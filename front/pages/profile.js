@@ -1,7 +1,16 @@
 import React from 'react';
+import Head from 'next/head';
+import AppLayout from '../components/AppLayout';
 
 const Profile=()=>{
-    return <div>내 프로필</div>
+    return (
+    <>
+        <Head>
+             <title>My profile | JackJack</title>
+        </Head>
+        <AppLayout>내 프로필</AppLayout>
+    </>
+    );
 }
 
 export default Profile;
