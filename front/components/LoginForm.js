@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { Form, Input , Button } from 'antd';
 import styled from 'styled-components';
 
+const FormWrapper = styled(Form)`
+    padding:10px;
+`;
+
 const ButtonWrapper = styled.div`
     margin-top:15px;
 `
@@ -25,7 +29,7 @@ const LoginForm =({setIsLoggedIn})=>{
     },[id,password])
 
     return(
-        <Form onFinish={onSubmitForm}>
+        <FormWrapper onFinish={onSubmitForm}>
             <div>
                 <label htmlFor="user-id">아이디</label>
                 <br />
@@ -38,7 +42,7 @@ const LoginForm =({setIsLoggedIn})=>{
             <div>
                 <label htmlFor="user-password">비밀번호</label>
                 <br />
-                <Input 
+                <Input.Password 
                  name="user-password"
                  value={password} 
                  onChange={onChangePassWord}
@@ -48,7 +52,7 @@ const LoginForm =({setIsLoggedIn})=>{
                 <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
                 <Link href="/signUp"><a><Button>회원가입</Button></a></Link>
             </ButtonWrapper>
-        </Form>
+        </FormWrapper>
     );
 };
 
