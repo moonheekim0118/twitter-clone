@@ -9,16 +9,14 @@ const Profile=()=>{
     const [followerList, setFollowerList]=useState([{nickname:'어허'}]);
 
     return (
-    <>
-        <Head>
-             <title>My profile | JackJack</title>
-        </Head>
         <AppLayout>
+            <Head>
+                <title>My profile | JackJack</title>
+            </Head>
             <NickNameEditForm/>
             <FollowList header="팔로잉 목록" data={followingList}/>
             <FollowList header="팔로워 목록"  data={followerList}/>
         </AppLayout>
-    </>
     );
 }
 
