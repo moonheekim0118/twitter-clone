@@ -1,12 +1,10 @@
-import React , {useState,useCallback}from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Input } from 'antd';
-import LoginForm from './LoginForm';
 import UserProfile from './UserProfile';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import {UserOutlined} from '@ant-design/icons';
 
 const Wrapper=styled.div`
     box-sizing:border-box;
@@ -20,7 +18,6 @@ const SearchInput = styled(Input.Search)`
     z-index:20;
     @media(max-width:767px){
         width:70%;
-        position:sticky;
     }
 `;
 
@@ -76,7 +73,6 @@ const Header=styled.header`
     @media(max-width:767px){
         padding:0px;
         margin-top:10px;
-        position:relative;
     }
 `;
 
@@ -111,6 +107,15 @@ const Footer =styled.footer`
     text-align:center;
 `;
 
+const User =styled.div`
+    display:block;
+    width:100%;
+    margin-top:30px;
+    @media(max-width:767px){
+        display:none;
+    }
+`
+
 const AppLayout = ({children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
     return(
@@ -131,10 +136,13 @@ const AppLayout = ({children})=>{
                                 <Link href="/signUp"><a>회원가입</a></Link>
                             </MenuItem>
                             <MenuItem>
-                               <UserOutlined />
+                                <User>
+                                 {isLoggedIn ? <UserProfile/> : 
+                                <Link href="/login"><a>로그인</a></Link>
+                                }
+                                </User>
                             </MenuItem>
                         </MenuWrapper>
-                    {/* {isLoggedIn ? <UserProfile/> : <LoginForm />} */}
                 </Navigation>
                 <Main>{children}</Main>
                 <Side>추후구현</Side>
