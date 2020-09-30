@@ -1,9 +1,10 @@
 import React , {useState , useCallback} from 'react';
-import { Button, Card, Popover,Avatar } from 'antd';
+import { Button, Card, Popover,Avatar, List, Comment } from 'antd';
 import {RetweetOutlined,HeartOutlined,HeartTwoTone,MessageOutlined,EllipsisOutlined} from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import {useSelector } from 'react-redux';
 import PostImages from './PostImages';
+import CommentForm from './CommentForm';
 import styled from 'styled-components';
 
 const CardWrapper = styled.div`
@@ -51,9 +52,24 @@ const PostCard=({post})=>{
             description={post.content}/>
             {/* <Buttons></Buttons> */}
         </Card>
-        {commentFormOpend && <div>댓글부분</div> }
-            {/* <CommentForm/>
-        <Comments/> */}
+        {commentFormOpend && 
+        <div>
+            <CommentForm post={post}/>
+            <List
+                header={`${post.Comments.length}개의 댓글`}
+                itemLayout="horizontal"
+                dataSource={post.Comments}
+                renderItem={(item)=>(
+                    <li>
+                        <Comment
+                            author={item.User.nickname}
+                            avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
+                            content={item.content}
+                        />
+                    </li>
+                )}
+            />
+        </div> }
        </CardWrapper>
     );
 }
