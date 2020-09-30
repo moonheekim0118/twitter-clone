@@ -26,6 +26,7 @@ export const initialState={
            ]
         },
     ],
+    createdAt:new Date(),
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
     postAdded:false, // 게시글 추가가 완료되었을 때 
 }
