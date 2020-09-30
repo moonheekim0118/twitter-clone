@@ -13,20 +13,12 @@ const Wrapper=styled.div`
 `;
 
 
-const Row = styled.div`
-    display:flex;
-    justify-contents:center;
-    @media(max-width:767px){
-        flex-direction:column;
-        align-items:center
-    }
-`;
-
 const SearchInput = styled(Input.Search)`
     vertical-align:middle;
     margin:20px;
     width:40%;
-    @media(max-width:768px){
+    z-index:20;
+    @media(max-width:767px){
         width:70%;
         position:sticky;
     }
@@ -37,21 +29,23 @@ const Navigation=styled.nav`
     flex-direction:row;
     margin-top:0px;
     margin-bottom:10px;
-    border-bottom:1px solid #f4f4f;
+    border-bottom:2px solid #f4f4f4;
+    justify-content:center;
+    align-items:center;
     @media(min-width:767px){
-        width:30%;
+        display:block;
+        width:20%;
         height:100%;
         max-height:1000px;
-        display:flex;
         background:#fff;
         position:fixed;
-        flex:1;
-        flex-basis:20%;
-        flex-direction:column;
-        justify-content:space-between;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
         z-index:10;
         margin-right:25px;
-        border-right: 1px solid #f4f4f;
+        border-right: 2px solid #f4f4f4;
     }
 `;
 
@@ -78,28 +72,38 @@ const MenuItem=styled.div`
 const Header=styled.header`
     text-align:center;
     padding:30px;
+    position:sticky;
     @media(max-width:767px){
         padding:0px;
         margin-top:10px;
+        position:relative;
     }
 `;
 
-    // flex:2;
-    // flex-basis:60%;
 
 const Main=styled.section`
-    width:40%;
-    margin-right:20px;
-    flex:2;
-    flex-basis:60%;
-    @media(max-width:768px){
-        width:70%;
-        margin:0px;
+    width:50%;
+    margin:auto;
+    @media(max-width:767px){
+        width:80%;
     }
 `;
 
 const Side=styled.section`
-    flex-basis:20%;
+    z-index:10;
+     position:fixed;
+     background:#fff;
+     max-height:1000px;
+     top:0px;
+     bottom:0px;
+     right:0px;
+     height:100%;
+     width:20%;
+     margin-left:25px;
+     border-left: 2px solid #f4f4f4;
+     @media(max-width:767px){
+        display:none;
+    }
 `;
 
 const Footer =styled.footer`
@@ -114,7 +118,7 @@ const AppLayout = ({children})=>{
             <Header>
                  <SearchInput enterButton/>
             </Header>
-            <Row>
+            <div>
                 <Navigation>
                         <MenuWrapper mode="horizontal">
                             <MenuItem key="home">
@@ -134,7 +138,7 @@ const AppLayout = ({children})=>{
                 </Navigation>
                 <Main>{children}</Main>
                 <Side>추후구현</Side>
-            </Row>
+            </div>
             <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
         </Wrapper>
     )
