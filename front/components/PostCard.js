@@ -27,7 +27,6 @@ const PostCard=({post})=>{
     return(
        <CardWrapper>
         <Card 
-            cover={post.Images[0] && <PostImages images={post.Images}/>}
             actions={[
                 <RetweetOutlined key="retweet"/>,
                 liked ?
@@ -51,6 +50,9 @@ const PostCard=({post})=>{
             title={post.User.nickname}
             description={post.content}/>
             {/* <Buttons></Buttons> */}
+            <br/>
+            <br/>
+            {post.Images[0] && <PostImages images={post.Images}/>}
         </Card>
         {commentFormOpend && 
         <div>

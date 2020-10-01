@@ -46,7 +46,6 @@ const PostImages =({images})=>{
                     onClick={onZoom}
                 >
                     <PlusOutlined/>
-                    <br/>
                     {images.length-1}개의 사진 더 보기
                 </ImagesWrapper>
             </div>

@@ -9,9 +9,12 @@ const FormWrapper = styled(Form)`
     marign: 10px 0 20px;
 `
 
-const ButtonWrapper = styled(Button)`
-    float:right;
-`
+const ButtonWrapper= styled.div`
+    margin-top:5px;
+    display:flex;
+    justify-content:space-between;
+`;
+
 
 const PostForm =()=>{
     
@@ -35,14 +38,14 @@ const PostForm =()=>{
         <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
             <Input.TextArea value={text}
              onChange={onChangeText}
-             maxLength={140}
+             maxLength={150}
              placeholder="어떤 신기한 일이 있었나요?"
             />
-            <div>
+            <ButtonWrapper>
                 <input type="file" multiple hidden ref={imageInput}/>
                 <Button onClick={onClickImageUpload}> 이미지 업로드 </Button>
-                <ButtonWrapper type="primary" htmlType="submit">짹짹</ButtonWrapper>
-            </div>
+                <Button type="primary" htmlType="submit">짹짹</Button>
+            </ButtonWrapper>
             <ImagePath/>
         </FormWrapper>
     )
