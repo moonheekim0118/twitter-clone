@@ -6,13 +6,28 @@ import useInput from '../hooks/useInput';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../reducers/user';
 
-const FormWrapper = styled(Form)`
-    padding:10px;
-`;
 
-const ButtonWrapper = styled.div`
-    margin-top:15px;
+
+const FormWrapper = styled(Form)`
+    width:100%;
+    margin-top:50px;
+    background-color:rgba(77, 166, 255,0.3);
+    padding:40px;
+    border-radius:10px;
+    -webkit-box-shadow: 2px 2px 18px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 18px -7px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 18px -7px rgba(0,0,0,0.75);
+    
 `
+
+const InputWrapper=styled.div`
+    width:50%;
+    margin:10px auto;
+    @media(max-width:767px){
+        width:100%;
+    }
+`
+
 
 const LoginForm =()=>{
     const dispatch = useDispatch();
@@ -26,7 +41,7 @@ const LoginForm =()=>{
 
     return(
         <FormWrapper onFinish={onSubmitForm}>
-            <div>
+            <InputWrapper>
                 <label htmlFor="user-id">아이디</label>
                 <br />
                 <Input 
@@ -34,8 +49,8 @@ const LoginForm =()=>{
                 value={id} 
                 onChange={onChangeId}
                 />
-            </div>
-            <div>
+            </InputWrapper>
+            <InputWrapper>
                 <label htmlFor="user-password">비밀번호</label>
                 <br />
                 <Input.Password 
@@ -43,11 +58,11 @@ const LoginForm =()=>{
                  value={password} 
                  onChange={onChangePassword}
                 />
-            </div>
-            <ButtonWrapper>
+            </InputWrapper>
+            <InputWrapper>
                 <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
                 <Link href="/signUp"><a><Button>회원가입</Button></a></Link>
-            </ButtonWrapper>
+            </InputWrapper>
         </FormWrapper>
     );
 };
