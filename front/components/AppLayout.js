@@ -5,16 +5,25 @@ import { Input } from 'antd';
 import UserProfile from './UserProfile';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { TwitterOutlined } from '@ant-design/icons';
 
 const Wrapper=styled.div`
     box-sizing:border-box;
 `;
 
+const SearchBar = styled.div`
+    position: -webkit-sticky;
+    position:sticky;
+    height:50px;
+    width:100%;
+    padding:15px 5px;
+    top: 0;
+    background-color:#fff;
+`;
 
 const SearchInput = styled(Input.Search)`
     vertical-align:middle;
-    margin:20px;
-    width:40%;
+    width:100%;
     z-index:20;
     @media(max-width:767px){
         width:70%;
@@ -68,18 +77,26 @@ const MenuItem=styled.div`
 
 const Header=styled.header`
     text-align:center;
-    padding:30px;
+    padding:15px 10px;
+    height:50px;
+    background-color:#fff;
+    top: 0;
+    position: -webkit-sticky;
     position:sticky;
+    z-index:5;
+    border-bottom:1px solid #f4f4f4;
     @media(max-width:767px){
         padding:0px;
         margin-top:10px;
+        border:none;
     }
 `;
 
 
 const Main=styled.section`
     width:50%;
-    margin:auto;
+    height:100%;
+    margin:15px auto;
     @media(max-width:767px){
         width:80%;
     }
@@ -87,13 +104,12 @@ const Main=styled.section`
 
 const Side=styled.section`
     z-index:10;
-     position:fixed;
+    position:absolute;
      background:#fff;
-     max-height:1000px;
+     min-height:1000px;
      top:0px;
      bottom:0px;
      right:0px;
-     height:100%;
      width:20%;
      margin-left:25px;
      border-left: 2px solid #f4f4f4;
@@ -121,7 +137,7 @@ const AppLayout = ({children})=>{
     return(
         <Wrapper>
             <Header>
-                 <SearchInput enterButton/>
+             <TwitterOutlined /> <Link href="/"><a>HOME</a></Link>
             </Header>
             <div>
                 <Navigation>
@@ -145,7 +161,11 @@ const AppLayout = ({children})=>{
                         </MenuWrapper>
                 </Navigation>
                 <Main>{children}</Main>
-                <Side>추후구현</Side>
+                <Side>
+                    <SearchBar>
+                         <SearchInput enterButton/> 
+                    </SearchBar> 
+                </Side>
             </div>
             <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
         </Wrapper>
