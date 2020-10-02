@@ -54,7 +54,7 @@ const SignUp=()=>{
     const onChangeTerm=useCallback((e)=>{
         setTerm(e.target.checked);
         setTermError(false);
-    })
+    },[])
 
     const onChangePasswordCheck=useCallback((e)=>{
         setPasswordCheck(e.target.value);

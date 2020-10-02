@@ -18,11 +18,11 @@ const PostCard=({post})=>{
     const me = useSelector(state => state.me?.id);
     const onToggleLike = useCallback(()=>{
         setLiked((prev)=>!prev);
-    })
+    },[])
 
     const onToggleComment = useCallback(()=>{
         setCommentFormOpend((prev)=>!prev);
-    })
+    },[])
 
     return(
        <CardWrapper>

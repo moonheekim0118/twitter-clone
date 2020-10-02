@@ -8,7 +8,7 @@ const UserProfile =()=>{
     
     const onLogout=useCallback(()=>{
         dispatch(logoutAction());
-    })
+    },[])
     
     return(
         <Card

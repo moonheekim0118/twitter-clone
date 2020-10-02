@@ -115,7 +115,7 @@ const ImagesZoom=({images,onClose})=>{
         else{
             setCurrentSlide((prev)=>prev-1);
         }
-    });
+    },[]);
 
     const onClickRight =useCallback(()=>{
         if(currentSlide===images.length-1){
@@ -124,13 +124,13 @@ const ImagesZoom=({images,onClose})=>{
         else{
             setCurrentSlide((prev)=>prev+1);
         }
-    });
+    },[]);
 
     const onClickIndicator=useCallback((index)=>{
         if(index!==currentSlide){
             setCurrentSlide(index);
         }
-    })
+    },[])
 
     return(
         <Overaly>

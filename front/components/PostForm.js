@@ -25,11 +25,11 @@ const PostForm =()=>{
     const onSubmit=useCallback(()=>{
         dispatch(addPost);
         setText('');
-    })
+    },[])
 
     const onChangeText =useCallback((e)=>{
         setText(e.target.value);
-    })
+    },[])
 
     const onClickImageUpload=useCallback(()=>{
         imageInput.current.click();
