@@ -9,8 +9,7 @@ export const initialState={
                 nickname:'Trump'
             },
             content: 'Hello! This is Donald Trump who is addicted to Twitter #COVID19',
-            Images:[{src:'https://cdn.cnn.com/cnnnext/dam/assets/180925135532-gfx-twitter-donald-trump-tweet.jpg'}
-            ,{src:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSXNQRNyn_A9ltjVqMLt1ozo9mPGUj8anfeBw&usqp=CAU'},
+            Images:[{src:'https://cdn.cnn.com/cnnnext/dam/assets/180925135532-gfx-twitter-donald-trump-tweet.jpg'},
             {src:'https://scitechdaily.com/images/Trump-Twitter-777x518.jpg'}
         ],
             Comments:[

@@ -100,8 +100,8 @@ const ImageWrapper = styled.div`
 
 
 
-const ImagesZoom=({images,onClose})=>{
-    const [currentSlide, setCurrentSlide]=useState(0);
+const ImagesZoom=({images,onClose,initial})=>{
+    const [currentSlide, setCurrentSlide]=useState(initial);
     
     const onClickLeft =useCallback(()=>{
         console.log(currentSlide);
@@ -154,7 +154,8 @@ ImagesZoom.propTypes = {
     images: PropTypes.arrayOf(PropTypes.shape({
         src: PropTypes.string,
       })).isRequired,
-    onClose:PropTypes.func.isRequired
+    onClose:PropTypes.func.isRequired,
+    initial:PropTypes.number.isRequired
 }
 
 export default ImagesZoom;
