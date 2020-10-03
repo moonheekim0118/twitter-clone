@@ -17,7 +17,7 @@ const IndicatorWrapper= styled.div`
 
 const Indicator = styled(MinusOutlined)`
     font-size:3rem;
-    color:${props=>props.color ? '#fff' : '#bfbfbf'};
+    color:${props=>props.color==='true' ? '#fff' : '#bfbfbf'};
     cursor:pointer;
 `;
 
@@ -78,11 +78,6 @@ const CloseBtn =styled(CloseCircleOutlined)`
     cursor:pointer;
 `
 
-const SlickWrapper = styled.div`
-    height:calc(100% - 44px);
-    background:#090909;
-`;
-
 const ImageWrapper = styled.div`
     padding: 32px;
     text-align:center;
@@ -109,28 +104,30 @@ const ImagesZoom=({images,onClose})=>{
     const [currentSlide, setCurrentSlide]=useState(0);
     
     const onClickLeft =useCallback(()=>{
+        console.log(currentSlide);
         if(currentSlide===0){
             setCurrentSlide(images.length-1);
         }
         else{
             setCurrentSlide((prev)=>prev-1);
         }
-    },[]);
+    },[currentSlide]);
 
     const onClickRight =useCallback(()=>{
+        console.log(currentSlide);
         if(currentSlide===images.length-1){
             setCurrentSlide(0);
         }
         else{
             setCurrentSlide((prev)=>prev+1);
         }
-    },[]);
+    },[currentSlide]);
 
     const onClickIndicator=useCallback((index)=>{
         if(index!==currentSlide){
             setCurrentSlide(index);
         }
-    },[])
+    },[currentSlide])
 
     return(
         <Overaly>
@@ -146,7 +143,7 @@ const ImagesZoom=({images,onClose})=>{
                 </ImageWrapper>
             </div>
            <IndicatorWrapper>
-           {images.map((v,i)=>(<Indicator onClick={onClickIndicator.bind(this,i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? true: false }/>))}
+           {images.map((v,i)=>(<Indicator onClick={onClickIndicator.bind(this,i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? "true": "false" }/>))}
            </IndicatorWrapper>
         </Overaly>
     );
