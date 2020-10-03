@@ -4,6 +4,7 @@ import {RetweetOutlined,HeartOutlined,HeartTwoTone,MessageOutlined,EllipsisOutli
 import PropTypes from 'prop-types';
 import {useSelector } from 'react-redux';
 import PostImages from './PostImages';
+import PostCardContent from './PostCardContent';
 import CommentForm from './CommentForm';
 import styled from 'styled-components';
 
@@ -48,8 +49,7 @@ const PostCard=({post})=>{
             <Card.Meta 
             avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
             title={post.User.nickname}
-            description={post.content}/>
-            {/* <Buttons></Buttons> */}
+            description={<PostCardContent postData={post.content}/>}/>
             <br/>
             <br/>
             {post.Images[0] && <PostImages images={post.Images}/>}
