@@ -50,8 +50,6 @@ const PostCard=({post})=>{
             avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
             title={post.User.nickname}
             description={<PostCardContent postData={post.content}/>}/>
-            <br/>
-            <br/>
             {post.Images[0] && <PostImages images={post.Images}/>}
         </Card>
         {commentFormOpend && 
