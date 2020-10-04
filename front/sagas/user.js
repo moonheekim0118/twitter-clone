@@ -1,4 +1,5 @@
 import {all, fork, takeLatest, delay, put} from 'redux-saga/effects';
+import * as type from '../actions/user';
 import axios from 'axios';
 
 function loginAPI(data){
@@ -14,12 +15,12 @@ function* login(action){
         // const result= yield call(loginAPI,action.data);
         yield delay(1000);
         yield put({
-            type:'LOG_IN_SUCCESS',
+            type:type.LOG_IN_SUCCESS,
             // data:result.data
         });
     }catch(err){
         yield put({
-            type:'LOG_IN_FAIL',
+            type:type.LOG_IN_FAIL,
             data:err.response.data
         })
     }
@@ -30,12 +31,12 @@ function* logout(){
         // const result= yield call(logoutAPI);
         yield delay(1000);
         yield put({
-            type:'LOG_OUT_SUCCESS',
+            type:type.LOG_OUT_SUCCESS,
             // data:result.data
         })
     }catch(err){
         yield put({
-            type:'LOG_OUT_FAIL',
+            type:type.LOG_OUT_FAIL,
             data:err.response.data
         })
     }
@@ -43,11 +44,11 @@ function* logout(){
 
 
 function* watchLogin(){
-    yield takeLatest('LOG_IN_REQUEST',login);
+    yield takeLatest(type.LOG_IN_REQUEST,login);
 }
 
 function* watchLogout(){
-    yield takeLatest('LOG_OUT_REQUEST',logout);
+    yield takeLatest(type.LOG_OUT_REQUEST,logout);
 }
 
 

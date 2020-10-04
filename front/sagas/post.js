@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as type from '../actions/post';
 import {all, fork, put, throttle,delay} from 'redux-saga/effects';
 
 
@@ -11,12 +12,12 @@ function* addPost(action){
         yield delay(1000);
         // const result = yield call(addPostAPI,action.data);
         yield put({
-            type:'ADD_POST_SUCCESS',
+            type:type.ADD_POST_SUCCESS,
             // data:result.data
         })
     }catch(err){
         yield put({
-            type:'ADD_POST_FAIL',
+            type:type.ADD_POST_FAIL,
             data:err.response.data
         })
     }
@@ -24,7 +25,7 @@ function* addPost(action){
 
 
 function* watchAddPost(){
-    yield throttle('ADD_POST_REQUEST',addPost,10000);    
+    yield throttle(type.ADD_POST_REQUEST,addPost,10000);    
 }
 
 export default function* postSaga(){

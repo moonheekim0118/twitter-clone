@@ -1,3 +1,5 @@
+import * as type from '../actions/user';
+
 export const initialState={
     isLoggedIn:false, // 로그인 완료 
     isLoggingIn:false, // 로그인 시도중 
@@ -7,20 +9,10 @@ export const initialState={
     loginData:{}
 }
 
-// 로그인 액션 
-const LOG_IN_REQUEST="LOG_IN_REQUEST";
-const LOG_IN_SUCCESS="LOG_IN_SUCCESS";
-const LOG_IN_FAIL="LOG_IN_FAIL";
-
-// 로그아웃 액션 
-const LOG_OUT_REQUEST="LOG_OUT_REQUEST";
-const LOG_OUT_SUCCESS="LOG_OUT_SUCCESS";
-const LOG_OUT_FAIL="LOG_OUT_FAIL";
-
 
 export const loginRequestAction = (data)=>{
     return {
-        type:LOG_IN_REQUEST,
+        type:type.LOG_IN_REQUEST,
         data,
     }
 };
@@ -28,7 +20,7 @@ export const loginRequestAction = (data)=>{
 
 export const logoutRequestAction = (data)=>{
     return {
-        type:LOG_OUT_REQUEST,
+        type:type.LOG_OUT_REQUEST,
         data,
     }
 };
@@ -36,36 +28,36 @@ export const logoutRequestAction = (data)=>{
 
 const reducer= (state = initialState , action)=>{
     switch(action.type){
-        case LOG_IN_REQUEST:
+        case type.LOG_IN_REQUEST:
             return{
                 ...state,
                 isLoggingIn:true,
             }
-        case LOG_IN_SUCCESS:
+        case type.LOG_IN_SUCCESS:
             return{
                 ...state,
                 isLoggingIn:false,
                 isLoggedIn:true,
                 me:{...action.data, nickname:'도람뿌'},
             }
-        case LOG_IN_FAIL:
+        case type.LOG_IN_FAIL:
             return{ ...state,
                 isLoggingIn:false,
                 isLoggedIn:false,
             }
-        case LOG_OUT_REQUEST:
+        case type.LOG_OUT_REQUEST:
             return{
                 ...state,
                 isLoggingOut:true,
             }
-        case LOG_OUT_SUCCESS:
+        case type.LOG_OUT_SUCCESS:
             return{
                 ...state,
                 isLoggingOut:false,
                 isLoggedIn:false,
                 me:null
             }
-        case LOG_OUT_FAIL:
+        case type.LOG_OUT_FAIL:
             return{
                 ...state,
                 isLoggingOut:false
