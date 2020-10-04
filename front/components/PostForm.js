@@ -3,7 +3,7 @@ import { Form , Input,Button }from 'antd';
 import styled from 'styled-components';
 import ImagePath from './ImagePath';
 import { useDispatch } from 'react-redux';
-import { addPost } from '../reducers/post';
+import { addPostRequest } from '../reducers/post';
 
 const FormWrapper = styled(Form)`
     marign: 10px 0 20px;
@@ -23,7 +23,7 @@ const PostForm =()=>{
     const [text, setText]=useState('');
 
     const onSubmit=useCallback(()=>{
-        dispatch(addPost);
+        dispatch(addPostRequest);
         setText('');
     },[])
 

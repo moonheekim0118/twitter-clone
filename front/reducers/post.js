@@ -33,9 +33,13 @@ export const initialState={
     postAdded:false, // 게시글 추가가 완료되었을 때 
 }
 
-const ADD_POST ='ADD_POST';
-export const addPost={
-    type:ADD_POST,
+const ADD_POST_REQUEST ='ADD_POST_REQUEST';
+const ADD_POST_SUCCESS='ADD_POST_SUCCESS';
+const ADD_POST_FAIL='ADD_POST_FAIL';
+
+
+export const addPostRequest={
+    type:ADD_POST_REQUEST,
 }
 
 const dummyPost = {
@@ -51,12 +55,16 @@ const dummyPost = {
 
 const reducer= (state = initialState , action)=>{
     switch(action.type){
-        case ADD_POST:
+        case ADD_POST_REQUEST:
             return {
                 ...state,
                 mainPosts:[dummyPost, ...state.mainPosts],
                 postAdded:true,
             }
+        case ADD_POST_SUCCESS:
+            return{}
+        case ADD_POST_FAIL:
+            return{}
         default:
             return state;
     }
