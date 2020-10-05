@@ -5,14 +5,14 @@ import styled  from 'styled-components';
 
 const IndicatorWrapper= styled.div`
     position: fixed;
-    bottom:20px;
-    left:45%;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    font-size:2rem;
+    color:#fff;
+    cursor:pointer;
     display:flex;
     justify-content:space-between;
-
-    @media(max-width:767px){
-        left:30%;
-    }
 `;
 
 const Indicator = styled(MinusOutlined)`
@@ -22,20 +22,20 @@ const Indicator = styled(MinusOutlined)`
 `;
 
 const LeftBtn = styled(LeftCircleOutlined)`
-    position: fixed;
+    position:fixed;
     top: 50%;
-    left: 10px;
-    margin-top: -50px;
+    left: 0;
+    transform: translate(20%, -50%);
     font-size:2rem;
     color:#fff;
     cursor:pointer;
 `
 
 const RightBtn = styled(RightCircleOutlined)`
-    position: fixed;
+    position:fixed;
     top: 50%;
-    right: 10px;
-    margin-top: -50px;
+    right: 0;
+    transform: translate(-20%, -50%);
     font-size:2rem;
     color:#fff;
     cursor:pointer;
@@ -79,22 +79,14 @@ const CloseBtn =styled(CloseCircleOutlined)`
 `
 
 const ImageWrapper = styled.div`
-    padding: 32px;
-    text-align:center;
-
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     & img {
-        margin: 0 auto;
-        max-height:750px;
-        max-width:750px;
-    }
-
-    @media(max-width:767px){
-        & img {
-            margin: 0 auto;
-            max-height:750px;
-            max-width:350px;
-        }
-    
+        margin: 10px auto;
+        max-height:70vmax;
+        max-width:70vmin;
     }
 `;
 

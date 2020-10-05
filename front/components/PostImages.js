@@ -11,18 +11,18 @@ const Wrapper = styled.div`
 
 const ImagesWrapper=styled.div`
     cursor:pointer;
-    margin-top:10px;
-    width:40%;
+    margin-top:5px;
     display:inline-block;
-    text-align:center;
-    vertical-align:middle;
+    @media(max-width:768px){
+        width:100%;
+    }
 `;
 
 const ImageWrapper=styled.img`
     cursor:pointer;
     display:inline-block;
     width:40%;
-    height:300px;
+    height:200px;
     margin:2px;
     border-radius:5px;
     object-fit: cover;
@@ -31,6 +31,10 @@ const ImageWrapper=styled.img`
         -webkit-box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
         -moz-box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
         box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
+    }
+
+    @media(max-width:768px){
+        height:100px;
     }
 `
 
