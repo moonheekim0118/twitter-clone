@@ -2,7 +2,7 @@ import React, {useCallback,useState,useRef} from 'react';
 import { Form , Input,Button }from 'antd';
 import styled from 'styled-components';
 import ImagePath from './ImagePath';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest } from '../reducers/post';
 
 const FormWrapper = styled(Form)`
@@ -17,15 +17,15 @@ const ButtonWrapper= styled.div`
 
 
 const PostForm =()=>{
-    
+    const {id, nickname}= useSelector((state)=>state.user.me);
     const imageInput = useRef();
     const dispatch = useDispatch();
     const [text, setText]=useState('');
 
     const onSubmit=useCallback(()=>{
-        dispatch(addPostRequest);
+        dispatch(addPostRequest({text,id,nickname}));
         setText('');
-    },[])
+    },[text])
 
     const onChangeText =useCallback((e)=>{
         setText(e.target.value);

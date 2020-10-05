@@ -40,7 +40,7 @@ export const signUpRequestAction=(data)=>{
 
 const dummyData=(data)=>({
     ...data,
-    id:1,
+    id:2,
     nickname:'도람뿌',
     Posts:[],
     Followings:[],
@@ -59,11 +59,12 @@ const reducer= (state = initialState , action)=>{
                 loginError:null,
             }
         case type.LOG_IN_SUCCESS:
+            const dummyUser=dummyData(action.data);
             return{
                 ...state,
+                me:dummyUser,
                 isLoggingIn:false,
                 isLoggedIn:true,
-                me:dummyData(action.data),
             }
         case type.LOG_IN_FAIL:
             return{ ...state,

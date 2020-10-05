@@ -36,7 +36,6 @@ const LoginForm =()=>{
     const [password, onChangePassword]=useInput('');
     
     const onSubmitForm=useCallback(()=>{
-        console.log(id,password);
         dispatch(loginRequestAction({id, password}));
     },[id,password])
 

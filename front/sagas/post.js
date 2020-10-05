@@ -13,6 +13,7 @@ function addCommentAPI(data){
 
 function* addPost(action){
     try{
+        console.log('post adding...');
         yield delay(1000);
         // const result = yield call(addPostAPI,action.data);
         yield put({

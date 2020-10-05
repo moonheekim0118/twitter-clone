@@ -41,37 +41,44 @@ export const initialState={
 }
 
 
-export const addPostRequest={
+export const addPostRequest=(data)=>{
+   return{
     type:type.ADD_POST_REQUEST,
+    data
+   }
 }
 
 export const addCommentRequest={
     type:type.ADD_COMMENT_REQUEST,
 }
 
-const dummyPost = {
-    id : 2,
-    User:{
-        id:2,
-        nickname:'Biden'
-    },
-    content:'I will ruin your career Donald. wait.',
-    Images:[],
-    Comments:[],
+const dummyPost =(contents,id,nickname)=>{
+    return{
+        id : Math.floor(Math.random() * 100)+contents.length+id,
+        User:{
+            id:id,
+            nickname:nickname,
+        },
+        content:contents,
+        Images:[],
+        Comments:[],
+    }
 }
 
 const reducer= (state = initialState , action)=>{
     switch(action.type){
         case type.ADD_POST_REQUEST:
+            const dummyData=dummyPost(action.data.text, action.data.id,action.data.nickname);
             return {
                 ...state,
-                mainPosts:[dummyPost, ...state.mainPosts],
+                mainPosts:[dummyData,...state.mainPosts],
                 addPostloading:true,
                 addPostDone:false,
                 addPostError:null,
             }
         case type.ADD_POST_SUCCESS:
             return{
+                ...state,
                 addPostloading:false,
                 addPostDone:true,
                 addPostError:null,
@@ -86,7 +93,6 @@ const reducer= (state = initialState , action)=>{
          case type.ADD_COMMENT_REQUEST:
             return {
                 ...state,
-                mainPosts:[dummyPost, ...state.mainPosts],
                 addCommentloading:true,
                 addCommentDone:false,
                 addCommentError:null,

@@ -16,7 +16,7 @@ const CardWrapper = styled.div`
 const PostCard=({post})=>{
     const [liked, setLiked]=useState(false);
     const [commentFormOpend, setCommentFormOpend]=useState(false);
-    const me = useSelector(state => state.me?.id);
+    const me = useSelector(state => state.user.me?.id);
     const onToggleLike = useCallback(()=>{
         setLiked((prev)=>!prev);
     },[])
@@ -24,7 +24,6 @@ const PostCard=({post})=>{
     const onToggleComment = useCallback(()=>{
         setCommentFormOpend((prev)=>!prev);
     },[])
-
     return(
        <CardWrapper>
         <Card 
