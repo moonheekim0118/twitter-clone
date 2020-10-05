@@ -2,6 +2,8 @@ import React , {useState, useCallback} from 'react';
 import {Form , Input , Checkbox, Button} from 'antd';
 import useInput from '../hooks/useInput';
 import styled from 'styled-components';
+import {useDispatch , useSelector} from 'react-redux';
+import {signUpRequestAction} from '../reducers/user';
 
 const FormWrapper = styled(Form)`
     width:100%;
@@ -33,13 +35,15 @@ const ErrorMessage=styled.div
 
 const SignUp=()=>{
 
-    const [id, onChangeId]=useInput('');
+    const [email, onChangeEmail]=useInput('');
     const [password, onChangePassword]=useInput('');
     const [nickname, onChangeNickName]=useInput('');
     const [passwordCheck, setPasswordCheck]= useState('');
     const [passwordError, setPasswordError]= useState(false);
     const [term, setTerm]=useState('');
     const [termError , setTermError]=useState(false);
+    const dispatch=useDispatch();
+    const signUploading = useSelector(state=>state.user.signUploading);
 
     const onSubmit=useCallback(() => {
         if(password!==passwordCheck){
@@ -48,8 +52,8 @@ const SignUp=()=>{
         if(!term){
             return setTermError(true);
         }
-        console.log(id,nickname, password);
-    },[password,passwordCheck, term])
+        dispatch(signUpRequestAction({email,password,passwordCheck,nickname}));
+    },[email,password,passwordCheck, nickname, term])
 
     const onChangeTerm=useCallback((e)=>{
         setTerm(e.target.checked);
@@ -64,9 +68,9 @@ const SignUp=()=>{
     return(
         <FormWrapper onFinish={onSubmit}>
             <InputWrapper>
-                <label htmlFor="user-id">아이디</label>
+                <label htmlFor="user-email">이메일</label>
                 <br />
-                <Input name ="user-id" value={id} required onChange={onChangeId}/>
+                <Input name ="user-email" value={email} required onChange={onChangeEmail}/>
             </InputWrapper>
             <InputWrapper>
                 <label htmlFor="user-nickname">닉네임</label>
@@ -89,7 +93,7 @@ const SignUp=()=>{
                 {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
             </InputWrapper>
             <InputWrapper>
-                <Button type="primary" htmlType="submit">가입하기</Button>
+                <Button type="primary" htmlType="submit" loading={signUploading}>가입하기</Button>
             </InputWrapper>
         </FormWrapper>
     );

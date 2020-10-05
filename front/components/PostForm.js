@@ -1,4 +1,4 @@
-import React, {useCallback,useState,useRef} from 'react';
+import React, {useCallback,useState,useRef,useEffect} from 'react';
 import { Form , Input,Button }from 'antd';
 import styled from 'styled-components';
 import ImagePath from './ImagePath';
@@ -18,13 +18,20 @@ const ButtonWrapper= styled.div`
 
 const PostForm =()=>{
     const {id, nickname}= useSelector((state)=>state.user.me);
+    const {imagePaths, addPostDone }= useSelector((state)=>state.post);
     const imageInput = useRef();
     const dispatch = useDispatch();
     const [text, setText]=useState('');
 
+
+    useEffect(()=>{
+       if(addPostDone){
+        setText('');
+       }
+    },[addPostDone])
+
     const onSubmit=useCallback(()=>{
         dispatch(addPostRequest({text,id,nickname}));
-        setText('');
     },[text])
 
     const onChangeText =useCallback((e)=>{

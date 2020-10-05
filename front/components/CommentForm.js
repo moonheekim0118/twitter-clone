@@ -1,4 +1,4 @@
-import React, {useCallback,useState} from 'react';
+import React, {useCallback,useState,useEffect} from 'react';
 import {Form, Input,Button} from 'antd';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,15 +21,21 @@ const ButtonWrapper= styled(Button)`
 
 const CommentForm=({post})=>{
     const {id, nickname}= useSelector((state)=>state.user.me);
+    const {addCommentDone} = useSelector((state)=>state.post);
     const [commentText, setCommentText]=useState('');
 
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        if(addCommentDone){
+            setCommentText('');
+        }
+    },[addCommentDone]);
+    
     const onSubmitComment=useCallback(()=>{
         // comment 추가하기위해 필요한것
         // 해당 포스트 id, 현재 커멘트 text, 현재 커멘트를 쓴 User 정보 (id, nickname)
         dispatch(addCommentRequest({text:commentText,id,nickname,postId:post.id}));
-        setCommentText('');
     },[commentText]);
 
     const onChangeText =useCallback((e)=>{

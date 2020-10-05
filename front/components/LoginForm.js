@@ -32,22 +32,22 @@ const InputWrapper=styled.div`
 const LoginForm =()=>{
     const dispatch = useDispatch();
     const isLoggingIn = useSelector((state)=>state.user.isLoggingIn);
-    const [id, onChangeId]=useInput('');
+    const [email, onChangeEmail]=useInput('');
     const [password, onChangePassword]=useInput('');
     
     const onSubmitForm=useCallback(()=>{
-        dispatch(loginRequestAction({id, password}));
-    },[id,password])
+        dispatch(loginRequestAction({email, password}));
+    },[email,password])
 
     return(
         <FormWrapper onFinish={onSubmitForm}>
             <InputWrapper>
-                <label htmlFor="user-id">아이디</label>
+                <label htmlFor="user-email">이메일</label>
                 <br />
                 <Input 
-                name ="user-id" 
-                value={id} 
-                onChange={onChangeId}
+                name ="user-email" 
+                value={email} 
+                onChange={onChangeEmail}
                 />
             </InputWrapper>
             <InputWrapper>
