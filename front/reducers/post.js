@@ -32,12 +32,21 @@ export const initialState={
     ],
     createdAt:new Date(),
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
-    postAdded:false, // 게시글 추가가 완료되었을 때 
+    addPostloading:false, 
+    addPostDone:false, // 게시글 추가가 완료되었을 때 
+    addPostError:null,
+    addCommentloading:false,
+    addCommentDone:false,
+    addCommentError:null,
 }
 
 
 export const addPostRequest={
     type:type.ADD_POST_REQUEST,
+}
+
+export const addCommentRequest={
+    type:type.ADD_COMMENT_REQUEST,
 }
 
 const dummyPost = {
@@ -57,12 +66,43 @@ const reducer= (state = initialState , action)=>{
             return {
                 ...state,
                 mainPosts:[dummyPost, ...state.mainPosts],
-                postAdded:true,
+                addPostloading:true,
+                addPostDone:false,
+                addPostError:null,
             }
         case type.ADD_POST_SUCCESS:
-            return{}
+            return{
+                addPostloading:false,
+                addPostDone:true,
+                addPostError:null,
+            }
         case type.ADD_POST_FAIL:
-            return{}
+            return{
+                addPostloading:false,
+                addPostDone:false,
+                addPostError:action.error
+            }
+
+         case type.ADD_COMMENT_REQUEST:
+            return {
+                ...state,
+                mainPosts:[dummyPost, ...state.mainPosts],
+                addCommentloading:true,
+                addCommentDone:false,
+                addCommentError:null,
+            }
+        case type.ADD_POST_SUCCESS:
+            return{
+                addCommentloading:false,
+                addCommentDone:true,
+                addCommentError:null,
+            }
+        case type.ADD_POST_FAIL:
+            return{
+                addCommentloading:false,
+                addCommentDone:false,
+                addCommentError:action.error
+            }
         default:
             return state;
     }

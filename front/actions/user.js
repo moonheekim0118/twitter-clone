@@ -8,3 +8,10 @@ export const LOG_IN_FAIL="LOG_IN_FAIL";
 export const LOG_OUT_REQUEST="LOG_OUT_REQUEST";
 export const LOG_OUT_SUCCESS="LOG_OUT_SUCCESS";
 export const LOG_OUT_FAIL="LOG_OUT_FAIL";
+
+
+// 회원가입 액션
+
+export const SIGN_UP_REQUEST ="SIGN_UP_REQUEST";
+export const SIGN_UP_SUCCESS ="SIGN_UP_SUCCESS";
+export const SIGN_UP_FAIL="SIGN_UP_FAIL";

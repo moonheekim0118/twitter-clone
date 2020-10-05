@@ -6,7 +6,10 @@ export const initialState={
     loginError:null, // 로그인 에러 
     isLoggingOut:false, // 로그아웃 시도중 
     isLoggedOut:false, // 로그아웃 완료
-    logoutError:null,
+    logoutError:null, // 로그아웃 에러 
+    signUploading:false, // 회원가입 시도중 
+    signUpDone:false, // 회원가입 완료 
+    signUpError:null, // 회원가입 에러 
     me:null,
     signUpData:{},
     loginData:{}
@@ -28,6 +31,13 @@ export const logoutRequestAction = (data)=>{
     }
 };
 
+export const signUpRequestAction=(data)=>{
+    return{
+        type:type.SIGN_UP_REQUEST,
+        data,
+    }
+}
+
 const dummyData=(data)=>({
     ...data,
     id:1,
@@ -39,6 +49,8 @@ const dummyData=(data)=>({
 
 const reducer= (state = initialState , action)=>{
     switch(action.type){
+
+        // login
         case type.LOG_IN_REQUEST:
             return{
                 ...state,
@@ -59,6 +71,8 @@ const reducer= (state = initialState , action)=>{
                 isLoggedIn:false,
                 loginError:action.error,
             }
+
+        // logout
         case type.LOG_OUT_REQUEST:
             return{
                 ...state,
@@ -80,6 +94,28 @@ const reducer= (state = initialState , action)=>{
                 isLoggingOut:false,
                 isLoggedOut:false,
                 logoutError:action.error,
+            }
+
+        // signup
+        case type.SIGN_UP_REQUEST:
+            return{
+                ...state,
+                signUploading:true,
+                signUpDone:false,
+                signUpError:null,
+            }
+        case type.SIGN_UP_SUCCESS:
+            return{
+                ...state,
+                signUploading:false,
+                signUpDone:true,
+            }
+        case type.SIGN_UP_FAIL:
+            return{
+                ...state,
+                signUploading:false,
+                signUpDone:false,
+                signUpError:action.error,
             }
         default:
             return state;
