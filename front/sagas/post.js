@@ -53,7 +53,7 @@ function* watchAddPost(){
 
 
 function* watchAddComment(){
-    yield throttle(type.ADD_COMMENT_REQUEST,addPost,10000);    
+    yield throttle(type.ADD_COMMENT_REQUEST,addComment,10000);    
 }
 
 

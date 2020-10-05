@@ -16,14 +16,18 @@ export const initialState={
         ],
             Comments:[
                 {
+                id:1,
                 User:{
-                    nickname:'Obama'
+                    nickname:'Obama',
+                    id:'45445'
                 },
                 content:'Please Stop twitting Trump! this is my advice!'
                },
                {
+                id:2,
                 User:{
-                    nickname:'Kanye West'
+                    nickname:'Kanye West',
+                    id:'5656'
                 },
                 content:'I love you.'
             }
@@ -48,13 +52,16 @@ export const addPostRequest=(data)=>{
    }
 }
 
-export const addCommentRequest={
-    type:type.ADD_COMMENT_REQUEST,
+export const addCommentRequest=(data)=>{
+    return{
+        type:type.ADD_COMMENT_REQUEST,
+        data
+    }
 }
 
-const dummyPost =(contents,id,nickname)=>{
+const dummyPostGenerator =(contents,id,nickname)=>{
     return{
-        id : Math.floor(Math.random() * 100)+contents.length+id,
+        id : Math.floor(Math.random() * 100),
         User:{
             id:id,
             nickname:nickname,
@@ -65,13 +72,24 @@ const dummyPost =(contents,id,nickname)=>{
     }
 }
 
+const dummyCommentGenerator=(contents,nickname,id)=>{
+    return{
+        id:Math.floor(Math.random() * 100),
+        User:{
+            id:id,
+            nickname:nickname,
+        },
+        content:contents,
+    }
+}
+
 const reducer= (state = initialState , action)=>{
     switch(action.type){
         case type.ADD_POST_REQUEST:
-            const dummyData=dummyPost(action.data.text, action.data.id,action.data.nickname);
+            const dummyPost=dummyPostGenerator(action.data.text, action.data.id,action.data.nickname);
             return {
                 ...state,
-                mainPosts:[dummyData,...state.mainPosts],
+                mainPosts:[dummyPost,...state.mainPosts],
                 addPostloading:true,
                 addPostDone:false,
                 addPostError:null,
@@ -91,20 +109,28 @@ const reducer= (state = initialState , action)=>{
             }
 
          case type.ADD_COMMENT_REQUEST:
+            const dummyComment= dummyCommentGenerator(action.data.text,action.data.nickname,action.data.id);
+            const postId=action.data.postId; 
+            let postData=[...state.mainPosts];
+            let index=postData.findIndex(x=>x.id===postId);
+            postData[index].Comments.unshift(dummyComment);
             return {
                 ...state,
+                mainPosts:postData,
                 addCommentloading:true,
                 addCommentDone:false,
                 addCommentError:null,
             }
-        case type.ADD_POST_SUCCESS:
+        case type.ADD_COMMENT_SUCCESS:
             return{
+                ...state,
                 addCommentloading:false,
                 addCommentDone:true,
                 addCommentError:null,
             }
-        case type.ADD_POST_FAIL:
+        case type.ADD_COMMENT_FAIL:
             return{
+                ...state,
                 addCommentloading:false,
                 addCommentDone:false,
                 addCommentError:action.error
