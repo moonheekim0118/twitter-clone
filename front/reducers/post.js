@@ -42,6 +42,9 @@ export const initialState={
     addCommentloading:false,
     addCommentDone:false,
     addCommentError:null,
+    removePostloading:false,
+    removePostDone:false,
+    removePostError:null,
 }
 
 
@@ -59,9 +62,16 @@ export const addCommentRequest=(data)=>{
     }
 }
 
+export const removePostRequest=(data)=>{
+    return{
+        type:type.REMOVE_POST_REQUEST,
+        data
+    }
+}
+
 const dummyPostGenerator =(contents,id,nickname)=>{
     return{
-        id : Math.floor(Math.random() * 100),
+        id : Math.floor(Math.random() * 100000),
         User:{
             id:id,
             nickname:nickname,
@@ -134,6 +144,30 @@ const reducer= (state = initialState , action)=>{
                 addCommentloading:false,
                 addCommentDone:false,
                 addCommentError:action.error
+            }
+        case type.REMOVE_POST_REQUEST:
+            postData=[...state.mainPosts];
+            let newPostData=postData.filter((x)=>x.id!==action.data.id);
+            return{
+                ...state,
+                mainPosts:newPostData,
+                removePostloading:true,
+                removePostDone:false,
+                removePostError:null, 
+            }
+        case type.REMOVE_POST_SUCCESS:
+            return{
+                ...state,
+                removePostloading:false,
+                removePostDone:true,
+                removePostError:null, 
+            }
+        case type.REMOVE_POST_FAIL:
+            return{
+                ...state,
+                removePostloading:false,
+                removePostDone:false,
+                removePostError:action.error, 
             }
         default:
             return state;
