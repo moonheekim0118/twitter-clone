@@ -87,6 +87,7 @@ const reducer= (state = initialState , action)=>{
             case type.LOG_OUT_SUCCESS:
                 draft.isLoggingOut=false;
                 draft.isLoggedOut=true;
+                draft.isLoggedIn=false;
                 draft.me=null;
                 break;
 

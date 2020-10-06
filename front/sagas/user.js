@@ -30,7 +30,7 @@ function* login(action){
     }
 }
 
-function* logout(){
+function* logout(action){
     try{
         // const result= yield call(logoutAPI);
         yield delay(1000);
