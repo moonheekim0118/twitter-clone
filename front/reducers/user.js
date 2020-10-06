@@ -59,6 +59,7 @@ const reducer= (state = initialState , action)=>{
                 loginError:null,
             }
         case type.LOG_IN_SUCCESS:
+            console.log('로그인 석세스');
             const dummyUser=dummyData(action.data);
             return{
                 ...state,

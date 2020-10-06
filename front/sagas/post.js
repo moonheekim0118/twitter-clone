@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as type from '../actions/post';
-import {all, fork, put, throttle,delay} from 'redux-saga/effects';
+import {all, fork, put, takeLatest,delay} from 'redux-saga/effects';
 
 
 function addPostAPI(data){
@@ -18,7 +18,6 @@ function removePostAPI(data){
 
 function* addPost(action){
     try{
-        console.log('post adding...');
         yield delay(1000);
         // const result = yield call(addPostAPI,action.data);
         yield put({
@@ -67,21 +66,21 @@ function* removePost(action){
 
 
 function* watchAddPost(){
-    yield throttle(type.ADD_POST_REQUEST,addPost,10000);    
+    yield takeLatest(type.ADD_POST_REQUEST,addPost);    
 }
 
 
 function* watchAddComment(){
-    yield throttle(type.ADD_COMMENT_REQUEST,addComment,10000);    
+    yield takeLatest(type.ADD_COMMENT_REQUEST,addComment);    
 }
 
 function* watchRemoveComment(){
-    yield throttle(type.REMOVE_POST_REQUEST,removePost);
+    yield takeLatest(type.REMOVE_POST_REQUEST,removePost);
 }
 
 
 export default function* postSaga(){
-    all([
+    yield all([
         fork(watchAddPost),
         fork(watchAddComment),
         fork(watchRemoveComment),

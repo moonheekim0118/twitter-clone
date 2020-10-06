@@ -21,7 +21,7 @@ const ButtonWrapper= styled(Button)`
 
 const CommentForm=({post})=>{
     const {id, nickname}= useSelector((state)=>state.user.me);
-    const {addCommentDone} = useSelector((state)=>state.post);
+    const {addCommentDone , addCommentloading} = useSelector((state)=>state.post);
     const [commentText, setCommentText]=useState('');
 
     const dispatch = useDispatch();
@@ -35,7 +35,9 @@ const CommentForm=({post})=>{
     const onSubmitComment=useCallback(()=>{
         // comment 추가하기위해 필요한것
         // 해당 포스트 id, 현재 커멘트 text, 현재 커멘트를 쓴 User 정보 (id, nickname)
-        dispatch(addCommentRequest({text:commentText,id,nickname,postId:post.id}));
+       if(commentText.length >0){
+            dispatch(addCommentRequest({text:commentText,id,nickname,postId:post.id}));
+       }
     },[commentText]);
 
     const onChangeText =useCallback((e)=>{
@@ -45,7 +47,7 @@ const CommentForm=({post})=>{
     return(
         <FormWrapper onFinish={onSubmitComment}>
             <Input.TextArea value={commentText} onChange={onChangeText} row={4}/>
-            <ButtonWrapper type="primary" htmlType="submit">삐약</ButtonWrapper>
+            <ButtonWrapper type="primary" htmlType="submit" loading={addCommentloading}>삐약</ButtonWrapper>
         </FormWrapper>
     )
 }

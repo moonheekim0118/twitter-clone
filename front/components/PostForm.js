@@ -31,7 +31,9 @@ const PostForm =()=>{
     },[addPostDone])
 
     const onSubmit=useCallback(()=>{
-        dispatch(addPostRequest({text,id,nickname}));
+        if(text.length>0){
+             dispatch(addPostRequest({text,id,nickname}));
+        }
     },[text])
 
     const onChangeText =useCallback((e)=>{
