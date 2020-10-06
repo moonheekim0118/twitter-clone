@@ -15,3 +15,8 @@ export const LOG_OUT_FAIL="LOG_OUT_FAIL";
 export const SIGN_UP_REQUEST ="SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS ="SIGN_UP_SUCCESS";
 export const SIGN_UP_FAIL="SIGN_UP_FAIL";
+
+// 내 포스트 등록 및 삭제 액션
+
+export const ADD_POST_TO_ME="ADD_POST_TO_ME";
+export const REMOVE_POST_OF_ME="REMOVE_POST_OF_ME";

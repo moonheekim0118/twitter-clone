@@ -59,7 +59,6 @@ const reducer= (state = initialState , action)=>{
                 loginError:null,
             }
         case type.LOG_IN_SUCCESS:
-            console.log('로그인 석세스');
             const dummyUser=dummyData(action.data);
             return{
                 ...state,
@@ -118,6 +117,15 @@ const reducer= (state = initialState , action)=>{
                 signUploading:false,
                 signUpDone:false,
                 signUpError:action.error,
+            }
+
+        case type.ADD_POST_TO_ME:
+            return{
+             ...state,
+                me:{
+                    ...state.me,
+                    Posts: [{ id: action.data }, ...state.me.Posts]
+                },
             }
         default:
             return state;

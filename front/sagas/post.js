@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as type from '../actions/post';
+import {ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../actions/user';
 import {all, fork, put, takeLatest,delay} from 'redux-saga/effects';
 
 
@@ -24,6 +25,13 @@ function* addPost(action){
             type:type.ADD_POST_SUCCESS,
             data:action.data,
         })
+
+        yield put({
+            type:ADD_POST_TO_ME,
+            data:action.data.postId
+        })
+
+
     }catch(err){
         yield put({
             type:type.ADD_POST_FAIL,
@@ -56,6 +64,11 @@ function* removePost(action){
             type:type.REMOVE_POST_SUCCESS,
             data:action.data,
         })
+
+        yield put({
+            type:REMOVE_POST_OF_ME
+        })
+
     }catch(err){
         yield put({
             type:type.REMOVE_POST_FAIL,

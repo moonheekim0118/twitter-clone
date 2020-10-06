@@ -77,9 +77,9 @@ export const removePostRequest=(data)=>{
     }
 }
 
-const dummyPostGenerator =(contents,id,nickname)=>{
+const dummyPostGenerator =(contents,id,nickname,postId)=>{
     return{
-        id : shortid.generate(),
+        id : postId,
         User:{
             id:id,
             nickname:nickname,
@@ -111,7 +111,7 @@ const reducer= (state = initialState , action)=>{
                 addPostError:null,
             }
         case type.ADD_POST_SUCCESS:
-            const dummyPost=dummyPostGenerator(action.data.text, action.data.id,action.data.nickname);
+            const dummyPost=dummyPostGenerator(action.data.text, action.data.id,action.data.nickname,action.data.postId);
             return{
                 ...state,
                 mainPosts:[dummyPost,...state.mainPosts],

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest } from '../reducers/post';
+import shortid from 'shortid';
 
 const FormWrapper = styled(Form)`
     marign: 10px 0 20px;
@@ -32,7 +33,8 @@ const PostForm =()=>{
 
     const onSubmit=useCallback(()=>{
         if(text.length>0){
-             dispatch(addPostRequest({text,id,nickname}));
+            const postId=shortid.generate();
+             dispatch(addPostRequest({text,id,nickname,postId}));
         }
     },[text])
 

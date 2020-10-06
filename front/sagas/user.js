@@ -16,7 +16,6 @@ function signUpAPI(data){
 
 function* login(action){
     try{
-        console.log('로그인 사가');
         // const result= yield call(loginAPI,action.data);
         yield delay(1000);
         yield put({
