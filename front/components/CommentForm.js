@@ -1,6 +1,7 @@
 import React, {useCallback,useState,useEffect} from 'react';
 import {Form, Input,Button} from 'antd';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {addCommentRequest} from '../reducers/post';
@@ -20,7 +21,9 @@ const ButtonWrapper= styled(Button)`
 `
 
 const CommentForm=({post})=>{
-    const {id, nickname}= useSelector((state)=>state.user.me);
+    const {isLoggedIn}= useSelector((state)=>state.user);
+    const id = useSelector((state)=>state.user.me?.id);
+    const nickname = useSelector((state)=>state.user.me?.nickname);
     const {addCommentDone , addCommentloading} = useSelector((state)=>state.post);
     const [commentText, setCommentText]=useState('');
 
@@ -33,10 +36,11 @@ const CommentForm=({post})=>{
     },[addCommentDone]);
     
     const onSubmitComment=useCallback(()=>{
-        // comment 추가하기위해 필요한것
-        // 해당 포스트 id, 현재 커멘트 text, 현재 커멘트를 쓴 User 정보 (id, nickname)
-       if(commentText.length >0){
-            dispatch(addCommentRequest({text:commentText,id,nickname,postId:post.id}));
+       if(!isLoggedIn){ // 로그인 되지 않은 상태라면 로그인 페이지로 리다이렉트 
+            Router.push('/login');
+       }
+       else if(commentText.length >0){ 
+            dispatch(addCommentRequest({text:commentText,id,nickname,postId:post.id})); // 여기서 id는 userId 
        }
     },[commentText]);
 
