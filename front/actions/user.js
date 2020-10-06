@@ -20,3 +20,20 @@ export const SIGN_UP_FAIL="SIGN_UP_FAIL";
 
 export const ADD_POST_TO_ME="ADD_POST_TO_ME";
 export const REMOVE_POST_OF_ME="REMOVE_POST_OF_ME";
+
+// 팔로우
+
+export const FOLLOW_REQUEST ="SIGN_UP_REQUEST";
+export const FOLLOW_SUCCESS ="SIGN_UP_SUCCESS";
+export const FOLLOW_FAIL="SIGN_UP_FAIL";
+
+// 언팔로우
+export const UNFOLLOW_REQUEST ="SIGN_UP_REQUEST";
+export const UNFOLLOW_SUCCESS ="SIGN_UP_SUCCESS";
+export const UNFOLLOW_FAIL="SIGN_UP_FAIL";
+
+// 닉네임 변경
+
+export const CHANGE_NICKNAME_REQUEST ="SIGN_UP_REQUEST";
+export const CHANGE_NICKNAME_SUCCESS ="SIGN_UP_SUCCESS";
+export const CHANGE_NICKNAME_FAIL="SIGN_UP_FAIL";

@@ -1,5 +1,6 @@
 import * as type from '../actions/post';
 import shortid from 'shortid';
+import produce from 'immer';
 
 export const initialState={
     // 시퀄라이즈 속성에 맞게 다른 정보와 결합되는 것은 대문자로 표기함.
@@ -102,83 +103,66 @@ const dummyCommentGenerator=(contents,nickname,id)=>{
 }
 
 const reducer= (state = initialState , action)=>{
-    switch(action.type){
-        case type.ADD_POST_REQUEST:
-            return {
-                ...state,
-                addPostloading:true,
-                addPostDone:false,
-                addPostError:null,
-            }
-        case type.ADD_POST_SUCCESS:
-            const dummyPost=dummyPostGenerator(action.data.text, action.data.id,action.data.nickname,action.data.postId);
-            return{
-                ...state,
-                mainPosts:[dummyPost,...state.mainPosts],
-                addPostloading:false,
-                addPostDone:true,
-                addPostError:null,
-            }
-        case type.ADD_POST_FAIL:
-            return{
-                addPostloading:false,
-                addPostDone:false,
-                addPostError:action.error
-            }
+    return produce(state,draft=>{
+        switch(action.type){
+            case type.ADD_POST_REQUEST:
+                draft.addPostloading=true;
+                draft.addPostDone=false;
+                draft.addPostError=null;
+                break;
 
-         case type.ADD_COMMENT_REQUEST:
-            return {
-                ...state,
-                addCommentloading:true,
-                addCommentDone:false,
-                addCommentError:null,
-            }
-        case type.ADD_COMMENT_SUCCESS:
-            const dummyComment= dummyCommentGenerator(action.data.text,action.data.nickname,action.data.id);
-            const postId=action.data.postId; 
-            let postData=[...state.mainPosts];
-            let index=postData.findIndex(x=>x.id===postId);
-            postData[index].Comments.unshift(dummyComment);
-            return{
-                ...state,
-                mainPosts:postData,
-                addCommentloading:false,
-                addCommentDone:true,
-                addCommentError:null,
-            }
-        case type.ADD_COMMENT_FAIL:
-            return{
-                ...state,
-                addCommentloading:false,
-                addCommentDone:false,
-                addCommentError:action.error
-            }
-        case type.REMOVE_POST_REQUEST:
-            return{
-                ...state,
-                removePostloading:true,
-                removePostDone:false,
-                removePostError:null, 
-            }
-        case type.REMOVE_POST_SUCCESS:
-            let newPostData=state.mainPosts.filter((x)=>x.id!==action.data.id);
-            return{
-                ...state,
-                mainPosts:newPostData,
-                removePostloading:false,
-                removePostDone:true,
-                removePostError:null, 
-            }
-        case type.REMOVE_POST_FAIL:
-            return{
-                ...state,
-                removePostloading:false,
-                removePostDone:false,
-                removePostError:action.error, 
-            }
-        default:
-            return state;
-    }
+            case type.ADD_POST_SUCCESS:
+                const dummyPost=dummyPostGenerator(action.data.text, action.data.id,action.data.nickname,action.data.postId);
+                draft.addPostloading=false;
+                draft.addPostDone=true;
+                draft.mainPosts.unshift(dummyPost);
+                break;
+
+            case type.ADD_POST_FAIL:
+                draft.addPostloading=false;
+                draft.addPostError=action.error;
+                break;
+    
+             case type.ADD_COMMENT_REQUEST:
+                 draft.addCommentloading=true;
+                 draft.addCommentDone=false;
+                 draft.addCommentError=null;
+                 break;
+
+            case type.ADD_COMMENT_SUCCESS:
+                const dummyComment= dummyCommentGenerator(action.data.text,action.data.nickname,action.data.id);
+                const post=draft.mainPosts.find(x=>x.id===action.data.postId);
+                post.Comments.unshift(dummyComment);
+                draft.addCommentloading=false;
+                draft.addCommentDone=true;
+                break;
+
+            case type.ADD_COMMENT_FAIL:
+                draft.addCommentloading=false;
+                draft.addCommentError=action.error;
+                break;
+
+            case type.REMOVE_POST_REQUEST:
+                draft.removePostloading=true;
+                draft.removePostDone=false;
+                draft.removePostError=null;
+                break;
+
+            case type.REMOVE_POST_SUCCESS:
+                draft.mainPosts=draft.mainPosts.filter((x)=>x.id!==action.data.id);
+                draft.removePostloading=false;
+                draft.removePostDone=true;
+                break;
+
+            case type.REMOVE_POST_FAIL:
+                draft.removePostloading=false;
+                draft.removePostError=action.error;
+                break;
+
+            default:
+                break;
+        }
+    })
 }
 
 export default reducer;
