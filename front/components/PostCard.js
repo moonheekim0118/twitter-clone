@@ -8,6 +8,7 @@ import PostCardContent from './PostCardContent';
 import CommentForm from './CommentForm';
 import styled from 'styled-components';
 import { removePostRequest } from '../reducers/post';
+import FollowButton from './FollowButton';
 
 const CardWrapper = styled.div`
     margin-bottom:20px;
@@ -52,11 +53,13 @@ const PostCard=({post})=>{
                     <EllipsisOutlined/>
                 </Popover>
             ]}
+            extra={me && <FollowButton post={post}/>}
         >
             <Card.Meta 
             avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
             title={post.User.nickname}
-            description={<PostCardContent postData={post.content}/>}/>
+            description={<PostCardContent postData={post.content}/>}
+            />
             {post.Images[0] && <PostImages images={post.Images}/>}
         </Card>
         {commentFormOpend && 

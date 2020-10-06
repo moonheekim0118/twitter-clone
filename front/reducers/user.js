@@ -2,22 +2,22 @@ import * as type from '../actions/user';
 import produce from 'immer';
 
 export const initialState={
-    isLoggedIn:false, // 로그인 완료 
-    isLoggingIn:false, // 로그인 시도중 
-    loginError:null, // 로그인 에러 
-    isLoggingOut:false, // 로그아웃 시도중 
-    isLoggedOut:false, // 로그아웃 완료
-    logoutError:null, // 로그아웃 에러 
-    signUploading:false, // 회원가입 시도중 
-    signUpDone:false, // 회원가입 완료 
-    signUpError:null, // 회원가입 에러 
-    followLoading:false,
+    isLoggedIn:false, // 로그인 
+    isLoggingIn:false, 
+    loginError:null, 
+    isLoggingOut:false, // 로그아웃 
+    isLoggedOut:false, 
+    logoutError:null, 
+    signUploading:false, // 회원가입 
+    signUpDone:false, 
+    signUpError:null, 
+    followLoading:false, // 팔로잉 
     followDone:false,
     followError:null,
-    unfollowLoading:false,
+    unfollowLoading:false, // 언팔로잉 
     unfollowDone:false,
     unfollowError:null,
-    changeNicknameLoading:false,
+    changeNicknameLoading:false, // 닉네임 변경
     changeNicknameDone:false,
     changeNicknameError:null,
     me:null,
@@ -130,6 +130,7 @@ const reducer= (state = initialState , action)=>{
             case type.FOLLOW_SUCCESS:
                 draft.followloading=false;
                 draft.followDone=true;
+                draft.me.Followings.push(action.data);
                 break;
     
             case type.FOLLOW_FAIL:
@@ -141,6 +142,7 @@ const reducer= (state = initialState , action)=>{
                 draft.unfollowloading=true;
                 draft.unfollowDone=false;
                 draft.unfollowError=null;
+                draft.me.Followings=draft.me.Followings.filter((v)=>v.id!==action.data.id);
                 break;      
 
             case type.UNFOLLOW_SUCCESS:

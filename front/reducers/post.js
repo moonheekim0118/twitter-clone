@@ -9,16 +9,16 @@ export const initialState={
     createdAt:new Date(),
     hasMorePost:true,
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
-    loadPostloading:false, 
-    loadPostDone:false, // 게시글 추가가 완료되었을 때 
+    loadPostloading:false, // 게시글 로딩  
+    loadPostDone:false, 
     loadPostError:null,
-    addPostloading:false, 
-    addPostDone:false, // 게시글 추가가 완료되었을 때 
+    addPostloading:false, // 게시글 추가  
+    addPostDone:false,
     addPostError:null,
-    addCommentloading:false,
+    addCommentloading:false, // 댓글 추가 
     addCommentDone:false,
     addCommentError:null,
-    removePostloading:false,
+    removePostloading:false, // 게시글 삭제 
     removePostDone:false,
     removePostError:null,
 }

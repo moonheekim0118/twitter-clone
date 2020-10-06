@@ -64,6 +64,42 @@ function* signUp(action){
 }
 
 
+function* follow(action){
+    try{
+        // const result= yield call(signUpAPI);
+        yield delay(1000);
+        yield put({
+            type:type.FOLLOW_SUCCESS,
+            data:action.data,
+        })
+    }catch(err){
+        yield put({
+            type:type.FOLLOW_FAIL,
+            data:err.response.data
+        })
+    }
+}
+
+
+
+function* unfollow(action){
+    try{
+        // const result= yield call(signUpAPI);
+        yield delay(1000);
+        yield put({
+            type:type.UNFOLLOW_SUCCESS,
+            data:action.data,
+        })
+    }catch(err){
+        yield put({
+            type:type.UNFOLLOW_FAIL,
+            data:err.response.data
+        })
+    }
+}
+
+
+
 
 
 function* watchLogin(){
@@ -78,10 +114,20 @@ function* watchSignUp(){
     yield takeLatest(type.SIGN_UP_REQUEST,signUp);
 }
 
+function* watchFollow(){
+    yield takeLatest(type.FOLLOW_REQUEST,follow);
+}
+
+function* watchUnfollow(){
+    yield takeLatest(type.UNFOLLOW_REQUEST,unfollow);
+}
+
 export default function* userSaga(){
     yield all([
         fork(watchLogin),
         fork(watchLogout),
-        fork(watchSignUp)
+        fork(watchSignUp),
+        fork(watchFollow),
+        fork(watchUnfollow),
     ]);
 }
