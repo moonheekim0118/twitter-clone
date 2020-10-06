@@ -1,51 +1,17 @@
 import * as type from '../actions/post';
 import shortid from 'shortid';
 import produce from 'immer';
-import faker from 'faker';
 
 export const initialState={
     // 시퀄라이즈 속성에 맞게 다른 정보와 결합되는 것은 대문자로 표기함.
 
-    mainPosts:[
-        {
-            id:1,
-            User:{
-                id:1,
-                nickname:'Trump'
-            },
-            content: 'Hello! This is Donald Trump who is addicted to Twitter #COVID19',
-            Images:[
-                {
-                    id:shortid.generate(),
-                    src:'https://cdn.cnn.com/cnnnext/dam/assets/180925135532-gfx-twitter-donald-trump-tweet.jpg'
-                },
-               {
-                    id:shortid.generate(),
-                    src:'https://scitechdaily.com/images/Trump-Twitter-777x518.jpg'
-               }
-        ],
-            Comments:[
-                {
-                id:shortid.generate(),
-                User:{
-                    nickname:'Obama',
-                    id:'45445'
-                },
-                content:'Please Stop twitting Trump! this is my advice!'
-               },
-               {
-                id:shortid.generate(),
-                User:{
-                    nickname:'Kanye West',
-                    id:'5656'
-                },
-                content:'I love you.'
-            }
-           ]
-        },
-    ],
+    mainPosts:[],
     createdAt:new Date(),
+    hasMorePost:true,
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
+    loadPostloading:false, 
+    loadPostDone:false, // 게시글 추가가 완료되었을 때 
+    loadPostError:null,
     addPostloading:false, 
     addPostDone:false, // 게시글 추가가 완료되었을 때 
     addPostError:null,
@@ -56,29 +22,6 @@ export const initialState={
     removePostDone:false,
     removePostError:null,
 }
-
-
-initialState.mainPosts=initialState.mainPosts.concat(
-    Array(20).fill().map((v,i)=>({
-        id:shortid.generate(),
-        User:{
-            id:shortid.generate(),
-            nickname:faker.name.findName()
-        },
-        content:faker.lorem.paragraph(),
-        Images:[{
-            id:shortid.generate(),
-            src:faker.image.image()
-        }],
-        Comments:[{
-            User:{
-                id:shortid.generate(),
-                nickname:faker.name.findName()
-            },
-            content:faker.lorem.sentence(),
-        }],
-    }))
-);
 
 
 export const addPostRequest=(data)=>{
@@ -181,6 +124,24 @@ const reducer= (state = initialState , action)=>{
             case type.REMOVE_POST_FAIL:
                 draft.removePostloading=false;
                 draft.removePostError=action.error;
+                break;
+
+            case type.LOAD_POST_REQUEST:
+                draft.loadPostloading=true;
+                draft.loadPostDone=false;
+                draft.loadPostError=null;
+                break;
+
+            case type.LOAD_POST_SUCCESS:
+                draft.loadPostloading=false;
+                draft.loadPostDone=true;
+                draft.mainPosts=draft.mainPosts.concat(action.data);
+                draft.hasMorePost=draft.mainPosts.length<50; 
+                break;
+
+            case type.LOAD_POST_FAIL:
+                draft.loadPostloading=false;
+                draft.loadPostError=action.error;
                 break;
 
             default:

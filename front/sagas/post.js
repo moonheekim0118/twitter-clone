@@ -13,7 +13,11 @@ function addCommentAPI(data){
 }
 
 function removePostAPI(data){
-    return axios.post('/api/removePost',data);
+    return axios.get('/api/loadPost',data);
+}
+
+function loadPostAPI(){
+    
 }
 
 
@@ -79,6 +83,24 @@ function* removePost(action){
 }
 
 
+function* loadPost(){
+    try{
+        yield delay(1000);
+        yield put({
+            type:type.LOAD_POST_SUCCESS,
+            data:type.generateDummyPost(10),
+        })
+
+    }catch(err){
+        console.log('에러!!'+err);
+        yield put({
+            type:type.LOAD_POST_FAIL,
+            data:err.response.data
+        })
+    }
+}
+
+
 function* watchAddPost(){
     yield takeLatest(type.ADD_POST_REQUEST,addPost);    
 }
@@ -92,11 +114,15 @@ function* watchRemoveComment(){
     yield takeLatest(type.REMOVE_POST_REQUEST,removePost);
 }
 
+function* watchLoadPost(){
+    yield takeLatest(type.LOAD_POST_REQUEST,loadPost);
+}
 
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),
         fork(watchAddComment),
         fork(watchRemoveComment),
+        fork(watchLoadPost),
     ]);
 }
