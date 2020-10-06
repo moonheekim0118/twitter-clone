@@ -161,8 +161,7 @@ const reducer= (state = initialState , action)=>{
                 removePostError:null, 
             }
         case type.REMOVE_POST_SUCCESS:
-            postData=[...state.mainPosts];
-            let newPostData=postData.filter((x)=>x.id!==action.data.id);
+            let newPostData=state.mainPosts.filter((x)=>x.id!==action.data.id);
             return{
                 ...state,
                 mainPosts:newPostData,

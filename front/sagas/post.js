@@ -66,7 +66,8 @@ function* removePost(action){
         })
 
         yield put({
-            type:REMOVE_POST_OF_ME
+            type:REMOVE_POST_OF_ME,
+            data:action.data
         })
 
     }catch(err){

@@ -127,6 +127,15 @@ const reducer= (state = initialState , action)=>{
                     Posts: [{ id: action.data }, ...state.me.Posts]
                 },
             }
+        case type.REMOVE_POST_OF_ME:
+            const newPosts = state.me.Posts.filter((v)=>v.id!==action.data.id);
+            return{
+                ...state,
+                me:{
+                    ...state.me,
+                    Posts:newPosts,
+                }
+            }
         default:
             return state;
     }

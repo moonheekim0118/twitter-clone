@@ -19,6 +19,7 @@ const PostCard=({post})=>{
     const [liked, setLiked]=useState(false);
     const [commentFormOpend, setCommentFormOpend]=useState(false);
     const me = useSelector(state => state.user.me?.id);
+    const {removePostloading} = useSelector(state=>state.post);
     const onToggleLike = useCallback(()=>{
         setLiked((prev)=>!prev);
     },[])
@@ -44,7 +45,7 @@ const PostCard=({post})=>{
                     {me===post.User.id 
                     ?<>
                         <Button>수정</Button>
-                        <Button type="danger" onClick={onClickRemove}>삭제</Button>
+                        <Button type="danger" onClick={onClickRemove} loading={removePostloading}>삭제</Button>
                     </>
                     :  <Button>신고</Button>}
                 </Button.Group>)}>
