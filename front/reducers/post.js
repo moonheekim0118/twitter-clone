@@ -1,6 +1,7 @@
 import * as type from '../actions/post';
 import shortid from 'shortid';
 import produce from 'immer';
+import faker from 'faker';
 
 export const initialState={
     // 시퀄라이즈 속성에 맞게 다른 정보와 결합되는 것은 대문자로 표기함.
@@ -55,6 +56,29 @@ export const initialState={
     removePostDone:false,
     removePostError:null,
 }
+
+
+initialState.mainPosts=initialState.mainPosts.concat(
+    Array(20).fill().map((v,i)=>({
+        id:shortid.generate(),
+        User:{
+            id:shortid.generate(),
+            nickname:faker.name.findName()
+        },
+        content:faker.lorem.paragraph(),
+        Images:[{
+            id:shortid.generate(),
+            src:faker.image.image()
+        }],
+        Comments:[{
+            User:{
+                id:shortid.generate(),
+                nickname:faker.name.findName()
+            },
+            content:faker.lorem.sentence(),
+        }],
+    }))
+);
 
 
 export const addPostRequest=(data)=>{
