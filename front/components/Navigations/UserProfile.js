@@ -1,9 +1,10 @@
-import React from 'react';
+import React , {useCallback , useState} from 'react';
 import { Avatar } from 'antd';
 import { useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {DownOutlined,UserOutlined } from '@ant-design/icons';
 import {Detail, Description} from './style';
+import UserProfileDetail from './UserProfileDetail';
 
 const CardWrapper = styled.div`
     cursor:pointer;
@@ -44,9 +45,16 @@ const Email= styled.span`
 
 const UserProfile =()=>{
     const me = useSelector((state)=>state.user.me);
-  
+    const [showDetail, setShowDetail]=useState(false);
+
+    const onClickProfile=useCallback(()=>{
+        setShowDetail((prev)=>!prev);
+    })
+    
     return(
-        <CardWrapper>
+        <>
+        {showDetail&&<UserProfileDetail onClose={onClickProfile}/>}
+        <CardWrapper onClick={onClickProfile}>
             <Avatar size="large" icon={<UserOutlined/>}/>
             <Detail>
                 <UserInfo>
@@ -56,6 +64,7 @@ const UserProfile =()=>{
                 <DownOutlined />
             </Detail>
         </CardWrapper>
+        </>
     );
 };
 
