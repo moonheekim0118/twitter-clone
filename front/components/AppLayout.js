@@ -6,18 +6,18 @@ import UserProfile from './UserProfile';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { TwitterOutlined } from '@ant-design/icons';
+import LogoutButton from './LogoutButton';
 
 const Wrapper=styled.div`
     box-sizing:border-box;
 `;
 
 const SearchBar = styled.div`
-    position: -webkit-sticky;
-    position:sticky;
     height:50px;
     width:100%;
     padding:15px 5px;
     top: 0;
+    left:0;
     background-color:#fff;
 `;
 
@@ -25,19 +25,22 @@ const SearchInput = styled(Input.Search)`
     vertical-align:middle;
     width:100%;
     z-index:20;
-    @media(max-width:767px){
-        width:70%;
-    }
 `;
 
 const Navigation=styled.nav`
     display:flex;
     flex-direction:row;
-    margin-top:0px;
     margin-bottom:10px;
+    padding-top:10px;
     border-bottom:2px solid #f4f4f4;
     justify-content:center;
     align-items:center;
+    position: -webkit-sticky;
+    position:sticky;
+    align-self: flex-start;
+    z-index:20;
+    top: 0;
+    background:#fff;
     @media(min-width:767px){
         display:block;
         width:20%;
@@ -49,7 +52,7 @@ const Navigation=styled.nav`
         left:0;
         bottom:0;
         right:0;
-        z-index:10;
+        z-index:20;
         margin-right:25px;
         border-right: 2px solid #f4f4f4;
     }
@@ -67,9 +70,10 @@ const MenuWrapper=styled.div`
 `;
 
 const MenuItem=styled.div`
-    display:inline-block;
+    display: ${props=>props.className==='logout'?'none':'inline-block'};
     margin-bottom:15px;
     @media(max-width:767px){
+       display:inline-block;
        margin-bottom:0px;
        margin-left:10px;
     }
@@ -83,12 +87,12 @@ const Header=styled.header`
     top: 0;
     position: -webkit-sticky;
     position:sticky;
-    z-index:5;
+    z-index:10;
     border-bottom:1px solid #f4f4f4;
     @media(max-width:767px){
-        padding:0px;
-        margin-top:10px;
+        padding-top:10px;
         border:none;
+        position:relative;
     }
 `;
 
@@ -103,10 +107,11 @@ const Main=styled.section`
 `;
 
 const Side=styled.section`
-    z-index:10;
-    position:absolute;
+     z-index:20;
+     position:fixed;
      background:#fff;
-     min-height:1000px;
+     height:100%;
+     max-height:1000px;
      top:0px;
      bottom:0px;
      right:0px;
@@ -128,12 +133,13 @@ const User =styled.div`
     width:100%;
     margin-top:30px;
     @media(max-width:767px){
-        display:none;
+        margin:0;
     }
 `
 
 const AppLayout = ({children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
+    
     return(
         <Wrapper>
             <Header>
@@ -148,9 +154,13 @@ const AppLayout = ({children})=>{
                             <MenuItem key="profile">
                                 <Link href="/profile"><a>프로필</a></Link>
                             </MenuItem>
+                            {isLoggedIn ?
+                            <MenuItem key="logout" className="logout">
+                                <LogoutButton/>
+                            </MenuItem> : 
                             <MenuItem key="signup">
                                 <Link href="/signUp"><a>회원가입</a></Link>
-                            </MenuItem>
+                            </MenuItem>}
                             <MenuItem>
                                 <User>
                                  {isLoggedIn ? <UserProfile/> : 
@@ -163,8 +173,8 @@ const AppLayout = ({children})=>{
                 <Main>{children}</Main>
                 <Side>
                     <SearchBar>
-                         <SearchInput enterButton/> 
-                    </SearchBar> 
+                        <SearchInput enterButton/> 
+                    </SearchBar>
                 </Side>
             </div>
             <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
