@@ -50,6 +50,7 @@ export const signUpRequestAction=(data)=>{
 
 const dummyData=(data)=>({
     ...data,
+    email:'test@teest.com',
     id:2,
     nickname:'도람뿌',
     Posts:[],

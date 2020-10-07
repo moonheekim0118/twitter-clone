@@ -5,22 +5,12 @@ import styled from 'styled-components';
 import LogoutButton from './LogoutButton';
 
 const CardWrapper = styled(Card)`
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:#80dfff;
-    margin:0;
-    border-top-left-radius:20px;
-    border-top-right-radius:20px;
-    @media(max-width:767px){
-        display:none;
-    }
+
 `;
 
 
 
-const UserProfile =()=>{
+const UserProfileDetail =()=>{
     const me = useSelector((state)=>state.user.me);
   
     return(
@@ -39,4 +29,4 @@ const UserProfile =()=>{
     );
 };
 
-export default UserProfile;
+export default UserProfileDetail;
