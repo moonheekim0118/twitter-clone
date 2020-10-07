@@ -6,6 +6,7 @@ import SignUp from './Navigations/SignUp';
 import LogIn from './Navigations/Login';
 import styled from 'styled-components';
 import LogoutButton from './LogoutButton';
+import PropTypes from 'prop-types';
 
 const Navigation=styled.nav`
     display:flex;
@@ -68,15 +69,6 @@ const MenuItem=styled.div`
     }
 `;
 
-const User =styled.div`
-    display:block;
-    width:100%;
-    margin-top:30px;
-    @media(max-width:767px){
-        margin:0;
-    }
-`
-
 const Menu =({isLoggedIn})=>{
     return(
         <Navigation>
@@ -93,5 +85,10 @@ const Menu =({isLoggedIn})=>{
         </Navigation>
     )
 };
+
+Menu.propTypes = {
+    isLoggedIn:PropTypes.bool.isRequired,
+}
+
 
 export default Menu;

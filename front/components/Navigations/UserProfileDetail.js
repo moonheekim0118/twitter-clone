@@ -3,6 +3,7 @@ import { Card,Avatar } from 'antd';
 import { useSelector} from 'react-redux';
 import styled from 'styled-components';
 import LogoutButton from '../LogoutButton';
+import PropTypes from 'prop-types';
 
 const Overaly = styled.div`
     top:0;
@@ -47,5 +48,9 @@ const UserProfileDetail =({onClose})=>{
     </Overaly>
     );
 };
+
+UserProfileDetail.propTypes = {
+    onClose:PropTypes.func.isRequired,
+}
 
 export default UserProfileDetail;
