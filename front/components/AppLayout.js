@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { TwitterOutlined } from '@ant-design/icons';
 import {Description } from './Navigations/style';
 import UserProfileModal from './Modals/UserProfileModal';
-
+import PostFormModal from './Modals/PostFormModal';
 const Wrapper=styled.div`
     box-sizing:border-box;
 `;
@@ -90,11 +90,12 @@ const Footer =styled.footer`
 
 const AppLayout = ({children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
-    const showProfileModal =useSelector(state=>state.ui.showProfileModal);
+    const {showProfileModal ,showPostModal } =useSelector(state=>state.ui);
 
     return(
         <Wrapper>
             {isLoggedIn && showProfileModal&& <UserProfileModal/>}
+            {isLoggedIn && showPostModal && <PostFormModal/> } 
             <Header>
              <TwitterOutlined style={{color:'#33ccff', fontSize:'1.2rem'}} /> <Link href="/"><Description>JACKJACK</Description></Link>
             </Header>

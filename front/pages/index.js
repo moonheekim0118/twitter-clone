@@ -6,7 +6,6 @@ import PostCard from '../components/PostCard';
 import { useSelector , useDispatch} from 'react-redux';
 import {Spin} from 'antd';
 import styled from 'styled-components';
-import PostFormModal from '../components/Modals/PostFormModal';
 
 const Wrapper = styled.div`
     text-align:center;
@@ -43,7 +42,6 @@ const Home =()=>{
 
     return(
         <AppLayout>
-            {isLoggedIn && showPostModal && <PostFormModal/> } 
             {isLoggedIn && <PostForm/>}
             <br/>
             {mainPosts.map((post)=><PostCard key={post.id} post={post}/>)}
