@@ -5,6 +5,11 @@ import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
 import { useSelector , useDispatch} from 'react-redux';
 import {Spin} from 'antd';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+    text-align:center;
+`;
 
 const Home =()=>{
     const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
@@ -39,7 +44,7 @@ const Home =()=>{
             {isLoggedIn && <PostForm/>}
             <br/>
             {mainPosts.map((post)=><PostCard key={post.id} post={post}/>)}
-            {loadPostloading? <Spin/> : ''}
+            {loadPostloading? <Wrapper><Spin/></Wrapper> : ''}
         </AppLayout>
 
     );

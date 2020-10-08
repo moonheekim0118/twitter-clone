@@ -4,6 +4,7 @@ import Profile from './Navigations/Profile';
 import UserProfile from './Navigations/UserProfile';
 import SignUp from './Navigations/SignUp';
 import LogIn from './Navigations/Login';
+import TweetButton from './Navigations/TweetButton';
 import styled from 'styled-components';
 import LogoutButton from './LogoutButton';
 import PropTypes from 'prop-types';
@@ -18,7 +19,6 @@ const Navigation=styled.nav`
     align-items:center;
     position: -webkit-sticky;
     position:sticky;
-    align-self: flex-start;
     z-index:20;
     top: 0;
     background:#fff;
@@ -52,9 +52,11 @@ const MenuWrapper=styled.div`
     padding:25px;
     margin:0;
     @media(max-width:767px){
+        width:70%;
         flex-direction:row;
+        justify-content:space-evenly;
+        align-items:center;
         padding:0px;
-        margin-bottom:10px;
     }
 `;
 
@@ -75,12 +77,13 @@ const Menu =({isLoggedIn})=>{
             <MenuWrapper>
                 <Home/>
                 <Profile/>
-                {isLoggedIn ?
+                {!isLoggedIn && <SignUp/>}
+                {isLoggedIn && <TweetButton/>}
+                {isLoggedIn ? <UserProfile/> : <LogIn/> }
+                {isLoggedIn&&
                 <MenuItem key="logout" className="logout">
                     <LogoutButton/>
-                </MenuItem> : 
-                 <SignUp/>}
-                {isLoggedIn ? <UserProfile/> : <LogIn/> }
+                </MenuItem> }
             </MenuWrapper>
         </Navigation>
     )

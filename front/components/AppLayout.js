@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { TwitterOutlined } from '@ant-design/icons';
 import {Description } from './Navigations/style';
+import RootModal from './Modals/RootModal';
+
 const Wrapper=styled.div`
     box-sizing:border-box;
 `;
@@ -46,16 +48,20 @@ const Header=styled.header`
 
 
 const Main=styled.section`
+    
     width:50%;
     height:100%;
     margin:15px auto;
     @media(max-width:767px){
-        width:80%;
+        width: 70% !important;
+        padding: 0 !important;
+    }
+
+    @media(max-width:1279px){
+        width:65%;
+        padding-right:80px;
     }
     
-    @media(max-width:1279px){
-        width:60%;
-    }
 `;
 
 const Side=styled.section`
@@ -73,6 +79,7 @@ const Side=styled.section`
      @media(max-width:767px){
         display:none;
     }
+
 `;
 
 const Footer =styled.footer`
@@ -83,9 +90,9 @@ const Footer =styled.footer`
 
 const AppLayout = ({children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
-    
     return(
         <Wrapper>
+            <RootModal/>
             <Header>
              <TwitterOutlined style={{color:'#33ccff', fontSize:'1.2rem'}} /> <Link href="/"><Description>JACKJACK</Description></Link>
             </Header>

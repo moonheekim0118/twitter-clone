@@ -2,6 +2,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 import user from './user';
 import post from './post';
+import ui from './ui';
 
 
 // (이전상태, 액션 ) => 다음상태 리턴 
@@ -16,6 +17,7 @@ const rootReducer =combineReducers({
     }},
     user,
     post,
+    ui,
 });
 
 export default rootReducer;
