@@ -13,6 +13,7 @@ const IndicatorWrapper= styled.div`
     cursor:pointer;
     display:flex;
     justify-content:space-between;
+    z-index:7000;
 `;
 
 const Indicator = styled(MinusOutlined)`
@@ -29,6 +30,7 @@ const LeftBtn = styled(LeftCircleOutlined)`
     font-size:2rem;
     color:#fff;
     cursor:pointer;
+    z-index:7000;
 `
 
 const RightBtn = styled(RightCircleOutlined)`
@@ -39,6 +41,7 @@ const RightBtn = styled(RightCircleOutlined)`
     font-size:2rem;
     color:#fff;
     cursor:pointer;
+    z-index:7000;
 `;
 
 
@@ -55,10 +58,11 @@ const Overaly = styled.div`
 
 const Header = styled.header`
     height: 44px;
-    position:relative;
+    position:fixed;
     padding:0;
     text-align:center;
-
+    top:5px;
+    z-index:7000;
     & h1 {
         margin:0;
         font-size:17px;
@@ -68,7 +72,7 @@ const Header = styled.header`
 `;
 
 const CloseBtn =styled(CloseCircleOutlined)`
-    position:absolute;
+    position:fixed;
     font-size:2rem;
     color:#fff;
     left:0;
@@ -82,6 +86,7 @@ const ImageWrapper = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
+    z-index:7000;
     transform: translate(-50%, -50%);
     & img {
         margin: 10px auto;
@@ -90,6 +95,9 @@ const ImageWrapper = styled.div`
     }
 `;
 
+const Wrapper = styled.div`
+    z-index:7000;
+`;
 
 
 const ImagesZoom=({images,onClose,initial})=>{
@@ -122,22 +130,25 @@ const ImagesZoom=({images,onClose,initial})=>{
     },[currentSlide])
 
     return(
-        <Overaly>
-            <Header>
-                <h1>상세 이미지</h1>
-                <CloseBtn onClick={onClose}></CloseBtn>
-            </Header>
-            <div>
-               <LeftBtn onClick={onClickLeft}/>
-               <RightBtn onClick={onClickRight}/>
-               <ImageWrapper>
-                  <img src={images[currentSlide].src} alt={images[currentSlide].src}/>
-                </ImageWrapper>
-            </div>
-           <IndicatorWrapper>
-           {images.map((v,i)=>(<Indicator onClick={onClickIndicator.bind(this,i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? "true": "false" }/>))}
-           </IndicatorWrapper>
-        </Overaly>
+        <>
+        <Overaly onClick={onClose}/>
+            <Wrapper>
+                <Header>
+                    <h1>상세 이미지</h1>
+                    <CloseBtn onClick={onClose}></CloseBtn>
+                </Header>
+                <div>
+                <LeftBtn onClick={onClickLeft}/>
+                <RightBtn onClick={onClickRight}/>
+                <ImageWrapper>
+                    <img src={images[currentSlide].src} alt={images[currentSlide].src}/>
+                    </ImageWrapper>
+                </div>
+            <IndicatorWrapper>
+            {images.map((v,i)=>(<Indicator onClick={onClickIndicator.bind(this,i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? "true": "false" }/>))}
+            </IndicatorWrapper>
+            </Wrapper>
+        </>
     );
     
 };

@@ -27,6 +27,10 @@ const FormWrapper=styled.div`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index:7000;
+
+    @media(max-width:767px){
+        width:70%;
+    }
     
 `;
 
