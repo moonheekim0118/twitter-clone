@@ -1,5 +1,5 @@
 import React , {useCallback} from 'react';
-import {Detail} from './style';
+import {Detail} from  '../Styles';
 import styled from 'styled-components';
 import {EditOutlined } from '@ant-design/icons';
 import {SHOW_POST_MODAL} from '../../actions/ui';

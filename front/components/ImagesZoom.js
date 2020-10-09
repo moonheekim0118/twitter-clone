@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { CloseCircleOutlined , RightCircleOutlined, LeftCircleOutlined, MinusOutlined} from '@ant-design/icons';
 import styled  from 'styled-components';
 
+const Wrapper = styled.div`
+    z-index:7000;
+`;
+
 const IndicatorWrapper= styled.div`
     position: fixed;
     bottom: 0%;
@@ -22,7 +26,7 @@ const Indicator = styled(MinusOutlined)`
     cursor:pointer;
 `;
 
-const LeftBtn = styled(LeftCircleOutlined)`
+const LeftButton = styled(LeftCircleOutlined)`
     position:fixed;
     top: 50%;
     left: 0;
@@ -33,7 +37,7 @@ const LeftBtn = styled(LeftCircleOutlined)`
     z-index:7000;
 `
 
-const RightBtn = styled(RightCircleOutlined)`
+const RightButton = styled(RightCircleOutlined)`
     position:fixed;
     top: 50%;
     right: 0;
@@ -53,25 +57,9 @@ const Overaly = styled.div`
     bottom:0;
     right:0;
     background-color:rgba(0,0,0,0.5);
-
 `;
 
-const Header = styled.header`
-    height: 44px;
-    position:fixed;
-    padding:0;
-    text-align:center;
-    top:5px;
-    z-index:7000;
-    & h1 {
-        margin:0;
-        font-size:17px;
-        color:#fff;
-        line-height:44px;
-    }
-`;
-
-const CloseBtn =styled(CloseCircleOutlined)`
+const CloseButton =styled(CloseCircleOutlined)`
     position:fixed;
     font-size:2rem;
     color:#fff;
@@ -80,6 +68,7 @@ const CloseBtn =styled(CloseCircleOutlined)`
     padding:10px;
     line-height:14px;
     cursor:pointer;
+    z-index:7000;
 `
 
 const ImageWrapper = styled.div`
@@ -95,9 +84,6 @@ const ImageWrapper = styled.div`
     }
 `;
 
-const Wrapper = styled.div`
-    z-index:7000;
-`;
 
 
 const ImagesZoom=({images,onClose,initial})=>{
@@ -131,18 +117,15 @@ const ImagesZoom=({images,onClose,initial})=>{
 
     return(
         <>
-        <Overaly onClick={onClose}/>
+            <Overaly onClick={onClose}/>
             <Wrapper>
-                <Header>
-                    <h1>상세 이미지</h1>
-                    <CloseBtn onClick={onClose}></CloseBtn>
-                </Header>
+                <CloseButton onClick={onClose}></CloseButton>
                 <div>
-                <LeftBtn onClick={onClickLeft}/>
-                <RightBtn onClick={onClickRight}/>
+                <LeftButton onClick={onClickLeft}/>
+                <RightButton onClick={onClickRight}/>
                 <ImageWrapper>
                     <img src={images[currentSlide].src} alt={images[currentSlide].src}/>
-                    </ImageWrapper>
+                </ImageWrapper>
                 </div>
             <IndicatorWrapper>
             {images.map((v,i)=>(<Indicator onClick={onClickIndicator.bind(this,i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? "true": "false" }/>))}

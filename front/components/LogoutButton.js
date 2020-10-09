@@ -6,10 +6,6 @@ import styled from 'styled-components';
 
 const ButtonWrapper = styled(Button)`
     border-radius:20px;
-
-    @media(max-width:767px){
-        
-    }
 `;
 
 const LogoutButton=()=>{

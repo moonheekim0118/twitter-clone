@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import {TeamOutlined} from '@ant-design/icons';
-import {MenuItemWrapper, Detail, Description} from './style';
+import {MenuItemWrapper, Detail, Description} from  '../Styles';
 
 const SignUp=()=>{
     return(

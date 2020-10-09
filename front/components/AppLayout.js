@@ -6,9 +6,10 @@ import Menu from './Menu';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { TwitterOutlined } from '@ant-design/icons';
-import {Description } from './Navigations/style';
+import {Description } from './Styles';
 import UserProfileModal from './Modals/UserProfileModal';
 import PostFormModal from './Modals/PostFormModal';
+
 const Wrapper=styled.div`
     box-sizing:border-box;
 `;
@@ -48,7 +49,6 @@ const Header=styled.header`
 
 
 const Main=styled.section`
-    
     width:50%;
     height:100%;
     margin:15px auto;

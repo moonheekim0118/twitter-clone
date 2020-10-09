@@ -9,7 +9,7 @@ const ListWrapper = styled(List)`
     margin-bottom:20px;
 `
 
-const LoadMoreBtn = styled.div`
+const LoadMoreButton = styled.div`
     text-align:center;
     margin:10px 0;
 `
@@ -24,7 +24,7 @@ const FollowList=({header,data})=>{
             grid={{guttuer:4, xs:2, md:3}}
             size="small"
             header={<div>{header}</div>}
-            loadMore={<LoadMoreBtn><Button>더보기</Button></LoadMoreBtn>}
+            loadMore={<LoadMoreButton><Button>더보기</Button></LoadMoreButton>}
             bordered
             dataSource={data}
             renderItem={(item)=>(

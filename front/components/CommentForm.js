@@ -12,8 +12,7 @@ const FormWrapper = styled(Form)`
 
 `
 
-
-const ButtonWrapper= styled(Button)`
+const SumbitButton= styled(Button)`
     margin-top:8px;
     right:-100%;
     transform:translateX(-100%);
@@ -51,7 +50,7 @@ const CommentForm=({post})=>{
     return(
         <FormWrapper onFinish={onSubmitComment}>
             <Input.TextArea value={commentText} onChange={onChangeText} row={4}/>
-            <ButtonWrapper type="primary" htmlType="submit" loading={addCommentloading}>삐약</ButtonWrapper>
+            <SumbitButton type="primary" htmlType="submit" loading={addCommentloading}>삐약</SumbitButton>
         </FormWrapper>
     )
 }

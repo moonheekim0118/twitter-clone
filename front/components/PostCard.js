@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { removePostRequest } from '../reducers/post';
 import FollowButton from './FollowButton';
 
-const CardWrapper = styled.div`
+const Wrapper = styled.div`
     margin-bottom:20px;
 `
 
@@ -34,7 +34,7 @@ const PostCard=({post})=>{
     },[]);
 
     return(
-       <CardWrapper>
+       <Wrapper>
         <Card 
             actions={[
                 <RetweetOutlined key="retweet"/>,
@@ -80,7 +80,7 @@ const PostCard=({post})=>{
                 )}
             />
         </div> }
-       </CardWrapper>
+       </Wrapper>
     );
 }
 

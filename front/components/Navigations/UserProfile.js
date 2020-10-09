@@ -3,11 +3,11 @@ import { Avatar } from 'antd';
 import { useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {DownOutlined,UserOutlined } from '@ant-design/icons';
-import {Detail, Description} from './style';
+import {Detail, Description} from '../Styles';
 import { useDispatch } from 'react-redux';
 import {SHOW_PROFILE_MODAL} from '../../actions/ui';
 
-const CardWrapper = styled.div`
+const Card = styled.div`
     cursor:pointer;
     position:absolute;
     bottom:0;
@@ -51,7 +51,7 @@ const UserProfile =()=>{
         dispatch({type:SHOW_PROFILE_MODAL});
     },[]);
     return(
-        <CardWrapper onClick={onClickProfile}>
+        <Card onClick={onClickProfile}>
             <Avatar size="large" icon={<UserOutlined/>}/>
             <Detail>
                 <UserInfo>
@@ -60,7 +60,7 @@ const UserProfile =()=>{
                 </UserInfo>
                 <DownOutlined />
             </Detail>
-        </CardWrapper>
+        </Card>
     );
 };
 
