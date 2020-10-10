@@ -4,13 +4,7 @@ import useInput from '../hooks/useInput';
 import styled from 'styled-components';
 import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction} from '../reducers/user';
-import {SignForm, SignInputWrapper} from './Styles';
-
-
-const ErrorMessage=styled.div
-`
-    color:red;
-`
+import {SignForm, SignInputWrapper,ErrorMessage} from './Styles';
 
 
 const SignUp=()=>{

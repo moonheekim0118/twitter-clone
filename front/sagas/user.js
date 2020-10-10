@@ -14,6 +14,10 @@ function signUpAPI(data){
     return axios.post('/api/signUp',data);
 }
 
+function changeNicknameAPI(data){
+    return axios.post('/api/changeNickname',data);
+}
+
 function* login(action){
     try{
         // const result= yield call(loginAPI,action.data);
@@ -99,6 +103,22 @@ function* unfollow(action){
 }
 
 
+function* changeNickname(action){
+    try{
+        // const result= yield call(signUpAPI);
+        yield delay(1000);
+        yield put({
+            type:type.CHANGE_NICKNAME_SUCCESS,
+            data:action.data,
+        })
+    }catch(err){
+        yield put({
+            type:type.CHANGE_NICKNAME_FAIL,
+            data:err.response.data
+        })
+    }
+}
+
 
 
 
@@ -122,6 +142,11 @@ function* watchUnfollow(){
     yield takeLatest(type.UNFOLLOW_REQUEST,unfollow);
 }
 
+function* watchChangeNickname(){
+    yield takeLatest(type.CHANGE_NICKNAME_REQUEST,changeNickname);
+}
+
+
 export default function* userSaga(){
     yield all([
         fork(watchLogin),
@@ -129,5 +154,6 @@ export default function* userSaga(){
         fork(watchSignUp),
         fork(watchFollow),
         fork(watchUnfollow),
+        fork(watchChangeNickname),
     ]);
 }

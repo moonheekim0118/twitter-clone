@@ -56,3 +56,8 @@ export const SignInputWrapper=styled.div`
         width:100%;
     }
 `
+
+export const ErrorMessage=styled.div
+`
+    color:red;
+`
