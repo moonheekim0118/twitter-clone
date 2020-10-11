@@ -2,7 +2,7 @@ import React , {useCallback} from 'react';
 import {Detail} from  '../Styles';
 import styled from 'styled-components';
 import {EditOutlined } from '@ant-design/icons';
-import {SHOW_POST_MODAL} from '../../actions/ui';
+import {showPostModalAction} from '../../actions/ui';
 import {useDispatch} from 'react-redux';
 
 const Button = styled.button`
@@ -37,7 +37,7 @@ const TweetButton=()=>{
 
     const dispatch = useDispatch();
     const onClickShowPostForm=useCallback(()=>{
-        dispatch({type:SHOW_POST_MODAL});
+        dispatch(showPostModalAction());
     },[]);
 
     return(

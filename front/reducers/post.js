@@ -27,27 +27,6 @@ export const initialState={
 }
 
 
-export const addPostRequest=(data)=>{
-   return{
-    type:type.ADD_POST_REQUEST,
-    data
-   }
-}
-
-export const addCommentRequest=(data)=>{
-    return{
-        type:type.ADD_COMMENT_REQUEST,
-        data
-    }
-}
-
-export const removePostRequest=(data)=>{
-    return{
-        type:type.REMOVE_POST_REQUEST,
-        data
-    }
-}
-
 const dummyPostGenerator =(contents,id,nickname,postId)=>{
     return{
         id : postId,

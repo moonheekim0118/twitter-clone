@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {DownOutlined,UserOutlined } from '@ant-design/icons';
 import {Detail, Description} from '../Styles';
 import { useDispatch } from 'react-redux';
-import {SHOW_PROFILE_MODAL} from '../../actions/ui';
+import { showProfileModalAction} from '../../actions/ui';
 
 const Card = styled.div`
     cursor:pointer;
@@ -48,7 +48,7 @@ const UserProfile =()=>{
     const me = useSelector((state)=>state.user.me);
     const dispatch=useDispatch();
     const onClickProfile=useCallback(()=>{
-        dispatch({type:SHOW_PROFILE_MODAL});
+        dispatch(showProfileModalAction());
     },[]);
     return(
         <Card onClick={onClickProfile}>

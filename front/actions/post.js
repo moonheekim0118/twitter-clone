@@ -47,3 +47,32 @@ export const generateDummyPost=(number)=> Array(number).fill().map((v,i)=>({
         content:faker.lorem.sentence(),
     }],
 }))
+
+
+export const addPostRequest=(data)=>{
+    return{
+     type:ADD_POST_REQUEST,
+     data
+    }
+ }
+ 
+ export const addCommentRequest=(data)=>{
+     return{
+         type:ADD_COMMENT_REQUEST,
+         data
+     }
+ }
+ 
+ export const removePostRequest=(data)=>{
+     return{
+         type:REMOVE_POST_REQUEST,
+         data
+     }
+ }
+ 
+ export const modifyPostRequest=(data)=>{
+     return {
+         type:MODIFY_POST_REQUEST,
+         data,
+     }
+ }

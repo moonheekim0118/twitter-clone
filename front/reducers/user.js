@@ -26,28 +26,6 @@ export const initialState={
 }
 
 
-export const loginRequestAction = (data)=>{
-    return {
-        type:type.LOG_IN_REQUEST,
-        data,
-    }
-};
-
-
-export const logoutRequestAction = (data)=>{
-    return {
-        type:type.LOG_OUT_REQUEST,
-        data,
-    }
-};
-
-export const signUpRequestAction=(data)=>{
-    return{
-        type:type.SIGN_UP_REQUEST,
-        data,
-    }
-}
-
 const dummyData=(data)=>({
     ...data,
     email:'test@teest.com',

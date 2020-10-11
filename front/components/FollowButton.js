@@ -2,25 +2,20 @@ import React , {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import {useSelector, useDispatch} from 'react-redux';
-import * as type from '../actions/user';
+import { followRequestAction , unfollowRequestAction} from '../actions/user';
 
 const FollowButton=({post})=>{
 
     const dispatch = useDispatch();
     const {me , followLoading, unfollowLoading} = useSelector(state=>state.user);
     const isFollowing = me&&me.Followings.find((v)=>v.id===post.User.id);
+    
     const onClickFollow=useCallback(()=>{
         if(isFollowing){ // 언팔로우 
-            dispatch({
-                type:type.UNFOLLOW_REQUEST,
-                data:{id:post.User.id, nickname:post.User.nickname}
-            })
+            dispatch(unfollowRequestAction({id:post.User.id, nickname:post.User.nickname}));
         }
         else{ // 팔로우 
-            dispatch({
-                type:type.FOLLOW_REQUEST,   
-                data:{id:post.User.id, nickname:post.User.nickname}
-            })
+            dispatch(followRequestAction({id:post.User.id, nickname:post.User.nickname}));
         }
     },[isFollowing]);
 

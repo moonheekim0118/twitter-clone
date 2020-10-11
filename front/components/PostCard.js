@@ -7,13 +7,13 @@ import PostImages from './PostImages';
 import PostCardContent from './PostCardContent';
 import CommentForm from './CommentForm';
 import styled from 'styled-components';
-import { removePostRequest } from '../reducers/post';
 import FollowButton from './FollowButton';
-import { SHOW_MODIFY_MODAL } from '../actions/ui';
+import { removePostRequest } from '../actions/post';
+import {showModifyModalAction} from '../actions/ui';
+
 const Wrapper = styled.div`
     margin-bottom:20px;
 `
-
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -34,12 +34,7 @@ const PostCard=({post})=>{
     },[]);
 
     const onClickModify=useCallback(()=>{
-        dispatch(
-            {
-                type:SHOW_MODIFY_MODAL,
-                data:{ postId:post.id, postContent:post.content}
-            }
-        );
+        dispatch(showModifyModalAction({ postId:post.id, postContent:post.content}));
     },[post.content]);
     
     return(

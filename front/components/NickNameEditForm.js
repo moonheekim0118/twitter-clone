@@ -2,8 +2,7 @@ import React , {useCallback,useState} from 'react';
 import { Form , Input, Button} from 'antd';
 import styled from 'styled-components';
 import { useSelector, useDispatch} from 'react-redux';
-import {CHANGE_NICKNAME_REQUEST} from '../actions/user';
-import { UserOutlined,CheckOutlined} from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import {ErrorMessage} from './Styles';
 
 const FormWrapper = styled(Form)
@@ -39,7 +38,7 @@ const NickNameEditForm=()=>{
 
     const onSubmitNickname=useCallback(()=>{
         dispatch({
-            type:CHANGE_NICKNAME_REQUEST,
+            type:"CHANGE_NICKNAME_REQUEST",
             data:text
         });
     },[text]);

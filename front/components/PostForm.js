@@ -2,8 +2,8 @@ import React, {useCallback,useState,useRef,useEffect} from 'react';
 import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
-import { addPostRequest } from '../reducers/post';
-import {HIDE_POST_MODAL} from '../actions/ui';
+import { addPostRequest } from '../actions/post';
+import {hidePostModalAction} from '../actions/ui';
 import shortid from 'shortid';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 
@@ -28,7 +28,7 @@ const PostForm =()=>{
         const postId=shortid.generate();
         dispatch(addPostRequest({text,id,nickname,postId}));
         if(showPostModal){
-            dispatch({type:HIDE_POST_MODAL});
+            dispatch(hidePostModalAction());
         }
     },[text])
 

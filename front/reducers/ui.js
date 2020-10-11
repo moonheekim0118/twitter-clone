@@ -9,7 +9,6 @@ export const initialState={
     modifyPostId:null,
 }
 
-
 const reducer=(state=initialState, action)=>{
     return produce(state,draft=>{
         switch(action.type){

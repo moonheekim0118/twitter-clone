@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {addCommentRequest} from '../reducers/post';
+import {addCommentRequest} from '../actions/post';
 
 const FormWrapper = styled(Form)`
     position:relative;

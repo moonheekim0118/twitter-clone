@@ -1,9 +1,9 @@
 import React, {useCallback,useState,useRef} from 'react';
 import { Button }from 'antd';
 import { useDispatch , useSelector} from 'react-redux';
-import {HIDE_MODIFY_MODAL} from '../actions/ui';
 import ImagePath from './ImagePath';
-import {MODIFY_POST_REQUEST} from '../actions/post';
+import { modifyPostRequest} from '../actions/post';
+import {hideModifyModalAction} from '../actions/ui';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 
 const ModifyPostPorm =()=>{
@@ -15,12 +15,8 @@ const ModifyPostPorm =()=>{
     const [text, setText]=useState(modifyFormerContent);
 
     const onSubmit=useCallback(()=>{
-        dispatch(
-            {
-                type:MODIFY_POST_REQUEST, 
-                data : { postId:modifyPostId, content:text}
-            });
-        dispatch({type:HIDE_MODIFY_MODAL});
+        dispatch(modifyPostRequest( { postId:modifyPostId, content:text}));
+        dispatch(hideModifyModalAction());
     },[text])
 
     const onChangeText =useCallback((e)=>{

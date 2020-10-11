@@ -1,14 +1,14 @@
 import React , {useCallback} from 'react';
 import ModifyPostForm from '../ModifyPostForm';
 import {useDispatch} from 'react-redux';
-import { HIDE_MODIFY_MODAL } from '../../actions/ui';
 import {ModalOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton} from '../Styles';
+import {hideModifyModalAction} from '../../actions/ui';
 
 const ModifyPostModal=()=>{
     const dispatch = useDispatch();
     
     const onClose=useCallback(()=>{
-        dispatch({ type:HIDE_MODIFY_MODAL });    
+        dispatch(hideModifyModalAction());    
     },[]);
 
     return(

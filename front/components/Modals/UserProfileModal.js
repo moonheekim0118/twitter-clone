@@ -4,7 +4,7 @@ import { useSelector} from 'react-redux';
 import styled from 'styled-components';
 import LogoutButton from '../LogoutButton';
 import {useDispatch} from 'react-redux';
-import { HIDE_PROFILE_MODAL } from '../../actions/ui';
+import {hideProfileModalAction} from '../../actions/ui';
 
 const Overaly = styled.div`
     top:0;
@@ -39,7 +39,7 @@ const UserProfileDetail =()=>{
     const dispatch = useDispatch();
 
     const onClose=useCallback(()=>{
-        dispatch({type:HIDE_PROFILE_MODAL});
+        dispatch(hideProfileModalAction());
     },[]);
 
     return(

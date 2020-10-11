@@ -1,9 +1,8 @@
 import React , {useState, useCallback} from 'react';
 import {Input , Checkbox, Button} from 'antd';
 import useInput from '../hooks/useInput';
-import styled from 'styled-components';
 import {useDispatch , useSelector} from 'react-redux';
-import {signUpRequestAction} from '../reducers/user';
+import {signUpRequestAction} from '../actions/user';
 import {SignForm, SignInputWrapper,ErrorMessage} from './Styles';
 
 

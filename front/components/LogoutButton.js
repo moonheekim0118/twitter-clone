@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import {Button} from 'antd';
-import {logoutRequestAction} from '../reducers/user';
+import {logoutRequestAction} from '../actions/user';
 import styled from 'styled-components';
 
 const ButtonWrapper = styled(Button)`
