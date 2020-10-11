@@ -5,6 +5,7 @@ import ImagePath from './ImagePath';
 import { modifyPostRequest} from '../actions/post';
 import {hideModifyModalAction} from '../actions/ui';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
+import useInput from '../hooks/useInput';
 
 const ModifyPostPorm =()=>{
 
@@ -12,16 +13,13 @@ const ModifyPostPorm =()=>{
     const modifyPostloading = useSelector(state=>state.post.modifyPostloading);
     const imageInput = useRef();
     const dispatch = useDispatch();
-    const [text, setText]=useState(modifyFormerContent);
+    const [text, onChangeText]=useInput(modifyFormerContent);
 
     const onSubmit=useCallback(()=>{
         dispatch(modifyPostRequest( { postId:modifyPostId, content:text}));
         dispatch(hideModifyModalAction());
     },[text])
 
-    const onChangeText =useCallback((e)=>{
-        setText(e.target.value);
-    },[])
 
     const onClickImageUpload=useCallback(()=>{
         imageInput.current.click();

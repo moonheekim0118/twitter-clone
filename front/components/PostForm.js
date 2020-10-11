@@ -6,7 +6,7 @@ import { addPostRequest } from '../actions/post';
 import {hidePostModalAction} from '../actions/ui';
 import shortid from 'shortid';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
-
+import useInput from '../hooks/useInput';
 
 
 const PostForm =()=>{
@@ -15,7 +15,7 @@ const PostForm =()=>{
     const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
     const dispatch = useDispatch();
-    const [text, setText]=useState('');
+    const [text, onChangeText, setText] = useInput('');
 
 
     useEffect(()=>{
@@ -31,10 +31,6 @@ const PostForm =()=>{
             dispatch(hidePostModalAction());
         }
     },[text])
-
-    const onChangeText =useCallback((e)=>{
-        setText(e.target.value);
-    },[])
 
     const onClickImageUpload=useCallback(()=>{
         imageInput.current.click();

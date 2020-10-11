@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {addCommentRequest} from '../actions/post';
+import useInput from '../hooks/useInput';
 
 const FormWrapper = styled(Form)`
     position:relative;
@@ -19,12 +20,12 @@ const SumbitButton= styled(Button)`
 
 `
 
-const CommentForm=({post})=>{
+const CommentForm=({postId})=>{
     const {isLoggedIn}= useSelector((state)=>state.user);
     const id = useSelector((state)=>state.user.me?.id);
     const nickname = useSelector((state)=>state.user.me?.nickname);
     const {addCommentDone , addCommentloading} = useSelector((state)=>state.post);
-    const [commentText, setCommentText]=useState('');
+    const [commentText, onChangeText, setCommentText]=useInput('');
 
     const dispatch = useDispatch();
 
@@ -39,14 +40,11 @@ const CommentForm=({post})=>{
             Router.push('/login');
        }
        else if(commentText.length >0){ 
-            dispatch(addCommentRequest({text:commentText,id,nickname,postId:post.id})); // 여기서 id는 userId 
+            dispatch(addCommentRequest({text:commentText,id,nickname,postId:postId})); // 여기서 id는 userId 
        }
     },[commentText]);
 
-    const onChangeText =useCallback((e)=>{
-        setCommentText(e.target.value);
-    },[])
-
+    
     return(
         <FormWrapper onFinish={onSubmitComment}>
             <Input.TextArea value={commentText} onChange={onChangeText} row={4}/>
@@ -56,7 +54,7 @@ const CommentForm=({post})=>{
 }
 
 CommentForm.propTypes={
-    post: PropTypes.object.isRequired,
+    postId:PropTypes.string.isRequired
 };
 
 
