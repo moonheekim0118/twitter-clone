@@ -154,7 +154,7 @@ const reducer= (state = initialState , action)=>{
             case type.MODIFY_POST_SUCCESS:
                 draft.modifyPostloading=false;
                 draft.modifyPostDone=true;
-                const index= draft.mainPosts.findIndex((x)=>x.id===action.data.id);
+                const index= draft.mainPosts.findIndex((x)=>x.id===action.data.postId);
                 draft.mainPosts[index].content=action.data.content;
                 break;
             case type.MODIFY_POST_FAIL:

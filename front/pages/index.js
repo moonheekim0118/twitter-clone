@@ -6,15 +6,16 @@ import PostCard from '../components/PostCard';
 import { useSelector , useDispatch} from 'react-redux';
 import {Spin} from 'antd';
 import styled from 'styled-components';
+import ModifyModal from '../components/Modals/ModifyPostModal';
 
 const Wrapper = styled.div`
     text-align:center;
 `;
 
 const Home =()=>{
+    const showModifyModal = useSelector(state=>state.ui.showModifyModal);
     const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
     const {mainPosts, hasMorePost, loadPostloading} = useSelector((state)=>state.post);
-    const showPostModal=useSelector(state=>state.ui.showPostModal);
     const dispatch = useDispatch();
 
     useEffect(()=>{ // 첫 로딩시
@@ -42,12 +43,12 @@ const Home =()=>{
 
     return(
         <AppLayout>
+            {isLoggedIn && showModifyModal && <ModifyModal/>}
             {isLoggedIn && <PostForm/>}
             <br/>
             {mainPosts.map((post)=><PostCard key={post.id} post={post}/>)}
             {loadPostloading? <Wrapper><Spin/></Wrapper> : ''}
         </AppLayout>
-
     );
 }
 

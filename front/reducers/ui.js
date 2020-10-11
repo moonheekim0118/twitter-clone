@@ -5,6 +5,8 @@ export const initialState={
     showProfileModal:false,
     showPostModal:false,
     showModifyModal:false,
+    modifyFormerContent:'',
+    modifyPostId:null,
 }
 
 
@@ -25,9 +27,13 @@ const reducer=(state=initialState, action)=>{
                 break;
             case type.SHOW_MODIFY_MODAL:
                 draft.showModifyModal=true;
+                draft.modifyPostId=action.data.postId;
+                draft.modifyFormerContent=action.data.postContent;
                 break;
             case type.HIDE_MODIFY_MODAL:
                 draft.showModifyModal=false;
+                draft.modifyPostId=null;
+                draft.modifyFormerContent='';
                 break;
         }
     })

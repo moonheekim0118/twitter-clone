@@ -9,7 +9,7 @@ import CommentForm from './CommentForm';
 import styled from 'styled-components';
 import { removePostRequest } from '../reducers/post';
 import FollowButton from './FollowButton';
-
+import { SHOW_MODIFY_MODAL } from '../actions/ui';
 const Wrapper = styled.div`
     margin-bottom:20px;
 `
@@ -33,6 +33,15 @@ const PostCard=({post})=>{
         dispatch(removePostRequest({id:post.id}));
     },[]);
 
+    const onClickModify=useCallback(()=>{
+        dispatch(
+            {
+                type:SHOW_MODIFY_MODAL,
+                data:{ postId:post.id, postContent:post.content}
+            }
+        );
+    },[post.content]);
+    
     return(
        <Wrapper>
         <Card 
@@ -45,7 +54,7 @@ const PostCard=({post})=>{
                 <Popover key="more" content={(<Button.Group>
                     {me===post.User.id 
                     ?<>
-                        <Button>수정</Button>
+                        <Button onClick={onClickModify}>수정</Button>
                         <Button type="danger" onClick={onClickRemove} loading={removePostloading}>삭제</Button>
                     </>
                     :  <Button>신고</Button>}
