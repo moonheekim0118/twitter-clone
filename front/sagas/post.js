@@ -20,6 +20,10 @@ function loadPostAPI(){
     
 }
 
+function modifyPostApi(data){
+    return axios.put('/api/modifyPost',data);
+}
+
 
 function* addPost(action){
     try{
@@ -100,6 +104,24 @@ function* loadPost(){
     }
 }
 
+function* modifyPost(action){
+    try{
+        yield delay(1000);
+        yield put({
+            type:type.MODIFY_POST_SUCCESS,
+            data:action.data,
+        })
+
+    }catch(err){
+        console.log('에러!!'+err);
+        yield put({
+            type:type.MODIFY_POST_FAIL,
+            data:err.response.data
+        })
+    }
+}
+
+
 
 function* watchAddPost(){
     yield takeLatest(type.ADD_POST_REQUEST,addPost);    
@@ -118,11 +140,16 @@ function* watchLoadPost(){
     yield takeLatest(type.LOAD_POST_REQUEST,loadPost);
 }
 
+function* watchModifyPost(){
+    yield takeLatest(type.MODIFY_POST_REQUEST,modifyPost);
+}
+
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),
         fork(watchAddComment),
         fork(watchRemoveComment),
         fork(watchLoadPost),
+        fork(watchModifyPost),
     ]);
 }

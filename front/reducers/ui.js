@@ -4,6 +4,7 @@ import produce from 'immer';
 export const initialState={
     showProfileModal:false,
     showPostModal:false,
+    showModifyModal:false,
 }
 
 
@@ -22,7 +23,12 @@ const reducer=(state=initialState, action)=>{
             case type.HIDE_POST_MODAL:
                 draft.showPostModal=false;
                 break;
-
+            case type.SHOW_MODIFY_MODAL:
+                draft.showModifyModal=true;
+                break;
+            case type.HIDE_MODIFY_MODAL:
+                draft.showModifyModal=false;
+                break;
         }
     })
 }

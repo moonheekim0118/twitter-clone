@@ -21,6 +21,9 @@ export const initialState={
     removePostloading:false, // 게시글 삭제 
     removePostDone:false,
     removePostError:null,
+    modifyPostloading:false,
+    modifyPostDone:false,
+    modifyPostError:null,
 }
 
 
@@ -142,6 +145,21 @@ const reducer= (state = initialState , action)=>{
             case type.LOAD_POST_FAIL:
                 draft.loadPostloading=false;
                 draft.loadPostError=action.error;
+                break;
+            case type.MODIFY_POST_REQUEST:
+                draft.modifyPostloading=true;
+                draft.modifyPostDone=false;
+                draft.modifyPostError=null;
+                break;
+            case type.MODIFY_POST_SUCCESS:
+                draft.modifyPostloading=false;
+                draft.modifyPostDone=true;
+                const index= draft.mainPosts.findIndex((x)=>x.id===action.data.id);
+                draft.mainPosts[index].content=action.data.content;
+                break;
+            case type.MODIFY_POST_FAIL:
+                draft.modifyPostloading=false;
+                draft.modifyPostError=action.error;
                 break;
 
             default:

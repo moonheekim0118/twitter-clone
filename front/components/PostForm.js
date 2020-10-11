@@ -1,24 +1,12 @@
 import React, {useCallback,useState,useRef,useEffect} from 'react';
-import { Form , Input,Button }from 'antd';
-import styled from 'styled-components';
+import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest } from '../reducers/post';
 import {HIDE_POST_MODAL} from '../actions/ui';
 import shortid from 'shortid';
+import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 
-const FormWrapper = styled(Form)`
-    marign: 10px 0 20px;
-`
-const TextArea = styled(Input.TextArea)`
-    border-radius:5px;
-`;
-
-const ButtonWrapper= styled.div`
-    margin-top:5px;
-    display:flex;
-    justify-content:space-between;
-`;
 
 
 const PostForm =()=>{
@@ -52,7 +40,7 @@ const PostForm =()=>{
         imageInput.current.click();
     },imageInput.current)
     return(
-        <FormWrapper encType="multipart/form-data" onFinish={onSubmit}>
+        <PostFormWrapper encType="multipart/form-data" onFinish={onSubmit}>
             <TextArea value={text}
              onChange={onChangeText}
              maxLength={150}
@@ -65,7 +53,7 @@ const PostForm =()=>{
                 <Button type="primary" htmlType="submit" disabled={text.length===0}>짹짹</Button>
             </ButtonWrapper>
             <ImagePath/>
-        </FormWrapper>
+        </PostFormWrapper>
     )
 }
 
