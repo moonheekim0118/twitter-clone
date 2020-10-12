@@ -46,8 +46,7 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.LOG_IN_SUCCESS:
-                const dummyUser=dummyData(action.data);
-                draft.me=dummyUser;
+                draft.me=action.data;
                 draft.isLoggedIn=true;
                 draft.isLoggingIn=false;
                 break;
@@ -89,7 +88,7 @@ const reducer= (state = initialState , action)=>{
 
             case type.SIGN_UP_FAIL:
                 draft.signUploading=false;
-                draft.signUpError=action.data;
+                draft.signUpError=action.error;
                 break;
 
             case type.ADD_POST_TO_ME:

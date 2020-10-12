@@ -3,7 +3,7 @@ import * as type from '../actions/user';
 import axios from 'axios';
 
 function loginAPI(data){
-    return axios.post('/api/login',data);
+    return axios.post('/user/login',data);
 }
 
 function logoutAPI(){
@@ -11,7 +11,7 @@ function logoutAPI(){
 }
 
 function signUpAPI(data){
-    return axios.post('http://localhost:3065/user',data);
+    return axios.post('/user',data);
 }
 
 function changeNicknameAPI(data){
@@ -20,16 +20,16 @@ function changeNicknameAPI(data){
 
 function* login(action){
     try{
-        // const result= yield call(loginAPI,action.data);
-        yield delay(1000);
+        const result= yield call(loginAPI,action.data);
+        console.log(result);
         yield put({
             type:type.LOG_IN_SUCCESS,
-            data:action.data,
+            data:result.data,
         });
     }catch(err){
         yield put({
             type:type.LOG_IN_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }
@@ -45,7 +45,7 @@ function* logout(action){
     }catch(err){
         yield put({
             type:type.LOG_OUT_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }
@@ -62,7 +62,7 @@ function* signUp(action){
     }catch(err){
         yield put({
             type:type.SIGN_UP_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }
@@ -79,7 +79,7 @@ function* follow(action){
     }catch(err){
         yield put({
             type:type.FOLLOW_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }
@@ -97,7 +97,7 @@ function* unfollow(action){
     }catch(err){
         yield put({
             type:type.UNFOLLOW_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }
@@ -114,7 +114,7 @@ function* changeNickname(action){
     }catch(err){
         yield put({
             type:type.CHANGE_NICKNAME_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }

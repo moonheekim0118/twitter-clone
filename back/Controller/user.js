@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 exports.signUp= async (req,res,next)=>{
     try{
@@ -22,4 +23,30 @@ exports.signUp= async (req,res,next)=>{
         console.log(err);
         next(err);
     }
-}   
+};
+
+exports.login = (req,res,next)=>{
+    passport.authenticate('local', (err,user,info)=>{
+        if(err){ // Server Error
+            console.error(err);
+            return next(err);
+        }
+        if(info){ // Client Error
+            return res.status(401).send(info.reason); 
+        }
+        return req.login(user, async (loginErr)=> {
+            if(loginErr){
+                console.error(loginErr);
+                return next(loginErr); // Error in Passport login 
+            }
+            return res.status(200).json(user); // login Completed
+        })
+    })(req,res,next);
+};
+
+
+exports.logout=(req,res,next)=>{
+    req.logout();
+    req.session.destroy();
+    res.stats(200).send('okay');
+}
