@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import {HomeOutlined} from '@ant-design/icons';
-import {MenuItemWrapper, Detail, Description} from  '../Styles';
+import {MenuItemWrapper, Detail, Description, HomeIcon} from  '../Styles';
 
 const Home=()=>{
     return(
         <MenuItemWrapper>
-            <HomeOutlined style={{ fontSize: '1.5rem'}}/>
+            <Link href="/">
+                <a><HomeIcon/></a>
+            </Link>
             <Detail>
                 <Link  href="/">
                     <Description>Home</Description>

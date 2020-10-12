@@ -1,12 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import {TeamOutlined} from '@ant-design/icons';
-import {MenuItemWrapper, Detail, Description} from  '../Styles';
+import {MenuItemWrapper, Detail, Description,SignupIcon} from  '../Styles';
 
 const SignUp=()=>{
     return(
         <MenuItemWrapper>
-            <TeamOutlined style={{ fontSize: '1.5rem'}}/>
+            <Link href="/signUp"><a><SignupIcon/></a></Link>
             <Detail>
                 <Link  href="/signUp"><Description>SignUp</Description></Link>
             </Detail>

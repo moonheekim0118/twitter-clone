@@ -1,6 +1,28 @@
 import styled from 'styled-components';
 import {Form, Input} from 'antd';
-import {CloseOutlined} from '@ant-design/icons';
+import {CloseOutlined, HomeOutlined , KeyOutlined, UserOutlined, TeamOutlined} from '@ant-design/icons';
+
+// Navigation Icons 
+export const HomeIcon=styled(HomeOutlined)`
+    font-size:1.5rem;
+    color:black;
+`;
+
+export const LoginIcon=styled(KeyOutlined)`
+    font-size:1.5rem;
+    color:black;
+`;
+
+export const ProfileIcon=styled(UserOutlined)`
+    font-size:1.5rem;
+    color:black;
+`;
+
+export const SignupIcon=styled(TeamOutlined)`
+    font-size:1.5rem;
+    color:black;
+`;
+
 
 export const MenuItemWrapper = styled.div`
     display:flex;
