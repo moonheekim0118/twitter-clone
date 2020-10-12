@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Post } = require('../models');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
@@ -39,7 +39,22 @@ exports.login = (req,res,next)=>{
                 console.error(loginErr);
                 return next(loginErr); // Error in Passport login 
             }
-            return res.status(200).json(user); // login Completed
+            const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 
+                where:{id : user.id},
+                attributes:{
+                    exclude:['password']
+                }, // excluding password
+                include:[{
+                    model:Post
+                } , {
+                    model: User,
+                    as:'Followings', 
+                }, {
+                    model: User,
+                    as: 'Followers'
+                }]
+            })
+            return res.status(200).json(fullUserwitoutPassword); // login Completed
         })
     })(req,res,next);
 };
