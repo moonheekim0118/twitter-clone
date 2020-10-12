@@ -15,7 +15,7 @@ function signUpAPI(data){
 }
 
 function changeNicknameAPI(data){
-    return axios.post('/api/changeNickname',data);
+    return axios.post('/user/changeNickname',data);
 }
 
 function* login(action){
@@ -104,11 +104,10 @@ function* unfollow(action){
 
 function* changeNickname(action){
     try{
-        // const result= yield call(signUpAPI);
-        yield delay(1000);
+        const result= yield call(changeNicknameAPI,action.data);
         yield put({
             type:type.CHANGE_NICKNAME_SUCCESS,
-            data:action.data,
+            data:action.data.nickname,
         })
     }catch(err){
         yield put({

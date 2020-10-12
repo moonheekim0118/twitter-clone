@@ -1,9 +1,9 @@
-import React , {useCallback} from 'react';
+import React , {useCallback,useEffect,useState,useRef} from 'react';
 import { Form , Input, Button} from 'antd';
 import styled from 'styled-components';
 import { useSelector, useDispatch} from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
-import {ErrorMessage} from './Styles';
+import {ErrorMessage,AlertMessage} from './Styles';
 import useValidation from '../hooks/useValidation';
 
 const FormWrapper = styled(Form)
@@ -32,13 +32,32 @@ const Wrapper = styled.div`
 
 const NickNameEditForm=()=>{
     const dispatch = useDispatch();
-    const changeNicknameLoading = useSelector(state=>state.user.changeNicknameLoading);
+    const {changeNicknameLoading,changeNicknameDone, me} = useSelector(state=>state.user);
     const [nickname, onChangeNickname, nicknameError]=useValidation('',1,5);
+    const [nickNameChanged, setNicknameChanged]=useState(false);
+    const firstUpdate = useRef(true);
+
+    useEffect(()=>{
+        if(firstUpdate.current){
+            firstUpdate.current=false;
+            return ;
+        }
+        if(changeNicknameDone){
+            setNicknameChanged(true);
+            const timer = setTimeout(()=>(setNicknameChanged(false)),3000);
+            return(()=>{
+                clearTimeout(timer);
+            });
+        }
+    },[changeNicknameDone]);
 
     const onSubmitNickname=useCallback(()=>{
         dispatch({
             type:"CHANGE_NICKNAME_REQUEST",
-            data:nickname
+            data:{
+                id:me.id,
+                nickname:nickname
+            }
         });
     },[nickname]);
 
@@ -50,6 +69,7 @@ const NickNameEditForm=()=>{
                 <Button htmlType="submit" type="primary" disabled={nicknameError} loading={changeNicknameLoading}>수정</Button>
             </Wrapper>
             {nicknameError ?<ErrorMessage>닉네임은 최소 1글자, 최대 5글자 입니다.</ErrorMessage>: <div></div>}
+            {nickNameChanged ? <AlertMessage>변경이 완료되었습니다!</AlertMessage>: <div></div> }
         </FormWrapper>
     )
 }

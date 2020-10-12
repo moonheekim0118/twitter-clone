@@ -65,3 +65,15 @@ exports.logout=(req,res,next)=>{
     req.session.destroy();
     res.status(200).send('okay');
 }
+
+exports.changeNickname= async (req,res,next)=>{
+   try{
+        const user = await User.findOne({ where : {id: req.body.id}});
+        user.nickname=req.body.nickname;
+        await user.save();
+        return res.status(200).send('ok');
+   }catch(err){
+        console.log(err);
+        next(err);
+   }
+}

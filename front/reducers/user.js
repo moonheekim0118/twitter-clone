@@ -26,16 +26,6 @@ export const initialState={
 }
 
 
-const dummyData=(data)=>({
-    ...data,
-    email:'test@teest.com',
-    id:2,
-    nickname:'도람뿌',
-    Posts:[],
-    Followings:[],
-    Followers:[],
-});
-
 const reducer= (state = initialState , action)=>{
     return produce(state,draft=>{
         switch(action.type){

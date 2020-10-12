@@ -86,6 +86,11 @@ export const ErrorMessage=styled.div
     color:red;
 `
 
+export const AlertMessage=styled.div
+`
+    color:green;
+`;
+
 export const PostFormWrapper = styled(Form)`
 marign: 10px 0 20px;
 `

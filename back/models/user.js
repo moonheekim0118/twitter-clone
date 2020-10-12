@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes)=>{
             unique:true,
         },
         nickname:{
-            type:DataTypes.STRING(4),
+            type:DataTypes.STRING(5),
             allowNull:false,
         },
         password:{
