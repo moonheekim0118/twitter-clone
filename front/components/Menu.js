@@ -81,7 +81,7 @@ const Menu =({isLoggedIn})=>{
                 {isLoggedIn && <TweetButton/>}
                 {isLoggedIn ? <UserProfile/> : <LogIn/> }
                 {isLoggedIn&&
-                <MenuItem key="logout" className="logout">
+                <MenuItem>
                     <LogoutButton/>
                 </MenuItem> }
             </MenuWrapper>

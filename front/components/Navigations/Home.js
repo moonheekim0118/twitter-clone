@@ -8,7 +8,9 @@ const Home=()=>{
         <MenuItemWrapper>
             <HomeOutlined style={{ fontSize: '1.5rem'}}/>
             <Detail>
-                <Link  href="/"><Description>Home</Description></Link>
+                <Link  href="/">
+                    <Description>Home</Description>
+                </Link>
             </Detail>
         </MenuItemWrapper>
     );

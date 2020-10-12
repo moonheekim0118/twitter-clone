@@ -1,6 +1,8 @@
-import React , {useState, useCallback} from 'react';
+import React , {useState, useCallback, useEffect} from 'react';
+import Router from 'next/router';
 import {Input , Checkbox, Button} from 'antd';
 import useInput from '../hooks/useInput';
+import useValidation from '../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction} from '../actions/user';
 import {SignForm, SignInputWrapper,ErrorMessage} from './Styles';
@@ -9,14 +11,26 @@ import {SignForm, SignInputWrapper,ErrorMessage} from './Styles';
 const SignUp=()=>{
 
     const [email, onChangeEmail]=useInput('');
-    const [password, onChangePassword]=useInput('');
-    const [nickname, onChangeNickName]=useInput('');
+    const [password, onChangePassword,passwordLengthError ]=useValidation('',6,15);
+    const [nickname, onChangeNickname, nicknameLengthError]=useValidation('',1,5);
     const [passwordCheck, setPasswordCheck]= useState('');
     const [passwordError, setPasswordError]= useState(false);
     const [term, setTerm]=useState('');
     const [termError , setTermError]=useState(false);
     const dispatch=useDispatch();
-    const signUploading = useSelector(state=>state.user.signUploading);
+    const {signUploading, signUpDone, signUpError} = useSelector(state=>state.user);
+
+    useEffect(()=>{
+        if(signUpDone){
+            Router.push('/');
+        }
+    },[signUpDone]);
+
+    useEffect(()=>{
+        if(signUpError){
+            alert(signUpError);
+        }
+    },[signUpError]);
 
     const onSubmit=useCallback(() => {
         if(password!==passwordCheck){
@@ -48,12 +62,14 @@ const SignUp=()=>{
             <SignInputWrapper>
                 <label htmlFor="user-nickname">닉네임</label>
                 <br />
-                <Input name ="user-nickname" value={nickname} required onChange={onChangeNickName}/>
+                <Input name ="user-nickname" value={nickname} required onChange={onChangeNickname}/>
+                {nicknameLengthError && <ErrorMessage>닉네임은 1자리 이상 5자리 이하여야 합니다.</ErrorMessage>}
             </SignInputWrapper>
             <SignInputWrapper>
                 <label htmlFor="user-password">패스워드</label>
                 <br />
                 <Input.Password name ="user-password" value={password} required onChange={onChangePassword}/>
+                {passwordLengthError && <ErrorMessage>비밀번호는 6자리 이상,14자리 이하여야 합니다.</ErrorMessage>}
             </SignInputWrapper>
             <SignInputWrapper>
                 <label htmlFor="user-password-check">패스워드 체크</label>
@@ -66,7 +82,7 @@ const SignUp=()=>{
                 {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
             </SignInputWrapper>
             <SignInputWrapper>
-                <Button type="primary" htmlType="submit" loading={signUploading}>가입하기</Button>
+                <Button type="primary" htmlType="submit" loading={signUploading} disabled={passwordError || termError || passwordLengthError || nicknameLengthError}>가입하기</Button>
             </SignInputWrapper>
         </SignForm>
     );

@@ -89,7 +89,7 @@ const reducer= (state = initialState , action)=>{
 
             case type.SIGN_UP_FAIL:
                 draft.signUploading=false;
-                draft.signUpError=action.error;
+                draft.signUpError=action.data;
                 break;
 
             case type.ADD_POST_TO_ME:

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch} from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
 import {ErrorMessage} from './Styles';
+import useValidation from '../hooks/useValidation';
 
 const FormWrapper = styled(Form)
 `
@@ -32,29 +33,23 @@ const Wrapper = styled.div`
 const NickNameEditForm=()=>{
     const dispatch = useDispatch();
     const changeNicknameLoading = useSelector(state=>state.user.changeNicknameLoading);
-    const [nicknameError, setNicknameError]=useState(false);
-    const [text, setText]=useState('');
-    
+    const [nickname, onChangeNickname, nicknameError]=useValidation('',1,5);
 
     const onSubmitNickname=useCallback(()=>{
         dispatch({
             type:"CHANGE_NICKNAME_REQUEST",
-            data:text
+            data:nickname
         });
-    },[text]);
+    },[nickname]);
 
-    const onChangeNickname=useCallback((e)=>{
-        setText(e.target.value);
-        setNicknameError(e.target.value.length>=5);
-    },[]);
 
     return(
         <FormWrapper onFinish={onSubmitNickname}>
             <Wrapper>
-                <InputWrapper size="large" placeholder="새로운 닉네임" prefix={<UserOutlined />} value={text} onChange={onChangeNickname}/>
-                <Button htmlType="submit" type="primary" disabled={text.length===0 || nicknameError} loading={changeNicknameLoading}>수정</Button>
+                <InputWrapper size="large" placeholder="새로운 닉네임" prefix={<UserOutlined />} value={nickname} onChange={onChangeNickname}/>
+                <Button htmlType="submit" type="primary" disabled={nicknameError} loading={changeNicknameLoading}>수정</Button>
             </Wrapper>
-            {nicknameError ?<ErrorMessage>닉네임은 최대 4글자입니다.</ErrorMessage>: <div></div>}
+            {nicknameError ?<ErrorMessage>닉네임은 최소 1글자, 최대 5글자 입니다.</ErrorMessage>: <div></div>}
         </FormWrapper>
     )
 }
