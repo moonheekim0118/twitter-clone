@@ -63,5 +63,5 @@ exports.login = (req,res,next)=>{
 exports.logout=(req,res,next)=>{
     req.logout();
     req.session.destroy();
-    res.stats(200).send('okay');
+    res.status(200).send('okay');
 }
