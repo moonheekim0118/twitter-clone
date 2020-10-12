@@ -1,24 +1,42 @@
-import React, { useCallback} from 'react';
+import React, { useCallback, useEffect,useState, useRef } from 'react';
 import Link from 'next/link';
 import { Input , Button } from 'antd';
 import useInput from '../hooks/useInput';
 import { useDispatch,useSelector } from 'react-redux';
 import { loginRequestAction } from '../actions/user';
-import {SignForm, SignInputWrapper} from './Styles';
+import {SignForm, SignInputWrapper, ErrorMessage} from './Styles';
 
 const LoginForm =()=>{
     const dispatch = useDispatch();
-    const isLoggingIn = useSelector((state)=>state.user.isLoggingIn);
+    const {isLoggingIn, loginError} = useSelector((state)=>state.user);
+    const [hasLoginError, setHasLoginError]=useState(false);
     const [email, onChangeEmail]=useInput('');
     const [password, onChangePassword]=useInput('');
+    const firstUpdate = useRef(true); // 첫번째 렌더링에는 에러 검사가 실행되지 않도록  
+
+    useEffect(()=>{
+        if(firstUpdate.current){
+            firstUpdate.current=false;
+            return;
+        }
+        if(loginError){
+            setHasLoginError(true);
+        }
+        else{
+            setHasLoginError(false);
+        }
+    },[loginError]);
     
+
     const onSubmitForm=useCallback(()=>{
         dispatch(loginRequestAction({email, password}));
     },[email,password])
 
+    
     return(
         <SignForm onFinish={onSubmitForm}>
             <SignInputWrapper>
+                {hasLoginError &&<ErrorMessage>{loginError}</ErrorMessage> }
                 <label htmlFor="user-email">이메일</label>
                 <br />
                 <Input 

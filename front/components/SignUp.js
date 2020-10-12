@@ -1,4 +1,4 @@
-import React , {useState, useCallback, useEffect} from 'react';
+import React , {useState, useCallback, useEffect,useRef} from 'react';
 import Router from 'next/router';
 import {Input , Checkbox, Button} from 'antd';
 import useInput from '../hooks/useInput';
@@ -19,6 +19,7 @@ const SignUp=()=>{
     const [termError , setTermError]=useState(false);
     const dispatch=useDispatch();
     const {signUploading, signUpDone, signUpError} = useSelector(state=>state.user);
+    const firstUpdate= useRef(true);
 
     useEffect(()=>{
         if(signUpDone){
@@ -27,6 +28,10 @@ const SignUp=()=>{
     },[signUpDone]);
 
     useEffect(()=>{
+        if(firstUpdate.current){
+            firstUpdate.current=false;
+            return;
+        }
         if(signUpError){
             alert(signUpError);
         }
