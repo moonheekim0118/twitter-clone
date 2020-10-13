@@ -10,9 +10,6 @@ import {Description } from './Styles';
 import UserProfileModal from './Modals/UserProfileModal';
 import PostFormModal from './Modals/PostFormModal';
 
-const Wrapper=styled.div`
-    box-sizing:border-box;
-`;
 
 const SearchBar = styled.div`
     height:50px;
@@ -93,7 +90,7 @@ const AppLayout = ({children})=>{
     const {showProfileModal ,showPostModal } =useSelector(state=>state.ui);
 
     return(
-        <Wrapper>
+        <>
             {isLoggedIn && showProfileModal&& <UserProfileModal/>}
             {isLoggedIn && showPostModal && <PostFormModal/> } 
             <Header>
@@ -109,7 +106,7 @@ const AppLayout = ({children})=>{
                 </Side>
             </div>
             <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
-        </Wrapper>
+        </>
     )
 }
 
