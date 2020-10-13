@@ -6,7 +6,6 @@ import ImagesZoom from './ImagesZoom';
 
 const Wrapper = styled.div`
     margin-top:30px;
-    margin-left:50px;
 `;
 
 const ImagesWrapper=styled.div`
