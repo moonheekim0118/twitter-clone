@@ -13,7 +13,7 @@ const ImagesWrapper=styled.div`
     cursor:pointer;
     margin-top:5px;
     display:inline-block;
-    @media(max-width:768px){
+    @media screen and (max-width:768px){
         width:100%;
     }
 `;
@@ -33,7 +33,7 @@ const ImageWrapper=styled.img`
         box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
     }
 
-    @media(max-width:768px){
+    @media screen and (max-width:767px){
         height:100px;
     }
 `

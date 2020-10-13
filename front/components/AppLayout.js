@@ -37,7 +37,7 @@ const Header=styled.header`
     position:sticky;
     z-index:10;
     border-bottom:1px solid #f4f4f4;
-    @media(max-width:767px){
+    @media screen and (max-width:767px){
         padding-top:10px;
         border:none;
         position:relative;
@@ -46,10 +46,10 @@ const Header=styled.header`
 
 
 const Main=styled.section`
-    width:50%;
+    width:50%; 
     height:100%;
     margin:15px auto;
-    @media(max-width:767px){
+    @media screen and (max-width:767px){
         width: 70% !important;
         padding: 0 !important;
     }
@@ -73,7 +73,7 @@ const Side=styled.section`
      width:20%;
      margin-left:25px;
      border-left: 2px solid #f4f4f4;
-     @media(max-width:767px){
+     @media screen and (max-width:767px){
         display:none;
     }
 

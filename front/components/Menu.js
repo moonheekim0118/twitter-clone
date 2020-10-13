@@ -12,37 +12,39 @@ import { useRouter } from 'next/router';
 
 const Navigation=styled.nav`
     display:flex;
-    flex-direction:row;
-    margin-bottom:10px;
-    padding-top:10px;
-    border-bottom:2px solid #f4f4f4;
-    justify-content:center;
-    align-items:center;
-    position: -webkit-sticky;
-    position:sticky;
-    z-index:20;
-    top: 0;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-end;
+    width:20%;
+    height:100%;
+    max-height:100%;
     background:#fff;
-    @media(min-width:767px){
-        flex-direction:column;
-        justify-content:flex-start;
-        align-items:flex-end;
-        width:10%;
-        height:100%;
-        max-height:100%;
-        background:#fff;
-        position:fixed;
-        top:0;
-        left:0;
-        bottom:0;
-        right:0;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:20;
+    margin-right:10px;
+    border-right: 2px solid #f4f4f4;
+    
+    @media screen and (max-width:767px){
+        width:100% !important;
+        flex-direction:row;
+        margin-bottom:10px;
+        padding-top:10px;
+        border-bottom:2px solid #f4f4f4;
+        justify-content:center;
+        align-items:center;
+        position: -webkit-sticky;
+        position:sticky;
         z-index:20;
-        margin-right:10px;
-        border-right: 2px solid #f4f4f4;
+        top: 0;
+        background:#fff;
     }
 
-    @media(min-width:1279px){
-        width:20%;
+    @media(max-width:1279px){
+        width:10%;
     }
 `;
 
@@ -52,7 +54,7 @@ const MenuWrapper=styled.div`
     flex-direction:column;
     padding:25px;
     margin:0;
-    @media(max-width:767px){
+    @media screen and (max-width:767px){
         width:70%;
         flex-direction:row;
         justify-content:space-evenly;
@@ -68,7 +70,7 @@ const LinkList = styled.div`
 const MenuItem=styled.div`
     display:none;
     margin-bottom:15px;
-    @media(max-width:767px){
+    @media screen and (max-width:767px){
        display:inline-block;
        margin-bottom:0px;
        margin-left:10px;

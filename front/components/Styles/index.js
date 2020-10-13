@@ -76,7 +76,7 @@ export const SignForm=styled(Form)`
 export const SignInputWrapper=styled.div`
     width:50%;
     margin:10px auto;
-    @media(max-width:767px){
+    @media screen and (max-width:767px){
         width:100%;
     }
 `
@@ -133,7 +133,7 @@ export const ModalFormWrapper=styled.div`
     transform: translate(-50%, -50%);
     z-index:7000;
 
-    @media(max-width:767px){
+    @media screen and (max-width:767px){
         width:70%;
     }
     
