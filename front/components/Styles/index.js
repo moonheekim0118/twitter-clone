@@ -5,22 +5,22 @@ import {CloseOutlined, HomeOutlined , KeyOutlined, UserOutlined, TeamOutlined} f
 // Navigation Icons 
 export const HomeIcon=styled(HomeOutlined)`
     font-size:1.5rem;
-    color:black;
+    color:#0099cc;
 `;
 
 export const LoginIcon=styled(KeyOutlined)`
     font-size:1.5rem;
-    color:black;
+    color:#0099cc;
 `;
 
 export const ProfileIcon=styled(UserOutlined)`
     font-size:1.5rem;
-    color:black;
+    color:#0099cc;
 `;
 
 export const SignupIcon=styled(TeamOutlined)`
     font-size:1.5rem;
-    color:black;
+    color:#0099cc;
 `;
 
 
@@ -57,7 +57,7 @@ export const Detail=styled.div`
 export const Description=styled.a`
     font-size:1.3rem;
     font-weight:bold;
-    color:black;
+    color:inherit;
 `;
 
 export const SignForm=styled(Form)`

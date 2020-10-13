@@ -8,6 +8,7 @@ import TweetButton from './Navigations/TweetButton';
 import styled from 'styled-components';
 import LogoutButton from './LogoutButton';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 const Navigation=styled.nav`
     display:flex;
@@ -60,6 +61,9 @@ const MenuWrapper=styled.div`
     }
 `;
 
+const LinkList = styled.div`
+    color: ${(props)=>props.color};
+`;
 
 const MenuItem=styled.div`
     display:none;
@@ -72,14 +76,19 @@ const MenuItem=styled.div`
 `;
 
 const Menu =({isLoggedIn})=>{
+    const router = useRouter();
     return(
         <Navigation>
             <MenuWrapper>
-                <Home/>
-                <Profile/>
-                {!isLoggedIn && <SignUp/>}
+                <LinkList color={router.pathname==='/' ? '#0099cc' : 'black'}>
+                     <Home/>
+                </LinkList>
+                <LinkList color={router.pathname==='/profile' ? '#0099cc' : 'black'}>
+                     <Profile/>
+                </LinkList>
+                {!isLoggedIn && <LinkList color={router.pathname==='/signUp' ? '#0099cc' : 'black'}><SignUp/></LinkList>}
                 {isLoggedIn && <TweetButton/>}
-                {isLoggedIn ? <UserProfile/> : <LogIn/> }
+                {isLoggedIn ? <UserProfile/> : <LinkList color={router.pathname==='/login' ? '#0099cc' : 'black'}><LogIn/></LinkList> }
                 {isLoggedIn&&
                 <MenuItem>
                     <LogoutButton/>
