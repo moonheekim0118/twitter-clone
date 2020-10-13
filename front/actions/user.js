@@ -38,6 +38,12 @@ export const CHANGE_NICKNAME_REQUEST ="CHANGE_NICKNAME_REQUEST";
 export const CHANGE_NICKNAME_SUCCESS ="CHANGE_NICKNAME_SUCCESS";
 export const CHANGE_NICKNAME_FAIL="CHANGE_NICKNAME_FAIL";
 
+// 유저 로그인 복구 
+export const LOAD_USER_INFO_REQUEST = "LOAD_USER_INFO_REQUEST";
+export const LOAD_USER_INFO_SUCCESS="LOAD_USER_INFO_SUCCESS";
+export const LOAD_USER_INFO_FAIL="LOAD_USER_INFO_FAIL";
+
+
 export const loginRequestAction = (data)=>{
     return {
         type:LOG_IN_REQUEST,

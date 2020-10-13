@@ -9,6 +9,8 @@ router.post('/logout',isLoggedIn,UserController.logout);
 
 router.post('/changeNickname',isLoggedIn,UserController.changeNickname);
 
-router.post('/',isNotLoggedIn,UserController.signUp);
+router.post('/signUp',isNotLoggedIn,UserController.signUp);
+
+router.get('/',UserController.loadUser);
 
 module.exports = router;

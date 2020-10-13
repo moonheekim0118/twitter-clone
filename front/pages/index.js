@@ -1,5 +1,6 @@
 import React , {useEffect} from 'react';
 import {LOAD_POST_REQUEST} from '../actions/post';
+import { LOAD_USER_INFO_REQUEST } from '../actions/user';
 import AppLayout from '../components/AppLayout';
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
@@ -18,6 +19,11 @@ const Home =()=>{
     const {mainPosts, hasMorePost, loadPostloading} = useSelector((state)=>state.post);
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        dispatch(
+        { type : LOAD_USER_INFO_REQUEST} // 로그인 상태 복구 
+        )
+    })
     useEffect(()=>{ // 첫 로딩시
         dispatch(
            { type:LOAD_POST_REQUEST}
