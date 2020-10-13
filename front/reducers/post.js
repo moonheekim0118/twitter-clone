@@ -1,5 +1,4 @@
 import * as type from '../actions/post';
-import shortid from 'shortid';
 import produce from 'immer';
 
 export const initialState={
@@ -27,30 +26,6 @@ export const initialState={
 }
 
 
-const dummyPostGenerator =(contents,id,nickname,postId)=>{
-    return{
-        id : postId,
-        User:{
-            id:id,
-            nickname:nickname,
-        },
-        content:contents,
-        Images:[],
-        Comments:[],
-    }
-}
-
-const dummyCommentGenerator=(contents,nickname,id)=>{
-    return{
-        id:shortid.generate(),
-        User:{
-            id:id,
-            nickname:nickname,
-        },
-        content:contents,
-    }
-}
-
 const reducer= (state = initialState , action)=>{
     return produce(state,draft=>{
         switch(action.type){
@@ -61,10 +36,9 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.ADD_POST_SUCCESS:
-                const dummyPost=dummyPostGenerator(action.data.text, action.data.id,action.data.nickname,action.data.postId);
                 draft.addPostloading=false;
                 draft.addPostDone=true;
-                draft.mainPosts.unshift(dummyPost);
+                draft.mainPosts.unshift(action.data);
                 break;
 
             case type.ADD_POST_FAIL:
@@ -79,9 +53,8 @@ const reducer= (state = initialState , action)=>{
                  break;
 
             case type.ADD_COMMENT_SUCCESS:
-                const dummyComment= dummyCommentGenerator(action.data.text,action.data.nickname,action.data.id);
-                const post=draft.mainPosts.find(x=>x.id===action.data.postId);
-                post.Comments.unshift(dummyComment);
+                const post=draft.mainPosts.find(x=>x.id===action.data.PostId);
+                post.Comments.unshift(action.data);
                 draft.addCommentloading=false;
                 draft.addCommentDone=true;
                 break;

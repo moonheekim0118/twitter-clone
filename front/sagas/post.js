@@ -1,15 +1,15 @@
 import axios from 'axios';
 import * as type from '../actions/post';
 import {ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../actions/user';
-import {all, fork, put, takeLatest,delay} from 'redux-saga/effects';
+import {all, fork, put, takeLatest,delay,call} from 'redux-saga/effects';
 
 
 function addPostAPI(data){
-    return axios.post('/api/addPost',data);
+    return axios.post('/post/addPost',data);
 }
 
 function addCommentAPI(data){
-    return axios.post('/api/addComment',data);
+    return axios.post(`/post/${data.postId}/addComment`,data);
 }
 
 function removePostAPI(data){
@@ -27,20 +27,20 @@ function modifyPostApi(data){
 
 function* addPost(action){
     try{
-        yield delay(1000);
-        // const result = yield call(addPostAPI,action.data);
+        const result = yield call(addPostAPI,action.data);
         yield put({
             type:type.ADD_POST_SUCCESS,
-            data:action.data,
+            data:result.data,
         })
 
         yield put({
             type:ADD_POST_TO_ME,
-            data:action.data.postId
+            data:result.data.id,
         })
 
 
     }catch(err){
+        console.log(err);
         yield put({
             type:type.ADD_POST_FAIL,
             data:err.response.data
@@ -51,11 +51,10 @@ function* addPost(action){
 
 function* addComment(action){
     try{
-        yield delay(1000);
-        // const result = yield call(addPostAPI,action.data);
+        const result = yield call(addCommentAPI,action.data);
         yield put({
             type:type.ADD_COMMENT_SUCCESS,
-            data:action.data,
+            data:result.data,
         })
     }catch(err){
         yield put({
