@@ -3,6 +3,8 @@ const router = express.Router();
 const PostController = require('../Controller/post');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
+router.put('/update', isLoggedIn, PostController.modifyPost);
+
 router.post('/:postId/addComment',isLoggedIn,PostController.AddComment);
 
 router.post('/addPost',isLoggedIn, PostController.Addpost);

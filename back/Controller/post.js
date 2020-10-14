@@ -95,3 +95,15 @@ exports.removePost=async(req,res,next)=>{
         next(err);
     }
 }
+
+exports.modifyPost=async(req,res,next)=>{
+    try{
+        const post = await Post.findOne({where:{id:req.body.postId, UserId:req.user.id}});
+        post.content=req.body.content;
+        await post.save();
+        res.status(200).json({postId:post.id, content:post.content});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+}

@@ -21,7 +21,7 @@ function loadPostAPI(lastId){
 }
 
 function modifyPostApi(data){
-    return axios.put('/api/modifyPost',data);
+    return axios.put('/post/update',data);
 }
 
 function likePostAPI(data){
@@ -114,14 +114,13 @@ function* loadPost(action){
 
 function* modifyPost(action){
     try{
-        yield delay(1000);
+        const result = yield call(modifyPostApi, action.data);
         yield put({
             type:type.MODIFY_POST_SUCCESS,
-            data:action.data,
+            data:result.data,
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.MODIFY_POST_FAIL,
             error:err.response.data
