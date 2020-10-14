@@ -62,6 +62,22 @@ const NicknameWrapper=styled.div`
     font-weight:bold;
 `;
 
+const LikedCount=styled.span`   
+    margin-left:5px;
+    font-size:1rem;
+    color:#eb2f96;
+`;
+
+const LikersCount=styled.span`
+    margin-left:5px;
+    font-size:1rem;
+    color:#f4f4f4;
+
+    &:hover{
+        color:#eb2f96;
+    }
+`;
+
 const PostCard=({post})=>{
     const dispatch = useDispatch();
     const [commentFormOpend, setCommentFormOpend]=useState(false);
@@ -100,8 +116,16 @@ const PostCard=({post})=>{
                 <CardButtons>
                       <RetweetOutlined key="retweet"/>
                       { liked ?
-                        <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
-                        :<HeartOutlined onClick={onLike} key="heart" />}
+                        <div>
+                            <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
+                            {post.Likers.length>0 && <LikedCount>{post.Likers.length}</LikedCount>}
+                        </div>
+                        :
+                        <div>
+                            <HeartOutlined onClick={onLike} key="heart" />
+                            {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
+                        </div>
+                        }
                       <MessageOutlined onClick={onToggleComment} key="comment"/>
                       <Popover key="more" content={(<Button.Group>
                          {me===post.User.id 
