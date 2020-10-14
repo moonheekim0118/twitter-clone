@@ -25,17 +25,21 @@ const Home =()=>{
         )
     })
     useEffect(()=>{ // 첫 로딩시
-        dispatch(
-           { type:LOAD_POST_REQUEST}
-        );
-    },[]);
+        if(hasMorePost){
+            dispatch(
+                { type:LOAD_POST_REQUEST}
+             );
+        }
+    },[hasMorePost]);
 
     useEffect(()=>{
         function onScroll(){
-            if(window.scrollY + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
+            if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
                 if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
+                    const lastId= mainPosts[mainPosts.length-1]?.id;
                     dispatch(
-                        { type:LOAD_POST_REQUEST}
+                        { type:LOAD_POST_REQUEST},
+                        lastId,
                      );
                 }
             }

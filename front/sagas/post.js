@@ -16,8 +16,8 @@ function removePostAPI(data){
     return axios.get('/api/loadPost',data);
 }
 
-function loadPostAPI(data){
-    return axios.get('/posts',data);
+function loadPostAPI(lastId){
+    return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
 function modifyPostApi(data){
