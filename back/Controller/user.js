@@ -45,13 +45,21 @@ exports.login = (req,res,next)=>{
                     exclude:['password']
                 }, // excluding password
                 include:[{
-                    model:Post
+                    model:Post,
+                    attributes:['id']
                 } , {
                     model: User,
                     as:'Followings', 
+                    attributes:['id']
                 }, {
                     model: User,
-                    as: 'Followers'
+                    as: 'Followers',
+                    attributes:['id']
+                },
+                {
+                    model:Post,
+                    as: 'Liked',
+                    attributes:['id']
                 }]
             })
             return res.status(200).json(fullUserwitoutPassword); // login Completed
@@ -97,6 +105,10 @@ exports.loadUser=async(req,res,next)=>{
                 }, {
                     model: User,
                     as: 'Followers',
+                    attributes:['id']
+                }, {
+                    model:Post,
+                    as: 'Liked',
                     attributes:['id']
                 }]
             })

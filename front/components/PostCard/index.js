@@ -3,80 +3,14 @@ import { Button, Popover,Avatar, List, Comment } from 'antd';
 import {RetweetOutlined,HeartOutlined,HeartTwoTone,MessageOutlined,EllipsisOutlined} from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import {useSelector ,useDispatch } from 'react-redux';
-import PostImages from './PostImages';
-import PostCardContent from './PostCardContent';
-import CommentForm from './CommentForm';
-import styled from 'styled-components';
-import FollowButton from './FollowButton';
-import { removePostRequest,likePostRequest,unLikePostRequest } from '../actions/post';
-import {showModifyModalAction} from '../actions/ui';
-
-const AvatarWrapper=styled.div`
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 5%;
-`;
-
-const Card = styled.div`
-    position:relative;
-    width:100%;
-    display:flex;
-    flex-direction: row;
-    align-items: stretch;
-    padding:20px 20px;
-    margin-bottom:30px;
-    border:1px solid #f4f4f4;
-    background-color:#fff;
-    cursor:pointer;
-    &:hover{
-        background-color:rgba(214, 214, 194,0.3);
-    }
-`;
-
-const CardMeta = styled.div`
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 90%;
-    display:flex;
-    flex-direction:column;
-    padding:0 20px;
-    margin-left:20px;
-`;
-
-const CardButtons= styled.div`
-    margin-top:20px;
-    font-size:1.2rem;
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-`;
-
-const FollowButtonWrapper=styled.div`
-    position: absolute;
-    right:15px;
-    top:5px;
-`;
-
-const NicknameWrapper=styled.div`
-    font-size:1.2rem;
-    font-weight:bold;
-`;
-
-const LikedCount=styled.span`   
-    margin-left:5px;
-    font-size:1rem;
-    color:#eb2f96;
-`;
-
-const LikersCount=styled.span`
-    margin-left:5px;
-    font-size:1rem;
-    color:#f4f4f4;
-
-    &:hover{
-        color:#eb2f96;
-    }
-`;
+import PostImages from '../PostImages';
+import PostCardContent from '../PostCardContent';
+import CommentForm from '../CommentForm';
+import FollowButton from '../FollowButton';
+import { removePostRequest,likePostRequest,unLikePostRequest } from '../../actions/post';
+import {showModifyModalAction} from '../../actions/ui';
+import {AvatarWrapper, Card, CardMeta, CardButtons, 
+    FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,LikeButtonWrapper} from './style';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -121,10 +55,10 @@ const PostCard=({post})=>{
                             {post.Likers.length>0 && <LikedCount>{post.Likers.length}</LikedCount>}
                         </div>
                         :
-                        <div>
+                        <LikeButtonWrapper>
                             <HeartOutlined onClick={onLike} key="heart" />
                             {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
-                        </div>
+                        </LikeButtonWrapper>
                         }
                       <MessageOutlined onClick={onToggleComment} key="comment"/>
                       <Popover key="more" content={(<Button.Group>
