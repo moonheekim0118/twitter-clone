@@ -11,6 +11,8 @@ router.patch('/:postId/like',isLoggedIn,PostController.LikePost);
 
 router.delete('/:postId/like',isLoggedIn,PostController.unLikePost);
 
+router.delete('/:postId',isLoggedIn,PostController.removePost);
+
 router.delete('/',(req,res)=>{
     res.json({id:1});
 });

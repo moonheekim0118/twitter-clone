@@ -79,3 +79,19 @@ exports.unLikePost=async(req,res,next)=>{
        next(err);
    }
 }
+
+
+exports.removePost=async(req,res,next)=>{
+    try{
+        const post = await Post.findOne({where:{id:req.params.postId}});
+        if(!post){
+            return res.status(403).json('존재하지 않는 게시물입니다.');
+        }
+        await post.destroy();
+        
+        res.status(200).json({id:+req.params.postId});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+}

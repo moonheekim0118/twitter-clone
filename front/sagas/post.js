@@ -12,12 +12,11 @@ function addCommentAPI(data){
     return axios.post(`/post/${data.postId}/addComment`,data);
 }
 
-function removePostAPI(data){
-    return axios.get('/api/loadPost',data);
+function removePostAPI(postId){
+    return axios.delete(`/post/${postId}`);
 }
 
 function loadPostAPI(lastId){
-    console.log("api로 전해지는 라스트 아이디"+lastId)
     return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
@@ -76,10 +75,10 @@ function* addComment(action){
 
 function* removePost(action){
     try{
-        yield delay(1000);
+        const result = yield call(removePostAPI,action.data.id);
         yield put({
             type:type.REMOVE_POST_SUCCESS,
-            data:action.data,
+            data:result.data,
         })
 
         yield put({
