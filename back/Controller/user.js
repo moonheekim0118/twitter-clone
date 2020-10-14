@@ -78,3 +78,35 @@ exports.changeNickname= async (req,res,next)=>{
         next(err);
    }
 }
+
+exports.loadUser=async(req,res,next)=>{
+    try{
+        if(req.user){
+            const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 
+                where:{id : req.user.id},
+                attributes:{
+                    exclude:['password']
+                }, // excluding password
+                include:[{
+                    model:Post,
+                    attributes:['id']
+                } , {
+                    model: User,
+                    as:'Followings', 
+                    attributes:['id']
+                }, {
+                    model: User,
+                    as: 'Followers',
+                    attributes:['id']
+                }]
+            })
+            res.status(200).json(fullUserwitoutPassword);
+        }
+        else{
+            res.status(200).json(null);
+        }
+    }catch(err){
+        console.log(err);
+        next(err);
+    }
+}

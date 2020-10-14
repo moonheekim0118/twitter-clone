@@ -4,6 +4,7 @@ import produce from 'immer';
 export const initialState={
     // 시퀄라이즈 속성에 맞게 다른 정보와 결합되는 것은 대문자로 표기함.
 
+    totalPostLength:0,
     mainPosts:[],
     createdAt:new Date(),
     hasMorePost:true,
@@ -53,7 +54,7 @@ const reducer= (state = initialState , action)=>{
                  break;
 
             case type.ADD_COMMENT_SUCCESS:
-                const post=draft.mainPosts.find(x=>x.id===action.data.PostId);
+                const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
                 post.Comments.unshift(action.data);
                 draft.addCommentloading=false;
                 draft.addCommentDone=true;
@@ -90,8 +91,11 @@ const reducer= (state = initialState , action)=>{
             case type.LOAD_POST_SUCCESS:
                 draft.loadPostloading=false;
                 draft.loadPostDone=true;
-                draft.mainPosts=draft.mainPosts.concat(action.data);
-                draft.hasMorePost=draft.mainPosts.length<50; 
+                draft.mainPosts=draft.mainPosts.concat(action.data.posts);
+                if(action.data.totalPostsLength!==0){
+                    draft.totalPostLength=action.data.totalPostsLength;
+                }
+                draft.hasMorePost=draft.mainPosts.length<draft.totalPostLength;
                 break;
 
             case type.LOAD_POST_FAIL:

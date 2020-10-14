@@ -54,7 +54,7 @@ const CommentForm=({postId})=>{
 }
 
 CommentForm.propTypes={
-    postId:PropTypes.string.isRequired
+    postId:PropTypes.number.isRequired
 };
 
 

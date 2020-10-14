@@ -2,6 +2,10 @@ import {all, fork, takeLatest, delay, put, call} from 'redux-saga/effects';
 import * as type from '../actions/user';
 import axios from 'axios';
 
+function loadUserInfoAPI(){
+    return axios.get('/user');
+}
+
 function loginAPI(data){
     return axios.post('/user/login',data);
 }
@@ -11,11 +15,26 @@ function logoutAPI(){
 }
 
 function signUpAPI(data){
-    return axios.post('/user',data);
+    return axios.post('/user/signUp',data);
 }
 
 function changeNicknameAPI(data){
     return axios.post('/user/changeNickname',data);
+}
+
+function* loadUserInfo(){
+    try{
+        const result= yield call(loadUserInfoAPI);
+        yield put({
+            type:type.LOAD_USER_INFO_SUCCESS,
+            data:result.data,
+        });
+    }catch(err){
+        yield put({
+            type:type.LOAD_USER_INFO_FAIL,
+            error:err.response.data
+        })
+    }
 }
 
 function* login(action){
@@ -144,6 +163,9 @@ function* watchChangeNickname(){
     yield takeLatest(type.CHANGE_NICKNAME_REQUEST,changeNickname);
 }
 
+function* wathchLoadUserInfo(){
+    yield takeLatest(type.LOAD_USER_INFO_REQUEST,loadUserInfo);
+}
 
 export default function* userSaga(){
     yield all([
@@ -153,5 +175,6 @@ export default function* userSaga(){
         fork(watchFollow),
         fork(watchUnfollow),
         fork(watchChangeNickname),
+        fork(wathchLoadUserInfo),
     ]);
 }
