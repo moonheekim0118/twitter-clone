@@ -8,7 +8,7 @@ import PostCardContent from './PostCardContent';
 import CommentForm from './CommentForm';
 import styled from 'styled-components';
 import FollowButton from './FollowButton';
-import { removePostRequest } from '../actions/post';
+import { removePostRequest,likePostRequest,unLikePostRequest } from '../actions/post';
 import {showModifyModalAction} from '../actions/ui';
 
 const AvatarWrapper=styled.div`
@@ -64,13 +64,17 @@ const NicknameWrapper=styled.div`
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
-    const [liked, setLiked]=useState(false);
     const [commentFormOpend, setCommentFormOpend]=useState(false);
     const me = useSelector(state => state.user.me?.id);
     const {removePostloading} = useSelector(state=>state.post);
-    const onToggleLike = useCallback(()=>{
-        setLiked((prev)=>!prev);
-    },[])
+    const liked = post.Likers.find((x)=>x.id===me);
+    const onUnlike=useCallback(()=>{
+        dispatch(unLikePostRequest(post.id));
+    },[]);
+
+    const onLike=useCallback(()=>{
+        dispatch(likePostRequest(post.id));
+    },[]);
 
     const onToggleComment = useCallback(()=>{
         setCommentFormOpend((prev)=>!prev);
@@ -96,8 +100,8 @@ const PostCard=({post})=>{
                 <CardButtons>
                       <RetweetOutlined key="retweet"/>
                       { liked ?
-                        <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onToggleLike}/>
-                        :<HeartOutlined onClick={onToggleLike} key="heart" />}
+                        <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
+                        :<HeartOutlined onClick={onLike} key="heart" />}
                       <MessageOutlined onClick={onToggleComment} key="comment"/>
                       <Popover key="more" content={(<Button.Group>
                          {me===post.User.id 
@@ -144,7 +148,8 @@ PostCard.propTypes = {
         content:PropTypes.string,
         createdAt:PropTypes.string,
         Comments:PropTypes.arrayOf(PropTypes.object),
-        Images:PropTypes.arrayOf(PropTypes.object)
+        Images:PropTypes.arrayOf(PropTypes.object),
+        Likers:PropTypes.arrayOf(PropTypes.object)
 
     }).isRequired,
 }

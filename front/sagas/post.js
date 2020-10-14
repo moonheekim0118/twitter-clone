@@ -24,6 +24,14 @@ function modifyPostApi(data){
     return axios.put('/api/modifyPost',data);
 }
 
+function likePostAPI(data){
+    return axios.patch(`/post/${data}/like`);
+}
+
+function unLikePostAPI(data){
+    return axios.delete(`/post/${data}/like`);
+}
+
 
 function* addPost(action){
     try{
@@ -116,10 +124,45 @@ function* modifyPost(action){
         console.log('에러!!'+err);
         yield put({
             type:type.MODIFY_POST_FAIL,
+            error:err.response.data
+        })
+    }
+}
+
+function* likePost(action){
+    try{
+        const result= yield call(likePostAPI,action.data);
+        yield put({
+            type:type.LIKE_POST_SUCCESS,
+            data:result.data
+        })
+
+    }catch(err){
+        console.log('에러!!'+err);
+        yield put({
+            type:type.LIKE_POST_FAIL,
             data:err.response.data
         })
     }
 }
+
+function* unLikePost(action){
+    try{
+        const result= yield call(unLikePostAPI,action.data);
+        yield put({
+            type:type.UNLIKE_POST_SUCCESS,
+            data:result.data
+        })
+
+    }catch(err){
+        console.log('에러!!'+err);
+        yield put({
+            type:type.UNLIKE_POST_FAIL,
+            data:err.response.data
+        })
+    }
+}
+
 
 
 
@@ -144,6 +187,15 @@ function* watchModifyPost(){
     yield takeLatest(type.MODIFY_POST_REQUEST,modifyPost);
 }
 
+function* watchLikePost(){
+    yield takeLatest(type.LIKE_POST_REQUEST,likePost);
+}
+
+function* watchUnLikePost(){
+    yield takeLatest(type.UNLIKE_POST_REQUEST,unLikePost);
+}
+
+
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),
@@ -151,5 +203,7 @@ export default function* postSaga(){
         fork(watchRemoveComment),
         fork(watchLoadPost),
         fork(watchModifyPost),
+        fork(watchLikePost),
+        fork(watchUnLikePost)
     ]);
 }

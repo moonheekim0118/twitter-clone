@@ -12,6 +12,7 @@ exports.Addpost= async (req,res,next)=>{
                 { model: Image,},
                 { model: Comment , include:[{ model: User, attributes:{exclude:['password']}}]},
                 { model : User,attributes:{exclude:['password']}}, 
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']}
             ]
         })
         res.status(201).json(fullPost);
@@ -47,3 +48,34 @@ exports.AddComment=async (req,res,next)=>{
         next(err);
     }
 };
+
+
+exports.LikePost=async(req,res,next)=>{
+   try{
+        const post = await Post.findOne({where:{id:req.params.postId}});
+        if(!post){
+            return res.status(403).json('존재하지 않는 게시물입니다.');
+        }
+        await post.addLikers(req.user.id);
+        res.status(200).json({PostId:post.id, UserId:req.user.id});
+   }catch(err){
+       console.log(err);
+       next(err);
+   }
+    
+
+};
+
+exports.unLikePost=async(req,res,next)=>{
+    try{
+        const post = await Post.findOne({where:{id:req.params.postId}});
+        if(!post){
+            return res.status(403).json('존재하지 않는 게시물입니다.');
+        }
+        await post.removeLikers(req.user.id);
+        res.status(200).json({postId:post.id, userId:req.user.id});
+   }catch(err){
+       console.log(err);
+       next(err);
+   }
+}

@@ -25,6 +25,16 @@ export const ADD_COMMENT_SUCCESS='ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAIL='ADD_COMMENT_FAIL';
 
 
+// LIKE POSt
+
+export const LIKE_POST_REQUEST='LIKE_POST_REQUEST';
+export const LIKE_POST_SUCCESS='LIKE_POST_SUCCESS';
+export const LIKE_POST_FAIL='LIKE_POST_FAIL';
+
+export const UNLIKE_POST_REQUEST='UNLIKE_POST_REQUEST';
+export const UNLIKE_POST_SUCCESS='UNLIKE_POST_SUCCESS';
+export const UNLIKE_POST_FAIL='UNLIKE_POST_FAIL';
+
 export const addPostRequest=(data)=>{
     return{
      type:ADD_POST_REQUEST,
@@ -52,3 +62,17 @@ export const addPostRequest=(data)=>{
          data,
      }
  }
+
+ export const likePostRequest=(data)=>{
+     return{
+         type:LIKE_POST_REQUEST,
+         data,
+     }
+ }
+
+ export const unLikePostRequest=(data)=>{
+    return{
+        type:UNLIKE_POST_REQUEST,
+        data,
+    }
+}

@@ -7,6 +7,10 @@ router.post('/:postId/addComment',isLoggedIn,PostController.AddComment);
 
 router.post('/addPost',isLoggedIn, PostController.Addpost);
 
+router.patch('/:postId/like',isLoggedIn,PostController.LikePost);
+
+router.delete('/:postId/like',isLoggedIn,PostController.unLikePost);
+
 router.delete('/',(req,res)=>{
     res.json({id:1});
 });

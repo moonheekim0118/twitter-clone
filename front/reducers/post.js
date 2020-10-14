@@ -24,6 +24,12 @@ export const initialState={
     modifyPostloading:false,
     modifyPostDone:false,
     modifyPostError:null,
+    likePostloading:false, // 게시글 로딩  
+    likePostDone:false, 
+    likePostError:null,
+    unlikePostloading:false, // 게시글 로딩  
+    unlikePostDone:false, 
+    unlikePostError:null,
 }
 
 
@@ -118,6 +124,38 @@ const reducer= (state = initialState , action)=>{
                 draft.modifyPostError=action.error;
                 break;
 
+            case type.LIKE_POST_REQUEST:
+                draft.likePostloading=true;
+                draft.likePostDone=false;
+                draft.likePostError=null;
+                break;
+            case type.LIKE_POST_SUCCESS:{
+                const post = draft.mainPosts.find((x)=> x.id === action.data.PostId);
+                post.Likers.push({id:action.data.UserId});
+                draft.likePostloading=false;
+                draft.likePostDone=true;
+                break;
+            }
+            case type.LIKE_POST_FAIL:
+                draft.likePostloading=false;
+                draft.likePostError=action.error;
+                break;
+            case type.UNLIKE_POST_REQUEST:
+                draft.unlikePostloading=true;
+                draft.unlikePostDone=false;
+                draft.unlikePostError=null;
+                break;
+            case type.UNLIKE_POST_SUCCESS:{
+                const post = draft.mainPosts.find((x)=> x.id === action.data.PostId);
+                post.Likers=post.Likers.filter((x)=>x.id !== action.data.UserId);
+                draft.unlikePostloading=false;
+                draft.unlikePostDone=true;
+                break;
+            }
+            case type.UNLIKE_POST_FAIL:
+                draft.unlikePostloading=false;
+                draft.unlikePostError=action.error;
+                break;
             default:
                 break;
         }

@@ -26,11 +26,12 @@ exports.loadPost=async (req,res,next)=>{
                 {model :Image},
                 {model:Comment, include:[{model:User}],  
                 attributes:{exclude:['password']},},
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']}
             ]
         });
         res.status(200).json({posts,totalPostsLength});
     }catch(err){
-        console.lerror(err);
+        console.error(err);
         next(err);
     }
 };
