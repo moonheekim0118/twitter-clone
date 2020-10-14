@@ -30,7 +30,7 @@ const Home =()=>{
                 { type:LOAD_POST_REQUEST}
              );
         }
-    },[hasMorePost]);
+    },[]);
 
     useEffect(()=>{
         function onScroll(){
@@ -38,8 +38,7 @@ const Home =()=>{
                 if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
                     const lastId= mainPosts[mainPosts.length-1]?.id;
                     dispatch(
-                        { type:LOAD_POST_REQUEST},
-                        lastId,
+                        { type:LOAD_POST_REQUEST ,data:lastId },
                      );
                 }
             }

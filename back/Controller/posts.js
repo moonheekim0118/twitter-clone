@@ -5,10 +5,11 @@ exports.loadPost=async (req,res,next)=>{
     try{
         let totalPostsLength=0;
         const where={};
-        if(+req.query.lastId){
-            where.id={[Op.lt]: +req.query+lastId};
+        const lastId=+req.query.lastId;
+        if(lastId!==0){
+            where.id={[Op.lt]: +req.query.lastId};
         }
-        else{ // 초기 
+        if(lastId===0){
             totalPostsLength= await Post.count();
         }
         const posts = await Post.findAll({

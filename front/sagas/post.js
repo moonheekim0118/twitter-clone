@@ -17,6 +17,7 @@ function removePostAPI(data){
 }
 
 function loadPostAPI(lastId){
+    console.log("api로 전해지는 라스트 아이디"+lastId)
     return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
@@ -158,7 +159,7 @@ function* unLikePost(action){
         console.log('에러!!'+err);
         yield put({
             type:type.UNLIKE_POST_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
     }
 }
