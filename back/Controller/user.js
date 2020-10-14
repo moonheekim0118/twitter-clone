@@ -77,7 +77,10 @@ exports.logout=(req,res,next)=>{
 
 exports.changeNickname= async (req,res,next)=>{
    try{
-        const user = await User.findOne({ where : {id: req.body.id}});
+        const user = await User.findOne({ where : {id: req.user.id}});
+        if(!user){
+            return res.status(403).send('다시 로그인 해주시길 바랍니다.');
+        }
         user.nickname=req.body.nickname;
         await user.save();
         return res.status(200).send('ok');

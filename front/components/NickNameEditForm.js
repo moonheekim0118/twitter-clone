@@ -32,7 +32,7 @@ const Wrapper = styled.div`
 
 const NickNameEditForm=()=>{
     const dispatch = useDispatch();
-    const {changeNicknameLoading,changeNicknameDone, me} = useSelector(state=>state.user);
+    const {changeNicknameLoading,changeNicknameDone} = useSelector(state=>state.user);
     const [nickname, onChangeNickname, nicknameError]=useValidation('',1,5);
     const [nickNameChanged, setNicknameChanged]=useState(false);
     const firstUpdate = useRef(true);
@@ -55,7 +55,6 @@ const NickNameEditForm=()=>{
         dispatch({
             type:"CHANGE_NICKNAME_REQUEST",
             data:{
-                id:me.id,
                 nickname:nickname
             }
         });
