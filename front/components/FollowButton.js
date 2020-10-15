@@ -4,18 +4,18 @@ import { Button } from 'antd';
 import {useSelector, useDispatch} from 'react-redux';
 import { followRequestAction , unfollowRequestAction} from '../actions/user';
 
-const FollowButton=({post})=>{
+const FollowButton=({userId})=>{
 
     const dispatch = useDispatch();
     const {me , followLoading, unfollowLoading} = useSelector(state=>state.user);
-    const isFollowing = me&&me.Followings.find((v)=>v.id===post.User.id);
+    const isFollowing = me&&me.Followings.find((v)=>v.id===userId);
     
     const onClickFollow=useCallback(()=>{
         if(isFollowing){ // 언팔로우 
-            dispatch(unfollowRequestAction(post.User.id));
+            dispatch(unfollowRequestAction(userId));
         }
         else{ // 팔로우 
-            dispatch(followRequestAction(post.User.id));
+            dispatch(followRequestAction(userId));
         }
     },[isFollowing]);
 
@@ -26,18 +26,7 @@ const FollowButton=({post})=>{
 };
 
 FollowButton.propTypes = {
-    post:PropTypes.shape({
-        id:PropTypes.number,
-        User:PropTypes.shape({
-            id:PropTypes.number,
-            nickname:PropTypes.string
-        }),
-        content:PropTypes.string,
-        createdAt:PropTypes.string,
-        Comments:PropTypes.arrayOf(PropTypes.object),
-        Images:PropTypes.arrayOf(PropTypes.object)
-
-    }).isRequired,
+   userId:PropTypes.number.isRequired,
 }
 
 

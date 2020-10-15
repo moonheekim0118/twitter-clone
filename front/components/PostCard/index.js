@@ -41,7 +41,7 @@ const PostCard=({post})=>{
     return(
        <>
         <Card>
-            {me && post.User.id!==me && <FollowButtonWrapper><FollowButton post={post}/></FollowButtonWrapper>}
+            {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
                 <NicknameWrapper>{post.User.nickname}</NicknameWrapper>
