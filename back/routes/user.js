@@ -7,7 +7,7 @@ router.post('/login',isNotLoggedIn,UserController.login);
 
 router.post('/logout',isLoggedIn,UserController.logout);
 
-router.post('/changeNickname',isLoggedIn,UserController.changeNickname);
+router.patch('/changeNickname',isLoggedIn,UserController.changeNickname);
 
 router.post('/signUp',isNotLoggedIn,UserController.signUp);
 

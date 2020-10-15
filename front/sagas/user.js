@@ -19,7 +19,7 @@ function signUpAPI(data){
 }
 
 function changeNicknameAPI(data){
-    return axios.post('/user/changeNickname',data);
+    return axios.patch('/user/changeNickname',data);
 }
 
 function* loadUserInfo(){
