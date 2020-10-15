@@ -183,7 +183,9 @@ const reducer= (state = initialState , action)=>{
                 draft.uploadImagesloading=false;
                 draft.uploadImagesError=action.error;
                 break;
-
+            
+            case type.REMOVE_IMAGE:
+                draft.imagePaths= draft.imagePaths.filter((v,i)=>i!==action.data);
             default:
                 break;
         }

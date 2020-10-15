@@ -1,7 +1,8 @@
 import React, {useCallback} from 'react';
-import { Button} from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {removeImageRequest} from '../actions/post';
 
 const Wrapper = styled.div`
     margin-top:20px;
@@ -12,13 +13,14 @@ const Wrapper = styled.div`
     width:100%;
 `;
 
-const ImageWrapperUnderTwo=styled.div`
+const ImageWrapper=styled.div`
+    position:relative;
     flex-grow:1;
     width:${props=>`${100/props.number}%`};
     margin:3px;
 `;
 
-const ImageWrapperThree=styled.div`
+const ImageWrapperColumn=styled.div`
     flex-grow:1;
     display:flex;
     flex-direction:column;
@@ -34,21 +36,49 @@ const Image=styled.img`
    flex-grow:1;
 `   
 
+const RemoveButton=styled(CloseCircleOutlined)`
+    position:absolute;
+    top:5px;
+    right:5px;
+    color:black;    
+    z-index:100;
+    font-size:1.5rem;
+    cursor:pointer;
+
+    &:hover{
+        color:red;
+    }
+`;
+
 const ImagePath=()=>{
     const imagePaths = useSelector((state)=>state.post.imagePaths);
+    const dispatch = useDispatch();
 
-    const onRemoveImage=useCallback((index)=>()=>{
-        
-    });
+    const onRemoveImage=useCallback((index)=>{
+        dispatch(removeImageRequest(index));
+    },[]);
 
-    if(imagePaths.length<=2){
+    if(imagePaths.length===1){
         return(
             <Wrapper>
-            {imagePaths.map((v, i)=>(
-                <ImageWrapperUnderTwo key={0} number={imagePaths.length} >
-                    <Image height="false" src={`http://localhost:3065/${v}`} alt={v}/>
-                </ImageWrapperUnderTwo>
-            ))}
+                <ImageWrapper key={0} number={1} >
+                    <Image height="false" src={`http://localhost:3065/${imagePaths[0]}`} alt={imagePaths[0]}/>
+                    <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                </ImageWrapper>
+            </Wrapper>
+        )
+    }
+    if(imagePaths.length===2){
+        return(
+            <Wrapper>
+                 <ImageWrapper key={0} number={2} >
+                    <Image height="false" src={`http://localhost:3065/${imagePaths[0]}`} alt={imagePaths[0]}/>
+                    <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                </ImageWrapper>
+                <ImageWrapper key={1} number={2} >
+                    <Image height="false" src={`http://localhost:3065/${imagePaths[1]}`} alt={imagePaths[1]}/>
+                    <RemoveButton onClick={onRemoveImage.bind(this,1)}/>
+                </ImageWrapper>
             </Wrapper>
         );
     }
@@ -56,17 +86,20 @@ const ImagePath=()=>{
     if(imagePaths.length===3){
         return(
             <Wrapper>
-               <ImageWrapperUnderTwo key={0} number={2} >
+               <ImageWrapper key={0} number={2} >
                    <Image  height="false" src={`http://localhost:3065/${imagePaths[0]}`}/>
-               </ImageWrapperUnderTwo>
-               <ImageWrapperThree>
-                    <ImageWrapperUnderTwo key={1} number={1} >
+                   <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+               </ImageWrapper>
+               <ImageWrapperColumn>
+                    <ImageWrapper key={1} number={1} >
                         <Image  height="true" src={`http://localhost:3065/${imagePaths[1]}`}/>
-                    </ImageWrapperUnderTwo>
-                    <ImageWrapperUnderTwo key={2} number={1}>
+                        <RemoveButton onClick={onRemoveImage.bind(this,1)}/>
+                    </ImageWrapper>
+                    <ImageWrapper key={2} number={1}>
                         <Image height="true" src={`http://localhost:3065/${imagePaths[2]}`}/>
-                    </ImageWrapperUnderTwo>
-               </ImageWrapperThree>
+                        <RemoveButton onClick={onRemoveImage.bind(this,2)}/>
+                    </ImageWrapper>
+               </ImageWrapperColumn>
             </Wrapper>
         )
     }
@@ -74,26 +107,32 @@ const ImagePath=()=>{
     if(imagePaths.length===4){
         return(
             <Wrapper>
-                <ImageWrapperThree>
-                    <ImageWrapperUnderTwo key={0} number={1} height="true">
+                <ImageWrapperColumn>
+                    <ImageWrapper key={0} number={1} height="true">
                         <Image  height="true" src={`http://localhost:3065/${imagePaths[0]}`}/>
-                    </ImageWrapperUnderTwo>
-                    <ImageWrapperUnderTwo key={1} number={1} height="true">
+                        <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                    </ImageWrapper>
+                    <ImageWrapper key={1} number={1} height="true">
                         <Image  height="true"src={`http://localhost:3065/${imagePaths[1]}`}/>
-                    </ImageWrapperUnderTwo>
-               </ImageWrapperThree>
-               <ImageWrapperThree>
-                    <ImageWrapperUnderTwo key={2} number={1} height="true">
+                        <RemoveButton onClick={onRemoveImage.bind(this,1)}/>
+                    </ImageWrapper>
+               </ImageWrapperColumn>
+               <ImageWrapperColumn>
+                    <ImageWrapper key={2} number={1} height="true">
                         <Image  height="true" src={`http://localhost:3065/${imagePaths[2]}`}/>
-                    </ImageWrapperUnderTwo>
-                    <ImageWrapperUnderTwo key={3} number={1} height="true">
+                        <RemoveButton onClick={onRemoveImage.bind(this,2)}/>
+                    </ImageWrapper>
+                    <ImageWrapper key={3} number={1} height="true">
                         <Image  height="true" src={`http://localhost:3065/${imagePaths[3]}`}/>
-                    </ImageWrapperUnderTwo>
-               </ImageWrapperThree>
+                        <RemoveButton onClick={onRemoveImage.bind(this,3)}/>
+                    </ImageWrapper>
+               </ImageWrapperColumn>
             </Wrapper>
         )
     }
-
+    else{
+        return(<></>)
+    }
 }
 
 export default ImagePath;

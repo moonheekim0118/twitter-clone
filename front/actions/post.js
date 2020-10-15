@@ -42,6 +42,14 @@ export const UPLOAD_IMAGES_REQUEST="UPLOAD_IMAGES_REQUEST";
 export const UPLOAD_IMAGES_SUCCESS="UPLOAD_IMAGES_SUCCESS";
 export const UPLOAD_IMAGES_FAIL="UPLOAD_IMAGES_FAIL";
 
+export const REMOVE_IMAGE="REMOVE_IMAGE";
+
+export const removeImageRequest=(data)=>{
+    return{
+        type:REMOVE_IMAGE,
+        data,
+    }
+}
 export const uploadImagesRequest=(data)=>{
     return{
         type:UPLOAD_IMAGES_REQUEST,
