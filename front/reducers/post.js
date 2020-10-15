@@ -36,6 +36,10 @@ export const initialState={
     unlikePostloading:false, // 게시글 좋아요취소  
     unlikePostDone:false, 
     unlikePostError:null,
+
+    uploadImagesloading:false, // 이미지 업로드 
+    uploadImagesDone:false,
+    uploadImagesError:null,
 }
 
 
@@ -162,6 +166,24 @@ const reducer= (state = initialState , action)=>{
                 draft.unlikePostloading=false;
                 draft.unlikePostError=action.error;
                 break;
+
+            case type.UPLOAD_IMAGES_REQUEST:
+                draft.uploadImagesloading=true;
+                draft.uploadImagesDone=false;
+                draft.uploadImagesError=null;
+                break;
+
+            case type.UPLOAD_IMAGES_SUCCESS:
+                draft.imagePaths=action.data;
+                draft.uploadImagesloading=false;
+                draft.uploadImagesDone=true;
+                break;
+
+            case type.UPLOAD_IMAGES_FAIL:
+                draft.uploadImagesloading=false;
+                draft.uploadImagesError=action.error;
+                break;
+
             default:
                 break;
         }
