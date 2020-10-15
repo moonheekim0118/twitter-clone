@@ -12,10 +12,10 @@ const FollowButton=({post})=>{
     
     const onClickFollow=useCallback(()=>{
         if(isFollowing){ // 언팔로우 
-            dispatch(unfollowRequestAction({id:post.User.id, nickname:post.User.nickname}));
+            dispatch(unfollowRequestAction(post.User.id));
         }
         else{ // 팔로우 
-            dispatch(followRequestAction({id:post.User.id, nickname:post.User.nickname}));
+            dispatch(followRequestAction(post.User.id));
         }
     },[isFollowing]);
 
@@ -33,7 +33,7 @@ FollowButton.propTypes = {
             nickname:PropTypes.string
         }),
         content:PropTypes.string,
-        createdAt:PropTypes.object,
+        createdAt:PropTypes.string,
         Comments:PropTypes.arrayOf(PropTypes.object),
         Images:PropTypes.arrayOf(PropTypes.object)
 

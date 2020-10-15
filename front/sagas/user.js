@@ -1,4 +1,4 @@
-import {all, fork, takeLatest, delay, put, call} from 'redux-saga/effects';
+import {all, fork, takeLatest, put, call} from 'redux-saga/effects';
 import * as type from '../actions/user';
 import axios from 'axios';
 
@@ -20,6 +20,14 @@ function signUpAPI(data){
 
 function changeNicknameAPI(data){
     return axios.patch('/user/changeNickname',data);
+}
+
+function followUserAPI(userId){
+    return axios.patch(`/user/${userId}/follow`);
+}
+
+function unfollowUserAPI(userId){
+    return axios.delete(`/user/${userId}/follow`);
 }
 
 function* loadUserInfo(){
@@ -88,11 +96,10 @@ function* signUp(action){
 
 function* follow(action){
     try{
-        // const result= yield call(signUpAPI);
-        yield delay(1000);
+        const result= yield call(followUserAPI,action.data);
         yield put({
             type:type.FOLLOW_SUCCESS,
-            data:action.data,
+            data:result.data,
         })
     }catch(err){
         yield put({
@@ -106,11 +113,10 @@ function* follow(action){
 
 function* unfollow(action){
     try{
-        // const result= yield call(signUpAPI);
-        yield delay(1000);
+        const result= yield call(unfollowUserAPI,action.data);
         yield put({
             type:type.UNFOLLOW_SUCCESS,
-            data:action.data,
+            data:result.data,
         })
     }catch(err){
         yield put({
@@ -126,7 +132,7 @@ function* changeNickname(action){
         const result= yield call(changeNicknameAPI,action.data);
         yield put({
             type:type.CHANGE_NICKNAME_SUCCESS,
-            data:action.data.nickname,
+            data:result.data.nickname,
         })
     }catch(err){
         yield put({

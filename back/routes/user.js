@@ -11,6 +11,10 @@ router.patch('/changeNickname',isLoggedIn,UserController.changeNickname);
 
 router.post('/signUp',isNotLoggedIn,UserController.signUp);
 
+router.patch('/:userId/follow',isLoggedIn,UserController.followUser);
+
+router.delete('/:userId/follow',isLoggedIn,UserController.unfollowUser);
+
 router.get('/',UserController.loadUser);
 
 module.exports = router;

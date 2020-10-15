@@ -50,11 +50,11 @@ exports.login = (req,res,next)=>{
                 } , {
                     model: User,
                     as:'Followings', 
-                    attributes:['id']
+                    attributes:['id','nickname']
                 }, {
                     model: User,
                     as: 'Followers',
-                    attributes:['id']
+                    attributes:['id','nickname']
                 },
                 {
                     model:Post,
@@ -83,7 +83,7 @@ exports.changeNickname= async (req,res,next)=>{
         }
         user.nickname=req.body.nickname;
         await user.save();
-        return res.status(200).send('ok');
+        return res.status(200).send({nickname:user.nickname});
    }catch(err){
         console.log(err);
         next(err);
@@ -104,11 +104,11 @@ exports.loadUser=async(req,res,next)=>{
                 } , {
                     model: User,
                     as:'Followings', 
-                    attributes:['id']
+                    attributes:['id', 'nickname']
                 }, {
                     model: User,
                     as: 'Followers',
-                    attributes:['id']
+                    attributes:['id', 'nickname']
                 }, {
                     model:Post,
                     as: 'Liked',
@@ -122,6 +122,39 @@ exports.loadUser=async(req,res,next)=>{
         }
     }catch(err){
         console.log(err);
+        next(err);
+    }
+}
+
+exports.followUser=async(req,res,next)=>{
+    try{
+        const userId= +req.params.userId;
+        const user = await User.findOne({where:{id:userId}});
+        if(!user){
+            return res.status(403).json('사용자 정보가 잘못 되었습니다.');
+        }
+        await user.addFollowers(req.user.id);
+        res.status(200).json({id:userId, nickname:user.nickname});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+};
+
+
+exports.unfollowUser=async(req,res,next)=>{
+    try{
+
+        const userId= +req.params.userId;
+        const user = await User.findOne({where:{id:userId}});
+        if(!user){
+            return res.status(403).json('사용자 정보가 잘못 되었습니다.');
+        }
+        
+        await user.removeFollowers(req.user.id);
+        res.status(200).json({id:userId});
+    }catch(err){
+        console.error(err);
         next(err);
     }
 }
