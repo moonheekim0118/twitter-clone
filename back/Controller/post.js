@@ -109,5 +109,5 @@ exports.modifyPost=async(req,res,next)=>{
 }
 
 exports.uploadImages=async(req,res,next)=>{
-    
+    res.json(req.files.map((v)=>v.filename));
 };

@@ -17,7 +17,7 @@ const ImagePath=()=>{
         <div>
         {imagePaths.map((v)=>(
             <Wrapper key={v}>
-                <ImageWrapper src={v} alt={v}/>
+                <ImageWrapper src={`http://localhost:3065/${v}`} alt={v}/>
                 <div>
                     <Button>제거</Button>
                 </div>

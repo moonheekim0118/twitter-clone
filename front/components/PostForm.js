@@ -11,7 +11,7 @@ import useInput from '../hooks/useInput';
 
 const PostForm =()=>{
     const {id, nickname}= useSelector((state)=>state.user.me);
-    const {imagePaths, addPostDone }= useSelector((state)=>state.post);
+    const { addPostDone }= useSelector((state)=>state.post);
     const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const PostForm =()=>{
         dispatch(uploadImagesRequest(imageFormData));
     });
 
-    
+
     return(
         <PostFormWrapper encType="multipart/form-data" onFinish={onSubmit}>
             <TextArea value={text}
