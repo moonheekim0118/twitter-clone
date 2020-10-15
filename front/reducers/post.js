@@ -6,28 +6,34 @@ export const initialState={
 
     totalPostLength:0,
     mainPosts:[],
-    createdAt:new Date(),
     hasMorePost:true,
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
+
     loadPostloading:false, // 게시글 로딩  
     loadPostDone:false, 
     loadPostError:null,
+
     addPostloading:false, // 게시글 추가  
     addPostDone:false,
     addPostError:null,
+
     addCommentloading:false, // 댓글 추가 
     addCommentDone:false,
     addCommentError:null,
+
     removePostloading:false, // 게시글 삭제 
     removePostDone:false,
     removePostError:null,
-    modifyPostloading:false,
+
+    modifyPostloading:false, //게시글 수정 
     modifyPostDone:false,
     modifyPostError:null,
-    likePostloading:false, // 게시글 로딩  
+
+    likePostloading:false, // 게시글 좋아요   
     likePostDone:false, 
     likePostError:null,
-    unlikePostloading:false, // 게시글 로딩  
+    
+    unlikePostloading:false, // 게시글 좋아요취소  
     unlikePostDone:false, 
     unlikePostError:null,
 }

@@ -15,6 +15,17 @@ router.patch('/:userId/follow',isLoggedIn,UserController.followUser);
 
 router.delete('/:userId/follow',isLoggedIn,UserController.unfollowUser);
 
+// 나중에 다른 routes로 나눌 지 결정하기 ! 
+router.get('/:userId/followings', UserController.loadFollowings);
+
+router.get('/:userId/followers', UserController.loadFollowers);
+
+router.get('/:userId/posts', UserController.loadUserPosts);
+
+router.get('/:userId/likes', UserController.loadLikedposts);
+
+router.get('/:userId',UserController.loadUserInfo); // 
+
 router.get('/',UserController.loadUser);
 
 module.exports = router;

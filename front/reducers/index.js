@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import user from './user';
 import post from './post';
 import ui from './ui';
-
+import commonUser from './commonUser';
 
 // (이전상태, 액션 ) => 다음상태 리턴 
 const rootReducer =combineReducers({
@@ -16,6 +16,7 @@ const rootReducer =combineReducers({
                 return state;
     }},
     user,
+    commonUser,
     post,
     ui,
 });

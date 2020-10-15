@@ -1,31 +1,37 @@
 import * as type from '../actions/user';
 import produce from 'immer';
-
+// User === 로그인한 유저
 export const initialState={
-    loadUserInfoLoading:false, // 유저 로딩 
+    loadUserInfoLoading:false, // 현재 로그인한 유저 정보 로딩 
     loadUserInfoDone:false,
     loadUserInfoError:null,
+
     isLoggedIn:false, // 로그인 
     isLoggingIn:false, 
     loginError:null, 
+
     isLoggingOut:false, // 로그아웃 
     isLoggedOut:false, 
     logoutError:null, 
+    
     signUploading:false, // 회원가입 
     signUpDone:false, 
     signUpError:null, 
+    
     followLoading:false, // 팔로잉 
     followDone:false,
     followError:null,
+    
     unfollowLoading:false, // 언팔로잉 
     unfollowDone:false,
     unfollowError:null,
+    
     changeNicknameLoading:false, // 닉네임 변경
     changeNicknameDone:false,
     changeNicknameError:null,
-    me:null,
-    signUpData:{},
-    loginData:{}
+
+    me:null, // 현재 로그인한 유저 정보 --> 팔로우 / 팔로잉 id만 가져오기
+
 }
 
 
@@ -162,7 +168,6 @@ const reducer= (state = initialState , action)=>{
                 draft.changeNicknameLoading=false;
                 draft.changeNicknameError=action.error;
                 break;
-
             default:
                 break;
         }
