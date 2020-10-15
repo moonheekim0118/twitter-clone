@@ -35,6 +35,19 @@ export const UNLIKE_POST_REQUEST='UNLIKE_POST_REQUEST';
 export const UNLIKE_POST_SUCCESS='UNLIKE_POST_SUCCESS';
 export const UNLIKE_POST_FAIL='UNLIKE_POST_FAIL';
 
+
+// 이미지 업로드
+
+export const UPLOAD_IMAGES_REQUEST="UPLOAD_IMAGES_REQUEST";
+export const UPLOAD_IMAGES_SUCCESS="UPLOAD_IMAGES_SUCCESS";
+export const UPLOAD_IMAGES_FAIL="UPLOAD_IMAGES_FAIL";
+
+export const uploadImagesRequest=(data)=>{
+    return{
+        type:UPLOAD_IMAGES_REQUEST,
+        data,
+    }
+}
 export const addPostRequest=(data)=>{
     return{
      type:ADD_POST_REQUEST,

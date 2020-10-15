@@ -32,6 +32,10 @@ function unLikePostAPI(data){
     return axios.delete(`/post/${data}/like`);
 }
 
+function uplaodImagesAPI(data){
+    return axios.post(`/post/images`,data);
+}
+
 
 function* addPost(action){
     try{
@@ -162,13 +166,27 @@ function* unLikePost(action){
     }
 }
 
+function* uploadImages(action){
+    try{
+        const result= yield call(uplaodImagesAPI,action.data);
+        yield put({
+            type:type.UPLOAD_IMAGES_SUCCESS,
+            data:result.data
+        })
 
+    }catch(err){
+        console.log('에러!!'+err);
+        yield put({
+            type:type.UPLOAD_IMAGES_FAIL,
+            error:err.response.data
+        })
+    }
+}
 
 
 function* watchAddPost(){
     yield takeLatest(type.ADD_POST_REQUEST,addPost);    
 }
-
 
 function* watchAddComment(){
     yield takeLatest(type.ADD_COMMENT_REQUEST,addComment);    
@@ -194,6 +212,9 @@ function* watchUnLikePost(){
     yield takeLatest(type.UNLIKE_POST_REQUEST,unLikePost);
 }
 
+function* watchUploadImages(){
+    yield takeLatest(type.UPLOAD_IMAGES_REQUEST,uploadImages);
+}
 
 export default function* postSaga(){
     yield all([
@@ -203,6 +224,7 @@ export default function* postSaga(){
         fork(watchLoadPost),
         fork(watchModifyPost),
         fork(watchLikePost),
-        fork(watchUnLikePost)
+        fork(watchUnLikePost),
+        fork(watchUploadImages),
     ]);
 }

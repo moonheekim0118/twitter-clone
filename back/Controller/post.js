@@ -107,3 +107,7 @@ exports.modifyPost=async(req,res,next)=>{
         next(err);
     }
 }
+
+exports.uploadImages=async(req,res,next)=>{
+    
+};
