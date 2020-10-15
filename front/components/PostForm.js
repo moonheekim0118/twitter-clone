@@ -11,7 +11,7 @@ import useInput from '../hooks/useInput';
 
 const PostForm =()=>{
     const {id, nickname}= useSelector((state)=>state.user.me);
-    const { addPostDone }= useSelector((state)=>state.post);
+    const { addPostDone,imagePaths }= useSelector((state)=>state.post);
     const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
     const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const PostForm =()=>{
             />
             <ButtonWrapper>
                 <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
-                <Button onClick={onClickImageUpload}> 이미지 업로드 </Button>
+                <Button onClick={onClickImageUpload} disabled={imagePaths.length===4}> 이미지 업로드 </Button>
                 <Button type="primary" htmlType="submit" disabled={text.length===0}>짹짹</Button>
             </ButtonWrapper>
             <ImagePath/>
