@@ -27,9 +27,6 @@ const PostForm =()=>{
     const onSubmit=useCallback(()=>{
         const postId=shortid.generate();
         dispatch(addPostRequest({text,id,nickname,postId}));
-        if(showPostModal){
-            dispatch(hidePostModalAction());
-        }
     },[text])
 
     const onClickImageUpload=useCallback(()=>{

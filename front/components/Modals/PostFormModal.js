@@ -1,5 +1,4 @@
 import React , {useCallback} from 'react';
-import PostForm from '../PostForm';
 import ModalPostForm from '../ModalPostForm';
 import {useDispatch} from 'react-redux';
 import { hidePostModalAction } from '../../actions/ui';

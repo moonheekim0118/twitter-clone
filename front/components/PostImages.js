@@ -1,41 +1,8 @@
 import React , {useCallback,useState,useRef } from 'react';
 import PropTypes from 'prop-types';
-import { PlusOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
 import ImagesZoom from './ImagesZoom';
+import {Wrapper, ImageWrapper, ImageWrapperColumn,Image  } from './Styles/image';
 
-const Wrapper = styled.div`
-    margin-top:30px;
-`;
-
-const ImagesWrapper=styled.div`
-    cursor:pointer;
-    margin-top:5px;
-    display:inline-block;
-    @media screen and (max-width:768px){
-        width:100%;
-    }
-`;
-
-const ImageWrapper=styled.img`
-    cursor:pointer;
-    display:inline-block;
-    width:40%;
-    height:200px;
-    margin:2px;
-    border-radius:5px;
-    object-fit: cover;
-    
-    &:hover{
-        -webkit-box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
-        box-shadow: 0px -1px 11px -1px rgba(0,0,0,0.3);
-    }
-
-    @media screen and (max-width:767px){
-        height:100px;
-    }
-`
 
 const PostImages =({images})=>{
 
@@ -51,35 +18,67 @@ const PostImages =({images})=>{
         setShowImageZoom(false);
     },[]);
 
+    
     if(images.length===1){
         return(
         <Wrapper>
-            <ImageWrapper role="presentation" style={{width:"100%"}} src={images[0].src} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+            <ImageWrapper key={0} number={1}>
+                <Image role="presentation" height="false" src={images[0].src} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+            </ImageWrapper>
             {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={0}/>}
         </Wrapper>
         );
     }
-    else if(images.length ===2){
+    if(images.length ===2){
         return(
             <Wrapper>
-                <ImageWrapper role="presentation"src={images[0].src} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
-                <ImageWrapper role="presentation" src={images[1].src} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
+                <ImageWrapper key={0} number={2}>
+                    <Image role="presentation" height="false" src={images[0].src} alt={images[0].src}  onClick={onZoom.bind(this,0)}/>
+                </ImageWrapper>
+                <ImageWrapper key={1} number={2}>
+                  <Image role="presentation" height="false" src={images[1].src} alt={images[1].src}  onClick={onZoom.bind(this,1)}/>
+                </ImageWrapper>
                 {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
             </Wrapper>
-            );
+        );
     } 
-    return(
+    if(images.length===3){
         <Wrapper>
-                <ImageWrapper role="presentation" src={images[0].src} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
-                <ImagesWrapper
-                    role="presentation"
-                    onClick={onZoom.bind(this,1)}
-                >
-                    <PlusOutlined/>
-                    {images.length-1}개의 사진 더 보기
-                </ImagesWrapper>
-                {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
+             <ImageWrapper key={0} number={2} >
+                   <Image role="presentation"  height="false" src={images[0].src} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+            </ImageWrapper>
+            <ImageWrapperColumn>
+                <ImageWrapper key={1} number={1} >
+                    <Image role="presentation"  height="true" src={images[1].src} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
+                </ImageWrapper>
+                <ImageWrapper key={2} number={1}>
+                    <Image  role="presentation"  height="true" src={images[2].src} alt={images[2].src} onClick={onZoom.bind(this,2)}/>
+                </ImageWrapper>
+            </ImageWrapperColumn>
+            {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
         </Wrapper>
+    }
+
+    return(
+         <Wrapper>
+                <ImageWrapperColumn>
+                    <ImageWrapper key={0} number={1} height="true">
+                        <Image role="presentation"  height="true" src={images[0].src} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+                    </ImageWrapper>
+                    <ImageWrapper key={1} number={1} height="true">
+                        <Image role="presentation"  height="true"src={images[1].src} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
+                    </ImageWrapper>
+               </ImageWrapperColumn>
+               <ImageWrapperColumn>
+                    <ImageWrapper key={2} number={1} height="true">
+                        <Image role="presentation"  height="true" src={images[2].src} alt={images[2].src} onClick={onZoom.bind(this,2)}/>
+                    </ImageWrapper>
+                    <ImageWrapper key={3} number={1} height="true">
+                        <Image role="presentation"  height="true" src={images[3].src} alt={images[3].src} onClick={onZoom.bind(this,3)}/>
+                    </ImageWrapper>
+               </ImageWrapperColumn>
+            {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
+            </Wrapper>
     )
 }
 
