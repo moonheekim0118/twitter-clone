@@ -3,7 +3,6 @@ import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest , uploadImagesRequest } from '../actions/post';
-import {hidePostModalAction} from '../actions/ui';
 import shortid from 'shortid';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 import useInput from '../hooks/useInput';
@@ -56,7 +55,7 @@ const PostForm =()=>{
                 <Button onClick={onClickImageUpload} disabled={imagePaths.length===4}> 이미지 업로드 </Button>
                 <Button type="primary" htmlType="submit" disabled={text.length===0}>짹짹</Button>
             </ButtonWrapper>
-            <ImagePath/>
+            {!showPostModal && <ImagePath/>}
         </PostFormWrapper>
     )
 }

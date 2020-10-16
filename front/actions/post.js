@@ -43,6 +43,14 @@ export const UPLOAD_IMAGES_SUCCESS="UPLOAD_IMAGES_SUCCESS";
 export const UPLOAD_IMAGES_FAIL="UPLOAD_IMAGES_FAIL";
 
 export const REMOVE_IMAGE="REMOVE_IMAGE";
+export const RESET_IMAGE="RESET_IMAGE";
+
+export const resetImageRequest=(data)=>{
+    return{
+        type:RESET_IMAGE,
+        data,
+    }
+}
 
 export const removeImageRequest=(data)=>{
     return{

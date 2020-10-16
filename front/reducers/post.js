@@ -186,6 +186,10 @@ const reducer= (state = initialState , action)=>{
             
             case type.REMOVE_IMAGE:
                 draft.imagePaths= draft.imagePaths.filter((v,i)=>i!==action.data);
+
+            case type.RESET_IMAGE:
+                draft.imagePaths=[];
+                break;
             default:
                 break;
         }
