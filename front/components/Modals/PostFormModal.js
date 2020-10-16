@@ -1,5 +1,6 @@
 import React , {useCallback} from 'react';
 import PostForm from '../PostForm';
+import ModalPostForm from '../ModalPostForm';
 import {useDispatch} from 'react-redux';
 import { hidePostModalAction } from '../../actions/ui';
 import {ModalOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton} from '../Styles';
@@ -17,7 +18,7 @@ const PostformModal=()=>{
         <ModalOveraly onClick={onClose}/>
         <ModalFormWrapper>
             <ModalBoxHeader><ModalCloseButton onClick={onClose} /></ModalBoxHeader>
-                <PostForm/>
+                <ModalPostForm/>
         </ModalFormWrapper>
         </>
     );
