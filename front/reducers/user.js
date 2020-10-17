@@ -110,6 +110,10 @@ const reducer= (state = initialState , action)=>{
                 draft.signUpError=action.error;
                 break;
 
+            case type.SIGN_UP_RESET:
+                draft.signUpDone=false;
+                break;
+                
             case type.ADD_POST_TO_ME:
                 draft.me.Posts.unshift({ id: action.data});
                 break;

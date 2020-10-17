@@ -16,6 +16,7 @@ export const SIGN_UP_REQUEST ="SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS ="SIGN_UP_SUCCESS";
 export const SIGN_UP_FAIL="SIGN_UP_FAIL";
 
+export const SIGN_UP_RESET="SIGN_UP_RESET"
 // 내 포스트 등록 및 삭제 액션
 
 export const ADD_POST_TO_ME="ADD_POST_TO_ME";
@@ -65,6 +66,13 @@ export const signUpRequestAction=(data)=>{
         data,
     }
 }
+
+export const signUpResetAction=()=>{
+    return{
+        type:SIGN_UP_RESET
+    }
+}
+
 
 export const followRequestAction=(data)=>{
     return{

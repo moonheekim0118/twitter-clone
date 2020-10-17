@@ -4,7 +4,7 @@ import {Input , Checkbox, Button} from 'antd';
 import useInput from '../hooks/useInput';
 import useValidation from '../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
-import {signUpRequestAction} from '../actions/user';
+import {signUpRequestAction,signUpResetAction} from '../actions/user';
 import {SignForm, SignInputWrapper,ErrorMessage} from './Styles';
 
 
@@ -23,6 +23,7 @@ const SignUp=()=>{
 
     useEffect(()=>{
         if(signUpDone){
+            dispatch(signUpResetAction()); // signup하고 다시 signUp페이지로 갈 수 있도록
             Router.push('/');
         }
     },[signUpDone]);
