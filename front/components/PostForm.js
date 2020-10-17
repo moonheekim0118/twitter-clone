@@ -4,7 +4,7 @@ import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest , uploadImagesRequest } from '../actions/post';
 import {hidePostModalAction} from '../actions/ui';
-import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
+import {PostFormWrapper,TextArea,ButtonWrapper, ErrorMessage} from './Styles';
 import useInput from '../hooks/useInput';
 import Alert from './Alert';
 
@@ -21,6 +21,12 @@ const PostForm =()=>{
         setText('');
        }
     },[addPostDone])
+
+    useEffect(()=>{
+        if(showPostModal && AlertShow){
+            setAlertShow(false);
+        }
+    },[showPostModal])
 
     useEffect(()=>{
         if(AlertShow){
@@ -82,7 +88,8 @@ const PostForm =()=>{
                 </ButtonWrapper>
                 <ImagePath/>
             </PostFormWrapper>
-            <Alert message="이미지는 최대 4장 업로드 가능합니다." alertState={AlertShow}/>
+            {!showPostModal && <Alert message="이미지는 최대 4장 업로드 가능합니다." alertState={AlertShow}/>}
+            {showPostModal && AlertShow &&<ErrorMessage>이미지는 최대 4장 업로드 가능합니다.</ErrorMessage> }
         </>
     )
 }

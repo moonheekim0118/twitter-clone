@@ -22,9 +22,7 @@ const AlertBox=styled.div`
 
 const Alert=({message, alertState})=>{
     return(
-        <>
-            <AlertBox show={alertState}>{message}</AlertBox>
-        </>
+        <AlertBox show={alertState}>{message}</AlertBox>
     );
 };
 

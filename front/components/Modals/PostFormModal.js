@@ -19,7 +19,7 @@ const PostformModal=()=>{
         <BlackOveraly onClick={onClose}/>
         <ModalFormWrapper>
             <ModalBoxHeader><ModalCloseButton onClick={onClose} /></ModalBoxHeader>
-                <PostForm/>
+            <PostForm/>
         </ModalFormWrapper>
         </>
     );

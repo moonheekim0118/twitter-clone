@@ -25,6 +25,7 @@ export const BlackOveraly = styled.div`
     background-color:rgba(0,0,0,0.5);
 `;
 
+
 export const ModalFormWrapper=styled.div`
     position:fixed;
     background:#fff;
@@ -37,7 +38,6 @@ export const ModalFormWrapper=styled.div`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index:7000;
-
     @media screen and (max-width:767px){
         width:70%;
     }

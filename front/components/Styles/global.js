@@ -6,6 +6,10 @@ const GlobalStyles = createGlobalStyle`
     *::before{
         box-sizing:border-box;
     }
+
+    *:focus{
+        outline:none;
+    }
 `;
 
 export default GlobalStyles;
