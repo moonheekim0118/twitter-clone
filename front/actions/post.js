@@ -45,6 +45,32 @@ export const UPLOAD_IMAGES_FAIL="UPLOAD_IMAGES_FAIL";
 export const REMOVE_IMAGE="REMOVE_IMAGE";
 export const RESET_IMAGE="RESET_IMAGE";
 
+
+// 리트윗 포스트
+export const RETWEET_POST_REQUEST="RETWEET_POST_REQUEST";
+export const RETWEET_POST_SUCCESS="RETWEET_POST_SUCCESS";
+export const RETWEET_POST_FAIL="RETWEET_POST_FAIL";
+
+// 언리트윗 포스트
+export const UNRETWEET_POST_REQUEST="UNRETWEET_POST_REQUEST";
+export const UNRETWEET_POST_SUCCESS="UNRETWEET_POST_SUCCESS";
+export const UNRETWEET_POST_FAIL="UNRETWEET_POST_FAIL";
+
+export const retweetRequest=(data)=>{
+    return{
+        type:RETWEET_POST_REQUEST,
+        data,
+    }
+}
+
+export const unretweetRequest=(data)=>{
+    return{
+        type:UNRETWEET_POST_REQUEST,
+        data,
+    }
+}
+
+
 export const resetImageRequest=(data)=>{
     return{
         type:RESET_IMAGE,

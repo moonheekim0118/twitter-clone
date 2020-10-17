@@ -40,6 +40,14 @@ export const initialState={
     uploadImagesloading:false, // 이미지 업로드 
     uploadImagesDone:false,
     uploadImagesError:null,
+
+    retweetPostloading:false, // 게시글 리트윗 
+    retweetPostDone:false,
+    retweetPostError:null,
+
+    unretweetPostloading:false, // 게시글 언리트윗 
+    unretweetPostDone:false,
+    unretweetPostError:null,
 }
 
 
@@ -192,6 +200,39 @@ const reducer= (state = initialState , action)=>{
             case type.RESET_IMAGE:
                 draft.imagePaths=[];
                 break;
+
+            case type.RETWEET_POST_REQUEST:
+                draft.retweetPostloading=true;
+                draft.retweetPostDone=false;
+                draft.retweetPostError=null;
+                break;
+
+            case type.RETWEET_POST_SUCCESS:
+                draft.retweetPostloading=false;
+                draft.retweetPostDone=true;
+                break;
+
+            case type.RETWEET_POST_FAIL:
+                draft.retweetPostloading=false;
+                draft.retweetPostError=action.error;
+                break;
+
+            case type.UNRETWEET_POST_REQUEST:
+                draft.unretweetPostloading=true;
+                draft.unretweetPostDone=false;
+                draft.unretweetPostError=null;
+                break;
+
+            case type.UNRETWEET_POST_SUCCESS:
+                draft.unretweetPostloading=false;
+                draft.unretweetPostDone=true;
+                break;
+                
+            case type.UNRETWEET_POST_FAIL:
+                draft.unretweetPostloading=false;
+                draft.unretweetPostError=action.error;
+                break;
+                 
             default:
                 break;
         }

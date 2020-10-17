@@ -33,6 +33,7 @@ router.post('/:postId/addComment',isLoggedIn,PostController.AddComment);
 
 router.post('/addPost',isLoggedIn, upload.none(), PostController.Addpost);
 
+router.post('/:postId/retweet',isLoggedIn,PostController.retweetPost);
 
 router.post('/images',isLoggedIn, upload.array('image'), PostController.uploadImages);
 

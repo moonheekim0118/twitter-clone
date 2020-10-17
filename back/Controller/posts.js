@@ -25,11 +25,13 @@ exports.loadPost=async (req,res,next)=>{
             include:[
                 {model:User,attributes:{exclude:['password']}},
                 {model :Image},
-                {model:Comment, include:[{model:User}],  
+                {model:Comment, include:[{model:User, attirbutes:['id','nickname']}],  
                 attributes:{exclude:['password']},},
-                { model: User,  as: 'Likers', attirbutes:['id','nickname']}
-            ]
-        });
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
+                { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname']},
+                 {model: Image}, 
+                 {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
+            ]}]});
         res.status(200).json({posts,totalPostsLength});
     }catch(err){
         console.error(err);

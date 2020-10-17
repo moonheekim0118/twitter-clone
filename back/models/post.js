@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes)=>{
         db.Post.hasMany(db.Image);
         db.Post.belongsToMany(db.Hashtag, {through: 'PostHashtag'});
         db.Post.belongsToMany(db.User, { through: 'Like', as: 'Likers'});
-        db.Post.belongsToMany(db.Post, {through:'RetweetPost', as :'Retweet'}); // 리트윗
+        db.Post.belongsTo(db.Post, { as: 'Retweet' }); // post.addRetweet
     };
     return Post;
 }
