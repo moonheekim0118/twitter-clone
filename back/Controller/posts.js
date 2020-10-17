@@ -29,6 +29,7 @@ exports.loadPost=async (req,res,next)=>{
                 attributes:{exclude:['password']},},
                 { model: User,  as: 'Likers', attirbutes:['id','nickname']},
                 { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname']},
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
                  {model: Image}, 
                  {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
             ]}]});

@@ -65,12 +65,11 @@ const PostCard=({post})=>{
     return(
        <>
        {post.RetweetId ? `${post.User.nickname}님이 리트윗 하셨습니다`:null}
+       {post.RetweetId && post.Retweet ?  
         <Card>
-            {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
-            <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
-            {post.RetweetId && post.Retweet ? 
-             <Card>
-                 <CardMeta>
+        {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
+        <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
+            <CardMeta>
                     <NicknameWrapper>{post.Retweet.User.nickname}</NicknameWrapper>
                         <PostCardContent postData={post.Retweet.content}/>
                         {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images}/>}
@@ -79,12 +78,12 @@ const PostCard=({post})=>{
                             { liked ?
                                 <div>
                                     <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
-                                    {post.Likers.length>0 && <LikedCount>{post.Likers.length}</LikedCount>}
+                                    {post.Retweet.Likers.length>0 && <LikedCount>{post.Retweet.Likers.length}</LikedCount>}
                                 </div>
                                 :
                                 <LikeButtonWrapper>
                                     <HeartOutlined onClick={onLike} key="heart" />
-                                    {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
+                                    {post.Retweet.Likers.length>0 && <LikersCount>{post.Retweet.Likers.length}</LikersCount>}
                                 </LikeButtonWrapper>
                                 }
                             <MessageOutlined onClick={onToggleComment} key="comment"/>
@@ -94,10 +93,13 @@ const PostCard=({post})=>{
                             <EllipsisOutlined/>
                             </Popover>
                         </CardButtons>
-                 </CardMeta>
-             </Card>
-            :
-                <CardMeta>
+            </CardMeta>
+        </Card>
+       :
+       <Card>
+            {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
+            <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
+            <CardMeta>
                     <NicknameWrapper>{post.User.nickname}</NicknameWrapper>
                     <PostCardContent postData={post.content}/>
                     {post.Images[0] && <PostImages images={post.Images}/>}
@@ -127,8 +129,8 @@ const PostCard=({post})=>{
                         </Popover>
                     </CardButtons>
                 </CardMeta>
-            }
         </Card>
+       }
         {commentFormOpend && 
         <div>
             <CommentForm postId={post.id}/>
