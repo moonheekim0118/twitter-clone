@@ -4,6 +4,7 @@ import { useSelector} from 'react-redux';
 import styled from 'styled-components';
 import LogoutButton from '../LogoutButton';
 import {useDispatch} from 'react-redux';
+import {TransparentOveraly} from '../Styles/modal';
 import {hideProfileModalAction} from '../../actions/ui';
 
 const Overaly = styled.div`
@@ -44,7 +45,7 @@ const UserProfileDetail =()=>{
 
     return(
         <>
-            <Overaly onClick={onClose}/>
+            <TransparentOveraly onClick={onClose}/>
             <CardWrapper
             actions={[
             <div key="twit">짹짹 <br/>{me.Posts.length}</div>,
