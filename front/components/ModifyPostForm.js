@@ -1,4 +1,4 @@
-import React, {useCallback,useState,useRef} from 'react';
+import React, {useCallback} from 'react';
 import { Button }from 'antd';
 import { useDispatch , useSelector} from 'react-redux';
 import ImagePath from './ImagePath';
@@ -11,7 +11,6 @@ const ModifyPostPorm =()=>{
 
     const {modifyFormerContent,modifyPostId}= useSelector(state=>state.ui);
     const modifyPostloading = useSelector(state=>state.post.modifyPostloading);
-    const imageInput = useRef();
     const dispatch = useDispatch();
     const [text, onChangeText]=useInput(modifyFormerContent);
 
@@ -19,11 +18,6 @@ const ModifyPostPorm =()=>{
         dispatch(modifyPostRequest( { postId:modifyPostId, content:text}));
         dispatch(hideModifyModalAction());
     },[text])
-
-
-    const onClickImageUpload=useCallback(()=>{
-        imageInput.current.click();
-    },imageInput.current)
 
     return(
         <PostFormWrapper encType="multipart/form-data" onFinish={onSubmit}>
@@ -33,8 +27,6 @@ const ModifyPostPorm =()=>{
              rows={3}
             />
             <ButtonWrapper>
-                <input type="file" multiple hidden ref={imageInput}/>
-                <Button onClick={onClickImageUpload}> 이미지 수정 </Button>
                 <Button type="primary" htmlType="submit" loading={modifyPostloading} disabled={text.length===0 || text===modifyFormerContent}>수정</Button>
             </ButtonWrapper>
             <ImagePath/>
