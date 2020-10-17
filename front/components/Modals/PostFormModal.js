@@ -1,5 +1,5 @@
 import React , {useCallback} from 'react';
-import ModalPostForm from '../ModalPostForm';
+import PostForm from '../PostForm';
 import {useDispatch} from 'react-redux';
 import {resetImageRequest} from '../../actions/post';
 import { hidePostModalAction } from '../../actions/ui';
@@ -19,7 +19,7 @@ const PostformModal=()=>{
         <ModalOveraly onClick={onClose}/>
         <ModalFormWrapper>
             <ModalBoxHeader><ModalCloseButton onClick={onClose} /></ModalBoxHeader>
-                <ModalPostForm/>
+                <PostForm/>
         </ModalFormWrapper>
         </>
     );

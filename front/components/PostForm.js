@@ -3,6 +3,7 @@ import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest , uploadImagesRequest } from '../actions/post';
+import {hidePostModalAction} from '../actions/ui';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 import useInput from '../hooks/useInput';
 
@@ -35,6 +36,9 @@ const PostForm =()=>{
         }
         dispatch(addPostRequest(formData));
 
+        if(showPostModal){ // 모달창 이라면, 
+            dispatch(hidePostModalAction());
+        }
     },[text,imagePaths])
 
     const onClickImageUpload=useCallback(()=>{
@@ -42,13 +46,17 @@ const PostForm =()=>{
     },imageInput.current);
 
     const onChangeImages=useCallback((e)=>{
-        console.log('images ', e.target.files);
-        const imageFormData = new FormData();
-        [].forEach.call(e.target.files, (f)=>{
-            imageFormData.append('image',f);
-        });
-        dispatch(uploadImagesRequest(imageFormData));
-    });
+        if(e.target.files.length>4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 
+            
+        }
+       else{
+            const imageFormData = new FormData();
+            [].forEach.call(e.target.files, (f)=>{
+                imageFormData.append('image',f);
+            });
+            dispatch(uploadImagesRequest(imageFormData));
+       }
+    },[]);
 
 
     return(
@@ -64,7 +72,7 @@ const PostForm =()=>{
                 <Button onClick={onClickImageUpload} disabled={imagePaths.length===4}> 이미지 업로드 </Button>
                 <Button type="primary" htmlType="submit" disabled={text.length===0}>짹짹</Button>
             </ButtonWrapper>
-            {!showPostModal && <ImagePath/>}
+            <ImagePath/>
         </PostFormWrapper>
     )
 }
