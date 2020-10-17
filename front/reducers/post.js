@@ -208,6 +208,7 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.RETWEET_POST_SUCCESS:
+                draft.mainPosts.unshift(action.data);
                 draft.retweetPostloading=false;
                 draft.retweetPostDone=true;
                 break;

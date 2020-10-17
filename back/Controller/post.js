@@ -170,7 +170,11 @@ exports.retweetPost=async(req,res,next)=>{
                 attributes: ['id', 'nickname'],
               }, {
                 model: Image,
-              }]
+              },{
+                model:User,
+                as:'Likers',
+                attributes:['id'],
+            },]
             }, {
               model: User,
               attributes: ['id', 'nickname'],

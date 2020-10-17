@@ -59,9 +59,6 @@ const PostCard=({post})=>{
 
     },[]);
 
-    if(post.RetweetId&&post.User.id===me){ // 내가 리트윗한 게시물은 index에서 보이지 않음 
-        return null;
-    }
     return(
        <>
        {post.RetweetId && post.Retweet ?  
