@@ -1,11 +1,17 @@
-const { Post, Comment,Image,User } = require('../models');
+const { Post, Comment,Image,User, Hashtag } = require('../models');
 
 exports.Addpost= async (req,res,next)=>{
     try{
+        const hashtags = req.body.content.match(/#[^\s#]+/g);
         const post = await Post.create({
             content:req.body.content,
             UserId:req.user.id,
         });
+        if(hashtags){
+           const result= await Promise.all(hashtags.map((tag)=>Hashtag.findOrCreate({where:{name:tag.slice(1).toLowerCase()}})));
+           await post.addHashtags(result.map((v)=>v[0]));
+        }
+
         if(req.body.image){ // 이미지가 있는 경우 
             if(Array.isArray(req.body.image)){ // 이미지 여러개 
                 const images=await Promise.all(req.body.image.map((image)=>Image.create({src:image})));
