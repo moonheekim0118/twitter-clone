@@ -10,7 +10,7 @@ import FollowButton from '../FollowButton';
 import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest } from '../../actions/post';
 import {showModifyModalAction} from '../../actions/ui';
 import {AvatarWrapper, Card, CardMeta, CardButtons, 
-    FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,LikeButtonWrapper} from './style';
+    FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,LikeButtonWrapper,Retweet,RetweetCard} from './style';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -64,9 +64,9 @@ const PostCard=({post})=>{
     }
     return(
        <>
-       {post.RetweetId ? `${post.User.nickname}님이 리트윗 하셨습니다`:null}
        {post.RetweetId && post.Retweet ?  
-        <Card>
+        <RetweetCard>
+            <Retweet><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
@@ -94,7 +94,7 @@ const PostCard=({post})=>{
                             </Popover>
                         </CardButtons>
             </CardMeta>
-        </Card>
+        </RetweetCard>
        :
        <Card>
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
