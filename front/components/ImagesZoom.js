@@ -90,7 +90,6 @@ const ImagesZoom=({images,onClose,initial})=>{
     const [currentSlide, setCurrentSlide]=useState(initial);
     
     const onClickLeft =useCallback(()=>{
-        console.log(currentSlide);
         if(currentSlide===0){
             setCurrentSlide(images.length-1);
         }
@@ -124,7 +123,7 @@ const ImagesZoom=({images,onClose,initial})=>{
                 <LeftButton onClick={onClickLeft}/>
                 <RightButton onClick={onClickRight}/>
                 <ImageWrapper>
-                    <img src={images[currentSlide].src} alt={images[currentSlide].src}/>
+                    <img src={`http://localhost:3065/${images[currentSlide].src}`} alt={images[currentSlide].src}/>
                 </ImageWrapper>
                 </div>
             <IndicatorWrapper>

@@ -1,16 +1,14 @@
-import React, {useCallback,useState,useRef,useEffect} from 'react';
+import React, {useCallback,useRef,useEffect} from 'react';
 import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest , uploadImagesRequest } from '../actions/post';
 import {hidePostModalAction} from '../actions/ui';
-import shortid from 'shortid';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 import useInput from '../hooks/useInput';
 
 
 const ModalPostForm =()=>{
-    const {id, nickname}= useSelector((state)=>state.user.me);
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
     const imageInput = useRef();
     const dispatch = useDispatch();
@@ -24,10 +22,20 @@ const ModalPostForm =()=>{
     },[addPostDone])
 
     const onSubmit=useCallback(()=>{
-        const postId=shortid.generate();
-        dispatch(addPostRequest({text,id,nickname,postId}));
+        let formData;
+        if(imagePaths.length > 0){
+            formData=new FormData();
+            imagePaths.forEach((i)=>{
+                formData.append('image',i);
+            })
+            formData.append('content',text);
+        }
+        else{
+            formData={'content':text}
+        }
+        dispatch(addPostRequest(formData));
         dispatch(hidePostModalAction());
-    },[text])
+    },[text,imagePaths])
 
     const onClickImageUpload=useCallback(()=>{
         imageInput.current.click();

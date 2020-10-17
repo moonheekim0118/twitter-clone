@@ -3,9 +3,19 @@ const { Post, Comment,Image,User } = require('../models');
 exports.Addpost= async (req,res,next)=>{
     try{
         const post = await Post.create({
-            content:req.body.text,
+            content:req.body.content,
             UserId:req.user.id,
         });
+        if(req.body.image){ // 이미지가 있는 경우 
+            if(Array.isArray(req.body.image)){ // 이미지 여러개 
+                const images=await Promise.all(req.body.image.map((image)=>Image.create({src:image})));
+                await post.addImages(images);
+            }
+            else{
+                const image = await Image.create({src:req.body.image});
+                await post.addImages(image);
+            }
+        }
         const fullPost= await Post.findOne({
             where:{id:post.id},
             include: [

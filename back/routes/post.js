@@ -12,12 +12,6 @@ try{
     fs.mkdirSync('uploads');
 }
 
-router.put('/update', isLoggedIn, PostController.modifyPost);
-
-router.post('/:postId/addComment',isLoggedIn,PostController.AddComment);
-
-router.post('/addPost',isLoggedIn, PostController.Addpost);
-
 
 const upload =multer({
     storage: multer.diskStorage({
@@ -33,6 +27,11 @@ const upload =multer({
     limits:{fileSize:20*1024*1024} // 20mg
 });
 
+router.put('/update', isLoggedIn, PostController.modifyPost);
+
+router.post('/:postId/addComment',isLoggedIn,PostController.AddComment);
+
+router.post('/addPost',isLoggedIn, upload.none(), PostController.Addpost);
 
 
 router.post('/images',isLoggedIn, upload.array('image'), PostController.uploadImages);

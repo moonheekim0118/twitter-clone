@@ -56,6 +56,7 @@ const reducer= (state = initialState , action)=>{
                 draft.addPostloading=false;
                 draft.addPostDone=true;
                 draft.mainPosts.unshift(action.data);
+                draft.imagePaths=[];
                 break;
 
             case type.ADD_POST_FAIL:
@@ -186,6 +187,7 @@ const reducer= (state = initialState , action)=>{
             
             case type.REMOVE_IMAGE:
                 draft.imagePaths= draft.imagePaths.filter((v,i)=>i!==action.data);
+                break;
 
             case type.RESET_IMAGE:
                 draft.imagePaths=[];

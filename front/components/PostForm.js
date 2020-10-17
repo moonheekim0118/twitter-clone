@@ -1,15 +1,13 @@
-import React, {useCallback,useState,useRef,useEffect} from 'react';
+import React, {useCallback,useRef,useEffect} from 'react';
 import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest , uploadImagesRequest } from '../actions/post';
-import shortid from 'shortid';
 import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
 import useInput from '../hooks/useInput';
 
 
 const PostForm =()=>{
-    const {id, nickname}= useSelector((state)=>state.user.me);
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
     const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
@@ -24,9 +22,20 @@ const PostForm =()=>{
     },[addPostDone])
 
     const onSubmit=useCallback(()=>{
-        const postId=shortid.generate();
-        dispatch(addPostRequest({text,id,nickname,postId}));
-    },[text])
+        let formData;
+        if(imagePaths.length > 0){
+            formData=new FormData();
+            imagePaths.forEach((i)=>{
+                formData.append('image',i);
+            })
+            formData.append('content',text);
+        }
+        else{
+            formData={'content':text}
+        }
+        dispatch(addPostRequest(formData));
+
+    },[text,imagePaths])
 
     const onClickImageUpload=useCallback(()=>{
         imageInput.current.click();
