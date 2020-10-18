@@ -3,7 +3,6 @@ import Head from 'next/head';
 import AppLayout from '../components/AppLayout';
 import SignUpComponent from '../components/SignUp';
 import {END} from 'redux-saga';
-import {LOAD_POST_REQUEST} from '../actions/post';
 import {LOAD_MY_INFO_REQUEST } from '../actions/user';
 import axios from 'axios';
 import wrapper from '../store/configureStore';
@@ -28,7 +27,6 @@ export const getServerSideProps= wrapper.getServerSideProps(async(context)=>{
         axios.defaults.headers.Cookie=cookie;
     }
     context.store.dispatch({ type : LOAD_MY_INFO_REQUEST} );
-    context.store.dispatch( { type : LOAD_POST_REQUEST  } );
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
 }); // 이부분이 home 보다 먼저 실행됨 

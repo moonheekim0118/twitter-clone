@@ -20,6 +20,10 @@ function loadPostAPI(lastId){
     return axios.get(`/posts?lastId=${lastId || 0}`);
 }
 
+function loadSinglePostAPI(postId){
+    return axios.get(`/post/${postId}`);
+}
+
 function modifyPostApi(data){
     return axios.put('/post/update',data);
 }
@@ -125,6 +129,24 @@ function* loadPost(action){
     }catch(err){
         yield put({
             type:type.LOAD_POST_FAIL,
+            error:err.response.data
+        })
+        
+        yield put(showAlertAction(err.response.data))
+    }
+}
+
+function* loadSinglePost(action){
+    try{
+        const result = yield call(loadSinglePostAPI,action.data);
+        yield put({
+            type:type.LOAD_SINGLE_POST_SUCCESS,
+            data:result.data,
+        })
+
+    }catch(err){
+        yield put({
+            type:type.LOAD_SINGLE_POST_FAIL,
             error:err.response.data
         })
         
@@ -259,6 +281,10 @@ function* watchLoadPost(){
     yield takeLatest(type.LOAD_POST_REQUEST,loadPost);
 }
 
+function* watchLoadSinglePost(){
+    yield takeLatest(type.LOAD_SINGLE_POST_REQUEST,loadSinglePost);
+}
+
 function* watchModifyPost(){
     yield takeLatest(type.MODIFY_POST_REQUEST,modifyPost);
 }
@@ -297,5 +323,6 @@ export default function* postSaga(){
         fork(watchUploadImages),
         fork(watchRetweetPost),
         fork(watchUnretweetPost),
+        fork(watchLoadSinglePost),
     ]);
 }

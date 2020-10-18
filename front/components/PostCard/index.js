@@ -7,6 +7,7 @@ import PostImages from '../PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../CommentForm';
 import FollowButton from '../FollowButton';
+import Router from 'next/router';
 import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest,unretweetRequest } from '../../actions/post';
 import {showModifyModalAction} from '../../actions/ui';
 import {AvatarWrapper, Card, CardMeta, CardButtons, 
@@ -19,6 +20,10 @@ const PostCard=({post})=>{
     const me = useSelector(state => state.user.me?.id);
     const {removePostloading} = useSelector(state=>state.post);
     const liked = post.Likers.find((x)=>x.id===me);
+
+    const onClickPostDetail=useCallback(()=>{
+        Router.push(`/post/${post.id}`);
+    },[]);
 
     const onUnlike=useCallback(()=>{
         if(!me){
@@ -67,7 +72,7 @@ const PostCard=({post})=>{
     return(
        <>
        {post.RetweetId && post.Retweet ?  
-        <RetweetCard>
+        <RetweetCard onClick={onClickPostDetail}>
             <Retweet><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
@@ -99,7 +104,7 @@ const PostCard=({post})=>{
             </CardMeta>
         </RetweetCard>
        :
-       <Card>
+       <Card onClick={onClickPostDetail}>
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>

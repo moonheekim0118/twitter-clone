@@ -219,3 +219,29 @@ exports.unRetweetPost=async(req,res,next)=>{
         next(err);
     }
 };
+
+
+exports.loadSinglePost=async(req,res,next)=>{
+    try{
+        const post = await Post.findOne( {where: {id: req.params.postId}}  )
+        if(!post){
+            return res.status(404).json('존재하지 않는 게시물 입니다.');
+        }
+
+        const fullPost = await Post.findOne(
+            {where: {id: post.id},
+             include: [
+                { model: Image,},
+                { model: Comment , include:[{ model: User, attributes:{exclude:['password']}}]},
+                { model: User,attributes:{exclude:['password']}}, 
+                { model: User,  as: 'Likers', attributes:['id','nickname']},
+                { model: Post , as: 'Retweet', include: [{model: User,  attributes: ['id', 'nickname']},{model:Image},{model:User, as:'Likers',attributes:['id']}]}
+            ] }
+        )
+
+        res.status(201).json(fullPost);
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+}

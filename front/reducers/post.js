@@ -8,10 +8,15 @@ export const initialState={
     mainPosts:[],
     hasMorePost:true,
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
+    singlePost:null,
 
     loadPostloading:false, // 게시글 로딩  
     loadPostDone:false, 
     loadPostError:null,
+
+    loadSinglePostloading:false, // 게시글 하나 로딩 
+    loadSinglePostDone:false,
+    loadSinglePostError:null,
 
     addPostloading:false, // 게시글 추가  
     addPostDone:false,
@@ -127,6 +132,23 @@ const reducer= (state = initialState , action)=>{
                 draft.loadPostloading=false;
                 draft.loadPostError=action.error;
                 break;
+
+            case type.LOAD_SINGLE_POST_REQUEST:
+                draft.loadSinglePostloading=true;
+                draft.loadSinglePostDone=false;
+                draft.loadSinglePostError=null;
+                break;
+            case type.LOAD_SINGLE_POST_SUCCESS:
+                draft.singlePost=action.data;
+                console.log('아아아ㅏ아~~'+draft.singlePost);
+                draft.loadSinglePostloading=false;
+                draft.loadSinglePostDone=true;
+                break;
+            case type.LOAD_SINGLE_POST_FAIL:
+                draft.loadSinglePostloading=false;
+                draft.loadSinglePostError=action.error;
+                break;
+
             case type.MODIFY_POST_REQUEST:
                 draft.modifyPostloading=true;
                 draft.modifyPostDone=false;
