@@ -1,6 +1,6 @@
 import React , {useState , useCallback} from 'react';
 import { Button, Popover,Avatar, List, Comment } from 'antd';
-import {RetweetOutlined,HeartOutlined,HeartTwoTone,MessageOutlined,EllipsisOutlined} from '@ant-design/icons';
+import {RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined} from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import {useSelector ,useDispatch } from 'react-redux';
 import PostImages from '../PostImages';
@@ -10,7 +10,8 @@ import FollowButton from '../FollowButton';
 import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest } from '../../actions/post';
 import {showModifyModalAction} from '../../actions/ui';
 import {AvatarWrapper, Card, CardMeta, CardButtons, 
-    FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,LikeButtonWrapper,Retweet,RetweetCard} from './style';
+    FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
+    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon} from './style';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const PostCard=({post})=>{
     },[post.content]);
     
     const onRetweet = useCallback(()=>{
-        if(!me){
+        if(!me || post.UserId === me){
             return;
         }
         dispatch(retweetRequest(post.id));
@@ -71,7 +72,7 @@ const PostCard=({post})=>{
                         <PostCardContent postData={post.Retweet.content}/>
                         {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images}/>}
                         <CardButtons>
-                            <RetweetOutlined onClick={onRetweet} key="retweet"/>
+                            <RetweetIcon onClick={onRetweet} key="retweet"/>
                             { liked ?
                                 <div>
                                     <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
@@ -83,7 +84,7 @@ const PostCard=({post})=>{
                                     {post.Retweet.Likers.length>0 && <LikersCount>{post.Retweet.Likers.length}</LikersCount>}
                                 </LikeButtonWrapper>
                                 }
-                            <MessageOutlined onClick={onToggleComment} key="comment"/>
+                            <CommentIcon onClick={onToggleComment} key="comment"/>
                             <Popover key="more" content={(<Button.Group>
                                 <Button>신고</Button>
                             </Button.Group>)}>
@@ -101,7 +102,7 @@ const PostCard=({post})=>{
                     <PostCardContent postData={post.content}/>
                     {post.Images[0] && <PostImages images={post.Images}/>}
                     <CardButtons>
-                        <RetweetOutlined onClick={onRetweet} key="retweet"/>
+                        <RetweetIcon onClick={onRetweet} key="retweet"/>
                         { liked ?
                             <div>
                                 <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
@@ -113,7 +114,7 @@ const PostCard=({post})=>{
                                 {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
                             </LikeButtonWrapper>
                             }
-                        <MessageOutlined onClick={onToggleComment} key="comment"/>
+                        <CommentIcon onClick={onToggleComment} key="comment"/>
                         <Popover key="more" content={(<Button.Group>
                             {me===post.User.id 
                             ?<>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { RetweetOutlined , MessageOutlined} from '@ant-design/icons';
 
 export const AvatarWrapper=styled.div`
     flex-grow: 0;
@@ -92,4 +93,16 @@ export const Retweet=styled.div`
     left:5px;
     color:#0099cc;
     font-weight:bold;
+`;
+
+export const RetweetIcon=styled(RetweetOutlined)`
+    &:hover{
+        color:lime;
+    }
+`;
+
+export const CommentIcon = styled(MessageOutlined)`
+    &:hover{
+        color:#0099cc;
+    }
 `;
