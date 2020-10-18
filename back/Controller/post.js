@@ -99,6 +99,12 @@ exports.unLikePost=async(req,res,next)=>{
 
 exports.removePost=async(req,res,next)=>{
     try{
+        await Post.destroy( // 삭제될 글을 리트윗한 게시글들을 삭제해준다.
+            {
+            where:{ RetweetId:req.params.postId,}
+            }
+
+        );
         await Post.destroy({
             where:{
                 id:req.params.postId,
