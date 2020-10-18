@@ -26,6 +26,6 @@ router.get('/:userId/likes', UserController.loadLikedposts);
 
 router.get('/:userId',UserController.loadUserInfo); // 
 
-router.get('/',UserController.loadUser);
+router.get('/',UserController.loadMyInfo);
 
 module.exports = router;

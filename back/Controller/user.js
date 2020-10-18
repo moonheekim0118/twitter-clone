@@ -90,7 +90,7 @@ exports.changeNickname= async (req,res,next)=>{
    }
 }
 
-exports.loadUser=async(req,res,next)=>{
+exports.loadMyInfo=async(req,res,next)=>{
     try{
         if(req.user){
             const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 

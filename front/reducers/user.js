@@ -2,9 +2,9 @@ import * as type from '../actions/user';
 import produce from 'immer';
 // User === 로그인한 유저
 export const initialState={
-    loadUserInfoLoading:false, // 현재 로그인한 유저 정보 로딩 
-    loadUserInfoDone:false,
-    loadUserInfoError:null,
+    loadMyInfoLoading:false, // 현재 로그인한 유저 정보 로딩 
+    loadMyInfoDone:false,
+    loadMyInfoError:null,
 
     isLoggedIn:false, // 로그인 
     isLoggingIn:false, 
@@ -38,24 +38,24 @@ export const initialState={
 const reducer= (state = initialState , action)=>{
     return produce(state,draft=>{
         switch(action.type){
-            case type.LOAD_USER_INFO_REQUEST:
-                draft.loadUserInfoLoading=true;
-                draft.loadUserInfoDone=false;
-                draft.loadUserInfoError=null;
+            case type.LOAD_MY_INFO_REQUEST:
+                draft.loadMyInfoLoading=true;
+                draft.loadMyInfoDone=false;
+                draft.loadMyInfoError=null;
                 break;
 
-            case type.LOAD_USER_INFO_SUCCESS:
+            case type.LOAD_MY_INFO_SUCCESS:
                 draft.me=action.data;
                 if(draft.me){
                     draft.isLoggedIn=true;
                 }
-                draft.loadUserInfoDone=true;
-                draft.loadUserInfoLoading=false;
+                draft.loadMyInfoDone=true;
+                draft.loadMyInfoLoading=false;
                 break;
 
-            case type.LOAD_USER_INFO_FAIL:
-                draft.loadUserInfoLoading=false;
-                draft.loadUserInfoError=action.error;
+            case type.LOAD_MY_INFO_FAIL:
+                draft.loadMyInfoLoading=false;
+                draft.loadMyInfoError=action.error;
                 break;
                 
             case type.LOG_IN_REQUEST:
