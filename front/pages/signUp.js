@@ -11,7 +11,7 @@ const SignUp=()=>{
 
 
     return(
-        <AppLayout>
+        <AppLayout  pageName={"SignUp"}> 
             <Head>
                 <title>Sign up | JackJack</title>
             </Head>

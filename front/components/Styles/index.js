@@ -60,6 +60,16 @@ export const Description=styled.a`
     color:inherit;
 `;
 
+export const DescriptionWithoutLink=styled.div`
+    font-size:1.3rem;
+    font-weight:bold;
+    color:inherit;
+    position:relative;
+    margin:0 auto;
+    width:50%;
+    text-align:center;
+`;
+
 export const SignForm=styled(Form)`
     width:100%;
     margin-top:50px;

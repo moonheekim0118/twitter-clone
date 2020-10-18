@@ -16,7 +16,7 @@ const Post=()=>{
     const singlePost = useSelector((state)=>state.post.singlePost);
 
     return(
-        <AppLayout>
+        <AppLayout  pageName={"Tweet"}>
             <Head>
                 {singlePost.User.nickname} 님의 글
             </Head>

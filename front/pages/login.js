@@ -18,7 +18,7 @@ const Login =()=>{
     },[isLoggedIn]);
 
     return(
-        <AppLayout>
+        <AppLayout pageName={"Login"}>
             <Head>
                 <title>Login | JackJack</title>
             </Head>

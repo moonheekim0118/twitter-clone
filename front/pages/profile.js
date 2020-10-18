@@ -23,7 +23,7 @@ const Profile=()=>{
     }
     
     return (
-        <AppLayout>
+        <AppLayout  pageName={"Profile"}>
             <Head>
                 <title>My profile | JackJack</title>
             </Head>

@@ -41,7 +41,7 @@ const Home =()=>{
 
 
     return(
-        <AppLayout>
+        <AppLayout pageName={"Home"}>
             {isLoggedIn && showModifyModal && <ModifyModal/>}
             {isLoggedIn && <PostForm/>}
             <br/>
