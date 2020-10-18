@@ -35,6 +35,7 @@ export const RetweetCard=styled.div`
     border:1px solid #f4f4f4;
     background-color:#fff;
     cursor:pointer;
+    z-index:1000;
     &:hover{
         background-color:rgba(214, 214, 194,0.3);
     }

@@ -7,7 +7,6 @@ import PostImages from '../PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../CommentForm';
 import FollowButton from '../FollowButton';
-import Router from 'next/router';
 import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest,unretweetRequest } from '../../actions/post';
 import {showModifyModalAction} from '../../actions/ui';
 import {AvatarWrapper, Card, CardMeta, CardButtons, 
@@ -21,43 +20,50 @@ const PostCard=({post})=>{
     const {removePostloading} = useSelector(state=>state.post);
     const liked = post.Likers.find((x)=>x.id===me);
 
-    const onClickPostDetail=useCallback(()=>{
-        Router.push(`/post/${post.id}`);
+    const onClickDetail = useCallback(()=>{
+        window.open(`/post/${post.id}`,'_self'); // 디테일 페이지로 이동
     },[]);
 
-    const onUnlike=useCallback(()=>{
+    // Card div 내부에 있는 요소들 onClick 이벤트에 stopPropagation 적용
+    const onUnlike=useCallback((e)=>{
+        e.stopPropagation();
         if(!me){
             return;
         }
         dispatch(unLikePostRequest(post.id));
     },[]);
 
-    const onLike=useCallback(()=>{
+    const onLike=useCallback((e)=>{
+        e.stopPropagation();
         if(!me){
             return;
         }
         dispatch(likePostRequest(post.id));
     },[]);
 
-    const onToggleComment = useCallback(()=>{
+    const onToggleComment = useCallback((e)=>{
+        e.stopPropagation();
         setCommentFormOpend((prev)=>!prev);
     },[])
 
-    const onClickRemove=useCallback(()=>{
+    const onClickRemove=useCallback((e)=>{
+        e.stopPropagation();
         if(!me){
             return;
         }
         dispatch(removePostRequest({id:post.id}));
     },[]);
 
-    const onClickModify=useCallback(()=>{
+    const onClickModify=useCallback((e)=>{
+        e.stopPropagation();
         if(!me){
             return;
         }
         dispatch(showModifyModalAction({ postId:post.id, postContent:post.content}));
     },[post.content]);
     
-    const onRetweet = useCallback(()=>{
+    const onRetweet = useCallback((e)=>{
+        e.stopPropagation();
         if(!me || post.UserId === me){
             return;
         }
@@ -65,14 +71,19 @@ const PostCard=({post})=>{
 
     },[]);
 
-    const onUnRetweet=useCallback(()=>{
+    const onUnRetweet=useCallback((e)=>{
+        e.stopPropagation();
         dispatch(unretweetRequest(post.id));
+    },[]);
+
+    const onClickEllipsis=useCallback((e)=>{
+        e.stopPropagation();
     },[]);
 
     return(
        <>
        {post.RetweetId && post.Retweet ?  
-        <RetweetCard onClick={onClickPostDetail}>
+        <RetweetCard onClick={onClickDetail}>
             <Retweet><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
@@ -98,13 +109,13 @@ const PostCard=({post})=>{
                             <Popover key="more" content={(<Button.Group>
                                 <Button>신고</Button>
                             </Button.Group>)}>
-                            <EllipsisOutlined/>
+                            <EllipsisOutlined onClcik={onClickEllipsis}/>
                             </Popover>
                         </CardButtons>
             </CardMeta>
         </RetweetCard>
        :
-       <Card onClick={onClickPostDetail}>
+       <Card  onClick={onClickDetail}>
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
@@ -133,7 +144,7 @@ const PostCard=({post})=>{
                             </>
                             :  <Button>신고</Button>}
                             </Button.Group>)}>
-                        <EllipsisOutlined/>
+                        <EllipsisOutlined onClcik={onClickEllipsis}/>
                         </Popover>
                     </CardButtons>
                 </CardMeta>
