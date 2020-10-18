@@ -45,7 +45,6 @@ const reducer=(state=initialState, action)=>{
                 break;
             case type.HIDE_ALERT:
                 draft.showAlert=false;
-                draft.alertContent=null;
                 break; 
         }
     })
