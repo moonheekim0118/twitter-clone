@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
+
 
 const AlertBox=styled.div`
     width:330px;
@@ -20,16 +21,13 @@ const AlertBox=styled.div`
     transition: 1s ease-in-out;
 `;
 
-const Alert=({message, alertState})=>{
+const Alert=()=>{
+    const {showAlert,alertContent }= useSelector((state)=>state.ui);
+
     return(
-        <AlertBox show={alertState}>{message}</AlertBox>
+        <AlertBox show={showAlert}>{alertContent}</AlertBox>
     );
 };
-
-Alert.propTypes = {
-    message:PropTypes.string.isRequired,
-    alertState:PropTypes.bool.isRequired,
-}
 
 
 export default Alert;

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Input } from 'antd';
 import Menu from './Menu';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
 import { TwitterOutlined } from '@ant-design/icons';
 import {Description } from './Styles';
 import UserProfileModal from './Modals/UserProfileModal';
 import PostFormModal from './Modals/PostFormModal';
-
+import { hideAlertAction } from '../actions/ui';
+import Alert from './Alert';
 
 const SearchBar = styled.div`
     height:50px;
@@ -87,12 +88,21 @@ const Footer =styled.footer`
 
 const AppLayout = ({children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
-    const {showProfileModal ,showPostModal } =useSelector(state=>state.ui);
+    const {showProfileModal ,showPostModal, showAlert } =useSelector(state=>state.ui);
+    const dispatch = useDispatch();
+    
+    useEffect(()=>{
+        if(showAlert){
+            const timer = setTimeout(()=>dispatch(hideAlertAction()),5000);
+            return()=>clearTimeout(timer);
+        }
+    },[showAlert]);
 
     return(
         <>
             {isLoggedIn && showProfileModal&& <UserProfileModal/>}
             {isLoggedIn && showPostModal && <PostFormModal/> } 
+            <Alert/>
             <Header>
              <TwitterOutlined style={{color:'#33ccff', fontSize:'1.2rem'}} /> <Link href="/"><Description>JACKJACK</Description></Link>
             </Header>

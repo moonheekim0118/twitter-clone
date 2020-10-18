@@ -7,6 +7,8 @@ export const initialState={
     showModifyModal:false,
     modifyFormerContent:'',
     modifyPostId:null,
+    showAlert:false,
+    alertContent:'',
 }
 
 const reducer=(state=initialState, action)=>{
@@ -18,12 +20,14 @@ const reducer=(state=initialState, action)=>{
             case type.HIDE_PROFILE_MODAL:
                 draft.showProfileModal=false;
                 break;
+
             case type.SHOW_POST_MODAL:
                 draft.showPostModal=true;
                 break;
             case type.HIDE_POST_MODAL:
                 draft.showPostModal=false;
                 break;
+
             case type.SHOW_MODIFY_MODAL:
                 draft.showModifyModal=true;
                 draft.modifyPostId=action.data.postId;
@@ -34,6 +38,15 @@ const reducer=(state=initialState, action)=>{
                 draft.modifyPostId=null;
                 draft.modifyFormerContent='';
                 break;
+
+            case type.SHOW_ALERT:
+                draft.showAlert=true;
+                draft.alertContent=action.data;
+                break;
+            case type.HIDE_ALERT:
+                draft.showAlert=false;
+                draft.alertContent=null;
+                break; 
         }
     })
 }

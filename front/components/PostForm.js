@@ -1,19 +1,18 @@
-import React, {useCallback,useRef,useEffect,useState} from 'react';
+import React, {useCallback,useRef,useEffect} from 'react';
 import { Button }from 'antd';
 import ImagePath from './ImagePath';
 import { useDispatch , useSelector} from 'react-redux';
 import { addPostRequest , uploadImagesRequest } from '../actions/post';
 import {hidePostModalAction} from '../actions/ui';
-import {PostFormWrapper,TextArea,ButtonWrapper, ErrorMessage} from './Styles';
+import {PostFormWrapper,TextArea,ButtonWrapper} from './Styles';
+import {showAlertAction} from '../actions/ui';
 import useInput from '../hooks/useInput';
-import Alert from './Alert';
 
 const PostForm =()=>{
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
     const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
     const dispatch = useDispatch();
-    const [AlertShow, setAlertShow]=useState(false);
     const [text, onChangeText, setText] = useInput('');
 
     useEffect(()=>{
@@ -22,18 +21,6 @@ const PostForm =()=>{
        }
     },[addPostDone])
 
-    useEffect(()=>{
-        if(showPostModal && AlertShow){
-            setAlertShow(false);
-        }
-    },[showPostModal])
-
-    useEffect(()=>{
-        if(AlertShow){
-            const timer= setTimeout(()=>setAlertShow(false),5000);
-            return ()=> clearTimeout(timer);
-        }
-    },[AlertShow])
 
     const onSubmit=useCallback(()=>{
         let formData;
@@ -60,15 +47,13 @@ const PostForm =()=>{
 
     const onChangeImages=useCallback((e)=>{
         if(e.target.files.length>4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 
-            setAlertShow(true);
+             return dispatch(showAlertAction("이미지는 최대 4장 업로드 가능합니다."));
         }
-       else{
-            const imageFormData = new FormData();
-            [].forEach.call(e.target.files, (f)=>{
-                imageFormData.append('image',f);
-            });
-            dispatch(uploadImagesRequest(imageFormData));
-       }
+        const imageFormData = new FormData();
+        [].forEach.call(e.target.files, (f)=>{
+            imageFormData.append('image',f);
+        });
+        dispatch(uploadImagesRequest(imageFormData));
     },[]);
 
 
@@ -88,8 +73,6 @@ const PostForm =()=>{
                 </ButtonWrapper>
                 <ImagePath/>
             </PostFormWrapper>
-            {!showPostModal && <Alert message="이미지는 최대 4장 업로드 가능합니다." alertState={AlertShow}/>}
-            {showPostModal && AlertShow &&<ErrorMessage>이미지는 최대 4장 업로드 가능합니다.</ErrorMessage> }
         </>
     )
 }
