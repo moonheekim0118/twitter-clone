@@ -101,6 +101,10 @@ export const RetweetIcon=styled(RetweetOutlined)`
     }
 `;
 
+export const RetweetedIcon=styled(RetweetOutlined)`
+    color:lime;
+`;
+
 export const CommentIcon = styled(MessageOutlined)`
     &:hover{
         color:#0099cc;

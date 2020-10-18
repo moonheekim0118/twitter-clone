@@ -225,6 +225,7 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.UNRETWEET_POST_SUCCESS:
+                draft.mainPosts=draft.mainPosts.filter((x)=>x.id!==action.data.id);
                 draft.unretweetPostloading=false;
                 draft.unretweetPostDone=true;
                 break;

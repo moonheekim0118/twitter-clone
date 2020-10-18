@@ -7,11 +7,11 @@ import PostImages from '../PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../CommentForm';
 import FollowButton from '../FollowButton';
-import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest } from '../../actions/post';
+import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest,unretweetRequest } from '../../actions/post';
 import {showModifyModalAction} from '../../actions/ui';
 import {AvatarWrapper, Card, CardMeta, CardButtons, 
     FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
-    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon} from './style';
+    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon} from './style';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -60,6 +60,10 @@ const PostCard=({post})=>{
 
     },[]);
 
+    const onUnRetweet=useCallback(()=>{
+        dispatch(unretweetRequest(post.id));
+    },[]);
+
     return(
        <>
        {post.RetweetId && post.Retweet ?  
@@ -72,7 +76,8 @@ const PostCard=({post})=>{
                         <PostCardContent postData={post.Retweet.content}/>
                         {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images}/>}
                         <CardButtons>
-                            <RetweetIcon onClick={onRetweet} key="retweet"/>
+                            { post.UserId === me ? <RetweetedIcon onClick={onUnRetweet} key="retweet"/> : 
+                            <RetweetIcon onClick={onRetweet} key="retweet"/> }
                             { liked ?
                                 <div>
                                     <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>

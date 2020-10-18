@@ -35,6 +35,8 @@ router.post('/addPost',isLoggedIn, upload.none(), PostController.Addpost);
 
 router.post('/:postId/retweet',isLoggedIn,PostController.retweetPost);
 
+router.delete('/:postId/retweet',isLoggedIn,PostController.unRetweetPost);
+
 router.post('/images',isLoggedIn, upload.array('image'), PostController.uploadImages);
 
 router.patch('/:postId/like',isLoggedIn,PostController.LikePost);

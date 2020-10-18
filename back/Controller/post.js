@@ -157,7 +157,7 @@ exports.retweetPost=async(req,res,next)=>{
         const retweet = await Post.create({
             UserId: req.user.id,
             RetweetId: retweetTargetId,
-            content: '삭제된 리트윗 게시글입니다.'
+            content: 'Retweet'
           });
 
           const retweetWithPrevPost = await Post.findOne({
@@ -195,6 +195,21 @@ exports.retweetPost=async(req,res,next)=>{
           res.status(201).json(retweetWithPrevPost);
     }catch(err){
         console.error(err);
+        next(err);
+    }
+};
+
+exports.unRetweetPost=async(req,res,next)=>{
+    try{
+        await Post.destroy({
+            where:{
+                id:req.params.postId,
+                UserId:req.user.id,
+            }
+        });
+        res.status(200).json({id:+req.params.postId});
+    }catch(err){
+        console.log(err);
         next(err);
     }
 };
