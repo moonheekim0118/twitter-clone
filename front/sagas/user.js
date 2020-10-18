@@ -1,6 +1,7 @@
 import {all, fork, takeLatest, put, call} from 'redux-saga/effects';
 import * as type from '../actions/user';
 import axios from 'axios';
+import {showAlertAction } from '../actions/ui';
 
 function loadUserInfoAPI(){
     return axios.get('/user');
@@ -42,6 +43,8 @@ function* loadUserInfo(){
             type:type.LOAD_USER_INFO_FAIL,
             error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -73,6 +76,8 @@ function* logout(){
             type:type.LOG_OUT_FAIL,
             error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -106,6 +111,8 @@ function* follow(action){
             type:type.FOLLOW_FAIL,
             error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -123,6 +130,8 @@ function* unfollow(action){
             type:type.UNFOLLOW_FAIL,
             error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -139,6 +148,8 @@ function* changeNickname(action){
             type:type.CHANGE_NICKNAME_FAIL,
             error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 

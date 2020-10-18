@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as type from '../actions/post';
 import {ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../actions/user';
 import {all, fork, put, takeLatest,call} from 'redux-saga/effects';
-
+import {showAlertAction } from '../actions/ui';
 
 function addPostAPI(data){
     return axios.post('/post/addPost',data);
@@ -60,11 +60,13 @@ function* addPost(action){
 
 
     }catch(err){
-        console.log(err);
+
         yield put({
             type:type.ADD_POST_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -77,11 +79,14 @@ function* addComment(action){
             data:result.data,
         })
     }catch(err){
-        console.log(err);
+
         yield put({
             type:type.ADD_COMMENT_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
+        
     }
 }
 
@@ -101,8 +106,10 @@ function* removePost(action){
     }catch(err){
         yield put({
             type:type.REMOVE_POST_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
+    
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -116,11 +123,12 @@ function* loadPost(action){
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.LOAD_POST_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
+        
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -137,6 +145,8 @@ function* modifyPost(action){
             type:type.MODIFY_POST_FAIL,
             error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -149,11 +159,12 @@ function* likePost(action){
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.LIKE_POST_FAIL,
-            data:err.response.data
+            error:err.response.data
         })
+
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -166,11 +177,12 @@ function* unLikePost(action){
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.UNLIKE_POST_FAIL,
             error:err.response.data
         })
+    
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -183,11 +195,12 @@ function* uploadImages(action){
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.UPLOAD_IMAGES_FAIL,
             error:err.response.data
         })
+    
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -201,11 +214,12 @@ function* retweetPost(action){
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.RETWEET_POST_FAIL,
             error:err.response.data
         })
+    
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -218,11 +232,12 @@ function* unretweetPost(action){
         })
 
     }catch(err){
-        console.log('에러!!'+err);
         yield put({
             type:type.UNRETWEET_POST_FAIL,
             error:err.response.data
         })
+    
+        yield put(showAlertAction(err.response.data))
     }
 }
 

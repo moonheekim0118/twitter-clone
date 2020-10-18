@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
-
+import {useSelector } from 'react-redux';
 
 const AlertBox=styled.div`
     width:330px;
@@ -23,6 +22,7 @@ const AlertBox=styled.div`
 
 const Alert=()=>{
     const {showAlert,alertContent }= useSelector((state)=>state.ui);
+    
 
     return(
         <AlertBox show={showAlert}>{alertContent}</AlertBox>
