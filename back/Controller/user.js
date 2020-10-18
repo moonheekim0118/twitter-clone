@@ -194,9 +194,45 @@ exports.loadUserPosts=async(req,res,next)=>{
 };
 
 exports.loadLikedposts=async(req,res,next)=>{
-
+    try{
+        const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 
+            where:{id : req.params.userId},
+            attributes:{
+                exclude:['password']
+            }, // excluding password
+            include:[{
+                model:Post,
+                attributes:['id']
+            } , {
+                model: User,
+                as:'Followings', 
+                attributes:['id', 'nickname']
+            }, {
+                model: User,
+                as: 'Followers',
+                attributes:['id', 'nickname']
+            }, {
+                model:Post,
+                as: 'Liked',
+                attributes:['id']
+            }]
+        })
+        if(fullUserwitoutPassword){
+            const data = fullUserwitoutPassword.toJSON();
+            data.Posts = data.Posts.length;
+            data.followers=data.followers.length;
+            data.followings=data.followings.length;
+        }
+        else{
+            return res.status(404).json('존재하지 않는 사용자입니다.');
+        }
+        res.status(200).json(fullUserwitoutPassword);
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
 }
 
 exports.loadUserInfo=async(req,res,next)=>{
-
+    
 }
