@@ -157,7 +157,7 @@ exports.retweetPost=async(req,res,next)=>{
         const retweet = await Post.create({
             UserId: req.user.id,
             RetweetId: retweetTargetId,
-            content: 'retweet'
+            content: '삭제된 리트윗 게시글입니다.'
           });
 
           const retweetWithPrevPost = await Post.findOne({
