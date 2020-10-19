@@ -109,7 +109,7 @@ const PostCard=({post})=>{
                             <Popover key="more" content={(<Button.Group>
                                 <Button>신고</Button>
                             </Button.Group>)}>
-                            <EllipsisOutlined onClcik={onClickEllipsis}/>
+                            <EllipsisOutlined onClick={onClickEllipsis}/>
                             </Popover>
                         </CardButtons>
             </CardMeta>
