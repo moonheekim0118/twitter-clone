@@ -1,5 +1,6 @@
 import React ,{ useState, useCallback } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
     display:flex;
@@ -38,32 +39,31 @@ const Likes = styled.div`
     }
 `;
 
-const ProfileMenu =()=>{
-    const [tweetClciked, setTweetClicked] = useState(true);
-    const [LikesClicked, setLikesClicked]= useState(false);
+const ProfileMenu =({userId,pageName})=>{
     
     const onClickTweet = useCallback(()=>{
-        setTweetClicked(true);
-        setLikesClicked(false);
         // 라우팅 
+        window.open(`/user/${userId}`,'_self');
     },[]);
 
     const onClickLikePosts = useCallback(()=>{
-        setTweetClicked(false);
-        setLikesClicked(true);
-        // routing 
+        window.open(`/user/${userId}/likes`,'_self');
     },[]);
 
     return(
         <Wrapper>
-            <Tweet onClick={onClickTweet} clicked={tweetClciked}>  
+            <Tweet onClick={onClickTweet} clicked={pageName==="Tweet"}>  
                 Tweets
             </Tweet>
-            <Likes onClick={onClickLikePosts} clicked={LikesClicked}>
+            <Likes onClick={onClickLikePosts} clicked={pageName==="Likes"}>
                 Liked Tweets
             </Likes>
         </Wrapper>
     );
 };
 
+ProfileMenu.propTypes={
+    userId:PropTypes.string.isRequired,
+    pageName:PropTypes.string.isRequired,
+};
 export default ProfileMenu;

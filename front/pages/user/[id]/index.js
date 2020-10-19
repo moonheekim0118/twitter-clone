@@ -37,7 +37,7 @@ const User=()=>{
 
     if(!userInfo){
       return(
-        <AppLayout header={""}>
+        <AppLayout pageName={""}>
             <h1>존재하지 않는 사용자입니다.</h1>
         </AppLayout>
       )
@@ -51,7 +51,7 @@ const User=()=>{
           <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지`}/>
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
           <UserProfile user={userInfo}/>
-          <ProfileMenu/>
+          <ProfileMenu userId={id} pageName={"Tweet"}/>
           {UserPosts.length > 0 && <PostsList posts={UserPosts} loading={loadUserPostLoading}/>}
     </AppLayout>
     )
