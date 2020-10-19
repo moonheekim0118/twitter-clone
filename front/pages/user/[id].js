@@ -18,13 +18,13 @@ const User=()=>{
 
     if(!userInfo){
       return(
-        <AppLayout>
+        <AppLayout header={""}>
             <h1>존재하지 않는 사용자입니다.</h1>
         </AppLayout>
       )
     }
     return(
-      <AppLayout>
+      <AppLayout header={userInfo.nickname}>
           <Head>
                 {userInfo.nickname} 님
           </Head>

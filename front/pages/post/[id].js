@@ -17,13 +17,13 @@ const Post=()=>{
 
     if(!singlePost){
       return(
-        <AppLayout>
+        <AppLayout pageName={""}>
           <h1>존재하지 않는 게시물 입니다.</h1>
         </AppLayout>
       ) 
     }
     return(
-        <AppLayout  pageName={"Tweet"}>
+        <AppLayout pageName={"Tweet"}>
             <Head>
                 {singlePost.User.nickname} 님의 글
             </Head>

@@ -121,9 +121,7 @@ const AppLayout = ({pageName,children})=>{
             <Alert/>
             <Header>
              {pageName==="Home"? <Link href="/"><Description>{pageName}</Description></Link> : 
-             pageName==="Tweet"?
-              <DescriptionWithoutLink><BackButton onClick={onClickBack} /><span>{pageName}</span></DescriptionWithoutLink>
-             : <DescriptionWithoutLink>{pageName}</DescriptionWithoutLink>}
+             <DescriptionWithoutLink><BackButton onClick={onClickBack} /><span>{pageName}</span></DescriptionWithoutLink>}
             </Header>
             <div>
                 <Menu isLoggedIn={isLoggedIn}/>
