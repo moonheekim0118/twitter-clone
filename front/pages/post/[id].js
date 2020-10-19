@@ -15,6 +15,13 @@ const Post=()=>{
     const { id } = router.query;
     const singlePost = useSelector((state)=>state.post.singlePost);
 
+    if(!singlePost){
+      return(
+        <AppLayout>
+          <h1>존재하지 않는 게시물 입니다.</h1>
+        </AppLayout>
+      ) 
+    }
     return(
         <AppLayout  pageName={"Tweet"}>
             <Head>

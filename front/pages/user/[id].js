@@ -16,6 +16,13 @@ const User=()=>{
     const { id } = router.query;
     const { userInfo } = useSelector((state)=>state.commonUser);
 
+    if(!userInfo){
+      return(
+        <AppLayout>
+            <h1>존재하지 않는 사용자입니다.</h1>
+        </AppLayout>
+      )
+    }
     return(
       <AppLayout>
           <Head>
@@ -25,7 +32,7 @@ const User=()=>{
           <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지`}/>
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
           <UserProfile user={userInfo}/>
-          <ProfileMenu/>
+          {userInfo.NotFoundUser? "존재하지 않는 유저입니다." : <ProfileMenu/>}
     </AppLayout>
     )
 }
