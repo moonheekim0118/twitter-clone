@@ -1,30 +1,30 @@
 import {all, fork, takeLatest, put, call} from 'redux-saga/effects';
 import * as type from '../actions/commonUser';
 import axios from 'axios';
+import {showAlertAction } from '../actions/ui';
 
 // 현재 로그인 된 사용자도 user 프로필 페이지 들어가면 이 정보를 로딩해줘야함 
 function loadUserInfoAPI(userId){
-    return axios.get(`/user/${userId}`);
+    return axios.get(`/users/${userId}`);
 }
 
-// 
 function loadFollowingsListAPI(userId){
-    return axios.get(`/user/${userId}/followings`);
+    return axios.get(`/users/${userId}/followings`);
 }
 
 function loadFollowerListAPI(userId){
-    return axios.get(`/user/${userId}/followers`);
+    return axios.get(`/users/${userId}/followers`);
 }
 
 function loadUserPostAPI(userId){
-    return axios.get(`/user/${userId}/posts`);
+    return axios.get(`/users/${userId}/posts`);
 };
 
 function loadLikedPostAPI(userId){
-    return axios.get(`/user/${userId}/likes`);
+    return axios.get(`/users/${userId}/likes`);
 }
 
-function* loadUserInfo(){
+function* loadUserInfo(action){
     try{
         const result= yield call(loadUserInfoAPI,action.data);
         yield put({
@@ -36,10 +36,11 @@ function* loadUserInfo(){
             type:type.LOAD_USER_INFO_FAIL,
             error:err.response.data
         })
+        yield put(showAlertAction(err.response.data))
     }
 }
 
-function* loadFollowings(){
+function* loadFollowings(action){
     try{
         const result= yield call(loadFollowingsListAPI,action.data);
         yield put({
@@ -51,11 +52,12 @@ function* loadFollowings(){
             type:type.LOAD_FOLLOWINGS_FAIL,
             error:err.response.data
         })
+        yield put(showAlertAction(err.response.data))
     }
 }
 
 
-function* loadFollowers(){
+function* loadFollowers(action){
     try{
         const result= yield call(loadFollowerListAPI,action.data);
         yield put({
@@ -67,10 +69,11 @@ function* loadFollowers(){
             type:type.LOAD_FOLLOWERS_FAIL,
             error:err.response.data
         })
+        yield put(showAlertAction(err.response.data))
     }
 }
 
-function* loadUserPost(){
+function* loadUserPost(action){
     try{
         const result= yield call(loadUserPostAPI,action.data);
         yield put({
@@ -82,11 +85,12 @@ function* loadUserPost(){
             type:type.LOAD_USER_POST_FAIL,
             error:err.response.data
         })
+        yield put(showAlertAction(err.response.data))
     }
 }
 
 
-function* loadLikedPost(){
+function* loadLikedPost(action){
     try{
         const result= yield call(loadLikedPostAPI,action.data);
         yield put({
@@ -98,6 +102,7 @@ function* loadLikedPost(){
             type:type.LOAD_LIKED_POST_FAIL,
             error:err.response.data
         })
+        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -105,15 +110,15 @@ function* loadLikedPost(){
 
 
 
-function* wathchLoadUserInfo(){
+function* watchLoadUserInfo(){
     yield takeLatest(type.LOAD_USER_INFO_REQUEST,loadUserInfo);
 }
 
-function* wathchLoadFollowings(){
+function* watchLoadFollowings(){
     yield takeLatest(type.LOAD_FOLLOWINGS_REQUEST,loadFollowings);
 }
 
-function* wathchLoadFollowers(){
+function* watchLoadFollowers(){
     yield takeLatest(type.LOAD_FOLLOWERS_REQUEST,loadFollowers);
 }
 
@@ -132,9 +137,9 @@ function* watchLoadLikedPost(){
 
 export default function* commonUserSaga(){
     yield all([
-        fork(wathchLoadUserInfo),
-        fork(wathchLoadFollowings),
-        fork(wathchLoadFollowers),
+        fork(watchLoadUserInfo),
+        fork(watchLoadFollowings),
+        fork(watchLoadFollowers),
         fork(watchLoadUserPost),
         fork(watchLoadLikedPost),
     ]);

@@ -43,8 +43,6 @@ function* loadMyInfo(){
             type:type.LOAD_MY_INFO_FAIL,
             error:err.response.data
         })
-
-        yield put(showAlertAction(err.response.data))
     }
 }
 

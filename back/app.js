@@ -1,6 +1,7 @@
 const express =require('express');
 const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
+const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 const cors = require('cors');
 const app = express();
@@ -36,7 +37,8 @@ app.use(passport.session());
 
 app.use('/post',postRouter);
 app.use('/posts',postsRouter);
-app.use('/user',userRouter);
+app.use('/users',usersRouter); // 다른 유저 정보 
+app.use('/user',userRouter); // 내 정보
 
 db.sequelize.sync()
 .then(()=>{
