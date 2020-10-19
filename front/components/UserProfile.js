@@ -54,8 +54,10 @@ const Description=styled.span`
     font-weight:bold;
 `;
 
+// {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
+
 const UserProfile=({user})=>{
-    const me = useSelector((state)=>state.user.me);
+    const me = useSelector((state)=>state.user.me?.id);
     return(
         <Wrapper>
             <UpperWrapper>
@@ -64,7 +66,7 @@ const UserProfile=({user})=>{
                     <NicknameWrapper>{user.nickname}</NicknameWrapper>
                     <div>{user.email}</div>
                 </UserInfoWrapper>
-                {me && <FollowButton userId={user.id}/>}
+                {me && user.id!==me&& <FollowButton userId={user.id}/>}
             </UpperWrapper>
             <DownWrapper>
                 <FollowWrapper>{user.Followings} <Description>Followings</Description></FollowWrapper>
