@@ -60,6 +60,7 @@ const reducer=(state= initialState, action)=>{
                 draft.loadUserInfoLoading=false;
                 draft.loadUserInfoError=action.error;
                 break;
+
             case type.LOAD_FOLLOWINGS_REQUEST:
                 draft.loadFollowingListLoading=true;
                 draft.loadFollowingListDone=false;
@@ -75,6 +76,7 @@ const reducer=(state= initialState, action)=>{
                 draft.loadFollowerListLoading=false;
                 draft.loadFollowingListError=action.error;
                 break;
+
             case type.LOAD_FOLLOWERS_REQUEST:
                 draft.loadFollowersListLoading=true;
                 draft.loadFollowersListDone=false;
@@ -91,6 +93,7 @@ const reducer=(state= initialState, action)=>{
                 draft.loadFollowersListDone=false;
                 draft.loadFollowersListError=null;
                 break;
+
             case type.LOAD_USER_POST_REQUEST:
                 draft.loadUserPostLoading=true;
                 draft.loadUserPostDone=false;
@@ -99,13 +102,14 @@ const reducer=(state= initialState, action)=>{
             case type.LOAD_USER_POST_SUCCESS:
                 draft.loadUserPostLoading=false;
                 draft.loadUserPostDone=true;
-                draft.UserPosts=draft.UserPosts.concat(action.data.UserPosts);
-                draft.hasMoerUserPosts=draft.UserPosts.length<draft.userInfo.UserPostNumber;
+                draft.UserPosts=draft.UserPosts.concat(action.data);
+                draft.hasMoerUserPosts=draft.UserPosts.length<draft.userInfo.Posts;
                 break;
             case type.LOAD_USER_POST_FAIL:
                 draft.loadUserPostLoading=false;
                 draft.loadUserPostError=action.error;
                 break;
+                
             case type.LOAD_LIKED_POST_REQUEST:
                 draft.loadLikedPostLoading=true;
                 draft.loadLikedPostDone=false;

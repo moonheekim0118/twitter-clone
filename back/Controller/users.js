@@ -1,5 +1,5 @@
-const { User, Post } = require('../models');
-
+const { User, Post, Comment,Image } = require('../models');
+const { Op } = require('sequelize');
 
 exports.loadFollowings=async(req,res,next)=>{
     try{
@@ -32,7 +32,42 @@ exports.loadFollowers=async(req,res,next)=>{ /// 개수 제한해서 줘야함
 };
 
 exports.loadUserPosts=async(req,res,next)=>{
+    try{
+        const where={UserId:req.params.userId};
+        const lastId=+req.query.lastId;
+        if(lastId!==0){
+            where.id={[Op.lt]: +req.query.lastId};
+        }
 
+        const user = await User.findOne({
+            where:{id:req.params.userId}
+        });
+        if(!user){
+            return res.status(404).json("존재하지 않는 사용자입니다.");
+        }
+        const posts = await Post.findAll({
+            where,
+            limit:5,
+            order:[
+                ['createdAt','DESC'],
+                [Comment, 'createdAt', 'DESC']
+        ],
+            include:[
+                {model:User,attributes:{exclude:['password']}},
+                {model :Image},
+                {model:Comment, include:[{model:User, attirbutes:['id','nickname']}],  
+                attributes:{exclude:['password']},},
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
+                { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname']},
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
+                 {model: Image}, 
+                 {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
+            ]}]});
+        res.status(200).json(posts||{});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
 };
 
 exports.loadLikedposts=async(req,res,next)=>{
@@ -41,7 +76,6 @@ exports.loadLikedposts=async(req,res,next)=>{
 
 exports.loadUserInfo=async(req,res,next)=>{
     try{
-        console.log('아미치것넹ㅋ');
         const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 
             where:{id : req.params.userId},
             attributes:{

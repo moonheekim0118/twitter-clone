@@ -16,8 +16,9 @@ function loadFollowerListAPI(userId){
     return axios.get(`/users/${userId}/followers`);
 }
 
-function loadUserPostAPI(userId){
-    return axios.get(`/users/${userId}/posts`);
+function loadUserPostAPI(data){
+    //`/posts?lastId=${lastId || 0}`
+    return axios.get(`/users/${data.userId}/posts?lastId=${data.lastId || 0}`);
 };
 
 function loadLikedPostAPI(userId){

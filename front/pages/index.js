@@ -5,16 +5,11 @@ import {LOAD_MY_INFO_REQUEST } from '../actions/user';
 import axios from 'axios';
 import AppLayout from '../components/AppLayout';
 import PostForm from '../components/PostForm';
-import PostCard from '../components/PostCard';
 import { useSelector , useDispatch} from 'react-redux';
-import {Spin} from 'antd';
-import styled from 'styled-components';
 import ModifyModal from '../components/Modals/ModifyPostModal';
 import wrapper from '../store/configureStore';
+import PostsList from '../components/PostsList';
 
-const Wrapper = styled.div`
-    text-align:center;
-`;
 
 const Home =()=>{
     const showModifyModal = useSelector(state=>state.ui.showModifyModal);
@@ -45,8 +40,7 @@ const Home =()=>{
             {isLoggedIn && showModifyModal && <ModifyModal/>}
             {isLoggedIn && <PostForm/>}
             <br/>
-            {mainPosts.map((post)=><PostCard key={post.id} post={post}/>)}
-            {loadPostloading? <Wrapper><Spin/></Wrapper> : ''}
+            <PostsList posts={mainPosts} loading={loadPostloading}/>
         </AppLayout>
     );
 }

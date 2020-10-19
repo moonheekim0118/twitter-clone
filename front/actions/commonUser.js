@@ -35,6 +35,12 @@ export const loadUserInfoAction=(data)=>{
     }
 }
 
+export const loadUserPostsAction=(data)=>{
+    return{
+        type:LOAD_USER_POST_REQUEST,
+        data,
+    }
+}
 
 export const loadFollowingsAction=(data)=>{
     return {

@@ -15,9 +15,6 @@ exports.loadPost=async (req,res,next)=>{
         const posts = await Post.findAll({
             where,
             limit:10,
-            attributes:{
-                exclude:['password']
-            }, // excluding password
             order:[
                 ['createdAt','DESC'],
                 [Comment, 'createdAt', 'DESC']
