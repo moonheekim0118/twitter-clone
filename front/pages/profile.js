@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Router from 'next/router';
 import AppLayout from '../components/AppLayout';
 import NickNameEditForm from '../components/NickNameEditForm';
-import FollowList from '../components/FollowList';
 import {useSelector } from 'react-redux';
 import {END} from 'redux-saga';
 import {LOAD_MY_INFO_REQUEST } from '../actions/user';
@@ -28,8 +27,6 @@ const Profile=()=>{
                 <title>My profile | JackJack</title>
             </Head>
             <NickNameEditForm/>
-            <FollowList header="팔로잉" data={me.Followings}/>
-            <FollowList header="팔로워"  data={me.Followers}/>
         </AppLayout>
     );
 }

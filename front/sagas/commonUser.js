@@ -49,6 +49,7 @@ function* loadFollowings(action){
             data:result.data,
         });
     }catch(err){
+        console.log(err);
         yield put({
             type:type.LOAD_FOLLOWINGS_FAIL,
             error:err.response.data

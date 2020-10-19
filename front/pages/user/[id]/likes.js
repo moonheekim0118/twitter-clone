@@ -43,7 +43,7 @@ const Detail =()=>{
     },[hasMoreLikedPosts,loadLikedPostLoading])
   
     return(
-        <AppLayout>
+        <AppLayout pageName={userInfo.nickname}> 
               <Head>
                 {userInfo.nickname} 님
             </Head>

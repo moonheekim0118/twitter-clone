@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -58,6 +58,15 @@ const Description=styled.span`
 
 const UserProfile=({user})=>{
     const me = useSelector((state)=>state.user.me?.id);
+
+    const onClickFollowings=useCallback(()=>{
+        window.open(`/user/${user.id}/followings`,'_self');
+    },[]);
+
+    const onClickFollowers=useCallback(()=>{
+        window.open(`/user/${user.id}/followers`,'_self');
+    },[]);
+
     return(
         <Wrapper>
             <UpperWrapper>
@@ -69,8 +78,8 @@ const UserProfile=({user})=>{
                 {me && user.id!==me&& <FollowButton userId={user.id}/>}
             </UpperWrapper>
             <DownWrapper>
-                <FollowWrapper>{user.Followings} <Description>Followings</Description></FollowWrapper>
-                <FollowWrapper>{user.Followers} <Description>Followers</Description></FollowWrapper>
+                <FollowWrapper onClick={onClickFollowings}>{user.Followings} <Description>Followings</Description></FollowWrapper>
+                <FollowWrapper onClick={onClickFollowers}>{user.Followers} <Description>Followers</Description></FollowWrapper>
             </DownWrapper>
         </Wrapper>
     )

@@ -13,11 +13,12 @@ exports.loadFollowings=async(req,res,next)=>{
         if(!user){
             return res.status(403).json('사용자 정보가 잘못 되었습니다.');
         } // 
-        const followings = user.getFollowings({
+        const followings = await user.getFollowings({
             where,
             attributes:['id','nickname'],
             limit:10,
         });
+
         res.status(200).json(followings);
     }catch(err){
         console.error(err);
@@ -37,7 +38,7 @@ exports.loadFollowers=async(req,res,next)=>{ /// 개수 제한해서 줘야함
         if(!user){
             return res.status(403).json('사용자 정보가 잘못 되었습니다.');
         }
-        const followers = user.getFollowers({
+        const followers = await user.getFollowers({
             where,
             attributes:['id','nickname'],
             limit:10,
