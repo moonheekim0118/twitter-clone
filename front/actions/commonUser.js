@@ -35,6 +35,13 @@ export const loadUserInfoAction=(data)=>{
     }
 }
 
+export const loadUserLikedPostsAction=(data)=>{
+    return{
+        type:LOAD_LIKED_POST_REQUEST,
+        data,
+    }
+}
+
 export const loadUserPostsAction=(data)=>{
     return{
         type:LOAD_USER_POST_REQUEST,

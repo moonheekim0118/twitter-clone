@@ -40,9 +40,7 @@ export const initialState={
     userInfo:null, // 로딩된 유저 인포 저장
 };
 
-// userInfo 에 Followings Followers id도 안가져오고 오로지 몇개 있는지만 가져옴!!
-// 따라서 첫 유저정보는 Follwings와 Followers 숫자만 가져오고, 추후에 팔로잉 팔로워 보여주는 페이지 가면
-// 그 때 인피니트 스크롤링으로 해당 유저 팔로워랑 팔로잉 목록 가져오기 --> hasMore~~ 이용하기
+
 const reducer=(state= initialState, action)=>{
     return produce(state,draft=>{
         switch(action.type){
@@ -69,8 +67,8 @@ const reducer=(state= initialState, action)=>{
             case type.LOAD_FOLLOWINGS_SUCCESS:
                 draft.loadFollowingListLoading=false;
                 draft.loadFollowingListDone=true;
-                draft.FollowingList=draft.FollowingList.concat(action.data.FollowingList);
-                draft.hasMoreFollowings=draft.FollowingList.length<draft.userInfo.FollowingsNumber;
+                draft.FollowingList=draft.FollowingList.concat(action.data);
+                draft.hasMoreFollowings=draft.FollowingList.length<draft.userInfo.Followings;
                 break;
             case type.LOAD_FOLLOWINGS_FAIL:
                 draft.loadFollowerListLoading=false;
@@ -85,8 +83,8 @@ const reducer=(state= initialState, action)=>{
             case type.LOAD_FOLLOWERS_SUCCESS:
                 draft.loadFollowersListLoading=false;
                 draft.loadFollowersListDone=true;
-                draft.FollowerList=draft.FollowerList.concat(action.data.FollowerList);
-                draft.hasMoreFollowers=draft.FollowerList.length<draft.userInfo.FollowersNumber;
+                draft.FollowerList=draft.FollowerList.concat(action.data);
+                draft.hasMoreFollowers=draft.FollowerList.length<draft.userInfo.Followers;
                 break;
             case type.LOAD_FOLLOWERS_FAIL:
                 draft.loadFollowersListLoading=true;
@@ -118,8 +116,8 @@ const reducer=(state= initialState, action)=>{
             case type.LOAD_LIKED_POST_SUCCESS:
                 draft.loadLikedPostLoading=false;
                 draft.loadLikedPostDone=true;
-                draft.LikedPosts=draft.LikedPosts.concat(action.data.LikedPosts);
-                draft.hasMoreLikedPosts=draft.LikedPosts.length<draft.userInfo.LikedPostNumber;
+                draft.LikedPosts=draft.LikedPosts.concat(action.data);
+                draft.hasMoreLikedPosts=draft.LikedPosts.length<draft.userInfo.Liked;
                 break;
             case type.LOAD_LIKED_POST_FAIL:
                 draft.loadLikedPostLoading=false;

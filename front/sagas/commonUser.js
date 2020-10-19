@@ -8,12 +8,12 @@ function loadUserInfoAPI(userId){
     return axios.get(`/users/${userId}`);
 }
 
-function loadFollowingsListAPI(userId){
-    return axios.get(`/users/${userId}/followings`);
+function loadFollowingsListAPI(data){
+    return axios.get(`/users/${data.userId}/followings?lastId=${data.lastId || 0}`);
 }
 
-function loadFollowerListAPI(userId){
-    return axios.get(`/users/${userId}/followers`);
+function loadFollowerListAPI(data){
+    return axios.get(`/users/${data.userId}/followers?lastId=${data.lastId || 0}`);
 }
 
 function loadUserPostAPI(data){
@@ -21,8 +21,8 @@ function loadUserPostAPI(data){
     return axios.get(`/users/${data.userId}/posts?lastId=${data.lastId || 0}`);
 };
 
-function loadLikedPostAPI(userId){
-    return axios.get(`/users/${userId}/likes`);
+function loadLikedPostAPI(data){
+    return axios.get(`/users/${data.userId}/likes?lastId=${data.lastId || 0}`);
 }
 
 function* loadUserInfo(action){

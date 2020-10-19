@@ -3,12 +3,21 @@ const { Op } = require('sequelize');
 
 exports.loadFollowings=async(req,res,next)=>{
     try{
+        const where={};
         const userId=+req.params.userId;
+        const lastId=+req.query.lastId;
+        if(lastId!==0){
+            where.id={[Op.lt]: +req.query.lastId};
+        }
         const user = await User.findOne({where:{id:userId}});
         if(!user){
             return res.status(403).json('사용자 정보가 잘못 되었습니다.');
-        }
-        const followings = user.getFollowings();
+        } // 
+        const followings = user.getFollowings({
+            where,
+            attributes:['id','nickname'],
+            limit:10,
+        });
         res.status(200).json(followings);
     }catch(err){
         console.error(err);
@@ -18,13 +27,22 @@ exports.loadFollowings=async(req,res,next)=>{
 
 exports.loadFollowers=async(req,res,next)=>{ /// 개수 제한해서 줘야함 
     try{
+        const where={};
         const userId=+req.params.userId;
+        const lastId=+req.query.lastId;
+        if(lastId!==0){
+            where.id={[Op.lt]: +req.query.lastId};
+        }
         const user = await User.findOne({where:{id:userId}});
         if(!user){
             return res.status(403).json('사용자 정보가 잘못 되었습니다.');
         }
-        const followers = user.getFollowers();
-        res.status(20).json(followers);
+        const followers = user.getFollowers({
+            where,
+            attributes:['id','nickname'],
+            limit:10,
+        });
+        res.status(200).json(followers);
     }catch(err){
         console.error(err);
         next(err);
@@ -70,8 +88,43 @@ exports.loadUserPosts=async(req,res,next)=>{
     }
 };
 
-exports.loadLikedposts=async(req,res,next)=>{
-    
+exports.loadLikedposts=async(req,res,next)=>{ // userId의 user가 Liked 한 포스트들 가져오기
+    try{
+        const userId=+req.params.userId;
+        const lastId=+req.query.lastId;
+        const where={UserId:userId};
+        if(lastId!==0){
+            where.id={[Op.lt]: +req.query.lastId};
+        }
+        const user = await User.findOne({where:{id:userId}});
+        if(!user){
+            return res.status(403).json('사용자 정보가 잘못 되었습니다.');
+        }
+        const posts= await user.getLiked({
+            where,
+            limit:5,
+            order:[
+                ['createdAt','DESC'],
+                [Comment, 'createdAt', 'DESC']
+             ],
+             include:[
+                {model:User,attributes:{exclude:['password']}},
+                {model :Image},
+                {model:Comment, include:[{model:User, attirbutes:['id','nickname']}],  
+                attributes:{exclude:['password']},},
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
+                { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname']},
+                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
+                 {model: Image}, 
+                 {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
+            ]}]
+        });
+        return res.status(200).json(posts);
+
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
 }
 
 exports.loadUserInfo=async(req,res,next)=>{

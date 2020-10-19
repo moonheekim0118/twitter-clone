@@ -2,15 +2,15 @@ import React, {useEffect} from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import {END} from 'redux-saga';
-import {LOAD_MY_INFO_REQUEST } from '../../actions/user';
-import { loadUserInfoAction,loadUserPostsAction } from '../../actions/commonUser';
+import {LOAD_MY_INFO_REQUEST } from '../../../actions/user';
+import { loadUserInfoAction,loadUserPostsAction } from '../../../actions/commonUser';
 import axios from 'axios';
-import wrapper from '../../store/configureStore';
-import AppLayout from '../../components/AppLayout'
-import UserProfile from '../../components/UserProfile';
-import ProfileMenu from '../../components/ProfileMenu';
+import wrapper from '../../../store/configureStore';
+import AppLayout from '../../../components/AppLayout'
+import UserProfile from '../../../components/UserProfile';
+import ProfileMenu from '../../../components/ProfileMenu';
 import { useSelector , useDispatch } from 'react-redux';
-import PostsList from '../../components/PostsList';
+import PostsList from '../../../components/PostsList';
 
 
 const User=()=>{
