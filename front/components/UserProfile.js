@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import {Avatar} from 'antd';
 import FollowButton from './FollowButton';
 
 const Wrapper = styled.div`
     width:100%;
-    height:700px;
+    height:250px;
     position:relative;
     display:flex;
     flex-direction:column;
@@ -25,7 +26,7 @@ const UpperWrapper= styled.div`
 // 아바타 / 이메일 / 닉네임 
 const UserInfoWrapper = styled.div`
     display:flex;
-    flex-direction:colum;
+    flex-direction:column;
 `;
 
 // 팔로잉 몇명 / 팔로우 몇명 
@@ -33,23 +34,41 @@ const DownWrapper = styled.div`
     display:flex;
     flex-direction:row;
     margin-left:20px;
+    margin-top: 20px;
+    cursor:pointer;
+    font-size:1rem;
 `;
 
+const NicknameWrapper= styled.div`
+    margin-top:10px;
+    font-size:1.3rem;
+    font-weight:bold;
+`;
+
+const FollowWrapper =styled.div`
+    margin-right:20px;
+`;
+
+const Description=styled.span`
+    color:#75a3a3;
+    font-weight:bold;
+`;
 
 const UserProfile=({user})=>{
+    const me = useSelector((state)=>state.user.me);
     return(
         <Wrapper>
             <UpperWrapper>
                 <UserInfoWrapper>
-                    <Avatar/>
-                    <span>{user.nickname}</span>
-                    <span>{user.email}</span>
+                    <Avatar size="large">{user.nickname[0]}</Avatar>
+                    <NicknameWrapper>{user.nickname}</NicknameWrapper>
+                    <div>{user.email}</div>
                 </UserInfoWrapper>
-                <FollowButton userId={user.id}/>
+                {me && <FollowButton userId={user.id}/>}
             </UpperWrapper>
             <DownWrapper>
-                <span>{user.Followings} Following</span>
-                <span>{user.Followers} Follower</span>
+                <FollowWrapper>{user.Followings} <Description>Followings</Description></FollowWrapper>
+                <FollowWrapper>{user.Followers} <Description>Followers</Description></FollowWrapper>
             </DownWrapper>
         </Wrapper>
     )
