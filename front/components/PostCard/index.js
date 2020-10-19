@@ -144,7 +144,7 @@ const PostCard=({post})=>{
                             </>
                             :  <Button>신고</Button>}
                             </Button.Group>)}>
-                        <EllipsisOutlined onClcik={onClickEllipsis}/>
+                        <EllipsisOutlined onClick={onClickEllipsis}/>
                         </Popover>
                     </CardButtons>
                 </CardMeta>

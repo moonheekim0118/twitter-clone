@@ -43,7 +43,7 @@ const User=()=>{
       )
     }
     return(
-      <AppLayout header={userInfo.nickname}>
+      <AppLayout pageName={userInfo.nickname}>
           <Head>
                 {userInfo.nickname} 님
           </Head>
