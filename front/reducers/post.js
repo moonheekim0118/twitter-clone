@@ -6,7 +6,9 @@ export const initialState={
 
     totalPostLength:0,
     mainPosts:[],
+    hashTagPosts:[],
     hasMorePost:true,
+    hasMoreHashtagPost:true,
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
     singlePost:null,
 
@@ -112,6 +114,7 @@ const reducer= (state = initialState , action)=>{
                 draft.removePostError=action.error;
                 break;
 
+            case type.LOAD_HASHTAG_REQUEST:
             case type.LOAD_POST_REQUEST:
                 draft.loadPostloading=true;
                 draft.loadPostDone=false;
@@ -128,9 +131,20 @@ const reducer= (state = initialState , action)=>{
                 draft.hasMorePost=draft.mainPosts.length<draft.totalPostLength;
                 break;
 
+            case type.LOAD_HASHTAG_FAIL:
             case type.LOAD_POST_FAIL:
                 draft.loadPostloading=false;
                 draft.loadPostError=action.error;
+                break;
+
+            case type.LOAD_HASHTAG_SUCCESS:
+                draft.loadPostloading=false;
+                draft.loadPostDone=true;
+                draft.hashTagPosts=draft.hashTagPosts.concat(action.data.posts);
+                if(action.data.totalPostsLength!==0){
+                    draft.totalPostsLength=action.data.totalPostsLength;
+                }
+                draft.totalPostsLength=draft.hashTagPosts.length<draft.totalPostsLength;
                 break;
 
             case type.LOAD_SINGLE_POST_REQUEST:
@@ -140,7 +154,6 @@ const reducer= (state = initialState , action)=>{
                 break;
             case type.LOAD_SINGLE_POST_SUCCESS:
                 draft.singlePost=action.data;
-                console.log('아아아ㅏ아~~'+draft.singlePost);
                 draft.loadSinglePostloading=false;
                 draft.loadSinglePostDone=true;
                 break;

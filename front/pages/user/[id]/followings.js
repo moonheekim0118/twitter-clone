@@ -10,7 +10,6 @@ import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout';
 import FollowHeader from '../../../components/Header/FollowHeader';
 import FollowCard from '../../../components/Follow/FollowCard';
-import styled from 'styled-components';
 import { Spin } from 'antd';
 import { MiddleWrapper } from '../../../components/globalStyle';
 

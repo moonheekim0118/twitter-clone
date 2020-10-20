@@ -68,6 +68,17 @@ export const UNRETWEET_POST_REQUEST="UNRETWEET_POST_REQUEST";
 export const UNRETWEET_POST_SUCCESS="UNRETWEET_POST_SUCCESS";
 export const UNRETWEET_POST_FAIL="UNRETWEET_POST_FAIL";
 
+export const LOAD_HASHTAG_REQUEST="LOAD_HASHTAG_REQUEST";
+export const LOAD_HASHTAG_SUCCESS="LOAD_HASHTAG_SUCCESS";
+export const LOAD_HASHTAG_FAIL="LOAD_HASHTAG_FAIL";
+
+export const loadHashtagAction=(data)=>{
+    return{
+        type:LOAD_HASHTAG_REQUEST,
+        data,
+    }
+}
+
 export const loadPostsAction=(data)=>{
     return{
         type:LOAD_POST_REQUEST,

@@ -3,6 +3,7 @@ const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
+const hashtagRouter = require('./routes/hashtag');
 const cors = require('cors');
 const app = express();
 const db = require('./models');
@@ -39,6 +40,7 @@ app.use('/post',postRouter);
 app.use('/posts',postsRouter);
 app.use('/users',usersRouter); // 다른 유저 정보 
 app.use('/user',userRouter); // 내 정보
+app.use('/hashtag',hashtagRouter); // 해쉬태그 검색
 
 db.sequelize.sync()
 .then(()=>{

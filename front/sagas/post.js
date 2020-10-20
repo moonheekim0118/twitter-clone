@@ -49,6 +49,10 @@ function unretweetPostAPI(data){
     return axios.delete(`/post/${data}/retweet`);
 }
 
+function hashTagAPI(data){
+    return axios.get(`/hashtag/${encodeURIComponent(data.hashTag)}/?lastId=${data.lastId || 0}`);
+}
+
 function* addPost(action){
     try{
         const result = yield call(addPostAPI,action.data);
@@ -264,6 +268,27 @@ function* unretweetPost(action){
 }
 
 
+function* hashTag(action){
+    try{
+        const result = yield call(hashTagAPI,action.data);
+        yield put({
+            type:type.LOAD_HASHTAG_SUCCESS,
+            data:result.data,
+        })
+
+    }catch(err){
+
+        console.log(err);
+
+        yield put({
+            type:type.LOAD_HASHTAG_FAIL,
+            error:err.response.data
+        })
+
+        yield put(showAlertAction(err.response.data))
+    }
+}
+
 
 function* watchAddPost(){
     yield takeLatest(type.ADD_POST_REQUEST,addPost);    
@@ -309,6 +334,9 @@ function* watchUnretweetPost(){
     yield takeLatest(type.UNRETWEET_POST_REQUEST,unretweetPost);
 }
 
+function* watchHashtag(){
+    yield takeLatest(type.LOAD_HASHTAG_REQUEST,hashTag);
+}
 
 
 export default function* postSaga(){
@@ -324,5 +352,6 @@ export default function* postSaga(){
         fork(watchRetweetPost),
         fork(watchUnretweetPost),
         fork(watchLoadSinglePost),
+        fork(watchHashtag),
     ]);
 }
