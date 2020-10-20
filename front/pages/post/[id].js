@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { END } from 'redux-saga';
-import { LOAD_SINGLE_POST_REQUEST } from '../../actions/post';
-import { LOAD_MY_INFO_REQUEST } from '../../actions/user';
+import { loadSinglePostAction } from '../../actions/post';
+import { loadMyInfoAction } from '../../actions/user';
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
 import AppLayout from '../../components/AppLayout'
@@ -44,13 +44,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     if (context.req && cookie) {
       axios.defaults.headers.Cookie = cookie;
     }
-    context.store.dispatch({
-      type: LOAD_MY_INFO_REQUEST,
-    });
-    context.store.dispatch({
-      type: LOAD_SINGLE_POST_REQUEST,
-      data: context.params.id,
-    });
+    context.store.dispatch(loadMyInfoAction());
+    context.store.dispatch(loadSinglePostAction(context.params.id));
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
     return { props: {} };

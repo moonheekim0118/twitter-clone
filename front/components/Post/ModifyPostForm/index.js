@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
-import { modifyPostRequest} from '../../../actions/post';
+import { modifyPostAction} from '../../../actions/post';
 import { hideModifyModalAction } from '../../../actions/ui';
 import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
@@ -15,7 +15,7 @@ const ModifyPostPorm =()=>{
     const [text, onChangeText]=useInput(modifyFormerContent);
 
     const onSubmit=useCallback(()=>{
-        dispatch(modifyPostRequest( { postId:modifyPostId, content:text}));
+        dispatch(modifyPostAction( { postId:modifyPostId, content:text}));
         dispatch(hideModifyModalAction());
     },[text])
 

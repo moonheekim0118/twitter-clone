@@ -1,6 +1,6 @@
 import React, { useCallback,useRef,useEffect } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
-import { addPostRequest , uploadImagesRequest } from '../../../actions/post';
+import { addPostAction , uploadImagesAction } from '../../../actions/post';
 import { hidePostModalAction, showAlertAction } from '../../../actions/ui';
 import useInput from '../../../hooks/useInput';
 import { Button }from 'antd';
@@ -33,7 +33,7 @@ const PostForm =()=>{
         else{
             formData={'content':text}
         }
-        dispatch(addPostRequest(formData));
+        dispatch(addPostAction(formData));
 
         if(showPostModal){ // 모달창 이라면, 
             dispatch(hidePostModalAction());
@@ -52,7 +52,7 @@ const PostForm =()=>{
         [].forEach.call(e.target.files, (f)=>{
             imageFormData.append('image',f);
         });
-        dispatch(uploadImagesRequest(imageFormData));
+        dispatch(uploadImagesAction(imageFormData));
     },[]);
 
 

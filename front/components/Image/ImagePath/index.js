@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeImageRequest } from '../../../actions/post';
+import { removeImageAction } from '../../../actions/post';
 import { Wrapper, ImageWrapper, ImageWrapperColumn ,Image, RemoveButton } from '../style';
 
 const ImagePath=()=>{
@@ -8,7 +8,7 @@ const ImagePath=()=>{
     const dispatch = useDispatch();
 
     const onRemoveImage=useCallback((index)=>{
-        dispatch(removeImageRequest(index));
+        dispatch(removeImageAction(index));
     },[]);
 
     if(imagePaths.length===1){

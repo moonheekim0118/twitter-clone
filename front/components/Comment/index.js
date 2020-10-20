@@ -2,7 +2,7 @@ import React, { useCallback,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCommentRequest } from '../../actions/post';
+import { addCommentAction } from '../../actions/post';
 import useInput from '../../hooks/useInput';
 import styled from 'styled-components';
 import { Form, Input, Button } from 'antd';
@@ -41,7 +41,7 @@ const CommentForm=({postId})=>{
             Router.push('/login');
        }
        else if(commentText.length >0){ 
-            dispatch(addCommentRequest({text:commentText,id,nickname,postId:postId})); // 여기서 id는 userId 
+            dispatch(addCommentAction({text:commentText,id,nickname,postId:postId})); // 여기서 id는 userId 
        }
     },[commentText]);
 

@@ -2,7 +2,7 @@ import React , { useState , useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector ,useDispatch } from 'react-redux';
 import { showModifyModalAction } from '../../../actions/ui';
-import { removePostRequest,likePostRequest,unLikePostRequest,retweetRequest,unretweetRequest } from '../../../actions/post';
+import { removePostAction,likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
 import { Button, Popover,Avatar, List, Comment } from 'antd';
 import { RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
 import PostImages from '../../Image/PostImages';
@@ -30,7 +30,7 @@ const PostCard=({post})=>{
         if(!me){
             return;
         }
-        dispatch(unLikePostRequest(post.id));
+        dispatch(unLikePostAction(post.id));
     },[]);
 
     const onLike=useCallback((e)=>{
@@ -38,7 +38,7 @@ const PostCard=({post})=>{
         if(!me){
             return;
         }
-        dispatch(likePostRequest(post.id));
+        dispatch(likePostAction(post.id));
     },[]);
 
     const onToggleComment = useCallback((e)=>{
@@ -51,7 +51,7 @@ const PostCard=({post})=>{
         if(!me){
             return;
         }
-        dispatch(removePostRequest({id:post.id}));
+        dispatch(removePostAction({id:post.id}));
     },[]);
 
     const onClickModify=useCallback((e)=>{
@@ -67,13 +67,13 @@ const PostCard=({post})=>{
         if(!me || post.UserId === me){
             return;
         }
-        dispatch(retweetRequest(post.id));
+        dispatch(retweetAction(post.id));
 
     },[]);
 
     const onUnRetweet=useCallback((e)=>{
         e.stopPropagation();
-        dispatch(unretweetRequest(post.id));
+        dispatch(unretweetAction(post.id));
     },[]);
 
     const onClickEllipsis=useCallback((e)=>{

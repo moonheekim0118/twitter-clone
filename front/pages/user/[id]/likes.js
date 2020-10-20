@@ -3,7 +3,7 @@ import { useSelector , useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import {END} from 'redux-saga';
-import { LOAD_MY_INFO_REQUEST } from '../../../actions/user';
+import { loadMyInfoAction } from '../../../actions/user';
 import { loadUserInfoAction, loadUserLikedPostsAction } from '../../../actions/commonUser';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
@@ -65,9 +65,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     if (context.req && cookie) {
       axios.defaults.headers.Cookie = cookie;
     }
-    context.store.dispatch({ // 로그인 정보 불러오기 
-      type: LOAD_MY_INFO_REQUEST,
-    });
+    context.store.dispatch(loadMyInfoAction());
     context.store.dispatch(loadUserInfoAction(context.params.id)); // 유저 정보 불러오기 
     context.store.dispatch(loadUserLikedPostsAction({userId:context.params.id})); // 좋아요 게시글 정보 
 

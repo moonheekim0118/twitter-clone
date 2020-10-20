@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { END } from 'redux-saga';
-import { LOAD_MY_INFO_REQUEST } from '../../../actions/user';
+import { loadMyInfoAction } from '../../../actions/user';
 import { useSelector , useDispatch } from 'react-redux';
 import { loadUserInfoAction,loadUserPostsAction } from '../../../actions/commonUser';
 import axios from 'axios';
@@ -63,9 +63,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     if (context.req && cookie) {
       axios.defaults.headers.Cookie = cookie;
     }
-    context.store.dispatch({ // 로그인 정보 불러오기 
-      type: LOAD_MY_INFO_REQUEST,
-    });
+    context.store.dispatch(loadMyInfoAction());
     context.store.dispatch(loadUserInfoAction(context.params.id));
     context.store.dispatch(loadUserPostsAction({userId:context.params.id}));
     context.store.dispatch(END);

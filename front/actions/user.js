@@ -44,6 +44,12 @@ export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS="LOAD_MY_INFO_SUCCESS";
 export const LOAD_MY_INFO_FAIL="LOAD_MY_INFO_FAIL";
 
+export const loadMyInfoAction=(data)=>{
+    return{
+        type:LOAD_MY_INFO_REQUEST,
+        data,
+    }
+}
 
 export const loginRequestAction = (data)=>{
     return {

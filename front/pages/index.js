@@ -1,8 +1,8 @@
 import React , { useEffect } from 'react';
 import { useSelector , useDispatch} from 'react-redux';
 import { END } from 'redux-saga';
-import { LOAD_POST_REQUEST } from '../actions/post';
-import { LOAD_MY_INFO_REQUEST } from '../actions/user';
+import { loadPostsAction } from '../actions/post';
+import { loadMyInfoAction } from '../actions/user';
 import axios from 'axios';
 import AppLayout from '../components/AppLayout';
 import PostForm from '../components/Post/PostForm';
@@ -22,9 +22,7 @@ const Home =()=>{
             if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
                 if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
                     const lastId= mainPosts[mainPosts.length-1]?.id;
-                    dispatch(
-                        { type:LOAD_POST_REQUEST ,data:lastId },
-                     );
+                    dispatch(loadPostsAction(lastId));
                 }
             }
         }
@@ -51,8 +49,8 @@ export const getServerSideProps= wrapper.getServerSideProps(async(context)=>{
     if(context.req && cookie){
         axios.defaults.headers.Cookie=cookie;
     }
-    context.store.dispatch({ type : LOAD_MY_INFO_REQUEST} );
-    context.store.dispatch( { type : LOAD_POST_REQUEST  } );
+    context.store.dispatch(loadMyInfoAction() );
+    context.store.dispatch(loadPostsAction());
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
 });
