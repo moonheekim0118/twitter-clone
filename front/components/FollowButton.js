@@ -10,7 +10,8 @@ const FollowButton=({userId})=>{
     const {me , followLoading, unfollowLoading} = useSelector(state=>state.user);
     const isFollowing = me&&me.Followings.find((v)=>v.id===userId);
     
-    const onClickFollow=useCallback(()=>{
+    const onClickFollow=useCallback((e)=>{
+        e.stopPropagation();
         if(isFollowing){ // 언팔로우 
             dispatch(unfollowRequestAction(userId));
         }

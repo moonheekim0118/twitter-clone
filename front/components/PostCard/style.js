@@ -67,6 +67,10 @@ export const FollowButtonWrapper=styled.div`
 export const NicknameWrapper=styled.div`
     font-size:1.2rem;
     font-weight:bold;
+
+    &:hover{
+        text-decoration:underline;
+    }
 `;
 
 export const LikedCount=styled.span`   
@@ -93,6 +97,10 @@ export const Retweet=styled.div`
     left:5px;
     color:#0099cc;
     font-weight:bold;
+
+    &:hover{
+        text-decoration:underline;
+    }
 `;
 
 export const RetweetIcon=styled(RetweetOutlined)`

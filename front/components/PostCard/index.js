@@ -80,15 +80,25 @@ const PostCard=({post})=>{
         e.stopPropagation();
     },[]);
 
+    const onClickUser= useCallback((e)=>{
+        e.stopPropagation();
+        window.open(`/user/${post.User.id}`,'_self'); 
+    },[]);
+
+    const onClickRetweetedUser=useCallback((e)=>{
+        e.stopPropagation();
+        window.open(`/user/${post.Retweet.User.id}`,'_self'); 
+    },[]);
+
     return(
        <>
        {post.RetweetId && post.Retweet ?  
         <RetweetCard onClick={onClickDetail}>
-            <Retweet><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
+            <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
-                    <NicknameWrapper>{post.Retweet.User.nickname}</NicknameWrapper>
+                    <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
                         <PostCardContent postData={post.Retweet.content}/>
                         {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images}/>}
                         <CardButtons>
@@ -119,7 +129,7 @@ const PostCard=({post})=>{
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
-                    <NicknameWrapper>{post.User.nickname}</NicknameWrapper>
+                    <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
                     <PostCardContent postData={post.content}/>
                     {post.Images[0] && <PostImages images={post.Images}/>}
                     <CardButtons>
