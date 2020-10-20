@@ -54,7 +54,7 @@ const Followings=()=>{
           <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지 팔로잉 목록 `}/>
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
           <FollowMenu userId={id} pageName={"Followings"}/>
-          {FollowingList.length === 0 ? <h1>팔로잉이 없습니다.</h1>:FollowingList.map((user)=><FollowList user={user}/>)}
+          {FollowingList.length === 0 ? <h1>팔로잉이 없습니다.</h1>:FollowingList.map((user)=><FollowList key={user.id} user={user}/>)}
           {loadFollowingListLoading? <Wrapper><Spin/></Wrapper> : ''}
         </AppLayout>
     )

@@ -49,7 +49,7 @@ const Followers=()=>{
           <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지 팔로잉 목록 `}/>
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
           <FollowMenu userId={id} pageName={"Followers"}/>
-          {FollowerList.length === 0 ? <h1>팔로워가 없습니다.</h1>:FollowerList.map((user)=><FollowList user={user}/>)}
+          {FollowerList.length === 0 ? <h1>팔로워가 없습니다.</h1>:FollowerList.map((user)=><FollowList  key={user.id} user={user}/>)}
           {loadFollowerListLoading? <Wrapper><Spin/></Wrapper> : ''}
         </AppLayout>
     )
