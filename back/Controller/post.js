@@ -2,11 +2,16 @@ const { Post, Comment,Image,User, Hashtag } = require('../models');
 
 exports.Addpost= async (req,res,next)=>{
     try{
-        const hashtags = req.body.content.match(/#[^\s#]+/g);
+        let hashtags = req.body.content.match(/#[^\s#]+/g);
         const post = await Post.create({
             content:req.body.content,
             UserId:req.user.id,
         });
+        hashtags = hashtags.reduce((a,b)=>{
+            if(a.indexOf(b) < 0 ) a.push(b);
+            return a;
+        },[]);
+        
         if(hashtags){
            const result= await Promise.all(hashtags.map((tag)=>Hashtag.findOrCreate({where:{name:tag.slice(1).toLowerCase()}})));
            await post.addHashtags(result.map((v)=>v[0]));
