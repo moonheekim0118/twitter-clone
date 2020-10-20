@@ -14,13 +14,13 @@ const HashTagPost=()=>{
     const dispatch = useDispatch();
     const router = useRouter();
     const { tag } = router.query;
-    const { hashTagPosts, hasMoreHashtagPost, loadPostloading } = useSelector((state)=>state.post);
+    const { hashTagPosts, hasMorePost, loadPostloading } = useSelector((state)=>state.post);
 
     
     useEffect(()=>{
       function onScroll(){
           if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
-              if(hasMoreHashtagPost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
+              if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
                   const lastId= hashTagPosts[hashTagPosts.length-1]?.id;
                   dispatch(loadHashtagAction({hashTag:tag, lastId:lastId}));
               }
@@ -30,7 +30,7 @@ const HashTagPost=()=>{
       return()=>{
           window.removeEventListener('scroll',onScroll);
       }
-  },[hasMoreHashtagPost,loadPostloading])
+  },[hasMorePost,loadPostloading])
 
     if(!hashTagPosts){
       return(

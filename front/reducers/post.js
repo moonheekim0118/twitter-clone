@@ -8,7 +8,6 @@ export const initialState={
     mainPosts:[],
     hashTagPosts:[],
     hasMorePost:true,
-    hasMoreHashtagPost:true,
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
     singlePost:null,
 
@@ -142,9 +141,9 @@ const reducer= (state = initialState , action)=>{
                 draft.loadPostDone=true;
                 draft.hashTagPosts=draft.hashTagPosts.concat(action.data.posts);
                 if(action.data.totalPostsLength!==0){
-                    draft.totalPostsLength=action.data.totalPostsLength;
+                    draft.totalPostLength=action.data.totalPostsLength;
                 }
-                draft.totalPostsLength=draft.hashTagPosts.length<draft.totalPostsLength;
+                draft.hasMorePost=draft.hashTagPosts.length<draft.totalPostLength;
                 break;
 
             case type.LOAD_SINGLE_POST_REQUEST:

@@ -3,19 +3,24 @@ const { Op } = require('sequelize');
 
 exports.loadPosts=async(req,res,next)=>{
     try{
-        let totalPostsLength=0;
+        let totalPostLength=0;
         const where={};
         const lastId=+req.query.lastId;
         if(lastId!==0){
             where.id={[Op.lt]: +req.query.lastId};
         }
         if(lastId===0){
-            totalPostsLength=await Hashtag.count();
+            totalPostLength=await Post.findAll({
+                include:[
+                    {model: Hashtag,
+                     where: {name: decodeURIComponent(req.params.hashtag)} },
+            ]});
+            totalPostLength=totalPostLength.length;
         }
 
         const posts = await Post.findAll({
             where,
-            limit:10,
+            limit:5,
             order:[
                 ['createdAt','DESC'],
                 [Comment, 'createdAt', 'DESC']
@@ -33,7 +38,7 @@ exports.loadPosts=async(req,res,next)=>{
                  {model: Image}, 
                  {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
             ]}]});
-        res.status(200).json({posts,totalPostsLength});
+        res.status(200).json({posts,totalPostLength});
     }catch(err){
         console.error(err);
         next(err);
