@@ -14,9 +14,6 @@ import styled from 'styled-components';
 import { Spin } from 'antd';
 import { MiddleWrapper } from '../../../components/globalStyle';
 
-const Wrapper = styled.div`
-    text-align:center;
-`;
 
 const Followings=()=>{
     const dispatch = useDispatch();
