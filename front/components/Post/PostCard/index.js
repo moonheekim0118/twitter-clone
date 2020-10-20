@@ -11,7 +11,7 @@ import CommentForm from '../../Comment';
 import FollowButton from '../../Follow/FollowButton';
 import { AvatarWrapper, Card, CardMeta, CardButtons, 
     FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
-    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon } from './style';
+    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper } from './style';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -90,6 +90,10 @@ const PostCard=({post})=>{
         window.open(`/user/${post.Retweet.User.id}`,'_self'); 
     },[]);
 
+    const onClickContent=useCallback((e)=>{
+        e.stopPropagation();
+    },[]);
+
     return(
        <>
        {post.RetweetId && post.Retweet ?  
@@ -99,7 +103,7 @@ const PostCard=({post})=>{
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
                     <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
-                        <PostCardContent postData={post.Retweet.content}/>
+                        <PostCardContent onClick={onClickContent}  postData={post.Retweet.content}/>
                         {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images}/>}
                         <CardButtons>
                             { post.UserId === me ? <RetweetedIcon onClick={onUnRetweet} key="retweet"/> : 
@@ -125,12 +129,14 @@ const PostCard=({post})=>{
             </CardMeta>
         </RetweetCard>
        :
-       <Card  onClick={onClickDetail}>
+       <Card onClick={onClickDetail} >
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
-                    <PostCardContent postData={post.content}/>
+                    <ContentWrapper onClick={onClickContent}>
+                        <PostCardContent postData={post.content}/>
+                    </ContentWrapper>
                     {post.Images[0] && <PostImages images={post.Images}/>}
                     <CardButtons>
                         <RetweetIcon onClick={onRetweet} key="retweet"/>

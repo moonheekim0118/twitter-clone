@@ -16,3 +16,10 @@ export const ButtonWrapper= styled.div`
     display:flex;
     justify-content:space-between;
 `;
+
+export const HashTag=styled.a`
+
+    &:hover{
+        text-decoration:underline;
+    }
+`;

@@ -41,6 +41,7 @@ export const RetweetCard=styled.div`
 `;
 
 export const CardMeta = styled.div`
+    position:relative;
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 90%;
@@ -101,6 +102,11 @@ export const Retweet=styled.div`
     &:hover{
         text-decoration:underline;
     }
+`;
+
+export const ContentWrapper=styled.div`
+    display:flex;
+    align-items:center;
 `;
 
 export const RetweetIcon=styled(RetweetOutlined)`

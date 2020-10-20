@@ -1,17 +1,19 @@
-import React ,{ useCallback }from 'react';
+import React , { useCallback }from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import { HashTag } from './style';
 // 해시태그 
 
 const PostCardContent=({postData})=>{
-    const onClickHashTag=useCallback((e)=>{
-        e.stopPropagation();
+
+    const onClickHashTag=useCallback((hashtag)=>{
+        window.open(`/hashtag/${hashtag}`,'_self'); 
     },[])
+
     return(
         <>
         {postData.split(/(#[^\s#]+)/g).map((v,i)=>{
             if(v.match((/(#[^\s#]+)/))){
-            return <Link onClick={onClickHashTag} href={`/hashtag/${v.slice(1)}`} key={i}><a>{v}</a></Link>
+            return <HashTag key={i} onClick={onClickHashTag.bind(this,v.slice(1))}>{v}</HashTag>
             }
             return v;
         })}
