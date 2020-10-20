@@ -20,13 +20,6 @@ const Detail =()=>{
     const { id  } = router.query;
     const { userInfo , LikedPosts, hasMoreLikedPosts , loadLikedPostLoading } = useSelector((state)=>state.commonUser);
 
-    if(!userInfo){
-        return(
-            <AppLayout pageName={""}>
-                <h1>존재하지 않는 사용자입니다.</h1>
-            </AppLayout>
-          )
-    }
 
     useEffect(()=>{
         function onScroll(){
@@ -43,6 +36,14 @@ const Detail =()=>{
         }
     },[hasMoreLikedPosts,loadLikedPostLoading])
   
+    if(!userInfo){
+        return(
+            <AppLayout pageName={""}>
+                <h1>존재하지 않는 사용자입니다.</h1>
+            </AppLayout>
+          )
+    }
+    
     return(
         <AppLayout pageName={userInfo.nickname}> 
               <Head>

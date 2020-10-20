@@ -20,14 +20,6 @@ const Followings=()=>{
     const { id  } = router.query;
     const { userInfo , FollowingList, hasMoreFollowings , loadFollowingListLoading } = useSelector((state)=>state.commonUser);
 
-    if(!userInfo){
-        return(
-            <AppLayout pageName={""}>
-                <h1>존재하지 않는 사용자입니다.</h1>
-            </AppLayout>
-          )
-    }
-
     useEffect(()=>{
         function onScroll(){
             if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
@@ -43,6 +35,14 @@ const Followings=()=>{
         }
     },[hasMoreFollowings,loadFollowingListLoading])
 
+    if(!userInfo){
+        return(
+            <AppLayout pageName={""}>
+                <h1>존재하지 않는 사용자입니다.</h1>
+            </AppLayout>
+          )
+    }
+    
     return(
         <AppLayout pageName={userInfo.nickname}>
           <Head>
