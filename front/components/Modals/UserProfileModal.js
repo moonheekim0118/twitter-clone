@@ -30,17 +30,29 @@ const UserProfileDetail =()=>{
         dispatch(hideProfileModalAction());
     },[]);
 
+    const onClickProfilePage=useCallback(()=>{
+        window.open(`/user/${me.id}`,'_self');
+    },[]);
+
+    const onClickFollowingPage=useCallback(()=>{
+        window.open(`/user/${me.id}/followings`,'_self');
+    },[]);
+
+    const onClickFollowerPage=useCallback(()=>{
+        window.open(`/user/${me.id}/followers`,'_self');
+    })
+
     return(
         <>
-            <TransparentOveraly onClick={onClose}/>
-            <CardWrapper
+        <TransparentOveraly onClick={onClose}/>
+        <CardWrapper
             actions={[
-            <div key="twit">짹짹 <br/>{me.Posts.length}</div>,
-            <div key="followings">팔로잉 <br/>{me.Followings.length}</div>,
-            <div key="followers">팔로워<br/>{me.Followers.length}</div>,
+            <div onClick={onClickProfilePage} key="twit">짹짹 <br/>{me.Posts.length}</div>,
+            <div onClick={onClickFollowingPage} key="followings">팔로잉 <br/>{me.Followings.length}</div>,
+            <div onClcik={onClickFollowerPage} key="followers">팔로워<br/>{me.Followers.length}</div>,
             ]}
            >
-            <Card.Meta 
+            <Card.Meta
             avatar={<Avatar>{me.nickname[0]}</Avatar>}
             title={me.nickname}/>
            <LogoutButton/>
