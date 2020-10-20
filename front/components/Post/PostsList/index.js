@@ -20,7 +20,7 @@ const PostsList=({posts, loading})=>{
 }
 
 PostsList.propTypes = {
-    post:PropTypes.array.isRequired,
+    posts:PropTypes.array.isRequired,
     loading:PropTypes.bool.isRequired,
 }
 
