@@ -1,8 +1,8 @@
 import React , {useCallback} from 'react';
-import ModifyPostForm from '../ModifyPostForm';
-import {useDispatch} from 'react-redux';
-import {BlackOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton} from '../Styles/modal';
-import {hideModifyModalAction} from '../../actions/ui';
+import { useDispatch } from 'react-redux';
+import { hideModifyModalAction } from '../../actions/ui';
+import ModifyPostForm from '../Post/ModifyPostForm';
+import { BlackOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton } from './style';
 
 const ModifyPostModal=()=>{
     const dispatch = useDispatch();

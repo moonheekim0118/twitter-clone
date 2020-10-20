@@ -1,11 +1,11 @@
 import React from 'react';
+import { END } from 'redux-saga';
+import { LOAD_MY_INFO_REQUEST } from '../actions/user';
 import Head from 'next/head';
-import AppLayout from '../components/AppLayout';
-import SignUpComponent from '../components/SignUp';
-import {END} from 'redux-saga';
-import {LOAD_MY_INFO_REQUEST } from '../actions/user';
 import axios from 'axios';
 import wrapper from '../store/configureStore';
+import AppLayout from '../components/AppLayout';
+import SignUpComponent from '../components/User/SignUp';
 
 const SignUp=()=>{
 
@@ -29,7 +29,7 @@ export const getServerSideProps= wrapper.getServerSideProps(async(context)=>{
     context.store.dispatch({ type : LOAD_MY_INFO_REQUEST} );
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
-}); // 이부분이 home 보다 먼저 실행됨 
+}); 
 
 
 

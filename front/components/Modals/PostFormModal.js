@@ -1,9 +1,9 @@
 import React , {useCallback} from 'react';
-import PostForm from '../PostForm';
-import {useDispatch} from 'react-redux';
-import {resetImageRequest} from '../../actions/post';
+import { useDispatch } from 'react-redux';
 import { hidePostModalAction } from '../../actions/ui';
-import {BlackOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton} from '../Styles/modal';
+import { resetImageRequest } from '../../actions/post';
+import PostForm from '../Post/PostForm';
+import { BlackOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton } from './style';
 
 
 const PostformModal=()=>{

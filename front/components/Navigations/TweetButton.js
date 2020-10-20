@@ -1,9 +1,9 @@
-import React , {useCallback} from 'react';
-import {Detail} from  '../Styles';
+import React , { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { showPostModalAction } from '../../actions/ui';
 import styled from 'styled-components';
-import {EditOutlined } from '@ant-design/icons';
-import {showPostModalAction} from '../../actions/ui';
-import {useDispatch} from 'react-redux';
+import { EditOutlined } from '@ant-design/icons';
+import { Detail } from  './style';
 
 const Button = styled.button`
     cursor:pointer;

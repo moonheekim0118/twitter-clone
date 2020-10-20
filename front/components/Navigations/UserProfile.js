@@ -1,11 +1,11 @@
-import React , {useCallback} from 'react';
+import React , { useCallback } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import { showProfileModalAction } from '../../actions/ui';
 import { Avatar } from 'antd';
-import { useSelector} from 'react-redux';
 import styled from 'styled-components';
-import {DownOutlined,UserOutlined } from '@ant-design/icons';
-import {Detail, Description} from '../Styles';
-import { useDispatch } from 'react-redux';
-import { showProfileModalAction} from '../../actions/ui';
+import { DownOutlined,UserOutlined } from '@ant-design/icons';
+import { Detail } from './style';
+import { Description } from '../AppLayout/style';
 
 const Card = styled.div`
     cursor:pointer;

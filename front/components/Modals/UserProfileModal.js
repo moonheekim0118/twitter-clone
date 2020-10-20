@@ -1,24 +1,11 @@
-import React, {useCallback} from 'react';
-import { Card,Avatar } from 'antd';
-import { useSelector} from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { hideProfileModalAction } from '../../actions/ui';
 import styled from 'styled-components';
-import LogoutButton from '../LogoutButton';
-import {useDispatch} from 'react-redux';
-import {TransparentOveraly} from '../Styles/modal';
-import {hideProfileModalAction} from '../../actions/ui';
+import { Card,Avatar } from 'antd';
+import LogoutButton from '../User/LogoutButton';
+import { TransparentOveraly } from './style';
 
-const Overaly = styled.div`
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    position:fixed;
-    z-index:5000;
-
-    @media(max-width:767px){
-        display:none;
-    }
-`;
 
 const CardWrapper = styled(Card)`
     position:fixed;

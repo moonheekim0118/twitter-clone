@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import {MenuItemWrapper, Detail, Description, ProfileIcon} from  '../Styles';
+import {MenuItemWrapper, Detail, ProfileIcon} from  './style';
+import { Description } from '../AppLayout/style';
 
 const Profile=()=>{
     return(

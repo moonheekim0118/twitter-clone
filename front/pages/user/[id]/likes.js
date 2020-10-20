@@ -1,17 +1,18 @@
 import React, {useEffect} from 'react';
+import { useSelector , useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import {END} from 'redux-saga';
-import {LOAD_MY_INFO_REQUEST } from '../../../actions/user';
-import { loadUserInfoAction,
-    loadUserLikedPostsAction,} from '../../../actions/commonUser';
+import { LOAD_MY_INFO_REQUEST } from '../../../actions/user';
+import { loadUserInfoAction, loadUserLikedPostsAction } from '../../../actions/commonUser';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout'
-import UserProfile from '../../../components/UserProfile';
-import ProfileMenu from '../../../components/ProfileMenu';
-import { useSelector , useDispatch } from 'react-redux';
-import PostsList from '../../../components/PostsList';
+import ProfileCard from '../../../components/Profile/ProfileCard';
+import PostHeader from '../../../components/Header/PostHeader';
+import PostsList from '../../../components/Post/PostsList';
+
+
 
 const Detail =()=>{
     const dispatch = useDispatch();
@@ -50,8 +51,8 @@ const Detail =()=>{
             <meta name="description" content={userInfo.nickname}/>
             <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지`}/>
             <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
-            <UserProfile user={userInfo}/>
-            <ProfileMenu userId={id} pageName={"Likes"}/>
+            <ProfileCard user={userInfo}/>
+            <PostHeader userId={id} pageName={"Likes"}/>
             {LikedPosts.length > 0 && <PostsList posts={LikedPosts} loading={loadLikedPostLoading}/>}
         </AppLayout>
     )

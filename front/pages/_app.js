@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import wrapper from '../store/configureStore';
-import GlobalStyles from '../components/Styles/global';
+import GlobalStyles from '../components/globalStyle'
 
 const App =({Component})=>{
 

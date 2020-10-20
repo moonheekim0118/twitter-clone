@@ -1,14 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import Head from 'next/head';
-import {END} from 'redux-saga';
-import {LOAD_SINGLE_POST_REQUEST} from '../../actions/post';
-import {LOAD_MY_INFO_REQUEST } from '../../actions/user';
+import { END } from 'redux-saga';
+import { LOAD_SINGLE_POST_REQUEST } from '../../actions/post';
+import { LOAD_MY_INFO_REQUEST } from '../../actions/user';
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
 import AppLayout from '../../components/AppLayout'
-import PostCard from '../../components/PostCard';
-import { useSelector } from 'react-redux';
+import PostCard from '../../components/Post/PostCard';
 
 const Post=()=>{
     const router = useRouter();

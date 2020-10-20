@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import {MenuItemWrapper, Detail, Description, HomeIcon} from  '../Styles';
+import {MenuItemWrapper, Detail, HomeIcon} from  './style';
+import { Description } from '../AppLayout/style';
 
 const Home=()=>{
     return(

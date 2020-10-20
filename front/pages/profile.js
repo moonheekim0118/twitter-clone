@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { END } from 'redux-saga';
+import { LOAD_MY_INFO_REQUEST } from '../actions/user';
 import Head from 'next/head';
 import Router from 'next/router';
-import AppLayout from '../components/AppLayout';
-import NickNameEditForm from '../components/NickNameEditForm';
-import {useSelector } from 'react-redux';
-import {END} from 'redux-saga';
-import {LOAD_MY_INFO_REQUEST } from '../actions/user';
 import axios from 'axios';
 import wrapper from '../store/configureStore';
+import AppLayout from '../components/AppLayout';
+import NickNameEditForm from '../components/User/NickNameEditForm';
 
 const Profile=()=>{
     const me = useSelector(state => state.user.me);
@@ -40,7 +40,7 @@ export const getServerSideProps= wrapper.getServerSideProps(async(context)=>{
     context.store.dispatch({ type : LOAD_MY_INFO_REQUEST} );
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
-}); // 이부분이 home 보다 먼저 실행됨 
+});
 
 
 export default Profile;

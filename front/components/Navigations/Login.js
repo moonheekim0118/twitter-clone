@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import {MenuItemWrapper, Detail, Description,LoginIcon} from  '../Styles';
+import {MenuItemWrapper, Detail,LoginIcon} from  './style';
+import { Description } from '../AppLayout/style';
 
 const LogIn=()=>{
     return(
