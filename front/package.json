@@ -4,21 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next"
+    "dev": "next",
+    "build": "cross-env ANALYZE=true NODE_ENV=production next build"
   },
   "author": "Moonhee kim",
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
+    "@next/bundle-analyzer": "^9.5.5",
     "antd": "^4.6.5",
     "axios": "^0.20.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "cross-env": "^7.0.2",
+    "dayjs": "^1.9.3",
     "faker": "^5.1.0",
     "immer": "^7.0.9",
     "next": "^9.5.3",
     "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-dayjs": "^0.1.6",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
