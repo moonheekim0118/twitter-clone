@@ -8,9 +8,10 @@ import Menu from './Menu';
 import Alert from '../Alert';
 import UserProfileModal from '../Modals/UserProfileModal';
 import PostFormModal from '../Modals/PostFormModal';
-import { SearchBar, SearchInput,Header,Main,Side,Footer,BackButton, Description,DescriptionWithoutLink } from './style';
+import Search from '../Search';
+import { Header,Main,Side,Footer,BackButton, Description,DescriptionWithoutLink } from './style';
 
-const AppLayout = ({pageName,children})=>{
+const AppLayout = ({pageName, searchKeyword,children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
     const {showProfileModal ,showPostModal, showAlert } =useSelector(state=>state.ui);
     const dispatch = useDispatch();
@@ -40,9 +41,7 @@ const AppLayout = ({pageName,children})=>{
                 <Menu isLoggedIn={isLoggedIn}/>
                 <Main>{children}</Main>
                 <Side>
-                    <SearchBar>
-                        <SearchInput enterButton/> 
-                    </SearchBar>
+                   <Search keyword={searchKeyword}/>
                 </Side>
             </div>
             <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
@@ -50,9 +49,14 @@ const AppLayout = ({pageName,children})=>{
     )
 }
 
+AppLayout.defaultProps={
+    searchKeyword:'',
+};
+
 AppLayout.propTypes={
     pageName: PropTypes.string.isRequired,
     children : PropTypes.node.isRequired,
+    searchKeyword: PropTypes.string.isRequired,
 }
 
 export default AppLayout;

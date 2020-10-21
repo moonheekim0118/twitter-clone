@@ -40,7 +40,7 @@ const HashTagPost=()=>{
       )
     }
     return(
-      <AppLayout pageName={tag}>
+      <AppLayout pageName={tag} searchKeyword={tag}>
           <Head>
                 {tag} 해시태그 검색내용
           </Head>

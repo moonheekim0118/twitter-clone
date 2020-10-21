@@ -1,22 +1,5 @@
 import styled from 'styled-components';
-import { Input } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
-
-export const SearchBar = styled.div`
-    height:50px;
-    width:100%;
-    padding:15px 5px;
-    top: 0;
-    left:0;
-    background-color:#fff;
-`;
-
-export const SearchInput = styled(Input.Search)`
-    vertical-align:middle;
-    width:100%;
-    z-index:20;
-`;
-
 
 export const Header=styled.header`
     text-align:center;
