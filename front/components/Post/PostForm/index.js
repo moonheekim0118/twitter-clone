@@ -42,7 +42,7 @@ const PostForm =()=>{
 
     const onClickImageUpload=useCallback(()=>{
         imageInput.current.click();
-    },imageInput.current);
+    },[imageInput.current]);
 
     const onChangeImages=useCallback((e)=>{
         if(e.target.files.length>4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 

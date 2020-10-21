@@ -49,7 +49,7 @@ const UserProfileDetail =()=>{
             actions={[
             <div onClick={onClickProfilePage} key="twit">짹짹 <br/>{me.Posts.length}</div>,
             <div onClick={onClickFollowingPage} key="followings">팔로잉 <br/>{me.Followings.length}</div>,
-            <div onClcik={onClickFollowerPage} key="followers">팔로워<br/>{me.Followers.length}</div>,
+            <div onClick={onClickFollowerPage} key="followers">팔로워<br/>{me.Followers.length}</div>,
             ]}
            >
             <Card.Meta

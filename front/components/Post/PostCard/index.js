@@ -2,7 +2,7 @@ import React , { useState , useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { useSelector ,useDispatch } from 'react-redux';
-import { showModifyModalAction } from '../../../actions/ui';
+import { showModifyModalAction,showAlertAction } from '../../../actions/ui';
 import { removePostAction,likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
 import { Button, Popover,Avatar, List, Comment } from 'antd';
 import { RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
@@ -21,50 +21,46 @@ const PostCard=({post})=>{
     const {removePostloading} = useSelector(state=>state.post);
     const liked = post.Likers.find((x)=>x.id===me);
 
-    const onClickDetail = useCallback(()=>{
-        Router.push(`/post/${post.id}`);
-    },[]);
+
+    const onShare=useCallback(()=>{ // 주소 복사해주기 
+        // `http://localhost:3000/post/${post.id}` 복사하도록 구현하기 
+        dispatch(showAlertAction('포스트 주소가 복사되었습니다.'));
+    });
 
     // Card div 내부에 있는 요소들 onClick 이벤트에 stopPropagation 적용
-    const onUnlike=useCallback((e)=>{
-        e.stopPropagation();
+    const onUnlike=useCallback(()=>{
         if(!me){
             return;
         }
         dispatch(unLikePostAction(post.id));
     },[]);
 
-    const onLike=useCallback((e)=>{
-        e.stopPropagation();
+    const onLike=useCallback(()=>{
         if(!me){
             return;
         }
         dispatch(likePostAction(post.id));
     },[]);
 
-    const onToggleComment = useCallback((e)=>{
-        e.stopPropagation();
+    const onToggleComment = useCallback(()=>{
         setCommentFormOpend((prev)=>!prev);
     },[])
 
-    const onClickRemove=useCallback((e)=>{
-        e.stopPropagation();
+    const onClickRemove=useCallback(()=>{
         if(!me){
             return;
         }
         dispatch(removePostAction({id:post.id}));
     },[]);
 
-    const onClickModify=useCallback((e)=>{
-        e.stopPropagation();
+    const onClickModify=useCallback(()=>{
         if(!me){
             return;
         }
         dispatch(showModifyModalAction({ postId:post.id, postContent:post.content}));
     },[post.content]);
     
-    const onRetweet = useCallback((e)=>{
-        e.stopPropagation();
+    const onRetweet = useCallback(()=>{
         if(!me || post.UserId === me){
             return;
         }
@@ -72,40 +68,30 @@ const PostCard=({post})=>{
 
     },[]);
 
-    const onUnRetweet=useCallback((e)=>{
-        e.stopPropagation();
+    const onUnRetweet=useCallback(()=>{
         dispatch(unretweetAction(post.id));
     },[]);
 
-    const onClickEllipsis=useCallback((e)=>{
-        e.stopPropagation();
-    },[]);
-
-    const onClickUser= useCallback((e)=>{
-        e.stopPropagation();
+    const onClickUser= useCallback(()=>{
         Router.push(`/user/${post.User.id}`);
     },[]);
 
-    const onClickRetweetedUser=useCallback((e)=>{
-        e.stopPropagation();
+    const onClickRetweetedUser=useCallback(()=>{
         Router.push(`/user/${post.Retweet.User.id}`);
     },[]);
 
-    const onClickContent=useCallback((e)=>{
-        e.stopPropagation();
-    },[]);
 
     return(
        <>
        {post.RetweetId && post.Retweet ?  
-        <RetweetCard onClick={onClickDetail}>
+        <RetweetCard>
             <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
                     <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
-                        <PostCardContent onClick={onClickContent}  postData={post.Retweet.content}/>
-                        {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images}/>}
+                        <PostCardContent postData={post.Retweet.content}/>
+                        {post.Retweet.Images[0] && <PostImages onClick={onClickContent}   images={post.Retweet.Images}/>}
                         <CardButtons>
                             { post.UserId === me ? <RetweetedIcon onClick={onUnRetweet} key="retweet"/> : 
                             <RetweetIcon onClick={onRetweet} key="retweet"/> }
@@ -122,20 +108,21 @@ const PostCard=({post})=>{
                                 }
                             <CommentIcon onClick={onToggleComment} key="comment"/>
                             <Popover key="more" content={(<Button.Group>
+                                <Button onClick={onShare}>공유</Button>
                                 <Button>신고</Button>
                             </Button.Group>)}>
-                            <EllipsisOutlined onClick={onClickEllipsis}/>
+                            <EllipsisOutlined/>
                             </Popover>
                         </CardButtons>
             </CardMeta>
         </RetweetCard>
        :
-       <Card onClick={onClickDetail} >
+       <Card>
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
             <CardMeta>
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
-                    <ContentWrapper onClick={onClickContent}>
+                    <ContentWrapper >
                         <PostCardContent postData={post.content}/>
                     </ContentWrapper>
                     {post.Images[0] && <PostImages images={post.Images}/>}
@@ -156,12 +143,13 @@ const PostCard=({post})=>{
                         <Popover key="more" content={(<Button.Group>
                             {me===post.User.id 
                             ?<>
+                            <Button onClick={onShare}>공유</Button>
                             <Button onClick={onClickModify}>수정</Button>
                             <Button type="danger" onClick={onClickRemove} loading={removePostloading}>삭제</Button>
                             </>
                             :  <Button>신고</Button>}
                             </Button.Group>)}>
-                        <EllipsisOutlined onClick={onClickEllipsis}/>
+                        <EllipsisOutlined/>
                         </Popover>
                     </CardButtons>
                 </CardMeta>

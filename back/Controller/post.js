@@ -7,12 +7,12 @@ exports.Addpost= async (req,res,next)=>{
             content:req.body.content,
             UserId:req.user.id,
         });
-        hashtags = hashtags.reduce((a,b)=>{
-            if(a.indexOf(b) < 0 ) a.push(b);
-            return a;
-        },[]);
         
         if(hashtags){
+            hashtags = hashtags.reduce((a,b)=>{
+                if(a.indexOf(b) < 0 ) a.push(b);
+                return a;
+            },[]);    
            const result= await Promise.all(hashtags.map((tag)=>Hashtag.findOrCreate({where:{name:tag.slice(1).toLowerCase()}})));
            await post.addHashtags(result.map((v)=>v[0]));
         }
