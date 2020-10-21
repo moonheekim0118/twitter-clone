@@ -140,8 +140,8 @@ const reducer= (state = initialState , action)=>{
                 draft.loadPostloading=false;
                 draft.loadPostDone=true;
                 draft.hashTagPosts=draft.hashTagPosts.concat(action.data.posts);
-                if(action.data.totalPostsLength!==0){
-                    draft.totalPostLength=action.data.totalPostsLength;
+                if(action.data.totalPostLength!==0){
+                    draft.totalPostLength=action.data.totalPostLength;
                 }
                 draft.hasMorePost=draft.hashTagPosts.length<draft.totalPostLength;
                 break;
