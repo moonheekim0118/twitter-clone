@@ -124,3 +124,10 @@ export const CommentIcon = styled(MessageOutlined)`
         color:#0099cc;
     }
 `;
+
+export const Date = styled.span`
+    position:absolute;
+    top:5px;
+    right:10px;
+    color:#d6d6c2
+`;

@@ -1,6 +1,7 @@
 import React , { useState , useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
+import dayjs from 'dayjs';
 import { useSelector ,useDispatch } from 'react-redux';
 import { showModifyModalAction,showAlertAction } from '../../../actions/ui';
 import { removePostAction,likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
@@ -12,7 +13,7 @@ import CommentForm from '../../Comment';
 import FollowButton from '../../Follow/FollowButton';
 import { AvatarWrapper, Card, CardMeta, CardButtons, 
     FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
-    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper } from './style';
+    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,Date } from './style';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const PostCard=({post})=>{
             <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
+            <Date>{dayjs(post.createdAt).format('YYYY.MM.DD.')}</Date>
             <CardMeta>
                     <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
                         <PostCardContent postData={post.Retweet.content}/>
@@ -120,6 +122,7 @@ const PostCard=({post})=>{
        <Card>
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
+            <Date>{dayjs(post.createdAt).format('YYYY.MM.DD.')}</Date>
             <CardMeta>
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
                     <ContentWrapper >
