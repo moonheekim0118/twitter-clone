@@ -1,5 +1,6 @@
 import React , {useCallback} from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import FollowButton from '../FollowButton';
 import { Avatar } from 'antd';
@@ -9,7 +10,7 @@ const FollowList=({user})=>{
     const me = useSelector(state=>state.user.me?.id);
 
     const onClickUser=useCallback(()=>{
-        window.open(`/user/${user.id}`,'_self'); // 유저에게로 라우팅 
+        Router.push(`/user/${user.id}`);
     },[]);
 
     return(

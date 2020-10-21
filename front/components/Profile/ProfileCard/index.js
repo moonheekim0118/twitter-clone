@@ -1,5 +1,6 @@
 import React , { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import { Avatar } from 'antd';
 import FollowButton from '../../Follow/FollowButton';
@@ -9,11 +10,11 @@ const UserProfile=({user})=>{
     const me = useSelector((state)=>state.user.me?.id);
 
     const onClickFollowings=useCallback(()=>{
-        window.open(`/user/${user.id}/followings`,'_self');
+        Router.push(`/user/${user.id}/followings`);
     },[]);
 
     const onClickFollowers=useCallback(()=>{
-        window.open(`/user/${user.id}/followers`,'_self');
+        Router.push(`/user/${user.id}/followers`);
     },[]);
 
     return(

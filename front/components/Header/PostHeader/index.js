@@ -1,4 +1,5 @@
 import React ,{ useCallback } from 'react';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { Wrapper,First,Second } from '../style';
 
@@ -6,11 +7,11 @@ const ProfileMenu =({userId,pageName})=>{
     
     const onClickTweet = useCallback(()=>{
         // 라우팅 
-        window.open(`/user/${userId}`,'_self');
+        Router.push(`/user/${userId}`);
     },[]);
 
     const onClickLikePosts = useCallback(()=>{
-        window.open(`/user/${userId}/likes`,'_self');
+        Router.push(`/user/${userId}/likes`);
     },[]);
 
     return(

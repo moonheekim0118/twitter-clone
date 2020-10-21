@@ -1,4 +1,5 @@
 import React , { useCallback }from 'react';
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { HashTag } from './style';
 // 해시태그 
@@ -6,7 +7,7 @@ import { HashTag } from './style';
 const PostCardContent=({postData})=>{
 
     const onClickHashTag=useCallback((hashtag)=>{
-        window.open(`/hashtag/${hashtag}`,'_self'); 
+        Router.push(`/hashtag/${hashtag}`);
     },[])
 
     return(

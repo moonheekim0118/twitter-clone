@@ -1,5 +1,6 @@
 import React , { useState , useCallback } from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import { useSelector ,useDispatch } from 'react-redux';
 import { showModifyModalAction } from '../../../actions/ui';
 import { removePostAction,likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
@@ -21,7 +22,7 @@ const PostCard=({post})=>{
     const liked = post.Likers.find((x)=>x.id===me);
 
     const onClickDetail = useCallback(()=>{
-        window.open(`/post/${post.id}`,'_self'); // 디테일 페이지로 이동
+        Router.push(`/post/${post.id}`);
     },[]);
 
     // Card div 내부에 있는 요소들 onClick 이벤트에 stopPropagation 적용
@@ -82,12 +83,12 @@ const PostCard=({post})=>{
 
     const onClickUser= useCallback((e)=>{
         e.stopPropagation();
-        window.open(`/user/${post.User.id}`,'_self'); 
+        Router.push(`/user/${post.User.id}`);
     },[]);
 
     const onClickRetweetedUser=useCallback((e)=>{
         e.stopPropagation();
-        window.open(`/user/${post.Retweet.User.id}`,'_self'); 
+        Router.push(`/user/${post.Retweet.User.id}`);
     },[]);
 
     const onClickContent=useCallback((e)=>{
