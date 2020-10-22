@@ -67,7 +67,8 @@ export const TweetButton=styled.button`
     padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
     cursor:pointer;
     border-radius:25px;
-
+    transition: 0.2s background-color ease-in-out;
+    
     &:hover{
         background-color:${({theme})=>theme.colors.blue_2};
     }

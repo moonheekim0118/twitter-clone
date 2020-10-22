@@ -35,7 +35,7 @@ const margins = {
 const colors = {
     black: "#000000",
     white: "#FFFFFF",
-    gray_1: "#222222",
+    gray_1: "#d6d6c2",
     gray_2: "#767676",
     gray_3: "#f4f4f4",
     gray_4: "#e0e0d1",
@@ -44,6 +44,7 @@ const colors = {
     pink:"#eb2f96",
     hover:"rgba(153, 204, 255,0.2)",
     disabled:"#b3ecff",
+    AvatarColor:"",
   }
 
   const deviceSizes = {
