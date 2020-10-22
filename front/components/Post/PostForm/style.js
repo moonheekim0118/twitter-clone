@@ -44,6 +44,7 @@ export const Buttons = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+    position:relative;
     color:${({theme})=>theme.colors.blue_2};
 
 `;
@@ -75,4 +76,12 @@ export const TweetButton=styled.button`
         background-color:${({theme})=>theme.colors.disabled};
         cursor:default;
     }
+`;
+
+export const TextLength = styled.span`
+    position:absolute;
+    top:18px;
+    right:100px;
+    font-size: ${({theme})=>theme.fontSizes.base};
+    color:${(props)=>props.limit? 'red' : `${({theme})=>theme.colors.blue_2}`}
 `;

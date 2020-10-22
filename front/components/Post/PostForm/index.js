@@ -5,7 +5,7 @@ import { hidePostModalAction, showAlertAction } from '../../../actions/ui';
 import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
 import { Avatar } from 'antd';
-import { FormWrapper,FormMeta,Buttons,ImageButtonIcon,TextArea,TweetButton } from './style';
+import { FormWrapper,FormMeta,Buttons,ImageButtonIcon,TextArea,TweetButton,TextLength } from './style';
 import { AvatarWrapper } from '../PostCard/style';
 
 const PostForm =()=>{
@@ -76,7 +76,8 @@ const PostForm =()=>{
                 <Buttons>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
                     <ImageButtonIcon onClick={onClickImageUpload} />
-                    <TweetButton disabled={text.length===0}>Tweet</TweetButton>
+                    {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
+                    <TweetButton disabled={text.length===0 || text.length>=140}>Tweet</TweetButton>
                 </Buttons>
                 <ImagePath/>
             </FormMeta>
