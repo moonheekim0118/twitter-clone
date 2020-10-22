@@ -2,10 +2,9 @@ import React, { useCallback, useEffect,useState, useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { loginRequestAction } from '../../../actions/user';
 import Link from 'next/link';
-import useInput from '../../../hooks/useInput';
-import { Input , Button } from 'antd';
-import { SignForm, SignInputWrapper } from '../style';
-import { ErrorMessage } from '../../globalStyle';
+import useInput from '../../../hooks/useInput';;
+import {  Form, Lable, InputWrapper,TextIpnut,PasswordIpnut,SubmitButton,ButtonWrapper,Text } from '../style';
+import { ErrorMessage, Loading } from '../../globalStyle';
 
 const LoginForm =()=>{
     const dispatch = useDispatch();
@@ -29,37 +28,39 @@ const LoginForm =()=>{
     },[loginError]);
     
 
-    const onSubmitForm=useCallback(()=>{
+    const onSubmit=useCallback((e)=>{
+        e.preventDefault();
         dispatch(loginRequestAction({email, password}));
     },[email,password])
 
     
     return(
-        <SignForm onFinish={onSubmitForm}>
-            <SignInputWrapper>
-                {hasLoginError &&<ErrorMessage>{loginError}</ErrorMessage> }
-                <label htmlFor="user-email">이메일</label>
-                <br />
-                <Input 
+        <Form onSubmit={onSubmit}>
+              {hasLoginError &&<ErrorMessage>{loginError}</ErrorMessage> }
+            <InputWrapper>
+                <Lable htmlFor="user-email">이메일</Lable>
+                <TextIpnut 
                 name ="user-email" 
                 value={email} 
                 onChange={onChangeEmail}
+                placeholder=" "
                 />
-            </SignInputWrapper>
-            <SignInputWrapper>
-                <label htmlFor="user-password">비밀번호</label>
-                <br />
-                <Input.Password 
+                 <Lable htmlFor="user-email">이메일</Lable>
+            </InputWrapper>
+            <InputWrapper>
+                <PasswordIpnut
                  name="user-password"
                  value={password} 
                  onChange={onChangePassword}
+                 placeholder=" "
                 />
-            </SignInputWrapper>
-            <SignInputWrapper>
-                <Button type="primary" htmlType="submit" loading={isLoggingIn}>로그인</Button>
-                <Link href="/signUp"><a><Button>회원가입</Button></a></Link>
-            </SignInputWrapper>
-        </SignForm>
+                 <Lable htmlFor="user-password">비밀번호</Lable>
+            </InputWrapper>
+            <ButtonWrapper>
+                {isLoggingIn ? <Loading/> : <SubmitButton>로그인</SubmitButton> }
+                <Link href="/signUp"><Text>회원가입</Text></Link>
+            </ButtonWrapper>
+        </Form>
     );
 };
 

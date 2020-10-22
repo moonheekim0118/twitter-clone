@@ -1,11 +1,12 @@
 import React , {useState, useCallback, useEffect,useRef} from 'react';
 import Router from 'next/router';
-import {Input , Checkbox, Button} from 'antd';
+import Link from 'next/link';
+import { Checkbox } from 'antd';
 import useInput from '../../../hooks/useInput';
 import useValidation from '../../../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction,signUpResetAction} from '../../../actions/user';
-import {SignForm, SignInputWrapper } from '../style';
+import { Form, Lable, InputWrapper,TextIpnut,PasswordIpnut,SubmitButton,ButtonWrapper,Text } from '../style';
 import { ErrorMessage } from '../../globalStyle';
 
 const SignUp=()=>{
@@ -38,7 +39,8 @@ const SignUp=()=>{
         }
     },[signUpError]);
 
-    const onSubmit=useCallback(() => {
+    const onSubmit=useCallback((e) => {
+        e.preventDefault();
         if(password!==passwordCheck){
             return setPasswordError(true);
         }
@@ -59,38 +61,59 @@ const SignUp=()=>{
     }, [password])
 
     return(
-        <SignForm onFinish={onSubmit}>
-            <SignInputWrapper>
-                <label htmlFor="user-email">이메일</label>
-                <br />
-                <Input name ="user-email" value={email} required onChange={onChangeEmail}/>
-            </SignInputWrapper>
-            <SignInputWrapper>
-                <label htmlFor="user-nickname">닉네임</label>
-                <br />
-                <Input name ="user-nickname" value={nickname} required onChange={onChangeNickname}/>
+        <Form onSumbit={onSubmit}>
+    
+            <InputWrapper>
+                <TextIpnut 
+                name ="user-email" 
+                value={email} 
+                onChange={onChangeEmail}
+                placeholder=" "
+                />
+                <Lable htmlFor="user-email">이메일</Lable>
+            </InputWrapper>
+            <InputWrapper>
+                <TextIpnut 
+                name ="user-nickname" 
+                value={nickname} 
+                onChange={onChangeNickname}
+                placeholder=" "
+                />
+                <Lable htmlFor="user-nickname">닉네임</Lable>
                 {nicknameLengthError && <ErrorMessage>닉네임은 1자리 이상 5자리 이하여야 합니다.</ErrorMessage>}
-            </SignInputWrapper>
-            <SignInputWrapper>
-                <label htmlFor="user-password">패스워드</label>
-                <br />
-                <Input.Password name ="user-password" value={password} required onChange={onChangePassword}/>
-                {passwordLengthError && <ErrorMessage>비밀번호는 6자리 이상,14자리 이하여야 합니다.</ErrorMessage>}
-            </SignInputWrapper>
-            <SignInputWrapper>
-                <label htmlFor="user-password-check">패스워드 체크</label>
-                <br />
-                <Input.Password name ="user-password-check" value={passwordCheck} required onChange={onChangePasswordCheck}/>
+            </InputWrapper>
+            <InputWrapper>
+                <PasswordIpnut 
+                name ="user-password" 
+                value={password} 
+                required 
+                onChange={onChangePassword}
+                placeholder=" "
+                />
+                <Lable htmlFor="user-password">비밀번호</Lable>
+                 {passwordLengthError && <ErrorMessage>비밀번호는 6자리 이상,14자리 이하여야 합니다.</ErrorMessage>}
+            </InputWrapper>
+
+            <InputWrapper>
+                <PasswordIpnut 
+                name ="user-password-check" 
+                value={passwordCheck} 
+                onChange={onChangePasswordCheck}
+                placeholder=" "
+                />
+                <Lable htmlFor="user-password-check">비밀번호 확인</Lable>
                 {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
-            </SignInputWrapper>
-            <SignInputWrapper>
+            </InputWrapper>
+            <InputWrapper>
                 <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>가입하시겠습니까..정말입니까..</Checkbox>
                 {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
-            </SignInputWrapper>
-            <SignInputWrapper>
-                <Button type="primary" htmlType="submit" loading={signUploading} disabled={passwordError || termError || passwordLengthError || nicknameLengthError}>가입하기</Button>
-            </SignInputWrapper>
-        </SignForm>
+            </InputWrapper>
+    
+            <ButtonWrapper>
+                <SubmitButton>회원가입</SubmitButton>
+                <Link href="/login"><Text>로그인</Text></Link>
+            </ButtonWrapper>
+        </Form>
     );
 }
 
