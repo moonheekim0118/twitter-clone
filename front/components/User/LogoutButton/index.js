@@ -1,12 +1,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutRequestAction } from '../../../actions/user';
-import styled from 'styled-components';
-import { Button } from 'antd';
+import { Button, Loading } from '../../globalStyle';
 
-const ButtonWrapper = styled(Button)`
-    border-radius:20px;
-`;
 
 const LogoutButton=()=>{
     const dispatch = useDispatch();
@@ -17,7 +13,9 @@ const LogoutButton=()=>{
     });
     
     return(
-        <ButtonWrapper loading={isLoggingOut} onClick={onClickLogOut}>로그아웃</ButtonWrapper>
+        <>
+            {isLoggingOut ? <Loading/> : <Button onClick={onClickLogOut}> 로그아웃 </Button>}
+        </>
     );
     
 };

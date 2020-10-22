@@ -2,7 +2,8 @@ import React , {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { followRequestAction , unfollowRequestAction} from '../../../actions/user';
-import { Button } from 'antd';
+import { Button , Loading } from '../../globalStyle';
+
 
 const FollowButton=({userId})=>{
 
@@ -21,9 +22,13 @@ const FollowButton=({userId})=>{
     },[isFollowing]);
 
     return (
-        <Button loading={ followLoading || unfollowLoading } onClick={onClickFollow}>
-            {isFollowing ? "언팔로우" : "팔로우"}
-        </Button>);
+        <>
+        {
+        (followLoading || unfollowLoading) ? <Loading/> :
+        <Button onClick={onClickFollow}> {isFollowing ? "언팔로우" : "팔로우"} </Button> 
+        }
+        </>
+    );
 };
 
 FollowButton.propTypes = {
