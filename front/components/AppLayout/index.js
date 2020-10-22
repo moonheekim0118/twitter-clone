@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useSelector , useDispatch } from 'react-redux';
 import { hideAlertAction } from '../../actions/ui';
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import Menu from './Menu';
 import Alert from '../Alert';
 import UserProfileModal from '../Modals/UserProfileModal';
 import PostFormModal from '../Modals/PostFormModal';
 import Search from '../Search';
 import { Header,Main,Side,Footer,BackButton, Description,DescriptionWithoutLink } from './style';
+import { ThemeProvider } from 'styled-components';
+import theme from '../theme';
 
 const AppLayout = ({pageName, searchKeyword,children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
     const {showProfileModal ,showPostModal, showAlert } =useSelector(state=>state.ui);
     const dispatch = useDispatch();
-    const router = useRouter()
+
 
     useEffect(()=>{
         if(showAlert){
@@ -25,11 +27,11 @@ const AppLayout = ({pageName, searchKeyword,children})=>{
     },[showAlert]);
 
     const onClickBack=useCallback(()=>{
-        router.back()
+      Router.back()
     },[]);
 
     return(
-        <>
+        <ThemeProvider theme={theme}>
             {isLoggedIn && showProfileModal&& <UserProfileModal/>}
             {isLoggedIn && showPostModal && <PostFormModal/> } 
             <Alert/>
@@ -45,7 +47,7 @@ const AppLayout = ({pageName, searchKeyword,children})=>{
                 </Side>
             </div>
             <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
-        </>
+        </ThemeProvider>
     )
 }
 

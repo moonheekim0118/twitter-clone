@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     flex-direction:row;
     justify-content:space-between;
     cursor:pointer;
-    font-size:1.2rem;
+    font-size:${({theme})=>theme.fontSizes.xl};
     font-weight:bold;
 `;
 

@@ -22,6 +22,7 @@ const Home =()=>{
             if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
                 if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
                     const lastId= mainPosts[mainPosts.length-1]?.id;
+                    console.log(lastId);
                     dispatch(loadPostsAction(lastId));
                 }
             }

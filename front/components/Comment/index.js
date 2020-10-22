@@ -15,7 +15,7 @@ const FormWrapper = styled(Form)`
 `
 
 const SubmitButton= styled(Button)`
-    margin-top:8px;
+    margin-top:${({theme})=>theme.margins.small};
     right:-100%;
     transform:translateX(-100%);
 

@@ -18,32 +18,32 @@ const Navigation=styled.nav`
     width:20%;
     height:100%;
     max-height:100%;
-    background:#fff;
+    background:${({theme})=>theme.colors.white};
     position:fixed;
     top:0;
     left:0;
     bottom:0;
     right:0;
     z-index:20;
-    margin-right:10px;
-    border-right: 2px solid #f4f4f4;
+    margin-right:${({theme})=>theme.margins.base};
+    border-right: 2px solid ${({theme})=>theme.colors.gray_3};
     
-    @media screen and (max-width:767px){
+    @media ${({theme})=>theme.device.tablet}{
         width:100% !important;
         flex-direction:row;
         margin-bottom:10px;
-        padding-top:10px;
-        border-bottom:2px solid #f4f4f4;
+        padding-top:${({theme})=>theme.paddings.base};
+        border-bottom:2px solid ${({theme})=>theme.colors.gray_3};
         justify-content:center;
         align-items:center;
         position: -webkit-sticky;
         position:sticky;
         z-index:20;
         top: 0;
-        background:#fff;
+        background:${({theme})=>theme.colors.white};
     }
 
-    @media(max-width:1279px){
+    @media  ${({theme})=>theme.device.pcS}{
         width:10%;
     }
 `;
@@ -54,7 +54,7 @@ const MenuWrapper=styled.div`
     flex-direction:column;
     padding:25px;
     margin:0;
-    @media screen and (max-width:767px){
+    @media ${({theme})=>theme.device.tablet}{
         width:70%;
         flex-direction:row;
         justify-content:space-evenly;
@@ -63,17 +63,14 @@ const MenuWrapper=styled.div`
     }
 `;
 
-const LinkList = styled.div`
-    color: ${(props)=>props.color};
-`;
-
 const MenuItem=styled.div`
     display:none;
-    margin-bottom:15px;
-    @media screen and (max-width:767px){
+    margin-bottom:${({theme})=>theme.margins.xl};
+
+    @media ${({theme})=>theme.device.tablet}{
        display:inline-block;
        margin-bottom:0px;
-       margin-left:10px;
+       margin-left:${({theme})=>theme.margins.base};
     }
 `;
 
@@ -82,15 +79,15 @@ const Menu =({isLoggedIn})=>{
     return(
         <Navigation>
             <MenuWrapper>
-                <LinkList color={router.pathname==='/' ? '#0099cc' : 'black'}>
+                <div>
                      <Home/>
-                </LinkList>
-                <LinkList color={router.pathname==='/profile' ? '#0099cc' : 'black'}>
+                </div>
+                <div>
                      <Profile/>
-                </LinkList>
-                {!isLoggedIn && <LinkList color={router.pathname==='/signUp' ? '#0099cc' : 'black'}><SignUp/></LinkList>}
+                </div>
+                {!isLoggedIn && <div><SignUp/></div>}
                 {isLoggedIn && <TweetButton/>}
-                {isLoggedIn ? <UserProfile/> : <LinkList color={router.pathname==='/login' ? '#0099cc' : 'black'}><LogIn/></LinkList> }
+                {isLoggedIn ? <UserProfile/> : <div><LogIn/></div> }
                 {isLoggedIn&&
                 <MenuItem>
                     <LogoutButton/>

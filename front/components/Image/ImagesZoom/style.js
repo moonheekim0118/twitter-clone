@@ -10,8 +10,8 @@ export const IndicatorWrapper= styled.div`
     bottom: 0%;
     left: 50%;
     transform: translate(-50%, -30%);
-    font-size:2rem;
-    color:#fff;
+    font-size:${({theme})=>theme.fontSizes.buttonSize};
+    color:${({theme})=>theme.colors.white};
     cursor:pointer;
     display:flex;
     justify-content:space-between;
@@ -19,7 +19,7 @@ export const IndicatorWrapper= styled.div`
 `;
 
 export const Indicator = styled(MinusOutlined)`
-    font-size:3rem;
+    font-size:${({theme})=>theme.fontSizes.titleSize};
     color:${props=>props.color==='true' ? '#fff' : '#bfbfbf'};
     cursor:pointer;
 `;
@@ -29,8 +29,8 @@ export const LeftButton = styled(LeftCircleOutlined)`
     top: 50%;
     left: 0;
     transform: translate(20%, -50%);
-    font-size:2rem;
-    color:#fff;
+    font-size:${({theme})=>theme.fontSizes.buttonSize};
+    color:${({theme})=>theme.colors.white};
     cursor:pointer;
     z-index:7000;
 `
@@ -41,7 +41,8 @@ export const RightButton = styled(RightCircleOutlined)`
     right: 0;
     transform: translate(-20%, -50%);
     font-size:2rem;
-    color:#fff;
+    font-size:${({theme})=>theme.fontSizes.buttonSize};
+    color:${({theme})=>theme.colors.white};
     cursor:pointer;
     z-index:7000;
 `;
@@ -59,11 +60,11 @@ export const Overaly = styled.div`
 
 export const CloseButton =styled(CloseCircleOutlined)`
     position:fixed;
-    font-size:2rem;
-    color:#fff;
+    font-size:${({theme})=>theme.fontSizes.buttonSize};
+    color:${({theme})=>theme.colors.white};
     left:0;
     top:0;
-    padding:10px;
+    padding:${({theme})=>theme.paddings.base};
     line-height:14px;
     cursor:pointer;
     z-index:7000;
@@ -76,7 +77,7 @@ export const ImageWrapper = styled.div`
     z-index:7000;
     transform: translate(-50%, -50%);
     & img {
-        margin: 10px auto;
+        margin:${({theme})=>theme.margins.base}; auto;
         max-height:70vmax;
         max-width:70vmin;
     }

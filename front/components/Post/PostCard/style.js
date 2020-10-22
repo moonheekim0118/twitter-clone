@@ -13,13 +13,12 @@ export const Card = styled.div`
     display:flex;
     flex-direction: row;
     align-items: stretch;
-    padding:20px 20px;
+    padding:${({theme})=>theme.paddings.xxxl};
     margin-bottom:30px;
-    border:1px solid #f4f4f4;
-    background-color:#fff;
+    border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
     &:hover{
-        background-color:rgba(214, 214, 194,0.3);
+        background-color:${({theme})=>theme.colors.hover};
     }
 `;
 
@@ -29,14 +28,13 @@ export const RetweetCard=styled.div`
     display:flex;
     flex-direction: row;
     align-items: stretch;
-    padding:20px 20px;
+    padding:${({theme})=>theme.paddings.xxxl};
     padding-top:40px;
     margin-bottom:30px;
-    border:1px solid #f4f4f4;
-    background-color:#fff;
+    border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
     &:hover{
-        background-color:rgba(214, 214, 194,0.3);
+        background-color:${({theme})=>theme.colors.hover};
     }
 `;
 
@@ -47,13 +45,13 @@ export const CardMeta = styled.div`
     flex-basis: 90%;
     display:flex;
     flex-direction:column;
-    padding:0 20px;
-    margin-left:20px;
+    padding:0 ${({theme})=>theme.paddings.xxxl};
+    margin-left:${({theme})=>theme.margins.xxxl};
 `;
 
 export const CardButtons= styled.div`
-    margin-top:20px;
-    font-size:1.2rem;
+    margin-top:${({theme})=>theme.margins.xxxl};
+    font-size:${({theme})=>theme.fontSizes.lg};
     display:flex;
     flex-direction:row;
     justify-content:space-between;
@@ -66,7 +64,7 @@ export const FollowButtonWrapper=styled.div`
 `;
 
 export const NicknameWrapper=styled.div`
-    font-size:1.2rem;
+    font-size:${({theme})=>theme.fontSizes.lg};
     font-weight:bold;
 
     &:hover{
@@ -75,20 +73,20 @@ export const NicknameWrapper=styled.div`
 `;
 
 export const LikedCount=styled.span`   
-    margin-left:5px;
-    font-size:1rem;
-    color:#eb2f96;
+    margin-left:${({theme})=>theme.margins.xsmall};
+    font-size:${({theme})=>theme.fontSizes.base};
+    color:${({theme})=>theme.colors.pink};
 `;
 
 export const LikersCount=styled.span`
-    margin-left:5px;
-    font-size:1rem;
-    color:#b8b894;
+    margin-left:${({theme})=>theme.margins.xsmall};
+    font-size:${({theme})=>theme.fontSizes.base};
+    color:${({theme})=>theme.colors.gray_2};
 `;
 
 export const LikeButtonWrapper=styled.div`
     &:hover{
-        color:#eb2f96;
+        color:${({theme})=>theme.colors.pink};
     }
 `;
 
@@ -96,7 +94,7 @@ export const Retweet=styled.div`
     position:absolute;
     top:5px;
     left:5px;
-    color:#0099cc;
+    color:${({theme})=>theme.colors.blue_2};
     font-weight:bold;
 
     &:hover{
@@ -121,7 +119,7 @@ export const RetweetedIcon=styled(RetweetOutlined)`
 
 export const CommentIcon = styled(MessageOutlined)`
     &:hover{
-        color:#0099cc;
+        color:${({theme})=>theme.colors.blue_2};
     }
 `;
 
@@ -129,5 +127,5 @@ export const Date = styled.span`
     position:absolute;
     top:5px;
     right:10px;
-    color:#d6d6c2
+    color:${({theme})=>theme.colors.gray_2};
 `;

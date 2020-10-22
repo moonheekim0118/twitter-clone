@@ -7,8 +7,8 @@ const AlertBox=styled.div`
     padding:20px;
     border-top-left-radius:15px;
     border-top-right-radius:15px;
-    font-size:1rem;
-    background-color:#0099cc;
+    font-size:${({theme})=>theme.fontSizes.base};
+    background-color:${({theme})=>theme.colors.blue_1};
     color:#fff;
     position:fixed;
     bottom:0;

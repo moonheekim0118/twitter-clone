@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import {Form, Input} from 'antd';
 
 export const PostFormWrapper = styled(Form)`
-marign: 10px 0 20px;
+    margin-top:${({theme})=>theme.margins.xxl};
+    margin-bottom:${({theme})=>theme.margins.xxxl}
 `
 
 
@@ -12,7 +13,7 @@ export const TextArea = styled(Input.TextArea)`
 
 
 export const ButtonWrapper= styled.div`
-    margin-top:5px;
+    margin-top:${({theme})=>theme.margins.small};
     display:flex;
     justify-content:space-between;
 `;

@@ -3,16 +3,16 @@ import { LeftOutlined } from '@ant-design/icons';
 
 export const Header=styled.header`
     text-align:center;
-    padding:15px 10px;
+    padding:${({theme})=>`${theme.paddings.xl} ${theme.paddings.base}`};
     height:50px;
-    background-color:#fff;
+    background-color:${({theme})=>theme.colors.white};
     top: 0;
     position: -webkit-sticky;
     position:sticky;
     z-index:10;
-    border-bottom:1px solid #f4f4f4;
-    @media screen and (max-width:767px){
-        padding-top:10px;
+    border-bottom:1px solid ${({theme})=>theme.colors.gray_3};
+    @media ${({theme})=>theme.device.tablet}{
+        padding-top:${({theme})=>theme.paddings.base};
         border:none;
         position:relative;
     }
@@ -22,13 +22,14 @@ export const Header=styled.header`
 export const Main=styled.section`
     width:50%; 
     height:100%;
-    margin:15px auto;
-    @media screen and (max-width:767px){
+    margin:${({theme})=>theme.margins.xl} auto;
+
+    @media ${({theme})=>theme.device.tablet}{
         width: 70% !important;
         padding: 0 !important;
     }
 
-    @media(max-width:1279px){
+    @media ${({theme})=>theme.device.pcS}{
         width:65%;
         padding-right:80px;
     }
@@ -38,7 +39,7 @@ export const Main=styled.section`
 export const Side=styled.section`
      z-index:20;
      position:fixed;
-     background:#fff;
+     background:${({theme})=>theme.colors.white};
      height:100%;
      max-height:1000px;
      top:0px;
@@ -46,25 +47,26 @@ export const Side=styled.section`
      right:0px;
      width:20%;
      margin-left:25px;
-     border-left: 2px solid #f4f4f4;
-     @media screen and (max-width:767px){
+     border-left: 2px solid ${({theme})=>theme.colors.gray_3};
+
+     @media ${({theme})=>theme.device.tablet}{
         display:none;
     }
 
 `;
 
 export const Footer =styled.footer`
-    padding:10px;
+    padding:${({theme})=>theme.paddings.base};
     text-align:center;
 `;
 
 export const BackButton=styled(LeftOutlined)`
-    font-size:1.5rem;
+    font-size:${({theme})=>theme.fontSizes.xxl};
     position:absolute;
     left:0px;
 
     &:hover{
-        color:#0099cc;
+        color:${({theme})=>theme.colors.blue_1};
     }
     
 `;
@@ -72,15 +74,15 @@ export const BackButton=styled(LeftOutlined)`
 
 
 export const Description=styled.a`
-    font-size:1.3rem;
+    font-size:${({theme})=>theme.fontSizes.xxl};
     font-weight:bold;
-    color:inherit;
+    color:${({theme})=>theme.colors.black};
 `;
 
 export const DescriptionWithoutLink=styled.div`
-    font-size:1.3rem;
+    font-size:${({theme})=>theme.fontSizes.xxl};
+    color:${({theme})=>theme.colors.black};
     font-weight:bold;
-    color:inherit;
     position:relative;
     margin:0 auto;
     width:50%;

@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Wrapper=styled.div`
     width:100%;
     height:100px;
-    padding:15px;
+    padding:${({theme})=>theme.paddings.xl};
     display:flex;
     flex-direction:row;
     align-items:center;
     position:relative;
-    font-size:1.2rem;
+    font-size:${({theme})=>theme.fontSizes.xl};
     font-weight:bold;
     cursor:pointer;
     color:black;
@@ -19,7 +19,7 @@ export const Wrapper=styled.div`
 `;
 
 export const AvatarWrapper=styled.div`
-margin-right:10px;
+margin-right:${({theme})=>theme.margins.base};
 `;
 
 export const FollowButtonWrapper=styled.div`

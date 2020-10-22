@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 // 유저정보  / 팔로우버튼 
 export const UpperWrapper= styled.div`
     width:100%;
-    padding:20px;
+    padding:${({theme})=>theme.paddings.xxl};
     display:flex;
     flex-direction:row;
     justify-content:space-between;
@@ -27,23 +27,23 @@ export const UserInfoWrapper = styled.div`
 export const DownWrapper = styled.div`
     display:flex;
     flex-direction:row;
-    margin-left:20px;
-    margin-top: 20px;
+    margin-left:${({theme})=>theme.margins.xxl};
+    margin-top: ${({theme})=>theme.margins.xxl};
     cursor:pointer;
-    font-size:1rem;
+    font-size:${({theme})=>theme.fontSizes.base};
 `;
 
 export const NicknameWrapper= styled.div`
-    margin-top:10px;
-    font-size:1.3rem;
+    margin-top:${({theme})=>theme.margins.base};
+    font-size:${({theme})=>theme.margins.lg};
     font-weight:bold;
 `;
 
 export const FollowWrapper =styled.div`
-    margin-right:20px;
+    margin-right:${({theme})=>theme.margins.xxxl};
 `;
 
 export const Description=styled.span`
-    color:#75a3a3;
+    color:${({theme})=>theme.colors.gray_2};
     font-weight:bold;
 `;

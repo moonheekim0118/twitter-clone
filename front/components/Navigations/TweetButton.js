@@ -9,25 +9,25 @@ const Button = styled.button`
     cursor:pointer;
     display:flex;
     border:none;
-    background:#0099ff;
+    background:${({theme})=>theme.colors.blue_1};
     border-radius:10px;
-    color:#fff;
-    padding:10px;
-    font-size:1.3rem;
+    color:${({theme})=>theme.colors.white};
+    padding:${({theme})=>theme.paddings.base};
+    font-size:${({theme})=>theme.fontSizes.xl};
     font-weight:bold;
-    margin-bottom:10px;
+    margin-bottom:${({theme})=>theme.margins.base};
     box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.75);
 
-    @media(max-width:1279px){
+    @media ${({theme})=>theme.device.pcS}{
         border-radius:50%;
         margin-right:0;
     }
 
-    @media(max-width:767px){
+    @media ${({theme})=>theme.device.tablet}{
         position: fixed;
         bottom:10px;
         right:10px;
-        font-size:1.7rem;
+        font-size:${({theme})=>theme.device.xxxl};
     }
 
 `;

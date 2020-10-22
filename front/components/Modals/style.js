@@ -9,7 +9,7 @@ export const TransparentOveraly=styled.div`
     position:fixed;
     z-index:5000;
 
-    @media(max-width:767px){
+    @media ${({theme})=>theme.device.tablet}{
         display:none;
     }
 `;
@@ -37,7 +37,8 @@ export const ModalFormWrapper=styled.div`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index:7000;
-    @media screen and (max-width:767px){
+
+    @media ${({theme})=>theme.device.tablet}{
         width:70%;
     }
     
@@ -45,7 +46,7 @@ export const ModalFormWrapper=styled.div`
 
 export const ModalBoxHeader = styled.div`
     width:100%;
-    margin-bottom:15px;
+    margin-bottom:${({theme})=>theme.margins.xl};
 `;
 
 export const ModalCloseButton=styled(CloseOutlined)`
@@ -53,5 +54,5 @@ export const ModalCloseButton=styled(CloseOutlined)`
     position:absolute;
     right:7px;
     top:5px;
-    font-size:1.2rem;
+    font-size:${({theme})=>theme.fontSizes.xl};
 `;

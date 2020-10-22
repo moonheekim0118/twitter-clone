@@ -16,8 +16,9 @@ export const SignForm=styled(Form)`
 
 export const SignInputWrapper=styled.div`
     width:50%;
-    margin:10px auto;
-    @media screen and (max-width:767px){
+    margin:${({theme})=>theme.margins.base} auto;
+    
+    @media ${({theme})=>theme.device.tablet}{
         width:100%;
     }
 `

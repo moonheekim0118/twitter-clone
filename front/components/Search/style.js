@@ -5,10 +5,10 @@ import { CloseOutlined } from '@ant-design/icons';
 export const Container = styled.form`
     height:50px;
     width:100%;
-    padding:15px 5px;
+    padding:${({theme})=>`${theme.paddings.xl} ${theme.paddings.base}`};
     top: 0;
     left:0;
-    background-color:#fff;
+    background-color: ${({theme})=>theme.colors.white};
     
 
 `;
@@ -33,19 +33,19 @@ export const HistoryWrapper = styled.div.attrs({ tabindex: "0" })`
 `;
 
 export const SearchInput = styled.input.attrs({ type: 'text' })`
-    padding:6px;
-    margin-top:8px;
-    font-size:1rem;
+    padding:${({theme})=>theme.paddings.small};
+    margin-top:${({theme})=>theme.margins.small};
+    font-size:${({theme})=>theme.fontSizes.base};
     width:100%;
     height:35px;
     z-index:20;
     border:none;
-    background-color:#f4f4f4;
+    background-color:${({theme})=>theme.colors.gray_3};
     border-radius:5px;
 
     &:focus{
-        background-color:#fff;
-        border:1px solid #33ccff;
+        background-color:${({theme})=>theme.colors.white};
+        border:1px solid ${({theme})=>theme.colors.blue_1};
     }
 
     &:focus ~ ${HistoryWrapper}{
@@ -55,18 +55,19 @@ export const SearchInput = styled.input.attrs({ type: 'text' })`
 `;
 
 export const SearchButton = styled.button.attrs({ type: 'submit' })`
-    height:35px;
-    padding: 6px 10px;
-    margin-top: 8px;
-    margin-right: 5px;
-    background:#33ccff;
-    color:#fff;
-    font-size:1rem;
+    height:34px;
+    padding:${({theme})=>`${theme.paddings.xsmall} ${theme.paddings.small}`};
+    margin-top:${({theme})=>theme.margins.small};
+    margin-right:${({theme})=>theme.margins.xsmall};
+    background:${({theme})=>theme.colors.blue_1};
+    color:${({theme})=>theme.colors.white};
+    font-size:${({theme})=>theme.fontSizes.lg};
     cursor:pointer;
     border:none;
     position:absolute;
     top:15px;
     right:0px;
+    z-index:100;
     border-top-right-radius:5px;
     border-bottom-right-radius:5px;
 `;
@@ -77,9 +78,9 @@ export const SearchButton = styled.button.attrs({ type: 'submit' })`
 export const HistoryTab=styled.div.attrs({ tabindex: "0" })`
     width:100%;
     padding:5px;
-    border-bottom:1px solid #e0e0d1;
-    border-left:1px solid #e0e0d1;
-    border-right:1px solid #e0e0d1;
+    border-bottom:1px solid ${({theme})=>theme.colors.gray_4};
+    border-left:1px solid ${({theme})=>theme.colors.gray_4};
+    border-right:1px solid ${({theme})=>theme.colors.gray_4};
     cursor:pointer;
     display:flex;
     justify-content:space-between;
@@ -90,7 +91,7 @@ export const HistoryTab=styled.div.attrs({ tabindex: "0" })`
     }
 
     &:hover{
-        background-color:rgba(153, 204, 255,0.2);
+        background-color:${({theme})=>theme.colors.hover};
     }
 `;
 

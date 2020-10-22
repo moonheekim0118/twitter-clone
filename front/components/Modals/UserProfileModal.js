@@ -15,7 +15,7 @@ const CardWrapper = styled(Card)`
     box-shadow: -1px 1px 7px -2px rgba(0,0,0,0.64);
     z-index:6000;
 
-    @media(max-width:767px){
+    @media ${({theme})=>theme.device.tablet}{
         display:none;
     }
 `;
