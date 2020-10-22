@@ -30,12 +30,12 @@ export const DownWrapper = styled.div`
     margin-left:${({theme})=>theme.margins.xxl};
     margin-top: ${({theme})=>theme.margins.xxl};
     cursor:pointer;
-    font-size:${({theme})=>theme.fontSizes.base};
+    font-size:${({theme})=>theme.fontSizes.lg};
 `;
 
 export const NicknameWrapper= styled.div`
     margin-top:${({theme})=>theme.margins.base};
-    font-size:${({theme})=>theme.margins.lg};
+    font-size:${({theme})=>theme.fontSizes.xxl};
     font-weight:bold;
 `;
 

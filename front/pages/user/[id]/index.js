@@ -33,7 +33,7 @@ const User=()=>{
       return()=>{
           window.removeEventListener('scroll',onScroll);
       }
-  },[hasMoerUserPosts,loadUserPostLoading])
+  },[UserPosts,hasMoerUserPosts,loadUserPostLoading])
 
     if(!userInfo){
       return(

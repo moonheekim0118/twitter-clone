@@ -33,7 +33,7 @@ const Followings=()=>{
         return()=>{
             window.removeEventListener('scroll',onScroll);
         }
-    },[hasMoreFollowings,loadFollowingListLoading])
+    },[FollowingList,hasMoreFollowings,loadFollowingListLoading])
 
     if(!userInfo){
         return(

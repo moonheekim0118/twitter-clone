@@ -31,7 +31,7 @@ const Followers=()=>{
         return()=>{
             window.removeEventListener('scroll',onScroll);
         }
-    },[hasMoreFollowers,loadFollowerListLoading])
+    },[FollowerList,hasMoreFollowers,loadFollowerListLoading])
 
     
     if(!userInfo){

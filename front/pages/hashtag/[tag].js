@@ -30,7 +30,7 @@ const HashTagPost=()=>{
       return()=>{
           window.removeEventListener('scroll',onScroll);
       }
-  },[hasMorePost,loadPostloading])
+  },[hashTagPosts,hasMorePost,loadPostloading])
 
     if(!hashTagPosts){
       return(

@@ -34,7 +34,7 @@ const Detail =()=>{
         return()=>{
             window.removeEventListener('scroll',onScroll);
         }
-    },[hasMoreLikedPosts,loadLikedPostLoading])
+    },[LikedPosts,hasMoreLikedPosts,loadLikedPostLoading])
   
     if(!userInfo){
         return(
