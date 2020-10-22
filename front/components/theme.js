@@ -43,6 +43,7 @@ const colors = {
     blue_2: "#0099cc",
     pink:"#eb2f96",
     hover:"rgba(153, 204, 255,0.2)",
+    disabled:"#b3ecff",
   }
 
   const deviceSizes = {

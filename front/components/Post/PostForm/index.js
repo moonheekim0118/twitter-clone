@@ -3,9 +3,10 @@ import { useDispatch , useSelector } from 'react-redux';
 import { addPostAction , uploadImagesAction } from '../../../actions/post';
 import { hidePostModalAction, showAlertAction } from '../../../actions/ui';
 import useInput from '../../../hooks/useInput';
-import { Button }from 'antd';
 import ImagePath from '../../Image/ImagePath';
-import { PostFormWrapper,TextArea,ButtonWrapper } from '../style';
+import { Avatar } from 'antd';
+import { FormWrapper,FormMeta,Buttons,ImageButtonIcon,TextArea,TweetButton } from './style';
+import { AvatarWrapper } from '../PostCard/style';
 
 const PostForm =()=>{
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
@@ -21,7 +22,8 @@ const PostForm =()=>{
     },[addPostDone])
 
 
-    const onSubmit=useCallback(()=>{
+    const onSubmit=useCallback((e)=>{
+        e.preventDefault();
         let formData;
         if(imagePaths.length > 0){
             formData=new FormData();
@@ -58,20 +60,27 @@ const PostForm =()=>{
 
     return(
         <>
-            <PostFormWrapper encType="multipart/form-data" onFinish={onSubmit}>
-                <TextArea value={text}
-                onChange={onChangeText}
-                maxLength={150}
-                rows={3}
-                placeholder="어떤 신기한 일이 있었나요?"
-                />
-                <ButtonWrapper>
+        <FormWrapper onSubmit={onSubmit} noborder={showPostModal}>
+            <AvatarWrapper>
+                <Avatar/>
+            </AvatarWrapper>
+            <FormMeta>
+                <TextArea
+                 name="content"
+                 onChange={onChangeText}
+                 value={text}
+                 minRows={1}
+                 type="text"
+                 placeholder="What is happening?"
+                 />
+                <Buttons>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
-                    <Button onClick={onClickImageUpload} disabled={imagePaths.length===4}> 이미지 업로드 </Button>
-                    <Button type="primary" htmlType="submit" disabled={text.length===0}>짹짹</Button>
-                </ButtonWrapper>
+                    <ImageButtonIcon onClick={onClickImageUpload} />
+                    <TweetButton disabled={text.length===0}>Tweet</TweetButton>
+                </Buttons>
                 <ImagePath/>
-            </PostFormWrapper>
+            </FormMeta>
+        </FormWrapper>
         </>
     )
 }
