@@ -19,16 +19,20 @@ function signUpAPI(data){
     return axios.post('/user/signUp',data);
 }
 
-function changeNicknameAPI(data){
-    return axios.patch('/user/changeNickname',data);
-}
-
 function followUserAPI(userId){
     return axios.patch(`/user/${userId}/follow`);
 }
 
 function unfollowUserAPI(userId){
     return axios.delete(`/user/${userId}/follow`);
+}
+
+function uploadProfilePicAPI(data){
+    return axios.post('/user/profilepic',data);
+}
+
+function updateMyInfoAPI(data){
+    return axios.patch('/user/updateMyInfo',data);
 }
 
 function* loadMyInfo(){
@@ -134,20 +138,37 @@ function* unfollow(action){
 }
 
 
-function* changeNickname(action){
+function* uploadProfilePic(action){
     try{
-        const result= yield call(changeNicknameAPI,action.data);
+        const result = yield call(uploadProfilePicAPI, action.data);
         yield put({
-            type:type.CHANGE_NICKNAME_SUCCESS,
-            data:result.data.nickname,
-        })
-    }catch(err){
-        yield put({
-            type:type.CHANGE_NICKNAME_FAIL,
-            error:err.response.data
+            type:type.UPLOAD_PROFILE_PIC_SUCCESS,
+            data:result.data.src
         })
 
-        yield put(showAlertAction(err.response.data))
+    }catch(err){
+        console.error(err);
+        yield put({
+            type:type.UPLOAD_PROFILE_PIC_FAIL,
+            error:err.response.data
+        })
+    }
+}
+
+function* updateMyInfo(action){
+    try{
+        const result = yield call(updateMyInfoAPI, action.data);
+        yield put({
+            type:type.UPDATE_MY_INFO_SUCCESS,
+            data:result.data
+        })
+
+    }catch(err){
+        console.error(err);
+        yield put({
+            type:type.UPDATE_MY_INFO_FAIL,
+            error:err.response.data
+        })
     }
 }
 
@@ -174,12 +195,17 @@ function* watchUnfollow(){
     yield takeLatest(type.UNFOLLOW_REQUEST,unfollow);
 }
 
-function* watchChangeNickname(){
-    yield takeLatest(type.CHANGE_NICKNAME_REQUEST,changeNickname);
-}
 
 function* wathchLoadMyInfo(){
     yield takeLatest(type.LOAD_MY_INFO_REQUEST,loadMyInfo);
+}
+
+function* wathchUploadProfilePic(){
+    yield takeLatest(type.UPLOAD_PROFILE_PIC_REQUEST,uploadProfilePic);
+}
+
+function* wathchUpdateMyInfo(){
+    yield takeLatest(type.UPDATE_MY_INFO_REQUEST,updateMyInfo);
 }
 
 export default function* userSaga(){
@@ -189,7 +215,9 @@ export default function* userSaga(){
         fork(watchSignUp),
         fork(watchFollow),
         fork(watchUnfollow),
-        fork(watchChangeNickname),
         fork(wathchLoadMyInfo),
+        fork(wathchUploadProfilePic),
+        fork(wathchUpdateMyInfo),
+
     ]);
 }

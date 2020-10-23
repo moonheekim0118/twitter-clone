@@ -26,9 +26,15 @@ export const initialState={
     unfollowDone:false,
     unfollowError:null,
     
-    changeNicknameLoading:false, // 닉네임 변경
-    changeNicknameDone:false,
-    changeNicknameError:null,
+    updateMyInfoLoading:false, // 유저 인포 변경
+    updateMyInfoDone:false,
+    updateMyInfoErorr:null,
+
+    uploadProfilePicLoading:false, // 프로필 사진 업로드 
+    uploadProfilePicDone:false, 
+    uploadProfilePicErorr:null,
+
+    profilePicPath:null, // 프로필 사진 업로드 경로 
 
     me:null, // 현재 로그인한 유저 정보 --> 팔로우 / 팔로잉 id만 가져오기
 
@@ -49,6 +55,7 @@ const reducer= (state = initialState , action)=>{
                 if(draft.me){
                     draft.isLoggedIn=true;
                 }
+                draft.profilePicPath=draft.me.profilepic;
                 draft.loadMyInfoDone=true;
                 draft.loadMyInfoLoading=false;
                 break;
@@ -156,22 +163,41 @@ const reducer= (state = initialState , action)=>{
                 draft.unfollowError=action.error;
                 break;
 
-            case type.CHANGE_NICKNAME_REQUEST:
-                draft.changeNicknameLoading=true;
-                draft.changeNicknameDone=false;
-                draft.changeNicknameError=null;
+            case type.UPLOAD_PROFILE_PIC_REQUEST:
+                draft.uploadProfilePicLoading=true;
+                draft.uploadProfilePicDone=false;
+                draft.uploadProfilePicErorr=null;
                 break;
 
-            case type.CHANGE_NICKNAME_SUCCESS:
-                draft.changeNicknameLoading=false;
-                draft.changeNicknameDone=true;
-                draft.me.nickname=action.data;
+            case type.UPLOAD_PROFILE_PIC_SUCCESS:
+                draft.uploadProfilePicLoading=false;
+                draft.uploadProfilePicDone=true;
+                draft.profilePicPath=action.data; // path 에 저장 
                 break;
 
-            case type.CHANGE_NICKNAME_FAIL:
-                draft.changeNicknameLoading=false;
-                draft.changeNicknameError=action.error;
+            case type.UPLOAD_PROFILE_PIC_FAIL:
+                draft.uploadProfilePicLoading=false;
+                draft.uploadProfilePicErorr=action.error;
                 break;
+
+            case type.UPDATE_MY_INFO_REQUEST:
+                draft.updateMyInfoLoading=true;
+                draft.updateMyInfoDone=false;
+                draft.updateMyInfoErorr=null;
+                break;
+            
+            case type.UPDATE_MY_INFO_SUCCESS:
+                draft.updateMyInfoLoading=false;
+                draft.updateMyInfoDone=done;
+                draft.me.nickname=action.data.nickname; // 변경 
+                draft.me.profilepic=action.data.profilepic;
+                break;
+            
+            case type.UPDATE_MY_INFO_FAIL:
+                draft.updateMyInfoLoading=false;
+                draft.updateMyInfoErorr=action.error;
+                break;
+            
             default:
                 break;
         }

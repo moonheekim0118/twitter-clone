@@ -75,20 +75,6 @@ exports.logout=(req,res,next)=>{
     res.status(200).send('okay');
 }
 
-exports.changeNickname= async (req,res,next)=>{
-   try{
-        const user = await User.findOne({ where : {id: req.user.id}});
-        if(!user){
-            return res.status(403).send('다시 로그인 해주시길 바랍니다.');
-        }
-        user.nickname=req.body.nickname;
-        await user.save();
-        return res.status(200).send({nickname:user.nickname});
-   }catch(err){
-        console.log(err);
-        next(err);
-   }
-}
 
 exports.loadMyInfo=async(req,res,next)=>{
     try{
@@ -153,6 +139,37 @@ exports.unfollowUser=async(req,res,next)=>{
         
         await user.removeFollowers(req.user.id);
         res.status(200).json({id:userId});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+}
+
+// 유저 프로필 사진 업로드 컨트롤러 
+exports.uploadProfilePic=(req,res,next)=>{
+    res.json(req.files.map((v)=>v.filename));
+}
+
+//유저 정보 업데이트 컨트롤러 
+exports.updateUserInfo =async(req,res,next)=>{
+    try{
+        const user = await User.findOne({ where : {id: req.user.id}});
+        if(!user){
+            return res.status(403).send('다시 로그인 해주시길 바랍니다.');
+        }
+        // User Nickname이 바뀌어서 왔다면 .. 교체
+        if(req.body.nickname){
+            user.nickname=req.body.nickname;
+            await user.save();
+        }
+
+        if(req.body.image){ // 이미지가 있는 경우 
+            const image = await Image.create({src:req.body.image});
+            user.profilepic=image;
+            await user.save();
+
+        }
+        return res.status(200).send({nickname:user.nickname, profilepic:user.profilepic});
     }catch(err){
         console.error(err);
         next(err);

@@ -33,16 +33,35 @@ export const UNFOLLOW_REQUEST ="UNFOLLOW_REQUEST";
 export const UNFOLLOW_SUCCESS ="UNFOLLOW_SUCCESS";
 export const UNFOLLOW_FAIL="UNFOLLOW_FAIL";
 
-// 닉네임 변경
-
-export const CHANGE_NICKNAME_REQUEST ="CHANGE_NICKNAME_REQUEST";
-export const CHANGE_NICKNAME_SUCCESS ="CHANGE_NICKNAME_SUCCESS";
-export const CHANGE_NICKNAME_FAIL="CHANGE_NICKNAME_FAIL";
 
 // 유저 로그인 복구 
 export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS="LOAD_MY_INFO_SUCCESS";
 export const LOAD_MY_INFO_FAIL="LOAD_MY_INFO_FAIL";
+
+// 유저 정보 변경
+export const UPDATE_MY_INFO_REQUEST="UPDATE_MY_INFO_REQUEST";
+export const UPDATE_MY_INFO_SUCCESS="UPDATE_MY_INFO_SUCCESS";
+export const UPDATE_MY_INFO_FAIL="UPDATE_MY_INFO_FAIL";
+
+// 프로필 사진 업로드
+export const UPLOAD_PROFILE_PIC_REQUEST="UPLOAD_PROFILE_PIC_REQUEST";
+export const UPLOAD_PROFILE_PIC_SUCCESS="UPLOAD_PROFILE_PIC_SUCCESS";
+export const UPLOAD_PROFILE_PIC_FAIL="UPLOAD_PROFILE_PIC_FAIL";
+
+export const updateMyInfoAction=(data)=>{
+    return{
+        type:UPDATE_MY_INFO_REQUEST,
+        data,
+    }
+};
+
+export const uploadProfilePicAction=(data)=>{
+    return{
+        type:UPLOAD_PROFILE_PIC_REQUEST,
+        data,
+    }
+};
 
 export const loadMyInfoAction=(data)=>{
     return{

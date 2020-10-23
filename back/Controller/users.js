@@ -15,7 +15,7 @@ exports.loadFollowings=async(req,res,next)=>{
         } // 
         const followings = await user.getFollowings({
             where,
-            attributes:['id','nickname'],
+            attributes:['id','nickname','profilepic'],
             limit:10,
         });
 
@@ -40,7 +40,7 @@ exports.loadFollowers=async(req,res,next)=>{ /// 개수 제한해서 줘야함
         }
         const followers = await user.getFollowers({
             where,
-            attributes:['id','nickname'],
+            attributes:['id','nickname','profilepic'],
             limit:10,
         });
         res.status(200).json(followers);
@@ -72,15 +72,15 @@ exports.loadUserPosts=async(req,res,next)=>{
                 [Comment, 'createdAt', 'DESC']
         ],
             include:[
-                {model:User,attributes:{exclude:['password']}},
+                {model:User,attributes:['id','nickname','profilepic']},
                 {model :Image},
-                {model:Comment, include:[{model:User, attirbutes:['id','nickname']}],  
+                {model:Comment, include:[{model:User, attributes:['id','nickname','profilepic']}],  
                 attributes:{exclude:['password']},},
-                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
-                { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname']},
-                { model: User,  as: 'Likers', attirbutes:['id','nickname']},
+                { model: User,  as: 'Likers', attributes:['id','nickname','profilepic']},
+                { model: Post, as: 'Retweet', include:[{model:User, attributes:['id','nickname','profilepic']},
+                { model: User,  as: 'Likers', attributes:['id','nickname','profilepic']},
                  {model: Image}, 
-                 {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
+                 {model:Comment, include:[{model:User, attributes:['id','nickname','profilepic']}]},
             ]}]});
         res.status(200).json(posts||{});
     }catch(err){
@@ -109,15 +109,15 @@ exports.loadLikedposts=async(req,res,next)=>{ // userId의 user가 Liked 한 포
                 [Comment, 'createdAt', 'DESC']
              ],
              include:[
-                {model:User,attributes:{exclude:['password']}},
+                {model:User,attributes:['id','nickname','profilepic']},
                 {model :Image},
-                {model:Comment, include:[{model:User, attirbutes:['id','nickname']}],  
+                {model:Comment, include:[{model:User, attributes:['id','nickname','profilepic']}],  
                 attributes:{exclude:['password']},},
                 { model: User,  as: 'Likers', attirbutes:['id','nickname']},
-                { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname']},
+                { model: Post, as: 'Retweet', include:[{model:User, attributes:['id','nickname','profilepic']},
                 { model: User,  as: 'Likers', attirbutes:['id','nickname']},
                  {model: Image}, 
-                 {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
+                 {model:Comment, include:[{model:User, attributes:['id','nickname','profilepic']}]},
             ]}]
         });
         return res.status(200).json(posts);
@@ -133,7 +133,7 @@ exports.loadUserInfo=async(req,res,next)=>{
         const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 
             where:{id : req.params.userId},
             attributes:{
-                exclude:['password']
+                attributes:['id','nickname','profilepic']
             }, // excluding password
             include:[{
                 model:Post,
