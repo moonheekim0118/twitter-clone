@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 const GlobalStyles = createGlobalStyle`  
     *,
@@ -17,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body{
+        overflow:${(props)=>props.modalOpen ? 'hidden':''};
         background-color:#FFFFFF;
         color:#000000;
     }
