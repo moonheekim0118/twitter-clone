@@ -14,7 +14,7 @@ export const FormWrapper = styled.form`
     height: auto;
     display:flex;   
     flex-direction: row;
-    border:${(props)=>props.noborder ? "none": '1px solid #f4f4f4'}
+    border:${(props)=>props.noborder ? "1px solid transparent": "1px solid #f4f4f4"}
 `;
 
 export const FormMeta= styled.div`
