@@ -6,7 +6,7 @@ import useInput from '../../../hooks/useInput';
 import useValidation from '../../../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction,signUpResetAction} from '../../../actions/user';
-import { Form, Lable, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text,TextLength } from '../style';
+import { Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text,TextLength } from '../style';
 import { ErrorMessage } from '../../globalStyle';
 
 const SignUp=()=>{
@@ -70,7 +70,7 @@ const SignUp=()=>{
                 onChange={onChangeEmail}
                 placeholder=" "
                 />
-                <Lable htmlFor="user-email">이메일</Lable>
+                <Label htmlFor="user-email">이메일</Label>
             </InputWrapper>
             <InputWrapper>
                 <TextInput 
@@ -79,7 +79,7 @@ const SignUp=()=>{
                 onChange={onChangeNickname}
                 placeholder=" "
                 />
-                <Lable htmlFor="user-nickname">닉네임</Lable>
+                <Label htmlFor="user-nickname">닉네임</Label>
                 <TextLength limit={nickname.length>5}>{nickname.length}/5</TextLength>
                 {nicknameLengthError && <ErrorMessage>닉네임은 1자리 이상 5자리 이하여야 합니다.</ErrorMessage>}
             </InputWrapper>
@@ -91,7 +91,7 @@ const SignUp=()=>{
                 onChange={onChangePassword}
                 placeholder=" "
                 />
-                <Lable htmlFor="user-password">비밀번호</Lable>
+                <Label htmlFor="user-password">비밀번호</Label>
                  {passwordLengthError && <ErrorMessage>비밀번호는 6자리 이상,14자리 이하여야 합니다.</ErrorMessage>}
             </InputWrapper>
 
@@ -102,7 +102,7 @@ const SignUp=()=>{
                 onChange={onChangePasswordCheck}
                 placeholder=" "
                 />
-                <Lable htmlFor="user-password-check">비밀번호 확인</Lable>
+                <Label htmlFor="user-password-check">비밀번호 확인</Label>
                 {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
             </InputWrapper>
             <InputWrapper>

@@ -20,7 +20,7 @@ export const Form= styled.form`
 `;
 
 
-export const Lable = styled.label`
+export const Label = styled.label`
     position:absolute;
     font-size:${({theme})=>theme.fontSizes.base};
     left:0;
@@ -31,9 +31,10 @@ export const Lable = styled.label`
     color:${({theme})=>theme.colors.gray_2};
     padding: 0 0.3rem;
     margin: 0 0.5rem;
-    transition: .1s ease-out;
-    transform-origin: left top;
     pointer-events:none;
+    
+    transition: 0.2s color ease-in-out;
+
 `;
 
 
@@ -53,7 +54,6 @@ export const TextInput = styled.input.attrs({ type: 'text' })`
     border-radius:5px;
     padding:${({theme})=>theme.paddings.base} ${({theme})=>theme.colors.small};
     color:  ${({theme})=>theme.colors.gray_2};
-    transition: 0.1s ease-out;
 
     &:focus + label{
         color: ${({theme})=>theme.colors.blue_2};
@@ -68,9 +68,8 @@ export const PasswordInput = styled.input.attrs({ type: 'password' })`
     border-radius:5px;
     padding:${({theme})=>theme.paddings.base} ${({theme})=>theme.colors.small};
     color:  ${({theme})=>theme.colors.gray_2};
-    transition: 0.1s ease-out;
 
-    &:focus + ${Lable}{
+    &:focus + label{
         color: ${({theme})=>theme.colors.blue_2};
     }
 `;

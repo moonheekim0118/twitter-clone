@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { loginRequestAction } from '../../../actions/user';
 import Link from 'next/link';
 import useInput from '../../../hooks/useInput';;
-import {  Form, Lable, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text  } from '../style';
+import {  Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text  } from '../style';
 import { ErrorMessage, Loading } from '../../globalStyle';
 
 const LoginForm =()=>{
@@ -44,7 +44,7 @@ const LoginForm =()=>{
                 onChange={onChangeEmail}
                 placeholder=" "
                 />
-                 <Lable htmlFor="user-email">이메일</Lable>
+                 <Label htmlFor="user-email">이메일</Label>
             </InputWrapper>
             <InputWrapper>
                 <PasswordInput
@@ -53,7 +53,7 @@ const LoginForm =()=>{
                  onChange={onChangePassword}
                  placeholder=" "
                 />
-                 <Lable htmlFor="user-password">비밀번호</Lable>
+                 <Label htmlFor="user-password">비밀번호</Label>
             </InputWrapper>
             <ButtonWrapper>
                 {isLoggingIn ? <Loading/> : <SubmitButton>로그인</SubmitButton> }
