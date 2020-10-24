@@ -28,6 +28,7 @@ export const MenuItemWrapper = styled.div`
     margin-bottom:${({theme})=>theme.margins.base};
     padding:${({theme})=>theme.paddings.base};
     border-radius:20px;
+    transition: 0.2s background-color ease-in-out;
 
     @media ${({theme})=>theme.device.pcS}{
         border-radius:50%;
@@ -41,7 +42,9 @@ export const MenuItemWrapper = styled.div`
 `;
 
 export const Detail=styled.div`
-    width:40%;
+    flex-grow: 0;
+    flex-shrink: 2;
+    flex-basis: 90%;
     margin-left:${({theme})=>theme.margins.base};
     display:flex;
     justify-content:space-between;

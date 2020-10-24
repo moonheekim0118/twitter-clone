@@ -43,6 +43,7 @@ const colors = {
     blue_2: "#0099cc",
     pink:"#eb2f96",
     hover:"rgba(153, 204, 255,0.2)",
+    hover_gray:"rgb(234, 234, 225,0.2)",
     disabled:"#b3ecff",
     gradient:"linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(220,245,149,1) 0%, rgba(0,203,255,0.8662815467984069) 100%)",
   }

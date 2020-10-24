@@ -54,12 +54,18 @@ const MenuWrapper=styled.div`
     flex-direction:column;
     padding:25px;
     margin:0;
+
+    @media  ${({theme})=>theme.device.pcS}{
+        padding:25px 10px 25px 25px;
+    }
+
     @media ${({theme})=>theme.device.tablet}{
         width:70%;
         flex-direction:row;
         justify-content:space-evenly;
         align-items:center;
-        padding:0px;
+        padding:0;
+        margin: 0;
     }
 `;
 

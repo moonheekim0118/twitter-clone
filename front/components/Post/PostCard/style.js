@@ -18,7 +18,7 @@ export const Card = styled.div`
     border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
     &:hover{
-        background-color:${({theme})=>theme.colors.hover};
+        background-color:${({theme})=>theme.colors.hover_gray};
     }
 `;
 
@@ -47,8 +47,8 @@ export const CardMeta = styled.div`
     flex-direction:column;
     width:100%;
 
-    padding:0 ${({theme})=>theme.paddings.xxxl};
-    margin-left:${({theme})=>theme.margins.xl};
+    padding:0 ${({theme})=>theme.paddings.xl};
+    margin-left:${({theme})=>theme.margins.lg};
 `;
 
 export const CardButtons= styled.div`
@@ -67,7 +67,7 @@ export const FollowButtonWrapper=styled.div`
     top:5px;
 `;
 
-export const NicknameWrapper=styled.div`
+export const NicknameWrapper=styled.span`
     font-size:${({theme})=>theme.fontSizes.lg};
     font-weight:bold;
 
@@ -133,6 +133,7 @@ export const CommentIcon = styled(MessageOutlined)`
 `;
 
 export const Date = styled.span`
-    margin-left:${({theme})=>theme.margins.base};
+    margin-left:${({theme})=>theme.margins.xsmall};
     color:${({theme})=>theme.colors.gray_2};
+    font-size:${({theme})=>theme.fontSizes.small};
 `;

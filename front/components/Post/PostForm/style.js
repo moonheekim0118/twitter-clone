@@ -20,7 +20,7 @@ export const FormWrapper = styled.form`
 export const FormMeta= styled.div`
     position:relative;
     flex-grow: 0;
-    flex-shrink: 0;
+    flex-shrink: 1;
     flex-basis: 90%;
     display:flex;
     flex-direction:column;

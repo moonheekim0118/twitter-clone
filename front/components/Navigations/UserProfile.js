@@ -14,19 +14,21 @@ const Card = styled.div`
     bottom:0;
     right:0;
     width:80%;
-    margin-right:10px;
-    margin-bottom:10px;
-    padding:10px;
+    margin-right:${({theme})=>theme.margins.base};
+    margin-bottom:${({theme})=>theme.margins.base};
+    padding:${({theme})=>theme.paddings.small};
     border-radius:20px;
     display:flex;
 
-    @media(max-width:1279px){
+    transition: 0.2s background-color ease-in-out;
+    
+    @media ${({theme})=>theme.device.pcS}{
         width:60px;
         border-radius:50%;
-        margin-right:10px;
+        margin-right:${({theme})=>theme.margins.base};
     }
 
-    @media(max-width:767px){
+    @media ${({theme})=>theme.device.tablet}{
         display:none;
     }
 
@@ -38,11 +40,14 @@ const Card = styled.div`
 const UserInfo=styled.div`
     display:flex;
     flex-direction:column;
-
 `;
 
 const Email= styled.span`
-    color:#75a3a3;
+    color:${({theme})=>theme.colors.gray_2};
+    width:120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 const UserProfile =()=>{

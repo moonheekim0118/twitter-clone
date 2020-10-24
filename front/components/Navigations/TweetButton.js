@@ -17,7 +17,8 @@ const Button = styled.button`
     font-weight:bold;
     margin-bottom:${({theme})=>theme.margins.base};
     box-shadow: -1px 1px 5px -1px rgba(0,0,0,0.75);
-
+    transition: 0.2s background-color ease-in-out;
+    
     @media ${({theme})=>theme.device.pcS}{
         border-radius:50%;
         margin-right:0;
@@ -28,6 +29,10 @@ const Button = styled.button`
         bottom:10px;
         right:10px;
         font-size:${({theme})=>theme.device.xxxl};
+    }
+
+    &:hover{
+        background-color:${({theme})=>theme.colors.blue_2};
     }
 
 `;
