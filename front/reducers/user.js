@@ -54,8 +54,8 @@ const reducer= (state = initialState , action)=>{
                 draft.me=action.data;
                 if(draft.me){
                     draft.isLoggedIn=true;
+                    draft.profilePicPath=draft.me.profilepic;
                 }
-                draft.profilePicPath=draft.me.profilepic;
                 draft.loadMyInfoDone=true;
                 draft.loadMyInfoLoading=false;
                 break;

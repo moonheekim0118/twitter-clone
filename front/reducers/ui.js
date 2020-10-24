@@ -9,6 +9,7 @@ export const initialState={
     modifyPostId:null,
     showAlert:false,
     alertContent:'',
+    showInfoEditModal:false,
 }
 
 const reducer=(state=initialState, action)=>{
@@ -46,6 +47,15 @@ const reducer=(state=initialState, action)=>{
             case type.HIDE_ALERT:
                 draft.showAlert=false;
                 break; 
+            
+            case type.SHOW_INFO_EDIT_MODAL:
+                draft.showInfoEditModal=true;
+                break;
+
+            case type.HIDE_INFO_EDIT_MODAL:
+                draft.showInfoEditModal=false;
+                break;
+                
         }
     })
 }

@@ -7,7 +7,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import wrapper from '../store/configureStore';
 import AppLayout from '../components/AppLayout';
-import NickNameEditForm from '../components/User/NickNameEditForm';
+import EditProfileForm from '../components/User/EditProfileForm';
 
 const Profile=()=>{
     const me = useSelector(state => state.user.me);
@@ -26,7 +26,7 @@ const Profile=()=>{
             <Head>
                 <title>My profile | JackJack</title>
             </Head>
-            <NickNameEditForm/>
+            <EditProfileForm/>
         </AppLayout>
     );
 }

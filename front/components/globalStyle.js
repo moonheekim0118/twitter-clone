@@ -71,6 +71,11 @@ export const RectButton = styled.button`
     &:hover{
         background-color:${({theme})=>theme.colors.blue_2} ;
     }
+
+    &:disabled{
+        background-color:${({theme})=>theme.colors.disabled};
+        cursor:default;
+    }
 `;
 
 

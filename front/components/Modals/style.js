@@ -21,7 +21,7 @@ export const BlackOveraly = styled.div`
     right:0;
     position:fixed;
     z-index:5000;
-    background-color:rgba(0,0,0,0.5);
+    background-color:rgba(0,0,0,0.5);    
 `;
 
 

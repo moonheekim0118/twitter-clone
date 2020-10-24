@@ -2,11 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 
 const Image = styled.img`
-    width:36px;
-    height:36px;
+    width:100%;
+    height:100%;
     border-radius:100%;
     oveflow:hidden;
 `;
@@ -19,29 +20,43 @@ const NicknameWrapper=styled.div`
     flex-direction: column;
     text-align:center;
 
-    width:52px;
-    height:52px;
+    width:100%;
+    height:100%;
     border-radius:100%;
     oveflow:hidden;
+
     background-color:${({theme})=>theme.colors.gray_1};
     color:${({theme})=>theme.colors.white};
     font-size:${({theme})=>theme.fontSizes.lg};
     
 `;
 
-const Avatar =({imageSrc, userId, userNickname})=>{
+const Avatar =({imageSrc, userId, userNickname, isLink})=>{
+    const profilePicPath =useSelector(state=>state.user.profilePicPath);
+
+    if(isLink){
+        return(
+            <Link href={`/user/${userId}`}>
+                <a>
+                    {imageSrc ? 
+                        (<Image src={imageSrc}/>) : 
+                        (<NicknameWrapper>
+                            {userNickname[0]} 
+                         </NicknameWrapper>)
+                    }
+                </a>
+            </Link>
+        )
+    }
     return(
-        <Link href={`/user/${userId}`}>
-            <a>
-                {imageSrc ? (
-                            <Image src={imageSrc}/>
-                        ) : (
-                            <NicknameWrapper>
-                                {userNickname[0]} 
-                            </NicknameWrapper>
-                )}
-            </a>
-        </Link>
+        <>
+            {imageSrc ? 
+                (<Image src={profilePicPath}/>) : 
+                ( <NicknameWrapper>
+                    {userNickname[0]} 
+                  </NicknameWrapper>)
+            }
+        </>
     )
 };
 
@@ -49,6 +64,9 @@ const Avatar =({imageSrc, userId, userNickname})=>{
 Avatar.propTypes = {
     imageSrc:PropTypes.string.isRequired,
     userId:PropTypes.string.isRequired,
+    userNickname:PropTypes.string.isRequired,
+    isLink:PropTypes.bool.isRequired,
+    
 }
 
 export default Avatar;

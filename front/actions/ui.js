@@ -19,6 +19,25 @@ export const HIDE_MODIFY_MODAL="HIDE_MODIFY_MODAL";
 export const SHOW_ALERT="SHOW_ALERT";
 export const HIDE_ALERT="HIDE_ALERT";
 
+// ProfileEidt
+
+export const SHOW_INFO_EDIT_MODAL="SHOW_INFO_EDIT_MODAL";
+export const HIDE_INFO_EDIT_MODAL="HIDE_INFO_EDIT_MODAL";
+
+export const showInfoEditModalAction=(data)=>{
+    return {
+        type:SHOW_INFO_EDIT_MODAL,
+        data,
+    }    
+}
+
+export const hideInfoEditModalAction=(data)=>{
+    return {
+        type:HIDE_INFO_EDIT_MODAL,
+        data,
+    }
+}
+
 
 export const showAlertAction=(data)=>{
     return {

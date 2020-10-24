@@ -84,5 +84,5 @@ export const TextLength = styled.span`
     top:18px;
     right:100px;
     font-size: ${({theme})=>theme.fontSizes.base};
-    color:${(props)=>props.limit? 'red' : `${({theme})=>theme.colors.blue_2}`}
+    color:${(props)=>props.limit? 'red' : `${({theme})=>theme.colors.blue_2}`}${({theme})=>theme.colors.blue_2};
 `;
