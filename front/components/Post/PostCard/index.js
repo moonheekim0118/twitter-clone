@@ -15,6 +15,7 @@ import { AvatarWrapper, Card, CardMeta, CardButtons,
     NicknameWrapper,LikedCount,LikersCount,
     LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,PostInfoWrapper,Date } from './style';
     import { MediumAvatarWrapper, XsmallAvatarWrapper } from '../../globalStyle';
+import Tooltip from '../Tooltip';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -116,12 +117,9 @@ const PostCard=({post})=>{
                                 </LikeButtonWrapper>
                                 }
                             <CommentIcon onClick={onToggleComment} key="comment"/>
-                            <Popover key="more" content={(<Button.Group>
-                                <Button onClick={onShare}>공유</Button>
-                                <Button>신고</Button>
-                            </Button.Group>)}>
-                            <EllipsisOutlined/>
-                            </Popover>
+                            {me &&<Tooltip post={post.Retweet}>
+                                <EllipsisOutlined/>
+                            </Tooltip>}
                         </CardButtons>
             </CardMeta>
         </RetweetCard>
@@ -156,17 +154,9 @@ const PostCard=({post})=>{
                             </LikeButtonWrapper>
                             }
                         <CommentIcon onClick={onToggleComment} key="comment"/>
-                        <Popover key="more" content={(<Button.Group>
-                            {me===post.User.id 
-                            ?<>
-                            <Button onClick={onShare}>공유</Button>
-                            <Button onClick={onClickModify}>수정</Button>
-                            <Button type="danger" onClick={onClickRemove} loading={removePostloading}>삭제</Button>
-                            </>
-                            :  <Button>신고</Button>}
-                            </Button.Group>)}>
-                        <EllipsisOutlined/>
-                        </Popover>
+                        {me && <Tooltip post={post}>
+                                <EllipsisOutlined/>
+                            </Tooltip>}
                     </CardButtons>
                 </CardMeta>
         </Card>

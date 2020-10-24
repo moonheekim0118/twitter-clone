@@ -96,7 +96,7 @@ Avatar.defaultProps={
 
 Avatar.propTypes = {
     imageSrc:PropTypes.string.isRequired,
-    userId:PropTypes.string.isRequired,
+    userId:PropTypes.number.isRequired,
     userNickname:PropTypes.string.isRequired,
     isLink:PropTypes.bool.isRequired,
     isMyPic:PropTypes.bool.isRequired,
