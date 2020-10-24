@@ -5,8 +5,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import { showInfoEditModalAction  } from '../../../actions/ui';
 import Avatar from '../../Avatar';
 import FollowButton from '../../Follow/FollowButton';
-import { Wrapper,AvatarWrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
-import { Button } from '../../globalStyle';
+import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
+import { Button, LargeAvatarWrapper } from '../../globalStyle';
 import EditProfileModal from '../../Modals/EditProfileModal'
 import ImagesZoom from '../../Image/ImagesZoom';
 
@@ -43,9 +43,9 @@ const UserProfile=({user})=>{
         <Wrapper>
             <UpperWrapper>
                 <UserInfoWrapper>
-                    <AvatarWrapper onClick={onZoom}>
-                        <Avatar imageSrc={user.profilepic ||""} userId={user.id} userNickname={user.nickname} isLink={false}/>
-                    </AvatarWrapper>
+                    <LargeAvatarWrapper onClick={onZoom}>
+                        <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={false} isMyPic={user.id===me}/>
+                    </LargeAvatarWrapper>
                     <NicknameWrapper>{user.nickname}</NicknameWrapper>
                     <div>{user.email}</div>
                 </UserInfoWrapper>

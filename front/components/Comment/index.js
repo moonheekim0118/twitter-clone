@@ -49,7 +49,7 @@ const CommentForm=({postId})=>{
     return(
         <FormWrapper onFinish={onSubmitComment}>
             <Input.TextArea value={commentText} onChange={onChangeText} row={4}/>
-            <SubmitButton type="primary" htmlType="submit" loading={addCommentloading}>삐약</SubmitButton>
+            <SubmitButton type="primary" htmlType="submit" loading={addCommentloading}>등록</SubmitButton>
         </FormWrapper>
     )
 }

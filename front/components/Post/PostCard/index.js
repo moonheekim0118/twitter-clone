@@ -5,15 +5,17 @@ import dayjs from 'dayjs';
 import { useSelector ,useDispatch } from 'react-redux';
 import { showModifyModalAction,showAlertAction } from '../../../actions/ui';
 import { removePostAction,likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
-import { Button, Popover,Avatar, List, Comment } from 'antd';
+import { Button, Popover, List, Comment } from 'antd';
 import { RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
 import PostImages from '../../Image/PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../../Comment';
 import FollowButton from '../../Follow/FollowButton';
+import Avatar from '../../Avatar';
 import { AvatarWrapper, Card, CardMeta, CardButtons, 
     FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
     LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,Date } from './style';
+    import { MediumAvatarWrapper, XsmallAvatarWrapper } from '../../globalStyle';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
@@ -88,7 +90,12 @@ const PostCard=({post})=>{
         <RetweetCard>
             <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
-        <AvatarWrapper><Avatar>{post.Retweet.User.nickname[0]}</Avatar></AvatarWrapper>
+        <AvatarWrapper>
+            <MediumAvatarWrapper>
+                <Avatar imageSrc={post.Retweet.User.profilepic} userId={post.Retweet.User.id}
+                userNickname={post.Retweet.User.nickname} isLink={true} isMyPic={false}/>     
+            </MediumAvatarWrapper>
+        </AvatarWrapper>
             <Date>{dayjs(post.createdAt).format('YYYY.MM.DD.')}</Date>
             <CardMeta>
                     <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
@@ -121,7 +128,12 @@ const PostCard=({post})=>{
        :
        <Card>
             {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
-            <AvatarWrapper><Avatar>{post.User.nickname[0]}</Avatar></AvatarWrapper>
+            <AvatarWrapper>
+                <MediumAvatarWrapper>
+                    <Avatar imageSrc={post.User.profilepic} userId={post.User.id}
+                    userNickname={post.User.nickname} isLink={true} isMyPic={false}/>     
+                </MediumAvatarWrapper>
+            </AvatarWrapper>
             <Date>{dayjs(post.createdAt).format('YYYY.MM.DD.')}</Date>
             <CardMeta>
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
@@ -169,7 +181,12 @@ const PostCard=({post})=>{
                     <li>
                         <Comment
                             author={item.User.nickname}
-                            avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
+                            avatar={
+                            <XsmallAvatarWrapper>
+                                <Avatar imageSrc={item.User.profilepic} userId={item.User.id}
+                                userNickname={item.User.nickname} isLink={true} isMyPic={false}/>
+                            </XsmallAvatarWrapper>
+                        }
                             content={item.content}
                         />
                     </li>

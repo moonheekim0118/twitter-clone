@@ -1,11 +1,12 @@
 import React , { useCallback } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { showProfileModalAction } from '../../actions/ui';
-import { Avatar } from 'antd';
+import Avatar from '../Avatar';
 import styled from 'styled-components';
-import { DownOutlined,UserOutlined } from '@ant-design/icons';
+import { DownOutlined } from '@ant-design/icons';
 import { Detail } from './style';
 import { Description } from '../AppLayout/style';
+import { SmallAvatarWrapper } from '../globalStyle';
 
 const Card = styled.div`
     cursor:pointer;
@@ -52,7 +53,9 @@ const UserProfile =()=>{
     },[]);
     return(
         <Card onClick={onClickProfile}>
-            <Avatar size="large" icon={<UserOutlined/>}/>
+            <SmallAvatarWrapper>
+                <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true} />
+            </SmallAvatarWrapper>
             <Detail>
                 <UserInfo>
                     <Description>{me.nickname}</Description>

@@ -31,15 +31,15 @@ const NicknameWrapper=styled.div`
     
 `;
 
-const Avatar =({imageSrc, userId, userNickname, isLink})=>{
+const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
     const profilePicPath =useSelector(state=>state.user.profilePicPath);
 
-    if(isLink){
+    if(isLink && isMyPic){
         return(
             <Link href={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
-                        (<Image src={imageSrc}/>) : 
+                        (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
                         (<NicknameWrapper>
                             {userNickname[0]} 
                          </NicknameWrapper>)
@@ -48,16 +48,49 @@ const Avatar =({imageSrc, userId, userNickname, isLink})=>{
             </Link>
         )
     }
-    return(
-        <>
-            {profilePicPath ? 
-                (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
-                ( <NicknameWrapper>
-                    {userNickname[0]} 
-                  </NicknameWrapper>)
-            }
-        </>
-    )
+    if(isLink && !isMyPic){
+        return(
+            <Link href={`/user/${userId}`}>
+                <a>
+                    {imageSrc ? 
+                        (<Image src={`http://localhost:3065/${imageSrc}`}/>) : 
+                        (<NicknameWrapper>
+                            {userNickname[0]} 
+                         </NicknameWrapper>)
+                    }
+                </a>
+            </Link>
+        )
+    }
+
+   if(!isLink && isMyPic){
+        return(
+            <>
+                {profilePicPath ? 
+                    (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
+                    ( <NicknameWrapper>
+                        {userNickname[0]} 
+                    </NicknameWrapper>)
+                }
+            </>
+        )
+   }
+
+   return(
+    <>
+        {imageSrc ? 
+            (<Image src={`http://localhost:3065/${imageSrc}`}/>) : 
+            ( <NicknameWrapper>
+                {userNickname[0]} 
+              </NicknameWrapper>)
+        }
+    </>
+)
+};
+
+
+Avatar.defaultProps={
+    imageSrc:'',
 };
 
 
@@ -66,6 +99,7 @@ Avatar.propTypes = {
     userId:PropTypes.string.isRequired,
     userNickname:PropTypes.string.isRequired,
     isLink:PropTypes.bool.isRequired,
+    isMyPic:PropTypes.bool.isRequired,
     
 }
 

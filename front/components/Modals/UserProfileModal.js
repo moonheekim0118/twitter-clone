@@ -2,10 +2,11 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideProfileModalAction } from '../../actions/ui';
 import styled from 'styled-components';
-import { Card,Avatar } from 'antd';
+import { Card } from 'antd';
+import  Avatar from '../Avatar';
 import LogoutButton from '../User/LogoutButton';
 import { TransparentOveraly } from './style';
-
+import { SmallAvatarWrapper } from '../globalStyle';
 
 const CardWrapper = styled(Card)`
     position:fixed;
@@ -47,13 +48,17 @@ const UserProfileDetail =()=>{
         <TransparentOveraly onClick={onClose}/>
         <CardWrapper
             actions={[
-            <div onClick={onClickProfilePage} key="twit">짹짹 <br/>{me.Posts.length}</div>,
+            <div onClick={onClickProfilePage} key="twit">트윗 <br/>{me.Posts.length}</div>,
             <div onClick={onClickFollowingPage} key="followings">팔로잉 <br/>{me.Followings.length}</div>,
             <div onClick={onClickFollowerPage} key="followers">팔로워<br/>{me.Followers.length}</div>,
             ]}
            >
             <Card.Meta
-            avatar={<Avatar>{me.nickname[0]}</Avatar>}
+            avatar={
+                <SmallAvatarWrapper>
+                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={true} isMyPic={true}/>
+                </SmallAvatarWrapper>
+            }
             title={me.nickname}/>
            <LogoutButton/>
         </CardWrapper>

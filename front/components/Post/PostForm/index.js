@@ -4,12 +4,14 @@ import { addPostAction , uploadImagesAction } from '../../../actions/post';
 import { hidePostModalAction, showAlertAction } from '../../../actions/ui';
 import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
-import { Avatar } from 'antd';
+import Avatar from '../../Avatar';
 import { FormWrapper,FormMeta,Buttons,ImageButtonIcon,TextArea,TweetButton,TextLength } from './style';
 import { AvatarWrapper } from '../PostCard/style';
+import { MediumAvatarWrapper } from '../../globalStyle';
 
 const PostForm =()=>{
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
+    const me = useSelector((state)=>state.user.me);
     const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
     const dispatch = useDispatch();
@@ -62,7 +64,9 @@ const PostForm =()=>{
         <>
         <FormWrapper onSubmit={onSubmit} noborder={showPostModal}>
             <AvatarWrapper>
-                <Avatar/>
+                <MediumAvatarWrapper>
+                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
+                </MediumAvatarWrapper>
             </AvatarWrapper>
             <FormMeta>
                 <TextArea

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import FollowButton from '../FollowButton';
-import { Avatar } from 'antd';
+import Avatar from '../../Avatar';
 import { Wrapper, AvatarWrapper, FollowButtonWrapper} from './style';
+import { MediumAvatarWrapper } from '../../globalStyle';
 
 const FollowList=({user})=>{
     const me = useSelector(state=>state.user.me?.id);
@@ -16,7 +17,9 @@ const FollowList=({user})=>{
     return(
         <Wrapper onClick={onClickUser}>
             <AvatarWrapper>
-                <Avatar>{user.nickname[0]}</Avatar>
+                <MediumAvatarWrapper>
+                     <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={true} isMyPic={false}/>
+                </MediumAvatarWrapper>
             </AvatarWrapper>
             <span>{user.nickname}</span>
             <FollowButtonWrapper>
