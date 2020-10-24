@@ -56,7 +56,7 @@ const UserProfileDetail =()=>{
             <Card.Meta
             avatar={
                 <SmallAvatarWrapper>
-                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={true} isMyPic={true}/>
+                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={true} isMyPic={false}/>
                 </SmallAvatarWrapper>
             }
             title={me.nickname}/>

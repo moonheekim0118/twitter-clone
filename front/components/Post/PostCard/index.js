@@ -10,10 +10,9 @@ import { RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@an
 import PostImages from '../../Image/PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../../Comment';
-import FollowButton from '../../Follow/FollowButton';
 import Avatar from '../../Avatar';
 import { AvatarWrapper, Card, CardMeta, CardButtons, 
-    FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
+    NicknameWrapper,LikedCount,LikersCount,
     LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,PostInfoWrapper,Date } from './style';
     import { MediumAvatarWrapper, XsmallAvatarWrapper } from '../../globalStyle';
 
@@ -89,7 +88,6 @@ const PostCard=({post})=>{
        {post.RetweetId && post.Retweet ?  
         <RetweetCard>
             <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
-        {me && post.Retweet.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.Retweet.User.id}/></FollowButtonWrapper>}
         <AvatarWrapper>
             <MediumAvatarWrapper>
                 <Avatar imageSrc={post.Retweet.User.profilepic} userId={post.Retweet.User.id}
@@ -129,7 +127,6 @@ const PostCard=({post})=>{
         </RetweetCard>
        :
        <Card>
-            {me && post.User.id!==me && <FollowButtonWrapper><FollowButton userId={post.User.id}/></FollowButtonWrapper>}
             <AvatarWrapper>
                 <MediumAvatarWrapper>
                     <Avatar imageSrc={post.User.profilepic} userId={post.User.id}

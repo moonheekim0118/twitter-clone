@@ -54,7 +54,7 @@ const UserProfile =()=>{
     return(
         <Card onClick={onClickProfile}>
             <SmallAvatarWrapper>
-                <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true} />
+                <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={false} />
             </SmallAvatarWrapper>
             <Detail>
                 <UserInfo>

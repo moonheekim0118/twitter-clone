@@ -44,7 +44,7 @@ const UserProfile=({user})=>{
             <UpperWrapper>
                 <UserInfoWrapper>
                     <LargeAvatarWrapper onClick={onZoom}>
-                        <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={false} isMyPic={user.id===me}/>
+                        <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={false} isMyPic={false}/>
                     </LargeAvatarWrapper>
                     <NicknameWrapper>{user.nickname}</NicknameWrapper>
                     <div>{user.email}</div>

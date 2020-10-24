@@ -113,8 +113,7 @@ export const Retweet=styled.div`
 `;
 
 export const ContentWrapper=styled.div`
-    display:flex;
-    align-items:center;
+    font-size:${({theme})=>theme.fontSizes.lg};
 `;
 
 export const RetweetIcon=styled(RetweetOutlined)`

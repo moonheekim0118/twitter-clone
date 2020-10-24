@@ -7,6 +7,7 @@ import { updateMyInfoAction,uploadProfilePicAction } from '../../../actions/user
 import { Wrapper,Title,ContentWrapper,ProfilePicWrapper, Overaly, EditIcon,CloseButton, Header } from './style';
 import { InputWrapper,  TextLength, Label , TextInput } from '../style';
 import { RectButton } from '../../globalStyle';
+import { TrophyOutlined } from '@ant-design/icons';
 
 const EditProfileForm=()=>{
     const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const EditProfileForm=()=>{
                     <Overaly/>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
                     <EditIcon  onClick={onClickImageUpload}/>
-                    <Avatar imageSrc={me.profilepic||""} userId={me.id} userNickname={me.nickname} isLink={false}/>
+                    <Avatar imageSrc={me.profilepic||""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
                 </ProfilePicWrapper>
                 <InputWrapper>
                     <TextInput
