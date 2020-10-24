@@ -5,7 +5,7 @@ import { PlusOutlined , CloseOutlined } from '@ant-design/icons';
 export const Wrapper = styled.div`
     position:fixed;
     background:#fff;
-    height:270px;
+    height:290px;
     border-radius:20px;
     margin:0;
     top:50%;
@@ -75,6 +75,7 @@ export const ProfilePicWrapper = styled.div`
     border-radius:50%;
     z-index:1000;
     background-color:rgba(0,0,0,0.8);
+    margin-bottom: ${({theme})=>theme.margins.xl};
 `;
 
 export const Overaly = styled.div`

@@ -50,8 +50,8 @@ const Avatar =({imageSrc, userId, userNickname, isLink})=>{
     }
     return(
         <>
-            {imageSrc ? 
-                (<Image src={profilePicPath}/>) : 
+            {profilePicPath ? 
+                (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
                 ( <NicknameWrapper>
                     {userNickname[0]} 
                   </NicknameWrapper>)

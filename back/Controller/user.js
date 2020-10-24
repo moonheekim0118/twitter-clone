@@ -147,7 +147,7 @@ exports.unfollowUser=async(req,res,next)=>{
 
 // 유저 프로필 사진 업로드 컨트롤러 
 exports.uploadProfilePic=(req,res,next)=>{
-    res.json(req.files.map((v)=>v.filename));
+    res.json(req.files[0].filename);
 }
 
 //유저 정보 업데이트 컨트롤러 
@@ -164,7 +164,7 @@ exports.updateUserInfo =async(req,res,next)=>{
         }
 
         if(req.body.image){ // 이미지가 있는 경우 
-            const image = await Image.create({src:req.body.image});
+            const image = req.body.image;
             user.profilepic=image;
             await user.save();
 

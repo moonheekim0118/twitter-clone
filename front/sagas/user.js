@@ -144,7 +144,7 @@ function* uploadProfilePic(action){
         const result = yield call(uploadProfilePicAPI, action.data);
         yield put({
             type:type.UPLOAD_PROFILE_PIC_SUCCESS,
-            data:result.data.src
+            data:result.data
         })
 
     }catch(err){

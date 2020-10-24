@@ -188,7 +188,7 @@ const reducer= (state = initialState , action)=>{
             
             case type.UPDATE_MY_INFO_SUCCESS:
                 draft.updateMyInfoLoading=false;
-                draft.updateMyInfoDone=done;
+                draft.updateMyInfoDone=true;
                 draft.me.nickname=action.data.nickname; // 변경 
                 draft.me.profilepic=action.data.profilepic;
                 break;

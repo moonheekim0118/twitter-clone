@@ -21,11 +21,12 @@ const EditProfileForm=()=>{
     },[]);
 
     const onSubmitUpdate = useCallback(()=>{ // submit 
-        dispatch(updateMyInfoAction({nickname:nickname, profilepic:profilePicPath}));
+        dispatch(updateMyInfoAction({nickname:nickname, image:profilePicPath}));
+        dispatch(hideInfoEditModalAction()); // 모달 창 닫기 
     },[nickname,profilePicPath]);
 
     // 이미지 업로드 
-    const onChangeImages=useCallback(()=>{
+    const onChangeImages=useCallback((e)=>{
         if(e.target.files.length>1){ // 이미지 개수가 1개 이상일 경우 
              return dispatch(showAlertAction("하나의 이미지만 선택해주세요."));
         }
@@ -53,7 +54,7 @@ const EditProfileForm=()=>{
                     <Overaly/>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
                     <EditIcon  onClick={onClickImageUpload}/>
-                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false}/>
+                    <Avatar imageSrc={me.profilepic||""} userId={me.id} userNickname={me.nickname} isLink={false}/>
                 </ProfilePicWrapper>
                 <InputWrapper>
                     <TextInput

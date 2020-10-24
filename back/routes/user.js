@@ -3,6 +3,7 @@ const router = express.Router();
 const UserController= require('../Controller/user');
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 try{
