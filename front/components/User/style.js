@@ -44,7 +44,7 @@ export const InputWrapper=styled.div`
     position:relative;
 `
 
-export const TextIpnut = styled.input.attrs({ type: 'text' })`
+export const TextInput = styled.input.attrs({ type: 'text' })`
     font-size:${({theme})=>theme.fontSizes.small};
     background-color: ${({theme})=>theme.colors.white};
     outline:none;
@@ -60,7 +60,7 @@ export const TextIpnut = styled.input.attrs({ type: 'text' })`
     }
 `;
 
-export const PasswordIpnut = styled.input.attrs({ type: 'password' })`
+export const PasswordInput = styled.input.attrs({ type: 'password' })`
     font-size:${({theme})=>theme.fontSizes.small};
     outline:none;
     border: none;
@@ -105,4 +105,12 @@ export const ButtonWrapper =styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+`;
+
+export const TextLength = styled.span`
+    position:absolute;
+    right:5px;
+    top:10px;
+    font-size: ${({theme})=>theme.fontSizes.base};
+    color:${(props)=>props.limit? 'red' : 'gray'}
 `;

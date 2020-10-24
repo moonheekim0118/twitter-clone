@@ -6,7 +6,7 @@ import useInput from '../../../hooks/useInput';
 import useValidation from '../../../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction,signUpResetAction} from '../../../actions/user';
-import { Form, Lable, InputWrapper,TextIpnut,PasswordIpnut,SubmitButton,ButtonWrapper,Text } from '../style';
+import { Form, Lable, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text,TextLength } from '../style';
 import { ErrorMessage } from '../../globalStyle';
 
 const SignUp=()=>{
@@ -64,7 +64,7 @@ const SignUp=()=>{
         <Form onSumbit={onSubmit}>
     
             <InputWrapper>
-                <TextIpnut 
+                <TextInput 
                 name ="user-email" 
                 value={email} 
                 onChange={onChangeEmail}
@@ -73,17 +73,18 @@ const SignUp=()=>{
                 <Lable htmlFor="user-email">이메일</Lable>
             </InputWrapper>
             <InputWrapper>
-                <TextIpnut 
+                <TextInput 
                 name ="user-nickname" 
                 value={nickname} 
                 onChange={onChangeNickname}
                 placeholder=" "
                 />
                 <Lable htmlFor="user-nickname">닉네임</Lable>
+                <TextLength limit={nickname.length>5}>{nickname.length}/5</TextLength>
                 {nicknameLengthError && <ErrorMessage>닉네임은 1자리 이상 5자리 이하여야 합니다.</ErrorMessage>}
             </InputWrapper>
             <InputWrapper>
-                <PasswordIpnut 
+                <PasswordInput 
                 name ="user-password" 
                 value={password} 
                 required 
@@ -95,7 +96,7 @@ const SignUp=()=>{
             </InputWrapper>
 
             <InputWrapper>
-                <PasswordIpnut 
+                <PasswordInput 
                 name ="user-password-check" 
                 value={passwordCheck} 
                 onChange={onChangePasswordCheck}
