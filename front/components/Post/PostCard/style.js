@@ -41,17 +41,20 @@ export const RetweetCard=styled.div`
 export const CardMeta = styled.div`
     position:relative;
     flex-grow: 0;
-    flex-shrink: 0;
+    flex-shrink: 1;
     flex-basis: 90%;
     display:flex;
     flex-direction:column;
+    width:100%;
+
     padding:0 ${({theme})=>theme.paddings.xxxl};
-    margin-left:${({theme})=>theme.margins.xxxl};
+    margin-left:${({theme})=>theme.margins.xl};
 `;
 
 export const CardButtons= styled.div`
     margin-top:${({theme})=>theme.margins.xxxl};
     font-size:${({theme})=>theme.fontSizes.lg};
+    width:100%;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
@@ -71,6 +74,12 @@ export const NicknameWrapper=styled.div`
     &:hover{
         text-decoration:underline;
     }
+`;
+
+export const PostInfoWrapper =styled.div`
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
 `;
 
 export const LikedCount=styled.span`   
@@ -125,8 +134,6 @@ export const CommentIcon = styled(MessageOutlined)`
 `;
 
 export const Date = styled.span`
-    position:absolute;
-    top:5px;
-    right:10px;
+    margin-left:${({theme})=>theme.margins.base};
     color:${({theme})=>theme.colors.gray_2};
 `;

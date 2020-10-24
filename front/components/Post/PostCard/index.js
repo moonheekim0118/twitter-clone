@@ -14,7 +14,7 @@ import FollowButton from '../../Follow/FollowButton';
 import Avatar from '../../Avatar';
 import { AvatarWrapper, Card, CardMeta, CardButtons, 
     FollowButtonWrapper,NicknameWrapper,LikedCount,LikersCount,
-    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,Date } from './style';
+    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,PostInfoWrapper,Date } from './style';
     import { MediumAvatarWrapper, XsmallAvatarWrapper } from '../../globalStyle';
 
 const PostCard=({post})=>{
@@ -96,9 +96,11 @@ const PostCard=({post})=>{
                 userNickname={post.Retweet.User.nickname} isLink={true} isMyPic={false}/>     
             </MediumAvatarWrapper>
         </AvatarWrapper>
-            <Date>{dayjs(post.createdAt).format('YYYY.MM.DD.')}</Date>
             <CardMeta>
-                    <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
+                    <PostInfoWrapper>
+                        <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
+                        <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
+                    </PostInfoWrapper>
                         <PostCardContent postData={post.Retweet.content}/>
                         {post.Retweet.Images[0] && <PostImages onClick={onClickContent}   images={post.Retweet.Images}/>}
                         <CardButtons>
@@ -134,9 +136,11 @@ const PostCard=({post})=>{
                     userNickname={post.User.nickname} isLink={true} isMyPic={false}/>     
                 </MediumAvatarWrapper>
             </AvatarWrapper>
-            <Date>{dayjs(post.createdAt).format('YYYY.MM.DD.')}</Date>
             <CardMeta>
+                <PostInfoWrapper>
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
+                    <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
+                </PostInfoWrapper>
                     <ContentWrapper >
                         <PostCardContent postData={post.content}/>
                     </ContentWrapper>
