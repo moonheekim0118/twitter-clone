@@ -178,7 +178,7 @@ exports.retweetPost=async(req,res,next)=>{
               as: 'Retweet',
               include: [{
                 model: User,
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname','profilepic'],
               }, {
                 model: Image,
               },{
