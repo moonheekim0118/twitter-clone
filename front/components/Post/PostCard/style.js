@@ -89,14 +89,14 @@ export const Count=styled.span`
 `;
 
 export const LikeButtonWrapper=styled.div`
-    color:${(props)=>props.liked ? '#eb2f96' : 'gray'};
+    color:${(props)=>props.liked==="true" ? '#eb2f96' : 'gray'};
     &:hover{
         color:${({theme})=>theme.colors.pink};
     }
 `;
 
 export const CommentButtonWrapper = styled.div`
-    color:${(props)=>props.opend?'#0099cc': 'gray' };
+    color:${(props)=>props.opend==="true"?'#0099cc': 'gray' };
     &:hover{
         color:${({theme})=>theme.colors.blue_2};
     }

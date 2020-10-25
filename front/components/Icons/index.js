@@ -116,7 +116,7 @@ export const SmallRetweetIcon = styled(RetweetOutlined)`
 `;
 
 export const RetweetIcon = styled(RetweetOutlined)`
-    color:${(props)=>props.retweeted? 'lime' : 'gray'};  
+    color:${(props)=>props.retweeted==="true"? 'lime' : 'gray'};  
     padding:${({theme})=>theme.paddings.base};
     border-radius:50%;
     transition: 0.2s background-color ease-in-out;

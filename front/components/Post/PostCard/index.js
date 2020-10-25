@@ -92,12 +92,12 @@ const PostCard=({post,commentFormOpen})=>{
                 <PostCardContent postData={post.Retweet.content}/>
                 {post.Retweet.Images[0] && <div onClick={onClickButtons}><PostImages images={post.Retweet.Images}/></div>}
                 <CardButtons onClick={onClickButtons}>
-                    <RetweetIcon retweeted={post.UserId === me && "true"} onClick={onRetweetToggle} key="retweet"/>
-                    <LikeButtonWrapper liked={liked && "true"}>
+                    <RetweetIcon retweeted={post.UserId===me?"true":"false"} onClick={onRetweetToggle} key="retweet"/>
+                    <LikeButtonWrapper liked={liked?"true":"false"}>
                         <HeartIcon onClick={onLikeToggle} />
                         {post.Likers.length>0 && <Count>{post.Likers.length}</Count>}
                     </LikeButtonWrapper>
-                    <CommentButtonWrapper opend={commentFormOpend && "true"} >
+                    <CommentButtonWrapper opend={commentFormOpend?"true":"false"} >
                         <CommentIcon
                         onClick={onToggleComment} key="comment"/>
                         {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
@@ -126,12 +126,12 @@ const PostCard=({post,commentFormOpen})=>{
                 </ContentWrapper>
                 {post.Images[0] && <div onClick={onClickButtons} ><PostImages images={post.Images}/></div>}
                 <CardButtons onClick={onClickButtons}>
-                    <RetweetIcon onClick={onRetweetToggle} key="retweet"/>
-                    <LikeButtonWrapper liked={liked && "true" } >
+                    <RetweetIcon retweeted="false" onClick={onRetweetToggle} key="retweet"/>
+                    <LikeButtonWrapper liked={liked ? "true":"false" } >
                         <HeartIcon onClick={onLikeToggle} />
                         {post.Likers.length>0 && <Count>{post.Likers.length}</Count>}
                     </LikeButtonWrapper>
-                    <CommentButtonWrapper opend={commentFormOpend && "true"} >
+                    <CommentButtonWrapper opend={commentFormOpend ? "true" : "false"} >
                         <CommentIcon
                         onClick={onToggleComment} key="comment"/>
                         {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
