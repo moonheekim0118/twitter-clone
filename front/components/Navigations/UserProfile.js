@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { DownOutlined } from '@ant-design/icons';
 import { Detail } from './style';
 import { Description } from '../AppLayout/style';
-import { SmallAvatarWrapper } from '../globalStyle';
+import { AvatarWrapper } from '../globalStyle';
 
 const Card = styled.div`
     cursor:pointer;
@@ -58,9 +58,9 @@ const UserProfile =()=>{
     },[]);
     return(
         <Card onClick={onClickProfile}>
-            <SmallAvatarWrapper>
+            <AvatarWrapper size={45}>
                 <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={false} />
-            </SmallAvatarWrapper>
+            </AvatarWrapper>
             <Detail>
                 <UserInfo>
                     <Description>{me.nickname}</Description>

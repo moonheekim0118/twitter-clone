@@ -6,7 +6,7 @@ import { Card } from 'antd';
 import  Avatar from '../Avatar';
 import LogoutButton from '../User/LogoutButton';
 import { TransparentOveraly } from './style';
-import { SmallAvatarWrapper } from '../globalStyle';
+import { AvatarWrapper } from '../globalStyle';
 
 const CardWrapper = styled(Card)`
     position:fixed;
@@ -55,9 +55,9 @@ const UserProfileDetail =()=>{
            >
             <Card.Meta
             avatar={
-                <SmallAvatarWrapper>
+                <AvatarWrapper size={45}>
                     <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={true} isMyPic={false}/>
-                </SmallAvatarWrapper>
+                </AvatarWrapper>
             }
             title={me.nickname}/>
            <LogoutButton/>

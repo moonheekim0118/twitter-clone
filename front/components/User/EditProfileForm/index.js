@@ -7,7 +7,6 @@ import { updateMyInfoAction,uploadProfilePicAction } from '../../../actions/user
 import { Wrapper,Title,ContentWrapper,ProfilePicWrapper, Overaly, EditIcon,CloseButton, Header } from './style';
 import { InputWrapper,  TextLength, Label , TextInput } from '../style';
 import { RectButton } from '../../globalStyle';
-import { TrophyOutlined } from '@ant-design/icons';
 
 const EditProfileForm=()=>{
     const dispatch = useDispatch();

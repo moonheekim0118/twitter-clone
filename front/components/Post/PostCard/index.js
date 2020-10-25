@@ -3,32 +3,25 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import dayjs from 'dayjs';
 import { useSelector ,useDispatch } from 'react-redux';
-import { showModifyModalAction,showAlertAction } from '../../../actions/ui';
-import { removePostAction,likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
-import { Button, Popover, List, Comment } from 'antd';
+import {likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
+import { List, Comment } from 'antd';
 import { RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
 import PostImages from '../../Image/PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../../Comment';
 import Avatar from '../../Avatar';
-import { AvatarWrapper, Card, CardMeta, CardButtons, 
+import { SideWrapper, Card, CardMeta, CardButtons, 
     NicknameWrapper,LikedCount,LikersCount,
-    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,CommentIcon,RetweetedIcon,ContentWrapper,PostInfoWrapper,Date } from './style';
-    import { MediumAvatarWrapper, XsmallAvatarWrapper } from '../../globalStyle';
+    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,
+    CommentIcon,RetweetedIcon,ContentWrapper,PostInfoWrapper,Date,MoreIcon } from './style';
+import { AvatarWrapper } from '../../globalStyle';
 import Tooltip from '../Tooltip';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
     const [commentFormOpend, setCommentFormOpend]=useState(false);
     const me = useSelector(state => state.user.me?.id);
-    const {removePostloading} = useSelector(state=>state.post);
     const liked = post.Likers.find((x)=>x.id===me);
-
-
-    const onShare=useCallback(()=>{ // 주소 복사해주기 
-        // `http://localhost:3000/post/${post.id}` 복사하도록 구현하기 
-        dispatch(showAlertAction('포스트 주소가 복사되었습니다.'));
-    });
 
     // Card div 내부에 있는 요소들 onClick 이벤트에 stopPropagation 적용
     const onUnlike=useCallback(()=>{
@@ -49,20 +42,6 @@ const PostCard=({post})=>{
         setCommentFormOpend((prev)=>!prev);
     },[])
 
-    const onClickRemove=useCallback(()=>{
-        if(!me){
-            return;
-        }
-        dispatch(removePostAction({id:post.id}));
-    },[]);
-
-    const onClickModify=useCallback(()=>{
-        if(!me){
-            return;
-        }
-        dispatch(showModifyModalAction({ postId:post.id, postContent:post.content}));
-    },[post.content]);
-    
     const onRetweet = useCallback(()=>{
         if(!me || post.UserId === me){
             return;
@@ -89,12 +68,12 @@ const PostCard=({post})=>{
        {post.RetweetId && post.Retweet ?  
         <RetweetCard>
             <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
-        <AvatarWrapper>
-            <MediumAvatarWrapper>
+        <SideWrapper>
+            <AvatarWrapper size={65}>
                 <Avatar imageSrc={post.Retweet.User.profilepic} userId={post.Retweet.User.id}
                 userNickname={post.Retweet.User.nickname} isLink={true} isMyPic={false}/>     
-            </MediumAvatarWrapper>
-        </AvatarWrapper>
+            </AvatarWrapper>
+        </SideWrapper>
             <CardMeta>
                     <PostInfoWrapper>
                         <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
@@ -118,19 +97,19 @@ const PostCard=({post})=>{
                                 }
                             <CommentIcon onClick={onToggleComment} key="comment"/>
                             {me &&<Tooltip post={post.Retweet}>
-                                <EllipsisOutlined/>
+                                <MoreIcon/>
                             </Tooltip>}
                         </CardButtons>
             </CardMeta>
         </RetweetCard>
        :
        <Card>
-            <AvatarWrapper>
-                <MediumAvatarWrapper>
+            <SideWrapper>
+                <AvatarWrapper size={65}>
                     <Avatar imageSrc={post.User.profilepic} userId={post.User.id}
                     userNickname={post.User.nickname} isLink={true} isMyPic={false}/>     
-                </MediumAvatarWrapper>
-            </AvatarWrapper>
+                </AvatarWrapper>
+            </SideWrapper>
             <CardMeta>
                 <PostInfoWrapper>
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
@@ -155,7 +134,7 @@ const PostCard=({post})=>{
                             }
                         <CommentIcon onClick={onToggleComment} key="comment"/>
                         {me && <Tooltip post={post}>
-                                <EllipsisOutlined/>
+                                <MoreIcon/>
                             </Tooltip>}
                     </CardButtons>
                 </CardMeta>
@@ -173,10 +152,10 @@ const PostCard=({post})=>{
                         <Comment
                             author={item.User.nickname}
                             avatar={
-                            <XsmallAvatarWrapper>
+                            <AvatarWrapper size={30}>
                                 <Avatar imageSrc={item.User.profilepic} userId={item.User.id}
                                 userNickname={item.User.nickname} isLink={true} isMyPic={false}/>
-                            </XsmallAvatarWrapper>
+                            </AvatarWrapper>
                         }
                             content={item.content}
                         />

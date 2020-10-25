@@ -83,6 +83,15 @@ export const Loading = styled(LoadingOutlined)`
     font-size:${({theme})=>theme.fontSizes.xl};
 `;
 
+
+
+export const AvatarWrapper = styled.div`
+    width:${(props)=>`${props.size}px`};
+    height:${(props)=>`${props.size}px`};
+    cursor:pointer;
+`;
+
+
 export const LargeAvatarWrapper = styled.div`
     width:90px;
     height:90px;

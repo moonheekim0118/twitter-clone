@@ -4,8 +4,8 @@ import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import FollowButton from '../FollowButton';
 import Avatar from '../../Avatar';
-import { Wrapper, AvatarWrapper, FollowButtonWrapper} from './style';
-import { MediumAvatarWrapper } from '../../globalStyle';
+import { Wrapper, SideWrapper, FollowButtonWrapper} from './style';
+import { AvatarWrapper } from '../../globalStyle';
 
 const FollowList=({user})=>{
     const me = useSelector(state=>state.user.me?.id);
@@ -16,11 +16,11 @@ const FollowList=({user})=>{
 
     return(
         <Wrapper onClick={onClickUser}>
-            <AvatarWrapper>
-                <MediumAvatarWrapper>
+            <SideWrapper>
+                <AvatarWrapper size={65}>
                      <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={true} isMyPic={false}/>
-                </MediumAvatarWrapper>
-            </AvatarWrapper>
+                </AvatarWrapper>
+            </SideWrapper>
             <span>{user.nickname}</span>
             <FollowButtonWrapper>
                  {me && user.id!==me&& <FollowButton userId={user.id}/>}

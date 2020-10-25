@@ -6,8 +6,8 @@ import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
 import Avatar from '../../Avatar';
 import { FormWrapper,FormMeta,Buttons,ImageButtonIcon,TextArea,TweetButton,TextLength } from './style';
-import { AvatarWrapper } from '../PostCard/style';
-import { MediumAvatarWrapper } from '../../globalStyle';
+import { SideWrapper } from '../PostCard/style';
+import { AvatarWrapper } from '../../globalStyle';
 
 const PostForm =()=>{
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
@@ -63,11 +63,11 @@ const PostForm =()=>{
     return(
         <>
         <FormWrapper onSubmit={onSubmit} noborder={showPostModal}>
-            <AvatarWrapper>
-                <MediumAvatarWrapper>
+            <SideWrapper>
+                <AvatarWrapper size={65}>
                     <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
-                </MediumAvatarWrapper>
-            </AvatarWrapper>
+                </AvatarWrapper>
+            </SideWrapper>
             <FormMeta>
                 <TextArea
                  name="content"

@@ -1,7 +1,29 @@
 import styled from 'styled-components';
-import { RetweetOutlined , MessageOutlined} from '@ant-design/icons';
+import { RetweetOutlined,MessageOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
 
-export const AvatarWrapper=styled.div`
+// icons 
+export const RetweetIcon=styled(RetweetOutlined)`
+    &:hover{
+        color:lime;
+    }
+`;
+
+export const RetweetedIcon=styled(RetweetOutlined)`
+    color:lime;
+`;
+
+export const CommentIcon = styled(MessageOutlined)`
+    &:hover{
+        color:${({theme})=>theme.colors.blue_2};
+    }
+`;
+
+export const MoreIcon = styled(EllipsisOutlined)`
+
+`;
+
+
+export const SideWrapper=styled.div`
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 5%;
@@ -114,22 +136,6 @@ export const Retweet=styled.div`
 
 export const ContentWrapper=styled.div`
     font-size:${({theme})=>theme.fontSizes.lg};
-`;
-
-export const RetweetIcon=styled(RetweetOutlined)`
-    &:hover{
-        color:lime;
-    }
-`;
-
-export const RetweetedIcon=styled(RetweetOutlined)`
-    color:lime;
-`;
-
-export const CommentIcon = styled(MessageOutlined)`
-    &:hover{
-        color:${({theme})=>theme.colors.blue_2};
-    }
 `;
 
 export const Date = styled.span`

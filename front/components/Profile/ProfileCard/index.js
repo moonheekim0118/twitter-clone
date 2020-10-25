@@ -6,7 +6,7 @@ import { showInfoEditModalAction  } from '../../../actions/ui';
 import Avatar from '../../Avatar';
 import FollowButton from '../../Follow/FollowButton';
 import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
-import { Button, LargeAvatarWrapper } from '../../globalStyle';
+import { Button, AvatarWrapper } from '../../globalStyle';
 import EditProfileModal from '../../Modals/EditProfileModal'
 import ImagesZoom from '../../Image/ImagesZoom';
 
@@ -43,9 +43,9 @@ const UserProfile=({user})=>{
         <Wrapper>
             <UpperWrapper>
                 <UserInfoWrapper>
-                    <LargeAvatarWrapper onClick={onZoom}>
+                    <AvatarWrapper size={90} onClick={onZoom}>
                         <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={false} isMyPic={false}/>
-                    </LargeAvatarWrapper>
+                    </AvatarWrapper>
                     <NicknameWrapper>{user.nickname}</NicknameWrapper>
                     <div>{user.email}</div>
                 </UserInfoWrapper>

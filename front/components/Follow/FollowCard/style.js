@@ -18,7 +18,7 @@ export const Wrapper=styled.div`
     }
 `;
 
-export const AvatarWrapper=styled.div`
+export const SideWrapper=styled.div`
 margin-right:${({theme})=>theme.margins.base};
 `;
 
