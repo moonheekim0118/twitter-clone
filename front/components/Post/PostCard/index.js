@@ -16,11 +16,20 @@ import { AvatarWrapper } from '../../globalStyle';
 import Tooltip from '../Tooltip';
 import { HeartIcon , RetweetIcon , MoreIcon, CommentIcon, SmallRetweetIcon } from '../../Icons';
 
-const PostCard=({post})=>{
+const PostCard=({post,commentFormOpen})=>{
     const dispatch = useDispatch();
-    const [commentFormOpend, setCommentFormOpend]=useState(false);
+    const [commentFormOpend, setCommentFormOpend]=useState(commentFormOpen);
     const me = useSelector(state => state.user.me?.id);
     const [liked, setLiked] = useState(post.Likers.find((x)=>x.id===me));
+
+    const onClickPost=useCallback(()=>{ // 해당 post Single page로 라우팅 
+        if(post.Retweet){
+            Router.push(`/post/${post.Retweet.id}`);
+        }
+        else{
+            Router.push(`/post/${post.id}`);
+        }
+    });
 
     const onLikeToggle=useCallback(()=>{
         if(!me){
@@ -50,19 +59,24 @@ const PostCard=({post})=>{
         }
     },[]);
 
-    const onClickUser= useCallback(()=>{
+    const onClickUser= useCallback((e)=>{
+        e.stopPropagation();
         Router.push(`/user/${post.User.id}`);
     },[]);
 
-    const onClickRetweetedUser=useCallback(()=>{
+    const onClickRetweetedUser=useCallback((e)=>{
+        e.stopPropagation();
         Router.push(`/user/${post.Retweet.User.id}`);
     },[]);
 
+    const onClickButtons = useCallback((e)=>{
+        e.stopPropagation();
+    })
 
     return(
        <Wrapper>
        {post.RetweetId && post.Retweet ?  
-        <RetweetCard>
+        <RetweetCard onClick={onClickPost}>
             <Retweet onClick={onClickUser}><SmallRetweetIcon/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         <SideWrapper>
             <AvatarWrapper size={65}>
@@ -76,8 +90,8 @@ const PostCard=({post})=>{
                     <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
                 </PostInfoWrapper>
                 <PostCardContent postData={post.Retweet.content}/>
-                {post.Retweet.Images[0] && <PostImages onClick={onClickContent}   images={post.Retweet.Images}/>}
-                <CardButtons>
+                {post.Retweet.Images[0] && <div onClick={onClickButtons}><PostImages images={post.Retweet.Images}/></div>}
+                <CardButtons onClick={onClickButtons}>
                     <RetweetIcon retweeted={post.UserId === me && "true"} onClick={onRetweetToggle} key="retweet"/>
                     <LikeButtonWrapper liked={liked && "true"}>
                         <HeartIcon onClick={onLikeToggle} />
@@ -89,13 +103,13 @@ const PostCard=({post})=>{
                         {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
                     </CommentButtonWrapper>
                     {me &&<Tooltip post={post.Retweet}>
-                        <MoreIcon/>
+                            <MoreIcon/>
                     </Tooltip>}
                  </CardButtons>
             </CardMeta>
         </RetweetCard>
        :
-       <Card>
+       <Card onClick={onClickPost}>
             <SideWrapper>
                 <AvatarWrapper size={65}>
                     <Avatar imageSrc={post.User.profilepic} userId={post.User.id}
@@ -110,8 +124,8 @@ const PostCard=({post})=>{
                 <ContentWrapper >
                     <PostCardContent postData={post.content}/>
                 </ContentWrapper>
-                {post.Images[0] && <PostImages images={post.Images}/>}
-                <CardButtons>
+                {post.Images[0] && <div onClick={onClickButtons} ><PostImages images={post.Images}/></div>}
+                <CardButtons onClick={onClickButtons}>
                     <RetweetIcon onClick={onRetweetToggle} key="retweet"/>
                     <LikeButtonWrapper liked={liked && "true" } >
                         <HeartIcon onClick={onLikeToggle} />
@@ -123,8 +137,8 @@ const PostCard=({post})=>{
                         {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
                     </CommentButtonWrapper>
                     {me && <Tooltip post={post}>
-                        <MoreIcon/>
-                    </Tooltip>}
+                            <MoreIcon/>
+                        </Tooltip>}
                 </CardButtons>
             </CardMeta>
         </Card>
@@ -134,6 +148,11 @@ const PostCard=({post})=>{
        </Wrapper>
     );
 }
+
+PostCard.defaultProps={
+    commentFormOpen:false,
+};
+
 
 PostCard.propTypes = {
     post:PropTypes.shape({
@@ -149,6 +168,7 @@ PostCard.propTypes = {
         Likers:PropTypes.arrayOf(PropTypes.object)
 
     }).isRequired,
+    commentFormOpen:PropTypes.bool.isRequired,
 }
 
 export default PostCard;

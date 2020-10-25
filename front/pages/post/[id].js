@@ -32,7 +32,7 @@ const Post=()=>{
             <meta property="og:description" content={singlePost.content}/>
             <meta property="og:image" content={`${singlePost.Images[0] ? singlePost.Images[0].src : ''}님의 게시글`}/>
             <meta property="og:url" content={`https://jackjacks.com/post/${id}`}/>
-            <PostCard post={singlePost}/>
+            <PostCard post={singlePost} commentFormOpen={true}/>
         </AppLayout>
     )
 }
