@@ -13,7 +13,7 @@ const MenuIcon=({where,id})=>{
         return( <Link href="/signUp"><a><SignupIcon/></a></Link>)
     }
     return(
-        <Link href={`/user/${id}`}><a><ProfileIcon/></a></Link>
+        <Link href="/user/[id]" as={`/user/${id}`}><a><ProfileIcon/></a></Link>
     )
 };
 

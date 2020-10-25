@@ -89,7 +89,9 @@ const PostCard=({post,commentFormOpen})=>{
                     <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
                     <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
                 </PostInfoWrapper>
-                <PostCardContent postData={post.Retweet.content}/>
+                <ContentWrapper onClick={onClickButtons}>
+                    <PostCardContent postData={post.Retweet.content}/>
+                </ContentWrapper>
                 {post.Retweet.Images[0] && <div onClick={onClickButtons}><PostImages images={post.Retweet.Images}/></div>}
                 <CardButtons onClick={onClickButtons}>
                     <RetweetIcon retweeted={post.UserId===me?"true":"false"} onClick={onRetweetToggle} key="retweet"/>
@@ -121,7 +123,7 @@ const PostCard=({post,commentFormOpen})=>{
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
                     <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
                 </PostInfoWrapper>
-                <ContentWrapper >
+                <ContentWrapper onClick={onClickButtons}>
                     <PostCardContent postData={post.content}/>
                 </ContentWrapper>
                 {post.Images[0] && <div onClick={onClickButtons} ><PostImages images={post.Images}/></div>}

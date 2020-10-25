@@ -17,7 +17,7 @@ const Profile=()=>{
         <MenuItemWrapper visit={pageName==='/user/[id]'&& +id===me && 'true'}>
             <MenuIcon where="Profile" id={me}/>
             <Detail>
-                <Link href={`/user/${me}`}>
+                <Link href="/user/[id]" as={`/user/${me}`}>
                     <Description>Profile</Description>
                 </Link>
             </Detail>

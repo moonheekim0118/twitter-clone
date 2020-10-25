@@ -1,28 +1,24 @@
-import React ,{ useCallback } from 'react';
-import Router from 'next/router';
+import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { Wrapper,First,Second } from '../style';
+import { Wrapper,Menu,Atag } from '../style';
 
 const FollowHeader =({userId,pageName})=>{
-    
-    const onClickFirst = useCallback(()=>{
-        // 라우팅 
-        Router.push(`/user/${userId}/followings`);
-    },[]);
-
-    const onClickSecond = useCallback(()=>{
-        Router.push(`/user/${userId}/followers`);
-    },[]);
 
     return(
         <Wrapper>
-            <First onClick={onClickFirst} clicked={pageName==="Followings"}>  
-                Followings
-            </First>
-            <Second onClick={onClickSecond} clicked={pageName==="Followers"}>
-                Followers
-            </Second>
+             <Menu clicked={pageName==="Followings"}>
+                <Link href="/user/[id]/followings" as={`/user/${userId}/followings`}>
+                    <Atag clicked={pageName==="Followings"}> Followings </Atag>
+                </Link>
+            </Menu>
+            <Menu  clicked={pageName==="Followers"}>
+                <Link href="/user/[id]/followers" as={`/user/${userId}/followers`}>
+                    <Atag clicked={pageName==="Followers"}>Followers</Atag>
+                </Link>
+            </Menu>
         </Wrapper>
+
     );
 };
 

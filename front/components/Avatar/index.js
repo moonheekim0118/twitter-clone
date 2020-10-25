@@ -36,7 +36,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
 
     if(isLink && isMyPic){
         return(
-            <Link href={`/user/${userId}`}>
+            <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
                         (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
@@ -50,7 +50,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
     }
     if(isLink && !isMyPic){
         return(
-            <Link href={`/user/${userId}`}>
+            <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
                         (<Image src={`http://localhost:3065/${imageSrc}`}/>) : 
