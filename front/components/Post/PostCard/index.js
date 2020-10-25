@@ -109,7 +109,7 @@ const PostCard=({post})=>{
                 </ContentWrapper>
                 {post.Images[0] && <PostImages images={post.Images}/>}
                 <CardButtons>
-                    <RetweetIcon retweeted={""} onClick={onRetweetToggle} key="retweet"/>
+                    <RetweetIcon onClick={onRetweetToggle} key="retweet"/>
                     <LikeButtonWrapper liked={liked && "true" } >
                         <HeartIcon onClick={onLikeToggle} />
                         {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}

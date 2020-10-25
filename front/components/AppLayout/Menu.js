@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import LogoutButton from '../User/LogoutButton';
 import Home from '../Navigations/Home';
@@ -69,7 +68,7 @@ const MenuWrapper=styled.div`
     }
 `;
 
-const MenuItem=styled.div`
+const LogOutWrapper=styled.div`
     display:none;
     margin-bottom:${({theme})=>theme.margins.xl};
 
@@ -81,7 +80,6 @@ const MenuItem=styled.div`
 `;
 
 const Menu =({isLoggedIn})=>{
-    const router = useRouter();
     return(
         <Navigation>
             <MenuWrapper>
@@ -95,9 +93,9 @@ const Menu =({isLoggedIn})=>{
                 {isLoggedIn && <TweetButton/>}
                 {isLoggedIn ? <UserProfile/> : <div><LogIn/></div> }
                 {isLoggedIn&&
-                <MenuItem>
+                <LogOutWrapper>
                     <LogoutButton/>
-                </MenuItem> }
+                </LogOutWrapper> }
             </MenuWrapper>
         </Navigation>
     )

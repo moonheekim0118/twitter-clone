@@ -7,6 +7,7 @@ export const MenuItemWrapper = styled.div`
     padding:${({theme})=>theme.paddings.base};
     border-radius:20px;
     transition: 0.2s background-color ease-in-out;
+    background:${(props)=>props.visit?'rgba(153, 204, 255,0.2)':'none'};
 
     @media ${({theme})=>theme.device.pcS}{
         border-radius:50%;
@@ -26,6 +27,7 @@ export const Detail=styled.div`
     margin-left:${({theme})=>theme.margins.base};
     display:flex;
     justify-content:space-between;
+    color:inherit;
 
     @media ${({theme})=>theme.device.pcS}{
         display:none;
