@@ -139,13 +139,12 @@ export const MoreIcon = styled(EllipsisOutlined)`
 `;
 
 export const CommentIcon = styled(MessageOutlined)`
-    color:${(props)=>props.opend ?  "#0099cc" : "gray" };
+    color:inherit;  
     padding:${({theme})=>theme.paddings.base};
     border-radius:50%;
     transition: 0.2s background-color ease-in-out;
 
     &:hover{
-        color:${({theme})=>theme.colors.blue_2};
         background-color:rgba(0, 153, 204,0.3);
     }
 `;

@@ -28,7 +28,7 @@ exports.loadPost=async (req,res,next)=>{
                 { model: Post, as: 'Retweet', include:[{model:User, attirbutes:['id','nickname','profilepic']},
                 { model: User,  as: 'Likers', attirbutes:['id','nickname']},
                  {model: Image}, 
-                 {model:Comment, include:[{model:User, attirbutes:['id','nickname']}]},
+                 {model:Comment, include:[{model:User, attirbutes:['id','nickname','profilepic']}]},
             ]}]});
         res.status(200).json({posts,totalPostsLength});
     }catch(err){

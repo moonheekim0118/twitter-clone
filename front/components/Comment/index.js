@@ -1,62 +1,45 @@
-import React, { useCallback,useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Router from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCommentAction } from '../../actions/post';
-import useInput from '../../hooks/useInput';
+import CommentForm from './CommentForm';
+import CommentCard from './CommentCard';
 import styled from 'styled-components';
-import { Form, Input, Button } from 'antd';
 
-
-const FormWrapper = styled(Form)`
+export const CommentBar = styled.div`   
     position:relative;
-    margin:0;
 
-`
-
-const SubmitButton= styled(Button)`
-    margin-top:${({theme})=>theme.margins.small};
-    right:-100%;
-    transform:translateX(-100%);
-
-`
-
-const CommentForm=({postId})=>{
-    const {isLoggedIn}= useSelector((state)=>state.user);
-    const id = useSelector((state)=>state.user.me?.id);
-    const nickname = useSelector((state)=>state.user.me?.nickname);
-    const {addCommentDone , addCommentloading} = useSelector((state)=>state.post);
-    const [commentText, onChangeText, setCommentText]=useInput('');
-
-    const dispatch = useDispatch();
-
-    useEffect(()=>{
-        if(addCommentDone){
-            setCommentText('');
-        }
-    },[addCommentDone]);
+    &::after{
+        content:"";
+        background-color:${({theme})=>theme.colors.blue_1};
+        position:absolute;
+        width: 10px;
+        height: 33px;
+        bottom:-17px;
+        left:20px;
+    }
     
-    const onSubmitComment=useCallback(()=>{
-       if(!isLoggedIn){ // 로그인 되지 않은 상태라면 로그인 페이지로 리다이렉트 
-            Router.push('/login');
-       }
-       else if(commentText.length >0){ 
-            dispatch(addCommentAction({text:commentText,id,nickname,postId:postId})); // 여기서 id는 userId 
-       }
-    },[commentText]);
+`;
+const Comment =({postId , Comments})=>{
 
-    
     return(
-        <FormWrapper onFinish={onSubmitComment}>
-            <Input.TextArea value={commentText} onChange={onChangeText} row={4}/>
-            <SubmitButton type="primary" htmlType="submit" loading={addCommentloading}>등록</SubmitButton>
-        </FormWrapper>
-    )
-}
-
-CommentForm.propTypes={
-    postId:PropTypes.number.isRequired
+        <>
+            <CommentBar/>
+            <CommentForm postId={postId}/>
+            {Comments.map(comment=>(<CommentCard key={comment.id}comment={comment}/>))}
+        </>
+    );
 };
 
+Comment.propTypes = {
+    postId:PropTypes.number.isRequired,
+    Comments:PropTypes.arrayOf(PropTypes.shape({
+        id:PropTypes.number,
+        User:PropTypes.shape({
+            id:PropTypes.number,
+            nickname:PropTypes.string,
+            profilepic:PropTypes.string,
+        }),
+        content:PropTypes.string,
+    }).isRequired,)
+}
 
-export default CommentForm;
+export default Comment;

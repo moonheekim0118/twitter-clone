@@ -6,10 +6,10 @@ export const FormWrapper = styled.form`
     margin-top:${({theme})=>theme.margins.xxl};
     margin-bottom:${({theme})=>theme.margins.xxxl};
     padding:${({theme})=>theme.paddings.xxxl};
-    padding-bottom:0;
+    padding-bottom:${(props)=>props.small ? "1rem": "0"};
     position:relative;
     width:100%;
-    min-height:130px;
+    min-height:${(props)=>props.small ? "50px": "130px"};
     height: auto;
     display:flex;   
     flex-direction: row;

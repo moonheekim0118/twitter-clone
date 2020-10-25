@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+export const Wrapper = styled.div`
+    margin-bottom:30px;
+`;
 export const SideWrapper=styled.div`
     flex-grow: 0;
     flex-shrink: 0;
@@ -13,7 +15,6 @@ export const Card = styled.div`
     flex-direction: row;
     align-items: stretch;
     padding:${({theme})=>theme.paddings.xxxl};
-    margin-bottom:30px;
     border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
     &:hover{
@@ -29,7 +30,6 @@ export const RetweetCard=styled.div`
     align-items: stretch;
     padding:${({theme})=>theme.paddings.xxxl};
     padding-top:40px;
-    margin-bottom:30px;
     border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
     &:hover{
@@ -82,7 +82,7 @@ export const PostInfoWrapper =styled.div`
 `;
 
 
-export const LikersCount=styled.span`
+export const Count=styled.span`
     margin-left:${({theme})=>theme.margins.xsmall};
     font-size:${({theme})=>theme.fontSizes.base};
     color:inherit;
@@ -92,6 +92,13 @@ export const LikeButtonWrapper=styled.div`
     color:${(props)=>props.liked ? '#eb2f96' : 'gray'};
     &:hover{
         color:${({theme})=>theme.colors.pink};
+    }
+`;
+
+export const CommentButtonWrapper = styled.div`
+    color:${(props)=>props.opend?'#0099cc': 'gray' };
+    &:hover{
+        color:${({theme})=>theme.colors.blue_2};
     }
 `;
 
@@ -115,4 +122,7 @@ export const Date = styled.span`
     margin-left:${({theme})=>theme.margins.xsmall};
     color:${({theme})=>theme.colors.gray_2};
     font-size:${({theme})=>theme.fontSizes.small};
+`;
+export const CommentWrapper = styled.div`
+    padding : ${({theme})=>theme.paddings.xxl};
 `;

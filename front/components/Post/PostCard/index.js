@@ -4,15 +4,14 @@ import Router from 'next/router';
 import dayjs from 'dayjs';
 import { useSelector ,useDispatch } from 'react-redux';
 import {likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
-import { List, Comment } from 'antd';
 import PostImages from '../../Image/PostImages';
 import PostCardContent from '../PostCardContent';
-import CommentForm from '../../Comment';
+import Comment from '../../Comment';
 import Avatar from '../../Avatar';
-import { SideWrapper, Card, CardMeta, CardButtons, 
-    NicknameWrapper,LikersCount,
+import { Wrapper, SideWrapper, Card, CardMeta, CardButtons, 
+    NicknameWrapper,Count,CommentButtonWrapper,
     LikeButtonWrapper,Retweet,RetweetCard,
-    ContentWrapper,PostInfoWrapper,Date } from './style';
+    ContentWrapper,PostInfoWrapper,Date,CommentWrapper } from './style';
 import { AvatarWrapper } from '../../globalStyle';
 import Tooltip from '../Tooltip';
 import { HeartIcon , RetweetIcon , MoreIcon, CommentIcon, SmallRetweetIcon } from '../../Icons';
@@ -61,7 +60,7 @@ const PostCard=({post})=>{
 
 
     return(
-       <>
+       <Wrapper>
        {post.RetweetId && post.Retweet ?  
         <RetweetCard>
             <Retweet onClick={onClickUser}><SmallRetweetIcon/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
@@ -82,9 +81,13 @@ const PostCard=({post})=>{
                     <RetweetIcon retweeted={post.UserId === me && "true"} onClick={onRetweetToggle} key="retweet"/>
                     <LikeButtonWrapper liked={liked && "true"}>
                         <HeartIcon onClick={onLikeToggle} />
-                        {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
+                        {post.Likers.length>0 && <Count>{post.Likers.length}</Count>}
                     </LikeButtonWrapper>
-                    <CommentIcon opend={commentFormOpend && "true"} onClick={onToggleComment} key="comment"/>
+                    <CommentButtonWrapper opend={commentFormOpend && "true"} >
+                        <CommentIcon
+                        onClick={onToggleComment} key="comment"/>
+                        {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
+                    </CommentButtonWrapper>
                     {me &&<Tooltip post={post.Retweet}>
                         <MoreIcon/>
                     </Tooltip>}
@@ -112,9 +115,13 @@ const PostCard=({post})=>{
                     <RetweetIcon onClick={onRetweetToggle} key="retweet"/>
                     <LikeButtonWrapper liked={liked && "true" } >
                         <HeartIcon onClick={onLikeToggle} />
-                        {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
+                        {post.Likers.length>0 && <Count>{post.Likers.length}</Count>}
                     </LikeButtonWrapper>
-                    <CommentIcon opend={commentFormOpend && "true"} onClick={onToggleComment} key="comment"/>
+                    <CommentButtonWrapper opend={commentFormOpend && "true"} >
+                        <CommentIcon
+                        onClick={onToggleComment} key="comment"/>
+                        {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
+                    </CommentButtonWrapper>
                     {me && <Tooltip post={post}>
                         <MoreIcon/>
                     </Tooltip>}
@@ -122,30 +129,9 @@ const PostCard=({post})=>{
             </CardMeta>
         </Card>
        }
-        {commentFormOpend && 
-        <div>
-            <CommentForm postId={post.id}/>
-            <List
-                header={`${post.Comments.length}개의 댓글`}
-                itemLayout="horizontal"
-                dataSource={post.Comments}
-                renderItem={(item)=>(
-                    <li>
-                        <Comment
-                            author={item.User.nickname}
-                            avatar={
-                            <AvatarWrapper size={30}>
-                                <Avatar imageSrc={item.User.profilepic} userId={item.User.id}
-                                userNickname={item.User.nickname} isLink={true} isMyPic={false}/>
-                            </AvatarWrapper>
-                        }
-                            content={item.content}
-                        />
-                    </li>
-                )}
-            />
-        </div> }
-       </>
+        {commentFormOpend &&
+        <CommentWrapper><Comment postId={post.id} Comments={post.Comments}/></CommentWrapper> }
+       </Wrapper>
     );
 }
 
