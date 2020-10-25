@@ -93,7 +93,7 @@ exports.loadLikedposts=async(req,res,next)=>{ // userId의 user가 Liked 한 포
     try{
         const userId=+req.params.userId;
         const lastId=+req.query.lastId;
-        const where={UserId:userId};
+        const where={};
         if(lastId!==0){
             where.id={[Op.lt]: +req.query.lastId};
         }
