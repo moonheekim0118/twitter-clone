@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Spin } from 'antd';
 import PostCard from '../PostCard';
-
+import { LoadingIcon } from '../../Icons';
 
 const Wrapper = styled.div`
     text-align:center;
@@ -14,7 +13,7 @@ const PostsList=({posts, loading})=>{
     return(
         <>
            {posts.map((post)=><PostCard key={post.id} post={post}/>)}
-           {loading? <Wrapper><Spin/></Wrapper> : ''}
+           {loading? <Wrapper><LoadingIcon/></Wrapper> : ''}
         </>
     )
 }

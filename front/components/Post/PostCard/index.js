@@ -5,53 +5,50 @@ import dayjs from 'dayjs';
 import { useSelector ,useDispatch } from 'react-redux';
 import {likePostAction,unLikePostAction,retweetAction,unretweetAction } from '../../../actions/post';
 import { List, Comment } from 'antd';
-import { RetweetOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
 import PostImages from '../../Image/PostImages';
 import PostCardContent from '../PostCardContent';
 import CommentForm from '../../Comment';
 import Avatar from '../../Avatar';
 import { SideWrapper, Card, CardMeta, CardButtons, 
-    NicknameWrapper,LikedCount,LikersCount,
-    LikeButtonWrapper,Retweet,RetweetCard,RetweetIcon,
-    CommentIcon,RetweetedIcon,ContentWrapper,PostInfoWrapper,Date,MoreIcon } from './style';
+    NicknameWrapper,LikersCount,
+    LikeButtonWrapper,Retweet,RetweetCard,
+    ContentWrapper,PostInfoWrapper,Date } from './style';
 import { AvatarWrapper } from '../../globalStyle';
 import Tooltip from '../Tooltip';
+import { HeartIcon , RetweetIcon , MoreIcon, CommentIcon, SmallRetweetIcon } from '../../Icons';
 
 const PostCard=({post})=>{
     const dispatch = useDispatch();
     const [commentFormOpend, setCommentFormOpend]=useState(false);
     const me = useSelector(state => state.user.me?.id);
-    const liked = post.Likers.find((x)=>x.id===me);
+    const [liked, setLiked] = useState(post.Likers.find((x)=>x.id===me));
 
-    // Card div 내부에 있는 요소들 onClick 이벤트에 stopPropagation 적용
-    const onUnlike=useCallback(()=>{
+    const onLikeToggle=useCallback(()=>{
         if(!me){
             return;
         }
-        dispatch(unLikePostAction(post.id));
-    },[]);
-
-    const onLike=useCallback(()=>{
-        if(!me){
-            return;
+        if(liked){
+            setLiked(false);
+            return dispatch(unLikePostAction(post.id));
         }
+        setLiked(true);
         dispatch(likePostAction(post.id));
-    },[]);
+    },[liked]);
 
     const onToggleComment = useCallback(()=>{
         setCommentFormOpend((prev)=>!prev);
     },[])
 
-    const onRetweet = useCallback(()=>{
-        if(!me || post.UserId === me){
+    const onRetweetToggle = useCallback(()=>{
+        if(!me ){ // 로그인 안되어 있다면 
             return;
         }
-        dispatch(retweetAction(post.id));
-
-    },[]);
-
-    const onUnRetweet=useCallback(()=>{
-        dispatch(unretweetAction(post.id));
+        if( post.UserId === me && post.Retweet ){ // 내가 리트윗한 게시글이라면 
+            return dispatch(unretweetAction(post.id));
+        }
+        else if( post.UserId!==me ){
+            dispatch(retweetAction(post.id));
+        }
     },[]);
 
     const onClickUser= useCallback(()=>{
@@ -67,7 +64,7 @@ const PostCard=({post})=>{
        <>
        {post.RetweetId && post.Retweet ?  
         <RetweetCard>
-            <Retweet onClick={onClickUser}><RetweetOutlined/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
+            <Retweet onClick={onClickUser}><SmallRetweetIcon/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         <SideWrapper>
             <AvatarWrapper size={65}>
                 <Avatar imageSrc={post.Retweet.User.profilepic} userId={post.Retweet.User.id}
@@ -75,31 +72,23 @@ const PostCard=({post})=>{
             </AvatarWrapper>
         </SideWrapper>
             <CardMeta>
-                    <PostInfoWrapper>
-                        <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
-                        <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
-                    </PostInfoWrapper>
-                        <PostCardContent postData={post.Retweet.content}/>
-                        {post.Retweet.Images[0] && <PostImages onClick={onClickContent}   images={post.Retweet.Images}/>}
-                        <CardButtons>
-                            { post.UserId === me ? <RetweetedIcon onClick={onUnRetweet} key="retweet"/> : 
-                            <RetweetIcon onClick={onRetweet} key="retweet"/> }
-                            { liked ?
-                                <div>
-                                    <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
-                                    {post.Retweet.Likers.length>0 && <LikedCount>{post.Retweet.Likers.length}</LikedCount>}
-                                </div>
-                                :
-                                <LikeButtonWrapper>
-                                    <HeartOutlined onClick={onLike} key="heart" />
-                                    {post.Retweet.Likers.length>0 && <LikersCount>{post.Retweet.Likers.length}</LikersCount>}
-                                </LikeButtonWrapper>
-                                }
-                            <CommentIcon onClick={onToggleComment} key="comment"/>
-                            {me &&<Tooltip post={post.Retweet}>
-                                <MoreIcon/>
-                            </Tooltip>}
-                        </CardButtons>
+                <PostInfoWrapper>
+                    <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
+                    <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
+                </PostInfoWrapper>
+                <PostCardContent postData={post.Retweet.content}/>
+                {post.Retweet.Images[0] && <PostImages onClick={onClickContent}   images={post.Retweet.Images}/>}
+                <CardButtons>
+                    <RetweetIcon retweeted={post.UserId === me && "true"} onClick={onRetweetToggle} key="retweet"/>
+                    <LikeButtonWrapper liked={liked && "true"}>
+                        <HeartIcon onClick={onLikeToggle} />
+                        {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
+                    </LikeButtonWrapper>
+                    <CommentIcon opend={commentFormOpend && "true"} onClick={onToggleComment} key="comment"/>
+                    {me &&<Tooltip post={post.Retweet}>
+                        <MoreIcon/>
+                    </Tooltip>}
+                 </CardButtons>
             </CardMeta>
         </RetweetCard>
        :
@@ -115,29 +104,22 @@ const PostCard=({post})=>{
                     <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
                     <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
                 </PostInfoWrapper>
-                    <ContentWrapper >
-                        <PostCardContent postData={post.content}/>
-                    </ContentWrapper>
-                    {post.Images[0] && <PostImages images={post.Images}/>}
-                    <CardButtons>
-                        <RetweetIcon onClick={onRetweet} key="retweet"/>
-                        { liked ?
-                            <div>
-                                <HeartTwoTone key="heart" twoToneColor="#eb2f96" onClick={onUnlike}/>
-                                {post.Likers.length>0 && <LikedCount>{post.Likers.length}</LikedCount>}
-                            </div>
-                            :
-                            <LikeButtonWrapper>
-                                <HeartOutlined onClick={onLike} key="heart" />
-                                {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
-                            </LikeButtonWrapper>
-                            }
-                        <CommentIcon onClick={onToggleComment} key="comment"/>
-                        {me && <Tooltip post={post}>
-                                <MoreIcon/>
-                            </Tooltip>}
-                    </CardButtons>
-                </CardMeta>
+                <ContentWrapper >
+                    <PostCardContent postData={post.content}/>
+                </ContentWrapper>
+                {post.Images[0] && <PostImages images={post.Images}/>}
+                <CardButtons>
+                    <RetweetIcon retweeted={""} onClick={onRetweetToggle} key="retweet"/>
+                    <LikeButtonWrapper liked={liked && "true" } >
+                        <HeartIcon onClick={onLikeToggle} />
+                        {post.Likers.length>0 && <LikersCount>{post.Likers.length}</LikersCount>}
+                    </LikeButtonWrapper>
+                    <CommentIcon opend={commentFormOpend && "true"} onClick={onToggleComment} key="comment"/>
+                    {me && <Tooltip post={post}>
+                        <MoreIcon/>
+                    </Tooltip>}
+                </CardButtons>
+            </CardMeta>
         </Card>
        }
         {commentFormOpend && 

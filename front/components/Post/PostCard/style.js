@@ -1,27 +1,4 @@
 import styled from 'styled-components';
-import { RetweetOutlined,MessageOutlined,HeartOutlined,HeartTwoTone,EllipsisOutlined } from '@ant-design/icons';
-
-// icons 
-export const RetweetIcon=styled(RetweetOutlined)`
-    &:hover{
-        color:lime;
-    }
-`;
-
-export const RetweetedIcon=styled(RetweetOutlined)`
-    color:lime;
-`;
-
-export const CommentIcon = styled(MessageOutlined)`
-    &:hover{
-        color:${({theme})=>theme.colors.blue_2};
-    }
-`;
-
-export const MoreIcon = styled(EllipsisOutlined)`
-
-`;
-
 
 export const SideWrapper=styled.div`
     flex-grow: 0;
@@ -104,19 +81,15 @@ export const PostInfoWrapper =styled.div`
     align-items:center;
 `;
 
-export const LikedCount=styled.span`   
-    margin-left:${({theme})=>theme.margins.xsmall};
-    font-size:${({theme})=>theme.fontSizes.base};
-    color:${({theme})=>theme.colors.pink};
-`;
 
 export const LikersCount=styled.span`
     margin-left:${({theme})=>theme.margins.xsmall};
     font-size:${({theme})=>theme.fontSizes.base};
-    color:${({theme})=>theme.colors.gray_2};
+    color:inherit;
 `;
 
 export const LikeButtonWrapper=styled.div`
+    color:${(props)=>props.liked ? '#eb2f96' : 'gray'};
     &:hover{
         color:${({theme})=>theme.colors.pink};
     }

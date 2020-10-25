@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
-import { Container,SearchInput,HistoryTab,SearchButton,HistoryWrapper,RemoveButton } from './style';
-import { SearchOutlined  } from '@ant-design/icons'; 
-
+import { Container,SearchInput,HistoryTab,SearchButton,HistoryWrapper } from './style';
+import { RedCloseIcon , SearchIcon } from '../Icons';
 
 const Search=({keyword})=>{
     const me = useSelector(state=>state.user.me);
@@ -51,13 +50,13 @@ const Search=({keyword})=>{
         <>
             <Container onSubmit={onSubmitSearch}>
                 <SearchInput value={value} onChange={setValue}/> 
-                <SearchButton disabled={value.length===0 || value===keyword}><SearchOutlined/></SearchButton>
+                <SearchButton disabled={value.length===0 || value===keyword}><SearchIcon/></SearchButton>
                 <HistoryWrapper>
                     {history.length ===0 && <span>해시태그를 검색해보세요!</span>}
                     {history.slice(0,5).map(item=>
                     <HistoryTab onClick={onClickHistory.bind(this,item.value)}
                      key={item.key}><span>{item.value}</span> 
-                     <RemoveButton onClick={(e)=>onRemove(e,item.key)}/></HistoryTab>)}   
+                     <RedCloseIcon onClick={(e)=>onRemove(e,item.key)}/></HistoryTab>)}   
                 </HistoryWrapper>
             </Container>
         </>

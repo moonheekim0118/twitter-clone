@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeImageAction } from '../../../actions/post';
-import { Wrapper, ImageWrapper, ImageWrapperColumn ,Image, RemoveButton } from '../style';
+import { Wrapper, ImageWrapper, ImageWrapperColumn ,Image } from '../style';
+import { CloseCircleRightIcon } from '../../Icons';
 
 const ImagePath=()=>{
     const imagePaths = useSelector((state)=>state.post.imagePaths);
@@ -16,7 +17,7 @@ const ImagePath=()=>{
             <Wrapper>
                 <ImageWrapper key={0} number={1} >
                     <Image role="presentation" height="false" src={`http://localhost:3065/${imagePaths[0]}`} alt={imagePaths[0]}/>
-                    <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                    <CloseCircleRightIcon onClick={onRemoveImage.bind(this,0)}/>
                 </ImageWrapper>
             </Wrapper>
         )
@@ -26,11 +27,11 @@ const ImagePath=()=>{
             <Wrapper>
                  <ImageWrapper key={0} number={2} >
                     <Image role="presentation" height="false" src={`http://localhost:3065/${imagePaths[0]}`} alt={imagePaths[0]}/>
-                    <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                    <CloseCircleRightIcon onClick={onRemoveImage.bind(this,0)}/>
                 </ImageWrapper>
                 <ImageWrapper key={1} number={2} >
                     <Image role="presentation" height="false" src={`http://localhost:3065/${imagePaths[1]}`} alt={imagePaths[1]}/>
-                    <RemoveButton onClick={onRemoveImage.bind(this,1)}/>
+                    <CloseCircleRightIcon onClick={onRemoveImage.bind(this,1)}/>
                 </ImageWrapper>
             </Wrapper>
         );
@@ -41,16 +42,16 @@ const ImagePath=()=>{
             <Wrapper>
                <ImageWrapper key={0} number={2} >
                    <Image role="presentation" height="false" src={`http://localhost:3065/${imagePaths[0]}`}/>
-                   <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                   <CloseCircleRightIcon onClick={onRemoveImage.bind(this,0)}/>
                </ImageWrapper>
                <ImageWrapperColumn>
                     <ImageWrapper key={1} number={1} >
                         <Image role="presentation" height="true" src={`http://localhost:3065/${imagePaths[1]}`}/>
-                        <RemoveButton onClick={onRemoveImage.bind(this,1)}/>
+                        <CloseCircleRightIcon onClick={onRemoveImage.bind(this,1)}/>
                     </ImageWrapper>
                     <ImageWrapper key={2} number={1}>
                         <Image role="presentation" height="true" src={`http://localhost:3065/${imagePaths[2]}`}/>
-                        <RemoveButton onClick={onRemoveImage.bind(this,2)}/>
+                        <CloseCircleRightIcon onClick={onRemoveImage.bind(this,2)}/>
                     </ImageWrapper>
                </ImageWrapperColumn>
             </Wrapper>
@@ -63,21 +64,21 @@ const ImagePath=()=>{
                 <ImageWrapperColumn>
                     <ImageWrapper key={0} number={1} height="true">
                         <Image role="presentation" height="true" src={`http://localhost:3065/${imagePaths[0]}`}/>
-                        <RemoveButton onClick={onRemoveImage.bind(this,0)}/>
+                        <CloseCircleRightIcon onClick={onRemoveImage.bind(this,0)}/>
                     </ImageWrapper>
                     <ImageWrapper key={1} number={1} height="true">
                         <Image role="presentation"  height="true"src={`http://localhost:3065/${imagePaths[1]}`}/>
-                        <RemoveButton onClick={onRemoveImage.bind(this,1)}/>
+                        <CloseCircleRightIcon onClick={onRemoveImage.bind(this,1)}/>
                     </ImageWrapper>
                </ImageWrapperColumn>
                <ImageWrapperColumn>
                     <ImageWrapper key={2} number={1} height="true">
                         <Image role="presentation" height="true" src={`http://localhost:3065/${imagePaths[2]}`}/>
-                        <RemoveButton onClick={onRemoveImage.bind(this,2)}/>
+                        <CloseCircleRightIcon onClick={onRemoveImage.bind(this,2)}/>
                     </ImageWrapper>
                     <ImageWrapper key={3} number={1} height="true">
                         <Image role="presentation" height="true" src={`http://localhost:3065/${imagePaths[3]}`}/>
-                        <RemoveButton onClick={onRemoveImage.bind(this,3)}/>
+                        <CloseCircleRightIcon onClick={onRemoveImage.bind(this,3)}/>
                     </ImageWrapper>
                </ImageWrapperColumn>
             </Wrapper>

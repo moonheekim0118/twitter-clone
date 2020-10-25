@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { AreaChartOutlined } from '@ant-design/icons';
 import TextareaAutosize from 'react-textarea-autosize';
 // Avatr Wrapper는 공유
 
@@ -47,15 +46,6 @@ export const Buttons = styled.div`
     position:relative;
     color:${({theme})=>theme.colors.blue_2};
 
-`;
-
-export const ImageButtonIcon=styled(AreaChartOutlined)`
-    border-radius:50%;
-    cursor:pointer;
-    padding:${({theme})=>theme.paddings.lg};
-    &:hover{
-        background-color:${({theme})=>theme.colors.hover};
-    }
 `;
 
 export const TweetButton=styled.button`

@@ -2,8 +2,8 @@ import React , {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { followRequestAction , unfollowRequestAction} from '../../../actions/user';
-import { Button , Loading } from '../../globalStyle';
-
+import { Button } from '../../globalStyle';
+import { LoadingIcon } from '../../Icons';
 
 const FollowButton=({userId})=>{
 
@@ -24,7 +24,7 @@ const FollowButton=({userId})=>{
     return (
         <>
         {
-        (followLoading || unfollowLoading) ? <Loading/> :
+        (followLoading || unfollowLoading) ? <LoadingIcon/> :
         <Button onClick={onClickFollow}> {isFollowing ? "언팔로우" : "팔로우"} </Button> 
         }
         </>

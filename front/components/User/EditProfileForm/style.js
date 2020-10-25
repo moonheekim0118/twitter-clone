@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { PlusOutlined , CloseOutlined } from '@ant-design/icons';
-
 
 export const Wrapper = styled.div`
     position:fixed;
@@ -54,18 +52,6 @@ export const ContentWrapper = styled.div`
     padding:${({theme})=>theme.paddings.xxl} ${({theme})=>theme.paddings.xxl};
 `;
 
-export const CloseButton=styled(CloseOutlined)`
-    cursor:pointer;
-    font-size:${({theme})=>theme.fontSizes.xl};
-    border-radius:50%;
-    padding:${({theme})=>theme.paddings.lg};
-    transition: 0.2s background-color ease-in-out;
-    
-    &:hover{
-        background-color:${({theme})=>theme.colors.hover};
-    }
-`;
-
 
 export const ProfilePicWrapper = styled.div`
     display:inline-block;
@@ -94,21 +80,3 @@ export const Overaly = styled.div`
     background-color: rgba(0,0,0,0.3);
 `;
 
-export const EditIcon= styled(PlusOutlined)`
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    cursor:pointer;
-
-    padding:${({theme})=>theme.paddings.base};
-    color:${({theme})=>theme.colors.white};
-    font-size:${({theme})=>theme.fontSizes.xxxl};
-    z-index:1001;
-    border-radius:50%;
-    transition: 0.2s background-color ease-in-out;
-
-    &:hover{
-        background-color:rgba(255,255,255,0.3);
-    }
-`;

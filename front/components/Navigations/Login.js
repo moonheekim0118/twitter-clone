@@ -1,14 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import {MenuItemWrapper, Detail,LoginIcon} from  './style';
+import {MenuItemWrapper, Detail } from  './style';
 import { Description } from '../AppLayout/style';
+import MenuIcon from './MenuIcon';
 
 const LogIn=()=>{
     return(
         <MenuItemWrapper>
-            <Link href="/login">
-                <a><LoginIcon/></a>
-            </Link>
+            <MenuIcon where="Login"/>
             <Detail>
                 <Link  href="/login"><Description>LogIn</Description></Link>
             </Detail>

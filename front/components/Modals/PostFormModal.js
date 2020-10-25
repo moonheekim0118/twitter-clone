@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { hidePostModalAction } from '../../actions/ui';
 import { resetImageAction } from '../../actions/post';
 import PostForm from '../Post/PostForm';
-import { BlackOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton } from './style';
-
+import { BlackOveraly,ModalFormWrapper,ModalBoxHeader } from './style';
+import { CloseIcon } from '../Icons';
 
 const PostformModal=()=>{
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const PostformModal=()=>{
         <>
         <BlackOveraly onClick={onClose}/>
         <ModalFormWrapper>
-            <ModalBoxHeader><ModalCloseButton onClick={onClose} /></ModalBoxHeader>
+            <ModalBoxHeader><CloseIcon onClick={onClose} /></ModalBoxHeader>
             <PostForm/>
         </ModalFormWrapper>
         </>

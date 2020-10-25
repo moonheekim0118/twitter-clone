@@ -1,14 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import {MenuItemWrapper, Detail, HomeIcon} from  './style';
+import {MenuItemWrapper, Detail } from  './style';
 import { Description } from '../AppLayout/style';
+import MenuIcon from './MenuIcon';
 
 const Home=()=>{
     return(
         <MenuItemWrapper>
-            <Link href="/">
-                <a><HomeIcon/></a>
-            </Link>
+            <MenuIcon where="home"/>
             <Detail>
                 <Link  href="/">
                     <Description>Home</Description>

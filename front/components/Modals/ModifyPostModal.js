@@ -2,7 +2,8 @@ import React , {useCallback} from 'react';
 import { useDispatch } from 'react-redux';
 import { hideModifyModalAction } from '../../actions/ui';
 import ModifyPostForm from '../Post/ModifyPostForm';
-import { BlackOveraly,ModalFormWrapper,ModalBoxHeader,ModalCloseButton } from './style';
+import { BlackOveraly,ModalFormWrapper,ModalBoxHeader } from './style';
+import { CloseIcon } from '../Icons';
 
 const ModifyPostModal=()=>{
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const ModifyPostModal=()=>{
         <>
         <BlackOveraly onClick={onClose}/>
         <ModalFormWrapper>
-            <ModalBoxHeader><ModalCloseButton onClick={onClose} /></ModalBoxHeader>
+            <ModalBoxHeader><CloseIcon onClick={onClose} /></ModalBoxHeader>
                 <ModifyPostForm/>
         </ModalFormWrapper>
         </>

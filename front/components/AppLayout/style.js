@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { LeftOutlined } from '@ant-design/icons';
 
 export const Header=styled.header`
     text-align:center;
@@ -59,18 +58,6 @@ export const Footer =styled.footer`
     padding:${({theme})=>theme.paddings.base};
     text-align:center;
 `;
-
-export const BackButton=styled(LeftOutlined)`
-    font-size:${({theme})=>theme.fontSizes.xxl};
-    position:absolute;
-    left:0px;
-
-    &:hover{
-        color:${({theme})=>theme.colors.blue_1};
-    }
-    
-`;
-
 
 
 export const Description=styled.a`

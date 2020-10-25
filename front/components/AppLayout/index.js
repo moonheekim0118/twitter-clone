@@ -9,9 +9,11 @@ import Alert from '../Alert';
 import UserProfileModal from '../Modals/UserProfileModal';
 import PostFormModal from '../Modals/PostFormModal';
 import Search from '../Search';
-import { Header,Main,Side,Footer,BackButton, Description,DescriptionWithoutLink } from './style';
+import { Header,Main,Side,Footer, Description,DescriptionWithoutLink } from './style';
+import { PushBackIcon } from '../Icons';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
+
 
 const AppLayout = ({pageName, searchKeyword,children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
@@ -37,7 +39,7 @@ const AppLayout = ({pageName, searchKeyword,children})=>{
             <Alert/>
             <Header>
              {pageName==="Home"? <Link href="/"><Description>{pageName}</Description></Link> : 
-             <DescriptionWithoutLink><BackButton onClick={onClickBack} /><span>{pageName}</span></DescriptionWithoutLink>}
+             <DescriptionWithoutLink><PushBackIcon onClick={onClickBack} /><span>{pageName}</span></DescriptionWithoutLink>}
             </Header>
             <div>
                 <Menu isLoggedIn={isLoggedIn}/>

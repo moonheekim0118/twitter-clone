@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { CloseOutlined } from '@ant-design/icons'; 
 
 
 export const Container = styled.form`
@@ -92,11 +91,5 @@ export const HistoryTab=styled.div.attrs({ tabindex: "0" })`
 
     &:hover{
         background-color:${({theme})=>theme.colors.hover};
-    }
-`;
-
-export const RemoveButton=styled(CloseOutlined)`
-    &:hover{
-        color:red;
     }
 `;
