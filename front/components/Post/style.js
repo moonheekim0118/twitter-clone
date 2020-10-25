@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const ButtonWrapper= styled.div`
-    margin-top:${({theme})=>theme.margins.small};
-    display:flex;
-    justify-content:space-between;
+    position:absolute;
+    right:0;
 `;
 
 export const HashTag=styled.a`

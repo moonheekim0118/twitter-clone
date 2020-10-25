@@ -9,6 +9,7 @@ import { FormWrapper,FormMeta,Buttons,TextArea,TweetButton,TextLength } from './
 import { SideWrapper } from '../PostCard/style';
 import { AvatarWrapper } from '../../globalStyle';
 import { ImageIcon } from '../../Icons';
+
 const PostForm =()=>{
     const { addPostDone,imagePaths }= useSelector((state)=>state.post);
     const me = useSelector((state)=>state.user.me);
@@ -62,7 +63,7 @@ const PostForm =()=>{
 
     return(
         <>
-        <FormWrapper onSubmit={onSubmit} noborder={showPostModal}>
+        <FormWrapper encType="multipart/form-data" onSubmit={onSubmit} noborder={showPostModal}>
             <SideWrapper>
                 <AvatarWrapper size={65}>
                     <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
@@ -81,7 +82,7 @@ const PostForm =()=>{
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
                     <ImageIcon onClick={onClickImageUpload} />
                     {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
-                    <TweetButton disabled={text.length===0 || text.length>=140}>Tweet</TweetButton>
+                    <TweetButton type="primary" htmlType="submit"  disabled={text.length===0 || text.length>=140}>Tweet</TweetButton>
                 </Buttons>
                 <ImagePath/>
             </FormMeta>
