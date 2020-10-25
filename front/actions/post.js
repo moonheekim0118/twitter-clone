@@ -32,6 +32,10 @@ export const ADD_COMMENT_REQUEST ='ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS='ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAIL='ADD_COMMENT_FAIL';
 
+// 커멘트 삭제 
+export const REMOVE_COMMENT_REQUEST="REMOVE_COMMENT_REQUEST";
+export const REMOVE_COMMENT_SUCCESS="REMOVE_COMMENT_SUCCESS";
+export const REMOVE_COMMENT_FAIL="REMOVE_COMMENT_FAIL";
 
 // LIKE POSt
 
@@ -71,6 +75,13 @@ export const UNRETWEET_POST_FAIL="UNRETWEET_POST_FAIL";
 export const LOAD_HASHTAG_REQUEST="LOAD_HASHTAG_REQUEST";
 export const LOAD_HASHTAG_SUCCESS="LOAD_HASHTAG_SUCCESS";
 export const LOAD_HASHTAG_FAIL="LOAD_HASHTAG_FAIL";
+
+export const removeCommentAction=(data)=>{
+    return{
+        type:REMOVE_COMMENT_REQUEST,
+        data,
+    }
+}
 
 export const loadHashtagAction=(data)=>{
     return{

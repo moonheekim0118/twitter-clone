@@ -4,15 +4,22 @@ export const Wrapper=styled.div`
     width:100%;
     display:flex;
     flex-direction:row;
-    justify-content:flex-start;
+    justify-content:space-between;
     font-size:${({theme})=>theme.fontSizes.base};
     margin-bottom:${({theme})=>theme.margins.xl};
     padding: 0 ${({theme})=>theme.paddings.lg} ${({theme})=>theme.paddings.lg} ${({theme})=>theme.paddings.lg};
     transition: 0.2s background-color ease-in-out;
-
+    
+    position : relative;
     &:hover{
         background-color:${({theme})=>theme.colors.hover_gray};
     }
+`;
+export const ButtonWrapper =styled.div`
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 5%;
+    padding-top:${({theme})=>theme.paddings.lg};
 `;
 
 // for avatar 

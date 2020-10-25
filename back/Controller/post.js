@@ -70,6 +70,26 @@ exports.AddComment=async (req,res,next)=>{
     }
 };
 
+exports.removeComment=async(req,res,next)=>{
+    try{
+        const postId= +req.params.postId;
+        const commentId=+req.query.commentId;
+        const comment= await Comment.findOne({  where:{ id:commentId, PostId:postId}});
+        if(!comment){
+            return res.status(401).json('존재하지 않는 댓글입니다.');
+        }
+        await Comment.destroy( // 삭제될 글을 리트윗한 게시글들을 삭제해준다.
+            {
+            where:{ id:commentId, PostId:postId}
+            }
+        );
+        res.status(200).json({postId,commentId});
+        
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+};
 
 exports.LikePost=async(req,res,next)=>{
    try{

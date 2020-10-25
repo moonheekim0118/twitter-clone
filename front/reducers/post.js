@@ -54,6 +54,10 @@ export const initialState={
     unretweetPostloading:false, // 게시글 언리트윗 
     unretweetPostDone:false,
     unretweetPostError:null,
+
+    removeCommentloading:false, // 댓글 삭제
+    removeCommentDone:false,
+    removeCommentError:null,
 }
 
 
@@ -267,6 +271,25 @@ const reducer= (state = initialState , action)=>{
             case type.UNRETWEET_POST_FAIL:
                 draft.unretweetPostloading=false;
                 draft.unretweetPostError=action.error;
+                break;
+
+            case type.REMOVE_COMMENT_REQUEST:
+                draft.removeCommentloading=true;
+                draft.removeCommentDone=false;
+                draft.removeCommentError=null;
+                break;
+
+            case type.REMOVE_COMMENT_SUCCESS:
+                // post Id 찾아와서 .. 커멘트 지우기
+                const idx = draft.mainPosts.findIndex(v=>v.id === action.data.postId);
+                draft.mainPosts[idx].Comments=draft.mainPosts[idx].Comments.filter((v)=>v.id!==action.data.commentId);
+                draft.removeCommentloading=false;
+                draft.removeCommentDone=true;
+                break;
+
+            case type.REMOVE_COMMENT_FAIL:
+                draft.removeCommentloading=false;
+                draft.removeCommentError=action.error;
                 break;
                  
             default:

@@ -24,7 +24,7 @@ const Comment =({postId , Comments})=>{
         <>
             <CommentBar/>
             <CommentForm postId={postId}/>
-            {Comments.map(comment=>(<CommentCard key={comment.id}comment={comment}/>))}
+            {Comments.map(comment=>(<CommentCard key={comment.id}comment={comment} postId={postId}/>))}
         </>
     );
 };

@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
+const { Post } = require('../models');
 
 try{
     fs.accessSync('uploads')
@@ -30,6 +31,8 @@ const upload =multer({
 router.put('/update', isLoggedIn, PostController.modifyPost);
 
 router.post('/:postId/addComment',isLoggedIn,PostController.AddComment);
+
+router.delete('/:postId/removeComment',isLoggedIn, PostController.removeComment);
 
 router.post('/addPost',isLoggedIn, upload.none(), PostController.Addpost);
 

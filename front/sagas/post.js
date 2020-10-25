@@ -12,6 +12,10 @@ function addCommentAPI(data){
     return axios.post(`/post/${data.postId}/addComment`,data);
 }
 
+function removeCommentAPI(data){
+    return axios.delete(`/post/${data.postId}/removeComment?commentId=${data.commentId}`);
+}
+
 function removePostAPI(postId){
     return axios.delete(`/post/${postId}`);
 }
@@ -97,6 +101,27 @@ function* addComment(action){
         
     }
 }
+
+function* removeComment(action){
+    try{
+        const result = yield call(removeCommentAPI,action.data);
+        yield put({
+            type:type.REMOVE_COMMENT_SUCCESS,
+            data:result.data,
+        })
+    }catch(err){
+
+        console.log(err);
+        yield put({
+            type:type.REMOVE_COMMENT_FAIL,
+            error:err.response.data
+        })
+
+        yield put(showAlertAction(err.response.data))
+        
+    }
+}
+
 
 function* removePost(action){
     try{
@@ -294,13 +319,19 @@ function* watchAddPost(){
     yield takeLatest(type.ADD_POST_REQUEST,addPost);    
 }
 
+function* watchRemovePost(){
+    yield takeLatest(type.REMOVE_POST_REQUEST,removePost);
+}
+
 function* watchAddComment(){
     yield takeLatest(type.ADD_COMMENT_REQUEST,addComment);    
 }
 
 function* watchRemoveComment(){
-    yield takeLatest(type.REMOVE_POST_REQUEST,removePost);
+    yield takeLatest(type.REMOVE_COMMENT_REQUEST,removeComment);
 }
+
+
 
 function* watchLoadPost(){
     yield takeLatest(type.LOAD_POST_REQUEST,loadPost);
@@ -342,6 +373,7 @@ function* watchHashtag(){
 export default function* postSaga(){
     yield all([
         fork(watchAddPost),
+        fork(watchRemovePost),
         fork(watchAddComment),
         fork(watchRemoveComment),
         fork(watchLoadPost),
