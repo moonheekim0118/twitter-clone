@@ -11,7 +11,7 @@ exports.loadFollowings=async(req,res,next)=>{
         }
         const user = await User.findOne({where:{id:userId}});
         if(!user){
-            return res.status(403).json('사용자 정보가 잘못 되었습니다.');
+            return res.status(402).json('사용자 정보가 잘못 되었습니다.');
         } // 
         const followings = await user.getFollowings({
             where,

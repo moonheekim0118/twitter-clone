@@ -79,8 +79,6 @@ function* logout(){
             type:type.LOG_OUT_FAIL,
             error:err.response.data
         })
-
-        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -170,6 +168,7 @@ function* updateMyInfo(action){
             type:type.UPDATE_MY_INFO_FAIL,
             error:err.response.data
         })
+        yield put(showAlertAction(err.response.data))
     }
 }
 

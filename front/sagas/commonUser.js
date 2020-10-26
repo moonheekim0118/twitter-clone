@@ -37,7 +37,6 @@ function* loadUserInfo(action){
             type:type.LOAD_USER_INFO_FAIL,
             error:err.response.data
         })
-        yield put(showAlertAction(err.response.data))
     }
 }
 

@@ -124,6 +124,10 @@ exports.unLikePost=async(req,res,next)=>{
 
 exports.removePost=async(req,res,next)=>{
     try{
+        const post = await Post.findOne({where:{id:req.params.postId}});
+        if(!post){
+            return res.status(403).json('존재하지 않는 게시물입니다.');
+        }
         await Post.destroy( // 삭제될 글을 리트윗한 게시글들을 삭제해준다.
             {
             where:{ RetweetId:req.params.postId,}
@@ -146,6 +150,9 @@ exports.removePost=async(req,res,next)=>{
 exports.modifyPost=async(req,res,next)=>{
     try{
         const post = await Post.findOne({where:{id:req.body.postId, UserId:req.user.id}});
+        if(!post){
+            return res.status(403).json('존재하지 않는 게시물입니다.');
+        }
         post.content=req.body.content;
         await post.save();
         res.status(200).json({postId:post.id, content:post.content});

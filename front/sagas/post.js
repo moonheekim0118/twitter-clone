@@ -160,8 +160,7 @@ function* loadPost(action){
             type:type.LOAD_POST_FAIL,
             error:err.response.data
         })
-        
-        yield put(showAlertAction(err.response.data))
+    
     }
 }
 
@@ -250,8 +249,6 @@ function* uploadImages(action){
             type:type.UPLOAD_IMAGES_FAIL,
             error:err.response.data
         })
-    
-        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -287,8 +284,6 @@ function* unretweetPost(action){
             type:type.UNRETWEET_POST_FAIL,
             error:err.response.data
         })
-    
-        yield put(showAlertAction(err.response.data))
     }
 }
 
@@ -310,7 +305,6 @@ function* hashTag(action){
             error:err.response.data
         })
 
-        yield put(showAlertAction(err.response.data))
     }
 }
 
