@@ -27,6 +27,11 @@ export const initialState={
     addCommentDone:false,
     addCommentError:null,
 
+    
+    removeCommentloading:false, // 댓글 삭제
+    removeCommentDone:false,
+    removeCommentError:null,
+
     removePostloading:false, // 게시글 삭제 
     removePostDone:false,
     removePostError:null,
@@ -54,10 +59,6 @@ export const initialState={
     unretweetPostloading:false, // 게시글 언리트윗 
     unretweetPostDone:false,
     unretweetPostError:null,
-
-    removeCommentloading:false, // 댓글 삭제
-    removeCommentDone:false,
-    removeCommentError:null,
 }
 
 
@@ -67,7 +68,7 @@ const reducer= (state = initialState , action)=>{
             case type.CHANGE_TARGET: // 타겟 변경 
                 draft.target= action.data;
 
-            case type.ADD_POST_REQUEST:
+            case type.ADD_POST_REQUEST: // 포스트 추가 
                 draft.addPostloading=true;
                 draft.addPostDone=false;
                 draft.addPostError=null;
@@ -84,8 +85,52 @@ const reducer= (state = initialState , action)=>{
                 draft.addPostloading=false;
                 draft.addPostError=action.error;
                 break;
-    
-             case type.ADD_COMMENT_REQUEST:
+
+            case type.REMOVE_POST_REQUEST: // 포스트 삭제 
+                draft.removePostloading=true;
+                draft.removePostDone=false;
+                draft.removePostError=null;
+                break;
+
+            case type.REMOVE_POST_SUCCESS:
+                if(draft.target==='single'){
+                     draft.singlePost=null; 
+                    }
+                else{
+                    draft.mainPosts=draft.mainPosts.filter((v)=>v.id!==action.data.id);
+                    }
+                draft.removePostloading=false;
+                draft.removePostDone=true;
+                break;
+
+            case type.REMOVE_POST_FAIL:
+                draft.removePostloading=false;
+                draft.removePostError=action.error;
+                break;
+
+            case type.MODIFY_POST_REQUEST: // 포스트 수정 
+                draft.modifyPostloading=true;
+                draft.modifyPostDone=false;
+                draft.modifyPostError=null;
+                break;
+
+            case type.MODIFY_POST_SUCCESS:
+                draft.modifyPostloading=false;
+                draft.modifyPostDone=true;
+                if(draft.target==='single'){
+                    draft.singlePost.content=action.data.content;
+                }
+                else{
+                    const index= draft.mainPosts.findIndex((v)=>v.id===action.data.postId);
+                    draft.mainPosts[index].content=action.data.content;
+                }
+                break;
+            case type.MODIFY_POST_FAIL:
+                draft.modifyPostloading=false;
+                draft.modifyPostError=action.error;
+                break;
+
+             case type.ADD_COMMENT_REQUEST: // 커멘트 추가 
                  draft.addCommentloading=true;
                  draft.addCommentDone=false;
                  draft.addCommentError=null;
@@ -108,28 +153,30 @@ const reducer= (state = initialState , action)=>{
                 draft.addCommentError=action.error;
                 break;
 
-            case type.REMOVE_POST_REQUEST:
-                draft.removePostloading=true;
-                draft.removePostDone=false;
-                draft.removePostError=null;
+            case type.REMOVE_COMMENT_REQUEST: // 커멘트 삭제 
+                draft.removeCommentloading=true;
+                draft.removeCommentDone=false;
+                draft.removeCommentError=null;
                 break;
 
-            case type.REMOVE_POST_SUCCESS:
+            case type.REMOVE_COMMENT_SUCCESS:
                 if(draft.target==='single'){
-                    draft.singlePost=null;
+                    draft.singlePost.Comments=draft.singlePost.Comments.filter((v)=>v.id!==action.data.commentId);
                 }
                 else{
-                    draft.mainPosts=draft.mainPosts.filter((v)=>v.id!==action.data.id);
+                    const idx = draft.mainPosts.findIndex(v=>v.id === action.data.postId);
+                    draft.mainPosts[idx].Comments=draft.mainPosts[idx].Comments.filter((v)=>v.id!==action.data.commentId);
                 }
-                draft.removePostloading=false;
-                draft.removePostDone=true;
+                draft.removeCommentloading=false;
+                draft.removeCommentDone=true;
                 break;
 
-            case type.REMOVE_POST_FAIL:
-                draft.removePostloading=false;
-                draft.removePostError=action.error;
+            case type.REMOVE_COMMENT_FAIL:
+                draft.removeCommentloading=false;
+                draft.removeCommentError=action.error;
                 break;
 
+                // multiple 포스트 로딩 
             case type.LOAD_USER_POST_REQUEST:
             case type.LOAD_LIKED_POST_REQUEST:
             case type.LOAD_HASHTAG_REQUEST:
@@ -156,6 +203,7 @@ const reducer= (state = initialState , action)=>{
                 draft.loadPostError=action.error;
                 break;
 
+                // 해시태그 포스트 로딩 
             case type.LOAD_HASHTAG_SUCCESS:
                 draft.loadPostloading=false;
                 draft.loadPostDone=true;
@@ -178,29 +226,7 @@ const reducer= (state = initialState , action)=>{
                 draft.loadSinglePostError=action.error;
                 break;
 
-            case type.MODIFY_POST_REQUEST:
-                draft.modifyPostloading=true;
-                draft.modifyPostDone=false;
-                draft.modifyPostError=null;
-                break;
-
-            case type.MODIFY_POST_SUCCESS:
-                draft.modifyPostloading=false;
-                draft.modifyPostDone=true;
-                if(draft.target==='single'){
-                    draft.singlePost.content=action.data.content;
-                }
-                else{
-                    const index= draft.mainPosts.findIndex((v)=>v.id===action.data.postId);
-                    draft.mainPosts[index].content=action.data.content;
-                }
-                break;
-            case type.MODIFY_POST_FAIL:
-                draft.modifyPostloading=false;
-                draft.modifyPostError=action.error;
-                break;
-
-            case type.LIKE_POST_REQUEST:
+            case type.LIKE_POST_REQUEST: // 포스트 좋아요 
                 draft.likePostloading=true;
                 draft.likePostDone=false;
                 draft.likePostError=null;
@@ -218,11 +244,12 @@ const reducer= (state = initialState , action)=>{
                 draft.likePostDone=true;
                 break;
             }
-            case type.LIKE_POST_FAIL:
+            case type.LIKE_POST_FAIL: 
                 draft.likePostloading=false;
                 draft.likePostError=action.error;
                 break;
-            case type.UNLIKE_POST_REQUEST:
+
+            case type.UNLIKE_POST_REQUEST: // 포스트 좋아요 취소 
                 draft.unlikePostloading=true;
                 draft.unlikePostDone=false;
                 draft.unlikePostError=null;
@@ -245,7 +272,7 @@ const reducer= (state = initialState , action)=>{
                 draft.unlikePostError=action.error;
                 break;
 
-            case type.UPLOAD_IMAGES_REQUEST:
+            case type.UPLOAD_IMAGES_REQUEST: // 포스트 이미지 업로드 
                 draft.uploadImagesloading=true;
                 draft.uploadImagesDone=false;
                 draft.uploadImagesError=null;
@@ -270,8 +297,8 @@ const reducer= (state = initialState , action)=>{
                 draft.imagePaths=[];
                 break;
 
-            case type.RETWEET_POST_REQUEST:
-                draft.retweetPostloading=true;
+            case type.RETWEET_POST_REQUEST: // 포스트 리트윗 
+                draft.retweetPostloading=true;  
                 draft.retweetPostDone=false;
                 draft.retweetPostError=null;
                 break;
@@ -289,7 +316,7 @@ const reducer= (state = initialState , action)=>{
                 draft.retweetPostError=action.error;
                 break;
 
-            case type.UNRETWEET_POST_REQUEST:
+            case type.UNRETWEET_POST_REQUEST: // 포스트 리트윗 취소 
                 draft.unretweetPostloading=true;
                 draft.unretweetPostDone=false;
                 draft.unretweetPostError=null;
@@ -304,29 +331,6 @@ const reducer= (state = initialState , action)=>{
             case type.UNRETWEET_POST_FAIL:
                 draft.unretweetPostloading=false;
                 draft.unretweetPostError=action.error;
-                break;
-
-            case type.REMOVE_COMMENT_REQUEST:
-                draft.removeCommentloading=true;
-                draft.removeCommentDone=false;
-                draft.removeCommentError=null;
-                break;
-
-            case type.REMOVE_COMMENT_SUCCESS:
-                if(draft.target==='single'){
-                    draft.singlePost.Comments=draft.singlePost.Comments.filter((v)=>v.id!==action.data.commentId);
-                }
-                else{
-                    const idx = draft.mainPosts.findIndex(v=>v.id === action.data.postId);
-                    draft.mainPosts[idx].Comments=draft.mainPosts[idx].Comments.filter((v)=>v.id!==action.data.commentId);
-                }
-                draft.removeCommentloading=false;
-                draft.removeCommentDone=true;
-                break;
-
-            case type.REMOVE_COMMENT_FAIL:
-                draft.removeCommentloading=false;
-                draft.removeCommentError=action.error;
                 break;
                  
             default:

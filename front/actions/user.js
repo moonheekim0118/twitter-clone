@@ -49,20 +49,6 @@ export const UPLOAD_PROFILE_PIC_REQUEST="UPLOAD_PROFILE_PIC_REQUEST";
 export const UPLOAD_PROFILE_PIC_SUCCESS="UPLOAD_PROFILE_PIC_SUCCESS";
 export const UPLOAD_PROFILE_PIC_FAIL="UPLOAD_PROFILE_PIC_FAIL";
 
-export const updateMyInfoAction=(data)=>{
-    return{
-        type:UPDATE_MY_INFO_REQUEST,
-        data,
-    }
-};
-
-export const uploadProfilePicAction=(data)=>{
-    return{
-        type:UPLOAD_PROFILE_PIC_REQUEST,
-        data,
-    }
-};
-
 export const loadMyInfoAction=(data)=>{
     return{
         type:LOAD_MY_INFO_REQUEST,
@@ -112,3 +98,17 @@ export const unfollowRequestAction=(data)=>{
         data,
     }
 }
+
+export const updateMyInfoAction=(data)=>{
+    return{
+        type:UPDATE_MY_INFO_REQUEST,
+        data,
+    }
+};
+
+export const uploadProfilePicAction=(data)=>{
+    return{
+        type:UPLOAD_PROFILE_PIC_REQUEST,
+        data,
+    }
+};

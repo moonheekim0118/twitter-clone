@@ -98,12 +98,13 @@ export const changeTargetAction=(data)=>{
     }
 }
 
-export const removeCommentAction=(data)=>{
+export const loadPostsAction=(data)=>{
     return{
-        type:REMOVE_COMMENT_REQUEST,
+        type:LOAD_POST_REQUEST,
         data,
     }
 }
+
 
 export const loadUserLikedPostsAction=(data)=>{
     return{
@@ -126,30 +127,9 @@ export const loadHashtagAction=(data)=>{
     }
 }
 
-export const loadPostsAction=(data)=>{
-    return{
-        type:LOAD_POST_REQUEST,
-        data,
-    }
-}
-
 export const loadSinglePostAction=(data)=>{
     return{
         type:LOAD_SINGLE_POST_REQUEST,
-        data,
-    }
-}
-// 리트윗 
-export const retweetAction=(data)=>{
-    return{
-        type:RETWEET_POST_REQUEST,
-        data,
-    }
-}
-
-export const unretweetAction=(data)=>{
-    return{
-        type:UNRETWEET_POST_REQUEST,
         data,
     }
 }
@@ -180,6 +160,20 @@ export const addPostAction=(data)=>{
      data
     }
  }
+
+ export const removePostAction=(data)=>{
+    return{
+        type:REMOVE_POST_REQUEST,
+        data
+    }
+}
+
+export const modifyPostAction=(data)=>{
+    return {
+        type:MODIFY_POST_REQUEST,
+        data,
+    }
+}
  
  export const addCommentAction=(data)=>{
      return{
@@ -187,20 +181,15 @@ export const addPostAction=(data)=>{
          data
      }
  }
+
+ export const removeCommentAction=(data)=>{
+    return{
+        type:REMOVE_COMMENT_REQUEST,
+        data,
+    }
+}
+
  
- export const removePostAction=(data)=>{
-     return{
-         type:REMOVE_POST_REQUEST,
-         data
-     }
- }
- 
- export const modifyPostAction=(data)=>{
-     return {
-         type:MODIFY_POST_REQUEST,
-         data,
-     }
- }
 
  export const likePostAction=(data)=>{
      return{
@@ -212,6 +201,21 @@ export const addPostAction=(data)=>{
  export const unLikePostAction=(data)=>{
     return{
         type:UNLIKE_POST_REQUEST,
+        data,
+    }
+}
+
+// 리트윗 
+export const retweetAction=(data)=>{
+    return{
+        type:RETWEET_POST_REQUEST,
+        data,
+    }
+}
+
+export const unretweetAction=(data)=>{
+    return{
+        type:UNRETWEET_POST_REQUEST,
         data,
     }
 }

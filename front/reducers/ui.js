@@ -15,6 +15,7 @@ export const initialState={
 const reducer=(state=initialState, action)=>{
     return produce(state,draft=>{
         switch(action.type){
+            // 프로필 모달 
             case type.SHOW_PROFILE_MODAL:
                 draft.showProfileModal=true;
                 break;
@@ -22,6 +23,7 @@ const reducer=(state=initialState, action)=>{
                 draft.showProfileModal=false;
                 break;
 
+                // 포스트 작성  모달 
             case type.SHOW_POST_MODAL:
                 draft.showPostModal=true;
                 break;
@@ -29,6 +31,7 @@ const reducer=(state=initialState, action)=>{
                 draft.showPostModal=false;
                 break;
 
+                // 포스트 수정 모달 
             case type.SHOW_MODIFY_MODAL:
                 draft.showModifyModal=true;
                 draft.modifyPostId=action.data.postId;
@@ -40,6 +43,7 @@ const reducer=(state=initialState, action)=>{
                 draft.modifyFormerContent='';
                 break;
 
+                // 알림창 
             case type.SHOW_ALERT:
                 draft.showAlert=true;
                 draft.alertContent=action.data;
@@ -48,6 +52,7 @@ const reducer=(state=initialState, action)=>{
                 draft.showAlert=false;
                 break; 
             
+                // 유저 프로필 수정 모달 
             case type.SHOW_INFO_EDIT_MODAL:
                 draft.showInfoEditModal=true;
                 break;

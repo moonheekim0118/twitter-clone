@@ -45,6 +45,7 @@ export const initialState={
 const reducer= (state = initialState , action)=>{
     return produce(state,draft=>{
         switch(action.type){
+            // 로그인한 유저 정보 불러오기 
             case type.LOAD_MY_INFO_REQUEST:
                 draft.loadMyInfoLoading=true;
                 draft.loadMyInfoDone=false;
@@ -66,6 +67,7 @@ const reducer= (state = initialState , action)=>{
                 draft.loadMyInfoError=action.error;
                 break;
                 
+                // 로그인 
             case type.LOG_IN_REQUEST:
                 draft.isLoggingIn=true;
                 draft.isLoggedIn=false;
@@ -83,6 +85,7 @@ const reducer= (state = initialState , action)=>{
                 draft.loginError=action.error;
                 break;
                 
+                // 로그아웃 
             case type.LOG_OUT_REQUEST:
                 draft.isLoggingOut=true;
                 draft.isLoggedOut=false;
@@ -101,13 +104,13 @@ const reducer= (state = initialState , action)=>{
                 draft.logoutError=action.error;
                 break;
     
+                // 회원가입 
             case type.SIGN_UP_REQUEST:
                 draft.signUploading=true;
                 draft.signUpDone=false;
                 draft.signUpError=null;
                 break;
                 
-
             case type.SIGN_UP_SUCCESS:
                 draft.signUploading=false;
                 draft.signUpDone=true;
@@ -122,14 +125,17 @@ const reducer= (state = initialState , action)=>{
                 draft.signUpDone=false;
                 break;
                 
+                // 내 게시글 추가 
             case type.ADD_POST_TO_ME:
                 draft.me.Posts.unshift({ id: action.data});
                 break;
 
+                // 내 게시글 삭제 
             case type.REMOVE_POST_OF_ME:
                 draft.me.Posts= draft.me.Posts.filter((v)=>v.id!==action.data.id);
                 break;
 
+                // 타 유저 팔로우 
             case type.FOLLOW_REQUEST:
                 draft.followloading=true;
                 draft.followDone=false;
@@ -147,6 +153,7 @@ const reducer= (state = initialState , action)=>{
                 draft.followError=action.error;
                 break;
 
+                // 타 유저 언팔로우 
             case type.UNFOLLOW_REQUEST:
                 draft.unfollowloading=true;
                 draft.unfollowDone=false;
@@ -164,6 +171,7 @@ const reducer= (state = initialState , action)=>{
                 draft.unfollowError=action.error;
                 break;
 
+                // 프로필 수정 ->  프로필 사진 업로드  
             case type.UPLOAD_PROFILE_PIC_REQUEST:
                 draft.uploadProfilePicLoading=true;
                 draft.uploadProfilePicDone=false;
@@ -181,6 +189,7 @@ const reducer= (state = initialState , action)=>{
                 draft.uploadProfilePicErorr=action.error;
                 break;
 
+                // 프로필 수정 -> 내 전체 정보 업데이트 
             case type.UPDATE_MY_INFO_REQUEST:
                 draft.updateMyInfoLoading=true;
                 draft.updateMyInfoDone=false;

@@ -34,6 +34,7 @@ export const initialState={
 const reducer=(state= initialState, action)=>{
     return produce(state,draft=>{
         switch(action.type){
+            // 현재 프로필 페이지 들어간 유저 정보 불러오기 
             case type.LOAD_USER_INFO_REQUEST:
                 draft.loadUserInfoLoading=true;
                 draft.loadUserInfoDone=false;
@@ -49,6 +50,7 @@ const reducer=(state= initialState, action)=>{
                 draft.loadUserInfoError=action.error;
                 break;
 
+                // 현재 프로필 페이지 들어간 유저 팔로잉 목록 불러오기 
             case type.LOAD_FOLLOWINGS_REQUEST:
                 draft.loadFollowingListLoading=true;
                 draft.loadFollowingListDone=false;
@@ -65,6 +67,7 @@ const reducer=(state= initialState, action)=>{
                 draft.loadFollowingListError=action.error;
                 break;
 
+                // 현재 프로필 페이지 들어간 유저 팔로워 목록 불러오기 
             case type.LOAD_FOLLOWERS_REQUEST:
                 draft.loadFollowersListLoading=true;
                 draft.loadFollowersListDone=false;
