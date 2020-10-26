@@ -17,12 +17,13 @@ const UserProfile=({user})=>{
     const dispatch= useDispatch();
 
     const onClickFollowings=useCallback(()=>{
+
         Router.push(`/user/${user.id}/followings`);
-    },[]);
+    },[user]);
 
     const onClickFollowers=useCallback(()=>{
         Router.push(`/user/${user.id}/followers`);
-    },[]);
+    },[user]);
 
     const onShowEditModal=useCallback(()=>{
         dispatch(showInfoEditModalAction());
