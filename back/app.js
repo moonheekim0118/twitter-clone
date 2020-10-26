@@ -14,16 +14,25 @@ const cookieParser= require('cookie-parser');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const path = require('path');
+const hpp = require('hpp');
+const helmet = require('helmet');
 
 dotenv.config();
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:['http://localhost:3000', 'mooneetwit.com'],
     credentials: true,
 }));
 
 passportConfig();
+if(process.env.NODE_ENV === 'production'){
+    app.use(morgan('combined'));
+    app.use(hpp());
+    app.use(helmet());
+}
+else{
+    app.use(morgan('dev'));
+}
 
-app.use(morgan('dev'));
 app.use('/',express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
