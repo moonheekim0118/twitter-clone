@@ -8,6 +8,7 @@ import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction,signUpResetAction} from '../../../actions/user';
 import { Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text,TextLength } from '../style';
 import { ErrorMessage } from '../../globalStyle';
+import { LoadingIcon } from '../../Icons';
 
 const SignUp=()=>{
 
@@ -111,7 +112,7 @@ const SignUp=()=>{
             </InputWrapper>
     
             <ButtonWrapper>
-                <SubmitButton>회원가입</SubmitButton>
+                {signUploading ? <LoadingIcon/> : <SubmitButton>회원가입</SubmitButton>}
                 <Link href="/login"><Text>로그인</Text></Link>
             </ButtonWrapper>
         </Form>

@@ -4,7 +4,8 @@ import { loginRequestAction } from '../../../actions/user';
 import Link from 'next/link';
 import useInput from '../../../hooks/useInput';;
 import {  Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text  } from '../style';
-import { ErrorMessage, Loading } from '../../globalStyle';
+import { ErrorMessage } from '../../globalStyle';
+import { LoadingIcon } from '../../Icons';
 
 const LoginForm =()=>{
     const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const LoginForm =()=>{
                  <Label htmlFor="user-password">비밀번호</Label>
             </InputWrapper>
             <ButtonWrapper>
-                {isLoggingIn ? <Loading/> : <SubmitButton>로그인</SubmitButton> }
+                {isLoggingIn ? <LoadingIcon/> : <SubmitButton>로그인</SubmitButton> }
                 <Link href="/signUp"><Text>회원가입</Text></Link>
             </ButtonWrapper>
         </Form>

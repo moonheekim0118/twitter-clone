@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-import { LoadingOutlined } from '@ant-design/icons';
+
 const GlobalStyles = createGlobalStyle`  
     *,
     *::after,
@@ -77,12 +77,6 @@ export const RectButton = styled.button`
         cursor:default;
     }
 `;
-
-
-export const Loading = styled(LoadingOutlined)`
-    font-size:${({theme})=>theme.fontSizes.xl};
-`;
-
 
 
 export const AvatarWrapper = styled.div`

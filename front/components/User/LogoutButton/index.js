@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutRequestAction } from '../../../actions/user';
-import { Button, Loading } from '../../globalStyle';
+import { Button } from '../../globalStyle';
+import { LoadingIcon } from '../../Icons';
+
 
 
 const LogoutButton=()=>{
@@ -14,7 +16,7 @@ const LogoutButton=()=>{
     
     return(
         <>
-            {isLoggingOut ? <Loading/> : <Button onClick={onClickLogOut}> 로그아웃 </Button>}
+            {isLoggingOut ? <LoadingIcon/> : <Button onClick={onClickLogOut}> 로그아웃 </Button>}
         </>
     );
     
