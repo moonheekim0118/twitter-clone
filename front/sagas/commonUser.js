@@ -16,14 +16,6 @@ function loadFollowerListAPI(data){
     return axios.get(`/users/${data.userId}/followers?lastId=${data.lastId || 0}`);
 }
 
-function loadUserPostAPI(data){
-    //`/posts?lastId=${lastId || 0}`
-    return axios.get(`/users/${data.userId}/posts?lastId=${data.lastId || 0}`);
-};
-
-function loadLikedPostAPI(data){
-    return axios.get(`/users/${data.userId}/likes?lastId=${data.lastId || 0}`);
-}
 
 function* loadUserInfo(action){
     try{
@@ -74,40 +66,6 @@ function* loadFollowers(action){
     }
 }
 
-function* loadUserPost(action){
-    try{
-        const result= yield call(loadUserPostAPI,action.data);
-        yield put({
-            type:type.LOAD_USER_POST_SUCCESS,
-            data:result.data,
-        });
-    }catch(err){
-        yield put({
-            type:type.LOAD_USER_POST_FAIL,
-            error:err.response.data
-        })
-        yield put(showAlertAction(err.response.data))
-    }
-}
-
-
-function* loadLikedPost(action){
-    try{
-        const result= yield call(loadLikedPostAPI,action.data);
-        yield put({
-            type:type.LOAD_LIKED_POST_SUCCESS,
-            data:result.data,
-        });
-    }catch(err){
-        yield put({
-            type:type.LOAD_LIKED_POST_FAIL,
-            error:err.response.data
-        })
-        yield put(showAlertAction(err.response.data))
-    }
-}
-
-
 
 
 
@@ -123,17 +81,6 @@ function* watchLoadFollowers(){
     yield takeLatest(type.LOAD_FOLLOWERS_REQUEST,loadFollowers);
 }
 
-function* watchLoadUserPost(){
-    yield takeLatest(type.LOAD_USER_POST_REQUEST,loadUserPost);
-}
-
-
-function* watchLoadLikedPost(){
-    yield takeLatest(type.LOAD_LIKED_POST_REQUEST,loadLikedPost);
-}
-
-
-
 
 
 export default function* commonUserSaga(){
@@ -141,7 +88,5 @@ export default function* commonUserSaga(){
         fork(watchLoadUserInfo),
         fork(watchLoadFollowings),
         fork(watchLoadFollowers),
-        fork(watchLoadUserPost),
-        fork(watchLoadLikedPost),
     ]);
 }

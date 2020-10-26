@@ -3,18 +3,14 @@ const { Op } = require('sequelize');
 
 exports.loadPost=async (req,res,next)=>{
     try{
-        let totalPostsLength=0;
         const where={};
         const lastId=+req.query.lastId;
         if(lastId!==0){
             where.id={[Op.lt]: +req.query.lastId};
         }
-        if(lastId===0){
-            totalPostsLength= await Post.count();
-        }
         const posts = await Post.findAll({
             where,
-            limit:10,
+            limit:5,
             order:[
                 ['createdAt','DESC'],
                 [Comment, 'createdAt', 'DESC']
@@ -30,7 +26,7 @@ exports.loadPost=async (req,res,next)=>{
                  {model: Image}, 
                  {model:Comment, include:[{model:User, attirbutes:['id','nickname','profilepic']}]},
             ]}]});
-        res.status(200).json({posts,totalPostsLength});
+        res.status(200).json({posts});
     }catch(err){
         console.error(err);
         next(err);

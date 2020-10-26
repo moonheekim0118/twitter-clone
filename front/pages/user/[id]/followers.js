@@ -10,8 +10,8 @@ import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout';
 import FollowHeader from '../../../components/Header/FollowHeader';
 import FollowCard from '../../../components/Follow/FollowCard';
-import { Spin } from 'antd';
 import { MiddleWrapper } from '../../../components/globalStyle';
+import { LoadingIcon } from '../../../components/Icons';
 
 const Followers=()=>{
     const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const Followers=()=>{
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
           <FollowHeader userId={id} pageName={"Followers"}/>
           {FollowerList.length === 0 ? <h1>팔로워가 없습니다.</h1>:FollowerList.map((user)=><FollowCard  key={user.id} user={user}/>)}
-          {loadFollowerListLoading? <MiddleWrapper><Spin/></MiddleWrapper> : ''}
+          {loadFollowerListLoading? <MiddleWrapper><LoadingIcon/></MiddleWrapper> : ''}
         </AppLayout>
     )
 }

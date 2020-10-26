@@ -57,7 +57,6 @@ exports.loadUserPosts=async(req,res,next)=>{
         if(lastId!==0){
             where.id={[Op.lt]: +req.query.lastId};
         }
-
         const user = await User.findOne({
             where:{id:req.params.userId}
         });
@@ -82,7 +81,7 @@ exports.loadUserPosts=async(req,res,next)=>{
                  {model: Image}, 
                  {model:Comment, include:[{model:User, attributes:['id','nickname','profilepic']}]},
             ]}]});
-        res.status(200).json(posts||{});
+        res.status(200).json({posts});
     }catch(err){
         console.error(err);
         next(err);
@@ -120,7 +119,7 @@ exports.loadLikedposts=async(req,res,next)=>{ // userId의 user가 Liked 한 포
                  {model:Comment, include:[{model:User, attributes:['id','nickname','profilepic']}]},
             ]}]
         });
-        return res.status(200).json(posts);
+        return res.status(200).json({posts});
 
     }catch(err){
         console.error(err);

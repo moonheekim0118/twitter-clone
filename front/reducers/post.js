@@ -3,8 +3,6 @@ import produce from '../util/produce';
 
 export const initialState={
     // 시퀄라이즈 속성에 맞게 다른 정보와 결합되는 것은 대문자로 표기함.
-
-    totalPostLength:0,
     mainPosts:[],
     hashTagPosts:[],
     hasMorePost:true,
@@ -117,6 +115,8 @@ const reducer= (state = initialState , action)=>{
                 draft.removePostError=action.error;
                 break;
 
+            case type.LOAD_USER_POST_REQUEST:
+            case type.LOAD_LIKED_POST_REQUEST:
             case type.LOAD_HASHTAG_REQUEST:
             case type.LOAD_POST_REQUEST:
                 draft.loadPostloading=true;
@@ -124,16 +124,17 @@ const reducer= (state = initialState , action)=>{
                 draft.loadPostError=null;
                 break;
 
+            case type.LOAD_USER_POST_SUCCESS:
+            case type.LOAD_LIKED_POST_SUCCESS:
             case type.LOAD_POST_SUCCESS:
                 draft.loadPostloading=false;
                 draft.loadPostDone=true;
                 draft.mainPosts=draft.mainPosts.concat(action.data.posts);
-                if(action.data.totalPostsLength!==0){
-                    draft.totalPostLength=action.data.totalPostsLength;
-                }
-                draft.hasMorePost=draft.mainPosts.length<draft.totalPostLength;
+                draft.hasMorePost=action.data.posts.length === 5;
                 break;
 
+            case type.LOAD_USER_POST_FAIL:
+            case type.LOAD_LIKED_POST_FAIL:
             case type.LOAD_HASHTAG_FAIL:
             case type.LOAD_POST_FAIL:
                 draft.loadPostloading=false;
@@ -144,10 +145,7 @@ const reducer= (state = initialState , action)=>{
                 draft.loadPostloading=false;
                 draft.loadPostDone=true;
                 draft.hashTagPosts=draft.hashTagPosts.concat(action.data.posts);
-                if(action.data.totalPostLength!==0){
-                    draft.totalPostLength=action.data.totalPostLength;
-                }
-                draft.hasMorePost=draft.hashTagPosts.length<draft.totalPostLength;
+                draft.hasMorePost=action.data.posts.length===5;
                 break;
 
             case type.LOAD_SINGLE_POST_REQUEST:
@@ -170,6 +168,7 @@ const reducer= (state = initialState , action)=>{
                 draft.modifyPostDone=false;
                 draft.modifyPostError=null;
                 break;
+
             case type.MODIFY_POST_SUCCESS:
                 draft.modifyPostloading=false;
                 draft.modifyPostDone=true;

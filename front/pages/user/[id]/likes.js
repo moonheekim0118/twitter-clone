@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import {END} from 'redux-saga';
 import { loadMyInfoAction } from '../../../actions/user';
-import { loadUserInfoAction, loadUserLikedPostsAction } from '../../../actions/commonUser';
+import { loadUserInfoAction } from '../../../actions/commonUser';
+import { loadUserLikedPostsAction } from '../../../actions/post';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout'
@@ -18,14 +19,14 @@ const Detail =()=>{
     const dispatch = useDispatch();
     const router = useRouter();
     const { id  } = router.query;
-    const { userInfo , LikedPosts, hasMoreLikedPosts , loadLikedPostLoading } = useSelector((state)=>state.commonUser);
-
+    const { userInfo } = useSelector((state)=>state.commonUser);
+    const { mainPosts, hasMorePost, loadPostloading   } = useSelector((state)=>state.post);
 
     useEffect(()=>{
         function onScroll(){
             if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
-                if(hasMoreLikedPosts && !loadLikedPostLoading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
-                    const lastId= LikedPosts[LikedPosts.length-1]?.id;
+                if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
+                    const lastId= mainPosts[mainPosts.length-1]?.id;
                     dispatch(loadUserLikedPostsAction({userId:id, lastId:lastId}));
                 }
             }
@@ -34,7 +35,7 @@ const Detail =()=>{
         return()=>{
             window.removeEventListener('scroll',onScroll);
         }
-    },[LikedPosts,hasMoreLikedPosts,loadLikedPostLoading])
+    },[mainPosts,hasMorePost,loadPostloading])
   
     if(!userInfo){
         return(
@@ -54,7 +55,7 @@ const Detail =()=>{
             <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
             <ProfileCard user={userInfo}/>
             <PostHeader userId={id} pageName={"Likes"}/>
-            {LikedPosts.length > 0 && <PostsList posts={LikedPosts} loading={loadLikedPostLoading}/>}
+            {mainPosts.length > 0 && <PostsList posts={mainPosts} loading={loadPostloading}/>}
         </AppLayout>
     )
     
