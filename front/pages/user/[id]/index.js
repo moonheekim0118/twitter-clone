@@ -5,7 +5,7 @@ import { END } from 'redux-saga';
 import { loadMyInfoAction } from '../../../actions/user';
 import { useSelector , useDispatch } from 'react-redux';
 import { loadUserInfoAction } from '../../../actions/commonUser';
-import { loadUserPostsAction } from '../../../actions/post';
+import { loadUserPostsAction,changeTargetAction } from '../../../actions/post';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout'
@@ -68,6 +68,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     context.store.dispatch(loadMyInfoAction());
     context.store.dispatch(loadUserInfoAction(context.params.id));
     context.store.dispatch(loadUserPostsAction({userId:context.params.id}));
+    context.store.dispatch(changeTargetAction('user'));
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
     return { props: {} };

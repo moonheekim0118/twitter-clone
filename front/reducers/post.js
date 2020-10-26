@@ -9,6 +9,8 @@ export const initialState={
     imagePaths:[], //이미지 업로드 할 때 이미지 경로 
     singlePost:null,
 
+    target:'main', // 현재 타겟 
+
     loadPostloading:false, // 게시글 로딩  
     loadPostDone:false, 
     loadPostError:null,
@@ -62,6 +64,9 @@ export const initialState={
 const reducer= (state = initialState , action)=>{
     return produce(state,draft=>{
         switch(action.type){
+            case type.CHANGE_TARGET: // 타겟 변경 
+                draft.target= action.data;
+
             case type.ADD_POST_REQUEST:
                 draft.addPostloading=true;
                 draft.addPostDone=false;
@@ -87,8 +92,13 @@ const reducer= (state = initialState , action)=>{
                  break;
 
             case type.ADD_COMMENT_SUCCESS:
-                const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
-                post.Comments.unshift(action.data);
+                if(draft.target==='single'){
+                    draft.singlePost.Comments.unshift(action.data);
+                }
+                else{
+                    const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+                    post.Comments.unshift(action.data);
+                }
                 draft.addCommentloading=false;
                 draft.addCommentDone=true;
                 break;
@@ -105,7 +115,12 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.REMOVE_POST_SUCCESS:
-                draft.mainPosts=draft.mainPosts.filter((x)=>x.id!==action.data.id);
+                if(draft.target==='single'){
+                    draft.singlePost=null;
+                }
+                else{
+                    draft.mainPosts=draft.mainPosts.filter((v)=>v.id!==action.data.id);
+                }
                 draft.removePostloading=false;
                 draft.removePostDone=true;
                 break;
@@ -172,8 +187,13 @@ const reducer= (state = initialState , action)=>{
             case type.MODIFY_POST_SUCCESS:
                 draft.modifyPostloading=false;
                 draft.modifyPostDone=true;
-                const index= draft.mainPosts.findIndex((x)=>x.id===action.data.postId);
-                draft.mainPosts[index].content=action.data.content;
+                if(draft.target==='single'){
+                    draft.singlePost.content=action.data.content;
+                }
+                else{
+                    const index= draft.mainPosts.findIndex((v)=>v.id===action.data.postId);
+                    draft.mainPosts[index].content=action.data.content;
+                }
                 break;
             case type.MODIFY_POST_FAIL:
                 draft.modifyPostloading=false;
@@ -185,9 +205,15 @@ const reducer= (state = initialState , action)=>{
                 draft.likePostDone=false;
                 draft.likePostError=null;
                 break;
+
             case type.LIKE_POST_SUCCESS:{
-                const post = draft.mainPosts.find((x)=> x.id === action.data.PostId);
-                post.Likers.push({id:action.data.UserId});
+                if(draft.target==='single'){
+                    draft.singlePost.Likers.push({id:action.data.UserId});
+                }
+                else{
+                    const post = draft.mainPosts.find((v)=> v.id === action.data.PostId);
+                    post.Likers.push({id:action.data.UserId});
+                }
                 draft.likePostloading=false;
                 draft.likePostDone=true;
                 break;
@@ -201,9 +227,15 @@ const reducer= (state = initialState , action)=>{
                 draft.unlikePostDone=false;
                 draft.unlikePostError=null;
                 break;
+
             case type.UNLIKE_POST_SUCCESS:{
-                const post = draft.mainPosts.find((x)=> x.id === action.data.PostId);
-                post.Likers=post.Likers.filter((x)=>x.id !== action.data.UserId);
+                if(draft.target==='single'){
+                    draft.singlePost.Likers=draft.singlePost.Likers.filter((v)=>v.id!==action.data.UserId);
+                }
+                else{
+                    const post = draft.mainPosts.find((v)=> v.id === action.data.PostId);
+                    post.Likers=post.Likers.filter((v)=>v.id !== action.data.UserId);
+                }
                 draft.unlikePostloading=false;
                 draft.unlikePostDone=true;
                 break;
@@ -245,8 +277,8 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.RETWEET_POST_SUCCESS:
-                if(action.data.target==='main'){
-                    draft.mainPosts.unshift(action.data.post);
+                if(draft.target==='main'){
+                    draft.mainPosts.unshift(action.data);
                 }
                 draft.retweetPostloading=false;
                 draft.retweetPostDone=true;
@@ -264,7 +296,7 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.UNRETWEET_POST_SUCCESS:
-                draft.mainPosts=draft.mainPosts.filter((x)=>x.id!==action.data.id);
+                draft.mainPosts=draft.mainPosts.filter((v)=>v.id!==action.data.id);
                 draft.unretweetPostloading=false;
                 draft.unretweetPostDone=true;
                 break;
@@ -281,9 +313,13 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.REMOVE_COMMENT_SUCCESS:
-                // post Id 찾아와서 .. 커멘트 지우기
-                const idx = draft.mainPosts.findIndex(v=>v.id === action.data.postId);
-                draft.mainPosts[idx].Comments=draft.mainPosts[idx].Comments.filter((v)=>v.id!==action.data.commentId);
+                if(draft.target==='single'){
+                    draft.singlePost.Comments=draft.singlePost.Comments.filter((v)=>v.id!==action.data.commentId);
+                }
+                else{
+                    const idx = draft.mainPosts.findIndex(v=>v.id === action.data.postId);
+                    draft.mainPosts[idx].Comments=draft.mainPosts[idx].Comments.filter((v)=>v.id!==action.data.commentId);
+                }
                 draft.removeCommentloading=false;
                 draft.removeCommentDone=true;
                 break;

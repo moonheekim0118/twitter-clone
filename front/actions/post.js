@@ -88,6 +88,16 @@ export const LOAD_HASHTAG_REQUEST="LOAD_HASHTAG_REQUEST";
 export const LOAD_HASHTAG_SUCCESS="LOAD_HASHTAG_SUCCESS";
 export const LOAD_HASHTAG_FAIL="LOAD_HASHTAG_FAIL";
 
+// 타겟 변경
+export const CHANGE_TARGET="CHANGE_TARGET";
+
+export const changeTargetAction=(data)=>{
+    return{
+        type:CHANGE_TARGET,
+        data,
+    }
+}
+
 export const removeCommentAction=(data)=>{
     return{
         type:REMOVE_COMMENT_REQUEST,

@@ -49,7 +49,7 @@ export const getServerSideProps= wrapper.getServerSideProps(async(context)=>{
     if(context.req && cookie){
         axios.defaults.headers.Cookie=cookie;
     }
-    context.store.dispatch(loadMyInfoAction() );
+    context.store.dispatch(loadMyInfoAction());
     context.store.dispatch(loadPostsAction());
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();

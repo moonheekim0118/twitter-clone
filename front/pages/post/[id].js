@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { END } from 'redux-saga';
-import { loadSinglePostAction } from '../../actions/post';
+import { loadSinglePostAction,changeTargetAction } from '../../actions/post';
 import { loadMyInfoAction } from '../../actions/user';
 import axios from 'axios';
 import wrapper from '../../store/configureStore';
@@ -46,6 +46,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     }
     context.store.dispatch(loadMyInfoAction());
     context.store.dispatch(loadSinglePostAction(context.params.id));
+    context.store.dispatch(changeTargetAction('single'));
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
     return { props: {} };

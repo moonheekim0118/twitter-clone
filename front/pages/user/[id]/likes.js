@@ -5,7 +5,7 @@ import Head from 'next/head';
 import {END} from 'redux-saga';
 import { loadMyInfoAction } from '../../../actions/user';
 import { loadUserInfoAction } from '../../../actions/commonUser';
-import { loadUserLikedPostsAction } from '../../../actions/post';
+import { loadUserLikedPostsAction,changeTargetAction } from '../../../actions/post';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout'
@@ -70,7 +70,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     context.store.dispatch(loadMyInfoAction());
     context.store.dispatch(loadUserInfoAction(context.params.id)); // 유저 정보 불러오기 
     context.store.dispatch(loadUserLikedPostsAction({userId:context.params.id})); // 좋아요 게시글 정보 
-
+    context.store.dispatch(changeTargetAction('like'));
     context.store.dispatch(END);
     await context.store.sagaTask.toPromise();
     return { props: {} };

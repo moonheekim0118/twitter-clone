@@ -16,7 +16,7 @@ import { AvatarWrapper } from '../../globalStyle';
 import Tooltip from '../Tooltip';
 import { HeartIcon , RetweetIcon , MoreIcon, CommentIcon, SmallRetweetIcon } from '../../Icons';
 
-const PostCard=({post,commentFormOpen,target})=>{
+const PostCard=({post,commentFormOpen})=>{
     const dispatch = useDispatch();
     const [commentFormOpend, setCommentFormOpend]=useState(commentFormOpen);
     const me = useSelector(state => state.user.me?.id);
@@ -55,7 +55,7 @@ const PostCard=({post,commentFormOpen,target})=>{
             return dispatch(unretweetAction(post.id));
         }
         else if( post.UserId!==me ){
-            dispatch(retweetAction({postId:post.id, target}));
+            dispatch(retweetAction(post.id));
         }
     },[]);
 
@@ -171,7 +171,6 @@ PostCard.propTypes = {
 
     }).isRequired,
     commentFormOpen:PropTypes.bool.isRequired,
-    target:PropTypes.string.isRequired,
 }
 
 export default PostCard;
