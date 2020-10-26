@@ -53,7 +53,7 @@ app.use('/hashtag',hashtagRouter); // 해쉬태그 검색
 
 db.sequelize.sync()
 .then(()=>{
-    app.listen(3065);
+    app.listen(80);
 })
 .catch((err)=>{
     console.log(err);
