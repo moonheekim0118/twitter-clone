@@ -7,7 +7,6 @@ module.exports={
     "password": process.env.DB_PASSWORD,
     "database": "twitter-clone-db",
     "host": "127.0.0.1",
-    "port":"3360",
     "dialect": "mysql"
   },
   "test": {
