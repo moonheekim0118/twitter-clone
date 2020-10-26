@@ -54,7 +54,7 @@ function uplaodImagesAPI(data){
 
 
 function retweetPostAPI(data){
-    return axios.post(`/post/${data}/retweet`);
+    return axios.post(`/post/${data.postId}/retweet`);
 }
 
 function unretweetPostAPI(data){
@@ -302,7 +302,7 @@ function* retweetPost(action){
         const result= yield call(retweetPostAPI,action.data);
         yield put({
             type:type.RETWEET_POST_SUCCESS,
-            data:result.data
+            data:{post:result.data, target:action.data.target}
         })
 
     }catch(err){

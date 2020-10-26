@@ -54,7 +54,7 @@ const User=()=>{
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
           <ProfileCard user={userInfo}/>
           <PostHeader userId={id} pageName={"Tweet"}/>
-          {mainPosts.length > 0 && <PostsList posts={mainPosts} loading={loadPostloading}/>}
+          {mainPosts.length > 0 && <PostsList posts={mainPosts} loading={loadPostloading} target="user"/>}
     </AppLayout>
     )
 }

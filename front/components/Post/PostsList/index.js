@@ -8,17 +8,22 @@ const Wrapper = styled.div`
     text-align:center;
 `;
 
-const PostsList=({posts, loading})=>{
+const PostsList=({posts, loading,target})=>{
 
     return(
         <>
-           {posts.map((post)=><PostCard key={post.id} post={post}/>)}
+           {posts.map((post)=><PostCard key={post.id} post={post} target={target}/>)}
            {loading? <Wrapper><LoadingIcon/></Wrapper> : ''}
         </>
     )
 }
 
+PostsList.defaultProps={
+    target:"main",
+};
+
 PostsList.propTypes = {
+    target:PropTypes.string.isRequired,
     posts:PropTypes.array.isRequired,
     loading:PropTypes.bool.isRequired,
 }
