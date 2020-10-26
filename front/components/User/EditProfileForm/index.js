@@ -7,7 +7,7 @@ import { updateMyInfoAction,uploadProfilePicAction } from '../../../actions/user
 import { Wrapper,Title,ContentWrapper,ProfilePicWrapper, Overaly, Header } from './style';
 import { InputWrapper,  TextLength, Label , TextInput } from '../style';
 import { RectButton } from '../../globalStyle';
-import { CloseIcon , EditIcon } from '../../Icons';
+import { CloseLeftIcon , EditIcon } from '../../Icons';
 
 const EditProfileForm=()=>{
     const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const EditProfileForm=()=>{
      return(
          <Wrapper>  
             <Header>
-                <CloseIcon onClick={onClose}/>
+                <CloseLeftIcon onClick={onClose}/>
                 <Title>Edit Profile</Title>
                 <RectButton onClick={onSubmitUpdate} disabled={nickname.length > 5}>저장</RectButton>
             </Header>

@@ -71,6 +71,19 @@ export const CloseIcon=styled(CloseOutlined)`
     }
 `;
 
+
+export const CloseLeftIcon=styled(CloseOutlined)`
+    cursor:pointer;
+    border-radius:50%;
+    padding:${({theme})=>theme.paddings.lg};
+    font-size:${({theme})=>theme.fontSizes.xl};
+    transition: 0.2s background-color ease-in-out;
+
+    &:hover{
+        background-color:${({theme})=>theme.colors.hover};
+    }
+`;
+
 export const RedCloseIcon = styled(CloseOutlined)`
     &:hover{
         color:red;
