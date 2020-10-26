@@ -1,5 +1,5 @@
 import * as type from '../actions/commonUser';
-import produce from 'immer';
+import produce from '../util/produce';
 // 선택한 유저 정보 불러오는 곳 (including 로그인된 사용자)
 // 유저정보에는 , id, nickname, Following 수 , Follower 수
 // 작성 Post 수, Like Post 수가 들어있다.

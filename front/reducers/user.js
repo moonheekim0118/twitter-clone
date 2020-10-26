@@ -1,5 +1,6 @@
 import * as type from '../actions/user';
-import produce from 'immer';
+import produce from '../util/produce';
+
 // User === 로그인한 유저
 export const initialState={
     loadMyInfoLoading:false, // 현재 로그인한 유저 정보 로딩 

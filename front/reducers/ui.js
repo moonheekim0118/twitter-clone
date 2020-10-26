@@ -1,5 +1,5 @@
 import * as type from '../actions/ui';
-import produce from 'immer';
+import produce from '../util/produce';
 
 export const initialState={
     showProfileModal:false,

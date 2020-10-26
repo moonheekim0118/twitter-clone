@@ -1,5 +1,5 @@
 import * as type from '../actions/post';
-import produce from 'immer';
+import produce from '../util/produce';
 
 export const initialState={
     // 시퀄라이즈 속성에 맞게 다른 정보와 결합되는 것은 대문자로 표기함.
