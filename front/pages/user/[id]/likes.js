@@ -47,7 +47,7 @@ const Detail =()=>{
     return(
         <AppLayout pageName={userInfo.nickname}> 
               <Head>
-                {userInfo.nickname} 님
+                <title>{userInfo.nickname}님이 좋아한 게시글</title>
             </Head>
             <meta name="description" content={userInfo.nickname}/>
             <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지`}/>

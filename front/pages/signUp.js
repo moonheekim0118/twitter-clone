@@ -13,7 +13,7 @@ const SignUp=()=>{
     return(
         <AppLayout  pageName={"SignUp"}> 
             <Head>
-                <title>Sign up | JackJack</title>
+                <title>회원가입 | Twitter</title>
             </Head>
             <SignUpComponent/>
         </AppLayout>        

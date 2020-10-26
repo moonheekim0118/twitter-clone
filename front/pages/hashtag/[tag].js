@@ -42,7 +42,7 @@ const HashTagPost=()=>{
     return(
       <AppLayout pageName={tag} searchKeyword={tag}>
           <Head>
-                {tag} 해시태그 검색내용
+                <title>{tag} 해시태그 검색내용</title>
           </Head>
           <meta name="description" content={tag}/>
           <meta property="og:title" content={tag}/>

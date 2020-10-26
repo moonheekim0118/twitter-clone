@@ -46,7 +46,7 @@ const Followings=()=>{
     return(
         <AppLayout pageName={userInfo.nickname}>
           <Head>
-                {userInfo.nickname} 님
+                <title>{userInfo.nickname}님의 팔로잉 리스트</title>
           </Head>
           <meta name="description" content={userInfo.nickname}/>
           <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지 팔로잉 목록 `}/>

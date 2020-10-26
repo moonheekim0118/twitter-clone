@@ -25,7 +25,7 @@ const Post=()=>{
     return(
         <AppLayout pageName={"Tweet"}>
             <Head>
-                {singlePost.User.nickname} 님의 글
+                <title>{singlePost.User.nickname}님의 게시글</title>
             </Head>
             <meta name="description" content={singlePost.content}/>
             <meta property="og:title" content={`${singlePost.User.nickname}님의 게시글`}/>

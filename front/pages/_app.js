@@ -11,7 +11,7 @@ const App =({Component})=>{
         <GlobalStyles/>
         <Head>
             <meta charSet="utf-8"/>
-            <title>JackJack</title>
+            <title>Twitter</title>
         </Head>
         <Component/>
         </>

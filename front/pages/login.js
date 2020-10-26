@@ -20,7 +20,7 @@ const Login =()=>{
     return(
         <AppLayout pageName={"Login"}>
             <Head>
-                <title>Login | JackJack</title>
+                <title>로그인 | Twitter</title>
             </Head>
            <LoginForm/>
         </AppLayout>

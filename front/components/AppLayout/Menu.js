@@ -84,7 +84,7 @@ const Menu =({isLoggedIn})=>{
         <Navigation>
             <MenuWrapper>
                 <div><Home/></div>
-                <div><Profile/></div>
+                {isLoggedIn && <div><Profile/></div>}
                 {!isLoggedIn && <div><SignUp/></div>}
                 {isLoggedIn && <TweetButton/>}
                 {isLoggedIn ? <UserProfile/> : <div><LogIn/></div> }

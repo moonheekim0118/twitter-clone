@@ -52,7 +52,6 @@ export const getServerSideProps= wrapper.getServerSideProps(async(context)=>{
     context.store.dispatch(loadMyInfoAction() );
     context.store.dispatch(loadPostsAction());
     context.store.dispatch(END);
-    console.log('보냇다능');
     await context.store.sagaTask.toPromise();
 });
 
