@@ -8,6 +8,7 @@ import Menu from './Menu';
 import Alert from '../Alert';
 import UserProfileModal from '../Modals/UserProfileModal';
 import PostFormModal from '../Modals/PostFormModal';
+import ModifyModal from '../Modals/ModifyPostModal';
 import Search from '../Search';
 import { Header,Main,Side,Footer, Description,DescriptionWithoutLink } from './style';
 import { PushBackIcon } from '../Icons';
@@ -17,7 +18,7 @@ import theme from '../theme';
 
 const AppLayout = ({pageName, searchKeyword,children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
-    const {showProfileModal ,showPostModal, showAlert } =useSelector(state=>state.ui);
+    const {showProfileModal ,showPostModal, showModifyModal, showAlert } =useSelector(state=>state.ui);
     const dispatch = useDispatch();
 
 
@@ -36,6 +37,7 @@ const AppLayout = ({pageName, searchKeyword,children})=>{
         <ThemeProvider theme={theme}>
             {isLoggedIn && showProfileModal&& <UserProfileModal/>}
             {isLoggedIn && showPostModal && <PostFormModal/> } 
+            {isLoggedIn && showModifyModal && <ModifyModal/>}
             <Alert/>
             <Header>
              {pageName==="Home"? <Link href="/"><Description>{pageName}</Description></Link> : 

@@ -6,13 +6,11 @@ import { loadMyInfoAction } from '../actions/user';
 import axios from 'axios';
 import AppLayout from '../components/AppLayout';
 import PostForm from '../components/Post/PostForm';
-import ModifyModal from '../components/Modals/ModifyPostModal';
 import wrapper from '../store/configureStore';
 import PostsList from '../components/Post/PostsList';
 
 
 const Home =()=>{
-    const showModifyModal = useSelector(state=>state.ui.showModifyModal);
     const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
     const {mainPosts, hasMorePost, loadPostloading} = useSelector((state)=>state.post);
     const dispatch = useDispatch();
@@ -35,7 +33,6 @@ const Home =()=>{
 
     return(
         <AppLayout pageName={"Home"}>
-            {isLoggedIn && showModifyModal && <ModifyModal/>}
             {isLoggedIn && <PostForm/>}
             <br/>
             <PostsList posts={mainPosts} loading={loadPostloading}/>
