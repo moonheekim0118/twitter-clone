@@ -31,7 +31,7 @@ if(process.env.NODE_ENV === 'production'){
     app.use(hpp());
     app.use(helmet());
     app.use(cors({
-        origin:'http://52.79.233.152',
+        origin:['http://3.34.157.241','http://twitcloneproject.xyz',],
         credentials: true,
     }));
 }
