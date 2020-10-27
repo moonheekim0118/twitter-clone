@@ -62,7 +62,7 @@ const SignUp=()=>{
     }, [password])
 
     return(
-        <Form onSumbit={onSubmit}>
+        <Form onSubmit={onSubmit}>
     
             <InputWrapper>
                 <TextInput 
