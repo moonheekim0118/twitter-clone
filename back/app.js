@@ -57,5 +57,4 @@ db.sequelize.sync()
 })
 .catch((err)=>{
     console.log(err);
-    next(err);
 })
