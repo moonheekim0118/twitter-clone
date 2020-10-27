@@ -19,7 +19,7 @@ const helmet = require('helmet');
 
 dotenv.config();
 app.use(cors({
-    origin:['http://localhost:3000', 'mooneetwit.com'],
+    origin:['http://localhost:3000', 'http://13.209.74.144'],
     credentials: true,
 }));
 
