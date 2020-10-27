@@ -78,7 +78,7 @@ exports.logout=(req,res,next)=>{
 
 exports.loadMyInfo=async(req,res,next)=>{
     try{
-        console.log('로그인된 유저 '+req.user.id);
+        console.log('로그인된 유저 '+req.user);
         if(req.user){
             const fullUserwitoutPassword = await User.findOne({ // 패스워드 제외하고 followings,followers, posts 정보 가져오기 
                 where:{id : req.user.id},
