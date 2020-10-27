@@ -18,10 +18,6 @@ const hpp = require('hpp');
 const helmet = require('helmet');
 
 dotenv.config();
-app.use(cors({
-    origin:['http://localhost:3000', 'http://52.79.233.152'],
-    credentials: true,
-}));
 
 db.sequelize.sync()
   .then(() => {
@@ -29,14 +25,22 @@ db.sequelize.sync()
   })
   .catch((err)=>console.log(err));
 passportConfig();
-passportConfig();
+
 if(process.env.NODE_ENV === 'production'){
     app.use(morgan('combined'));
     app.use(hpp());
     app.use(helmet());
+    app.use(cors({
+        origin:['http://localhost:3000', 'http://52.79.233.152'],
+        credentials: true,
+    }));
 }
 else{
     app.use(morgan('dev'));
+    app.use(cors({
+        origin:true,
+        credentials: true,
+    }));
 }
 
 app.use('/',express.static(path.join(__dirname, 'uploads')));

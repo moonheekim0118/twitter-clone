@@ -62,6 +62,7 @@ exports.login = (req,res,next)=>{
                     attributes:['id']
                 }]
             })
+            console.log(fullUserwitoutPassword.nickname);
             return res.status(200).json(fullUserwitoutPassword); // login Completed
         })
     })(req,res,next);
