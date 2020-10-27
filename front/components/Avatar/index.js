@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-
+import { backUrl } from '../../config/config';
 
 const Image = styled.img`
     width:100%;
@@ -39,7 +39,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
             <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
-                        (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
+                        (<Image src={`${backUrl}/${profilePicPath}`}/>) : 
                         (<NicknameWrapper>
                             {userNickname[0]} 
                          </NicknameWrapper>)
@@ -53,7 +53,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
             <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
-                        (<Image src={`http://localhost:3065/${imageSrc}`}/>) : 
+                        (<Image src={`${backUrl}/${imageSrc}`}/>) : 
                         (<NicknameWrapper>
                             {userNickname[0]} 
                          </NicknameWrapper>)
@@ -67,7 +67,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
         return(
             <>
                 {profilePicPath ? 
-                    (<Image src={`http://localhost:3065/${profilePicPath}`}/>) : 
+                    (<Image src={`${backUrl}/${profilePicPath}`}/>) : 
                     ( <NicknameWrapper>
                         {userNickname[0]} 
                     </NicknameWrapper>)
@@ -79,7 +79,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
    return(
     <>
         {imageSrc ? 
-            (<Image src={`http://localhost:3065/${imageSrc}`}/>) : 
+            (<Image src={`${backUrl}/${imageSrc}`}/>) : 
             ( <NicknameWrapper>
                 {userNickname[0]} 
               </NicknameWrapper>)
