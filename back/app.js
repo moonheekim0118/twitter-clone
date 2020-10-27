@@ -23,6 +23,12 @@ app.use(cors({
     credentials: true,
 }));
 
+db.sequelize.sync()
+  .then(() => {
+    console.log('db 연결 성공');
+  })
+  .catch(console.error);
+passportConfig();
 passportConfig();
 if(process.env.NODE_ENV === 'production'){
     app.use(morgan('combined'));
@@ -51,10 +57,6 @@ app.use('/users',usersRouter); // 다른 유저 정보
 app.use('/user',userRouter); // 내 정보
 app.use('/hashtag',hashtagRouter); // 해쉬태그 검색
 
-db.sequelize.sync()
-.then(()=>{
-    app.listen(80);
-})
-.catch((err)=>{
-    console.log(err);
+app.listen(80, ()=>{
+    console.log('서버 실행중');
 })
