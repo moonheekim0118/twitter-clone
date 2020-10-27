@@ -27,7 +27,7 @@ db.sequelize.sync()
   .then(() => {
     console.log('db 연결 성공');
   })
-  .catch(console.error);
+  .catch((err)=>console.log(err));
 passportConfig();
 passportConfig();
 if(process.env.NODE_ENV === 'production'){
