@@ -41,7 +41,7 @@ const ImagesZoom=({images,onClose,initial})=>{
                 <LeftIcon onClick={onClickLeft}/>
                 <RightIcon onClick={onClickRight}/>
                 <ImageWrapper>
-                    <img src={`${images[currentSlide].src.replace(/\/thumb\//, '/original/')}`} alt={images[currentSlide].src}/>
+                    <img src={`${images[currentSlide].src}`} alt={images[currentSlide].src}/>
                 </ImageWrapper>
                 </div>
             <IndicatorWrapper>

@@ -163,7 +163,7 @@ exports.modifyPost=async(req,res,next)=>{
 }
 
 exports.uploadImages=(req,res,next)=>{
-    res.json(req.files.map((v)=>v.location.replace(/\/original\//, '/thumb/')));
+    res.json(req.files.map((v)=>v.location));
 };
 
 exports.retweetPost=async(req,res,next)=>{
