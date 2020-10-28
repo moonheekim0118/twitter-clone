@@ -32,6 +32,7 @@ export const Image=styled.img`
    width: 100%;
    height: ${props=>props.height==="true"?"150px":"300px"};
    flex-grow:1;
+   object-fit:cover;
 `   
 
 export const RemoveButton=styled(CloseCircleOutlined)`
