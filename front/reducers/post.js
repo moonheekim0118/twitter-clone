@@ -279,7 +279,7 @@ const reducer= (state = initialState , action)=>{
                 break;
 
             case type.UPLOAD_IMAGES_SUCCESS:
-                draft.imagePaths=action.data;
+                draft.imagePaths=draft.imagePaths.concat(action.data);
                 draft.uploadImagesloading=false;
                 draft.uploadImagesDone=true;
                 break;

@@ -28,7 +28,7 @@ const PostForm =()=>{
     const onSubmit=useCallback((e)=>{
         e.preventDefault();
         let formData;
-        if(imagePaths.length > 0){
+        if(imagePaths.length > 0 && imagePaths.length<= 4){
             formData=new FormData();
             imagePaths.forEach((i)=>{
                 formData.append('image',i);
@@ -50,7 +50,7 @@ const PostForm =()=>{
     },[imageInput.current]);
 
     const onChangeImages=useCallback((e)=>{
-        if(e.target.files.length>4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 
+        if(e.target.files.length>4 || imagePaths.length >4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 
              return dispatch(showAlertAction("이미지는 최대 4장 업로드 가능합니다."));
         }
         const imageFormData = new FormData();
@@ -80,7 +80,7 @@ const PostForm =()=>{
                  />
                 <Buttons>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
-                    <ImageIcon onClick={onClickImageUpload} />
+                    <ImageIcon onClick={onClickImageUpload} disabled={imagePaths.length>4}/>
                     {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
                     {addPostloading ? <LoadingIcon/> : 
                     <TweetButton type="primary" htmlType="submit"  disabled={text.length===0 || text.length>=140}>Tweet</TweetButton>

@@ -171,6 +171,11 @@ export const ImageIcon=styled(AreaChartOutlined)`
     &:hover{
         background-color:${({theme})=>theme.colors.hover};
     }
+
+    &:disabled{
+        background-color:${({theme})=>theme.colors.disabled};
+        cursor:default;
+    }
 `;
 
 
