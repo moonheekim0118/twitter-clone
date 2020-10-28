@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const UserController= require('../Controller/user');
-const multer = require('multer');
+const multerS3 =require('multer-s3');
+const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const { isLoggedIn, isNotLoggedIn} = require('./middlewares');
@@ -13,19 +14,16 @@ try{
 }
 
 const upload =multer({
-    storage: multer.diskStorage({
-        destination(req,file,done){
-            done(null,'uploads')
-        },
-        filename(req,file,done){
-            const ext= path.extname(file.originalname);
-            const basename = path.basename(file.originalname, ext);
-            done(null, basename + new Date().getTime()+ext);
+    storage: multerS3({
+        s3: new AWS.S3(),
+        bucket: 'twitcloneproject',
+        key(req,file,cb){
+            cb(null, `original/${Date.now()} ${path.basename(file.originalname)}`)
         }
-    }),
+    }) 
+   ,
     limits:{fileSize:20*1024*1024} // 20mg
 });
-
 
 router.post('/login',isNotLoggedIn,UserController.login);
 
