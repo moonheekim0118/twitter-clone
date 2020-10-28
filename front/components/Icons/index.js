@@ -167,9 +167,10 @@ export const ImageIcon=styled(AreaChartOutlined)`
     cursor:${(props)=>props.disabled==='true'? 'default' :'pointer'};
     padding:${({theme})=>theme.paddings.lg};
     transition: 0.2s background-color ease-in-out;
+    opacity:${(props)=>props.disabled==='true'? '0' :'1'};
 
     &:hover{
-        background-color:${(props)=>props.disabled==='true'?'none':`${({theme})=>theme.colors.hover}`};
+        background-color:${({theme})=>theme.colors.hover};
     }
     
 `;

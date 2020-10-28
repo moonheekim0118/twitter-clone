@@ -80,7 +80,7 @@ const PostForm =()=>{
                  />
                 <Buttons>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
-                    <ImageIcon onClick={ ()=> {imagePaths.length <4 ? onClickImageUpload : ''} } 
+                    <ImageIcon onClick={onClickImageUpload} 
                     disabled={imagePaths.length===4? 'true' : 'false'}/>
                     {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
                     {addPostloading ? <LoadingIcon/> : 
