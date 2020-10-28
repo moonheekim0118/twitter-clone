@@ -7,7 +7,7 @@ export const Wrapper=styled.div`
     justify-content:space-between;
     font-size:${({theme})=>theme.fontSizes.base};
     margin-bottom:${({theme})=>theme.margins.xl};
-    padding: 0 ${({theme})=>theme.paddings.lg} ${({theme})=>theme.paddings.lg} ${({theme})=>theme.paddings.lg};
+    padding: ${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.lg} ${({theme})=>theme.paddings.lg} ${({theme})=>theme.paddings.lg};
     transition: 0.2s background-color ease-in-out;
     
     position : relative;
