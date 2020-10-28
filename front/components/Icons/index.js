@@ -164,18 +164,14 @@ export const CommentIcon = styled(MessageOutlined)`
 
 export const ImageIcon=styled(AreaChartOutlined)`
     border-radius:50%;
-    cursor:pointer;
+    cursor:${(props)=>props.disabled==='true'? 'default' :'pointer'};
     padding:${({theme})=>theme.paddings.lg};
     transition: 0.2s background-color ease-in-out;
 
     &:hover{
-        background-color:${({theme})=>theme.colors.hover};
+        background-color:${(props)=>props.disabled==='true'?'none':`${({theme})=>theme.colors.hover}`};
     }
-
-    &:disabled{
-        background-color:${({theme})=>theme.colors.disabled};
-        cursor:default;
-    }
+    
 `;
 
 
