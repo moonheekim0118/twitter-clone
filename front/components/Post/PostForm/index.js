@@ -66,7 +66,7 @@ const PostForm =()=>{
         <FormWrapper encType="multipart/form-data" onSubmit={onSubmit} noborder={showPostModal}>
             <SideWrapper>
                 <AvatarWrapper size={65}>
-                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
+                    <Avatar imageSrc={me.profilepic || ""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
                 </AvatarWrapper>
             </SideWrapper>
             <FormMeta>

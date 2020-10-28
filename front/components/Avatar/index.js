@@ -90,7 +90,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
 
 
 Avatar.defaultProps={
-    imageSrc:'',
+    imageSrc:"",
 };
 
 
