@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const UserController= require('../Controller/user');
+const multer = require('multer');
 const multerS3 =require('multer-s3');
 const AWS = require('aws-sdk');
 const fs = require('fs');
