@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Wrapper,IndicatorWrapper, ImageWrapper } from './style';
 import { BlackOveraly } from '../../Modals/style';
 import { CloseCircleIcon ,  IndicatorIcon , LeftIcon, RightIcon } from '../../Icons';
-import { backUrl } from '../../../config/config';
 
 const ImagesZoom=({images,onClose,initial})=>{
     const [currentSlide, setCurrentSlide]=useState(initial);
@@ -42,7 +41,7 @@ const ImagesZoom=({images,onClose,initial})=>{
                 <LeftIcon onClick={onClickLeft}/>
                 <RightIcon onClick={onClickRight}/>
                 <ImageWrapper>
-                    <img src={`${backUrl}/${images[currentSlide].src}`} alt={images[currentSlide].src}/>
+                    <img src={`${images[currentSlide].src}`} alt={images[currentSlide].src}/>
                 </ImageWrapper>
                 </div>
             <IndicatorWrapper>

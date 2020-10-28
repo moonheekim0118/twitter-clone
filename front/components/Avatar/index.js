@@ -3,7 +3,6 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { backUrl } from '../../config/config';
 
 const Image = styled.img`
     width:100%;
@@ -39,7 +38,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
             <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
-                        (<Image src={`${backUrl}/${profilePicPath}`}/>) : 
+                        (<Image src={`${profilePicPath}`}/>) : 
                         (<NicknameWrapper>
                             {userNickname[0]} 
                          </NicknameWrapper>)
@@ -53,7 +52,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
             <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
                     {imageSrc ? 
-                        (<Image src={`${backUrl}/${imageSrc}`}/>) : 
+                        (<Image src={`${imageSrc}`}/>) : 
                         (<NicknameWrapper>
                             {userNickname[0]} 
                          </NicknameWrapper>)
@@ -67,7 +66,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
         return(
             <>
                 {profilePicPath ? 
-                    (<Image src={`${backUrl}/${profilePicPath}`}/>) : 
+                    (<Image src={`${profilePicPath}`}/>) : 
                     ( <NicknameWrapper>
                         {userNickname[0]} 
                     </NicknameWrapper>)
@@ -79,7 +78,7 @@ const Avatar =({imageSrc, userId, userNickname, isLink, isMyPic})=>{
    return(
     <>
         {imageSrc ? 
-            (<Image src={`${backUrl}/${imageSrc}`}/>) : 
+            (<Image src={`${imageSrc}`}/>) : 
             ( <NicknameWrapper>
                 {userNickname[0]} 
               </NicknameWrapper>)

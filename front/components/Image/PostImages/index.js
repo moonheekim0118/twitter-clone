@@ -2,7 +2,6 @@ import React , { useCallback,useState,useRef } from 'react';
 import PropTypes from 'prop-types';
 import ImagesZoom from '../ImagesZoom';
 import { Wrapper, ImageWrapper, ImageWrapperColumn,Image  } from '../style';
-import { backUrl } from '../../../config/config';
 
 const PostImages =({images})=>{
 
@@ -22,7 +21,7 @@ const PostImages =({images})=>{
         return(
         <Wrapper>
             <ImageWrapper key={0} number={1}>
-                <Image role="presentation" height="false" src={`${backUrl}/${images[0].src}`} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+                <Image role="presentation" height="false" src={`${images[0].src}`} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
             </ImageWrapper>
             {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={0}/>}
         </Wrapper>
@@ -32,10 +31,10 @@ const PostImages =({images})=>{
         return(
             <Wrapper>
                 <ImageWrapper key={0} number={2}>
-                    <Image role="presentation" height="false" src={`${backUrl}/${images[0].src}`} alt={images[0].src}  onClick={onZoom.bind(this,0)}/>
+                    <Image role="presentation" height="false" src={`${images[0].src}`} alt={images[0].src}  onClick={onZoom.bind(this,0)}/>
                 </ImageWrapper>
                 <ImageWrapper key={1} number={2}>
-                  <Image role="presentation" height="false" src={`${backUrl}/${images[1].src}`} alt={images[1].src}  onClick={onZoom.bind(this,1)}/>
+                  <Image role="presentation" height="false" src={`${images[1].src}`} alt={images[1].src}  onClick={onZoom.bind(this,1)}/>
                 </ImageWrapper>
                 {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
             </Wrapper>
@@ -45,14 +44,14 @@ const PostImages =({images})=>{
         return(
             <Wrapper>
             <ImageWrapper key={0} number={2} >
-                  <Image role="presentation"  height="false" src={`${backUrl}/${images[0].src}`} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+                  <Image role="presentation"  height="false" src={`${images[0].src}`} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
            </ImageWrapper>
            <ImageWrapperColumn>
                <ImageWrapper key={1} number={1} >
-                   <Image role="presentation"  height="true" src={`${backUrl}/${images[1].src}`} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
+                   <Image role="presentation"  height="true" src={`${images[1].src}`} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
                </ImageWrapper>
                <ImageWrapper key={2} number={1}>
-                   <Image  role="presentation"  height="true" src={`${backUrl}/${images[2].src}`} alt={images[2].src} onClick={onZoom.bind(this,2)}/>
+                   <Image  role="presentation"  height="true" src={`${images[2].src}`} alt={images[2].src} onClick={onZoom.bind(this,2)}/>
                </ImageWrapper>
            </ImageWrapperColumn>
            {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
@@ -64,18 +63,18 @@ const PostImages =({images})=>{
          <Wrapper>
                 <ImageWrapperColumn>
                     <ImageWrapper key={0} number={1} height="true">
-                        <Image role="presentation"  height="true" src={`${backUrl}/${images[0].src}`} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
+                        <Image role="presentation"  height="true" src={`${images[0].src}`} alt={images[0].src} onClick={onZoom.bind(this,0)}/>
                     </ImageWrapper>
                     <ImageWrapper key={1} number={1} height="true">
-                        <Image role="presentation"  height="true"src={`${backUrl}/${images[1].src}`} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
+                        <Image role="presentation"  height="true"src={`${images[1].src}`} alt={images[1].src} onClick={onZoom.bind(this,1)}/>
                     </ImageWrapper>
                </ImageWrapperColumn>
                <ImageWrapperColumn>
                     <ImageWrapper key={2} number={1} height="true">
-                        <Image role="presentation"  height="true" src={`${backUrl}/${images[2].src}`} alt={images[2].src} onClick={onZoom.bind(this,2)}/>
+                        <Image role="presentation"  height="true" src={`${images[2].src}`} alt={images[2].src} onClick={onZoom.bind(this,2)}/>
                     </ImageWrapper>
                     <ImageWrapper key={3} number={1} height="true">
-                        <Image role="presentation"  height="true" src={`${backUrl}/${images[3].src}`} alt={images[3].src} onClick={onZoom.bind(this,3)}/>
+                        <Image role="presentation"  height="true" src={`${images[3].src}`} alt={images[3].src} onClick={onZoom.bind(this,3)}/>
                     </ImageWrapper>
                </ImageWrapperColumn>
             {showImageZoom && <ImagesZoom images={images} onClose={onClose} initial={selectedIndex.current}/>}
