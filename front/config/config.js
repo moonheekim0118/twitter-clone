@@ -1,1 +1,1 @@
-export const backUrl  ='http://13.209.116.194';
+export const backUrl  ='http://api.twitcloneproject.xyz';
