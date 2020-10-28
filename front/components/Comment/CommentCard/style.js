@@ -16,10 +16,9 @@ export const Wrapper=styled.div`
     }
 `;
 export const ButtonWrapper =styled.div`
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: 5%;
-    padding-top:${({theme})=>theme.paddings.lg};
+    position:absolute;
+    top:5px;
+    right:5px;
 `;
 
 // for avatar 

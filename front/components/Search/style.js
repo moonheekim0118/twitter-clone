@@ -76,7 +76,7 @@ export const SearchButton = styled.button.attrs({ type: 'submit' })`
 
 export const HistoryTab=styled.div.attrs({ tabindex: "0" })`
     width:100%;
-    padding:5px;
+    padding: ${({theme})=>theme.paddings.lg};
     border-bottom:1px solid ${({theme})=>theme.colors.gray_4};
     border-left:1px solid ${({theme})=>theme.colors.gray_4};
     border-right:1px solid ${({theme})=>theme.colors.gray_4};

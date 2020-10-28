@@ -9,6 +9,7 @@ const Image = styled.img`
     height:100%;
     border-radius:100%;
     oveflow:hidden;
+    object-fit:fill;
 `;
 
 
