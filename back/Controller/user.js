@@ -149,7 +149,7 @@ exports.unfollowUser=async(req,res,next)=>{
 
 // 유저 프로필 사진 업로드 컨트롤러 
 exports.uploadProfilePic=(req,res,next)=>{
-    res.json(req.files[0].location);
+    res.json(req.files[0].location.replace(/\/original\//, '/thumb/'));
 }
 
 //유저 정보 업데이트 컨트롤러 
