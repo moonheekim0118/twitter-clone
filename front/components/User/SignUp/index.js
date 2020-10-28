@@ -6,6 +6,7 @@ import useInput from '../../../hooks/useInput';
 import useValidation from '../../../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
 import {signUpRequestAction,signUpResetAction} from '../../../actions/user';
+import { showAlertAction } from '../../../actions/ui';
 import { Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text,TextLength } from '../style';
 import { ErrorMessage } from '../../globalStyle';
 import { LoadingIcon } from '../../Icons';
@@ -36,7 +37,7 @@ const SignUp=()=>{
             return;
         }
         if(signUpError){
-            alert(signUpError);
+            dispatch(showAlertAction(signUpError));
         }
     },[signUpError]);
 
