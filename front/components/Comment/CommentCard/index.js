@@ -21,8 +21,8 @@ const CommentCard = ({postId,comment}) =>{
     return(
         <Wrapper>
             <FirstWrapper>
-                <AvatarWrapper size={20}>
-                    <Avatar imageSrc={comment.User.profilepic}
+                <AvatarWrapper size={30}>
+                    <Avatar imageSrc={comment.User.profilepic || ""}
                     userId={comment.User.id}
                     userNickname={comment.User.nickname}
                     isLink={true}

@@ -80,7 +80,7 @@ const PostCard=({post,commentFormOpen})=>{
             <Retweet onClick={onClickUser}><SmallRetweetIcon/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         <SideWrapper>
             <AvatarWrapper onClick={onClickButtons} size={65}>
-                <Avatar imageSrc={post.Retweet.User.profilepic} userId={post.Retweet.User.id}
+                <Avatar imageSrc={post.Retweet.User.profilepic || ""} userId={post.Retweet.User.id}
                 userNickname={post.Retweet.User.nickname} isLink={true} isMyPic={false}/>     
             </AvatarWrapper>
         </SideWrapper>
@@ -114,7 +114,7 @@ const PostCard=({post,commentFormOpen})=>{
        <Card onClick={onClickPost}>
             <SideWrapper>
                 <AvatarWrapper onClick={onClickButtons} size={65}>
-                    <Avatar imageSrc={post.User.profilepic} userId={post.User.id}
+                    <Avatar imageSrc={post.User.profilepic || ""} userId={post.User.id}
                     userNickname={post.User.nickname} isLink={true} isMyPic={false}/>     
                 </AvatarWrapper>
             </SideWrapper>
