@@ -8,36 +8,45 @@
 
 # 📌 데모
 
-- 회원가입 <br/>
+### 회원가입 <br/>
+
 <img src="./demo/signup.gif?raw=true"/>
 
-- 포스트 <br/>
+### 포스트 작성 수정 삭제 및 리트윗 <br/>
+
 <img src="./demo/post.gif?raw=true">
 <img src="./demo/postmodal.gif?raw=true">
 <img src="./demo/SinglePost.gif?raw=true"/>
 <img src="./demo/Retweet.gif?raw=true"/>
 
-- 프로필 수정 <br />
+### 내 프로필 수정 <br/>
+
 <img src="./demo/editProfile.gif?raw=true"/>
 
-- 유저 정보 <br />
+### 유저 프로필 페이지 <br/>
+
 <img src="./demo/follow.gif?raw=true"/>
-<img src="./demo/UserProfile.gif?raw=true"/>
+<img src="./demo/UserProifle.gif?raw=true"/>
 
 
-- 해시태그 검색 - 최근 검색어 저장 <br />
+### 해시태그 검색 <br/>
+
 <img src="./demo/hashtag.gif?raw=true"/>
 
-device 별 레이아웃
 
-- tablet & pc small
+### device 별 레이아웃 ( 실제 트위터 기준 )
+#### 태블릿 & pc small <br/>
+
 <img src="./demo/tablet.png?raw=true"/>
 
-- mobile
-<img src="./demo/mobile.png?raw=true" width=200px/>
-<img src="./demo/mobile2.png?raw=true" width=200px/>
+#### 모바일 <br/>
+<p align="center">
+  <kdb><img src="./demo/mobile.png?raw=true" width="350"></kdb>
+  <kdb><img src="./demo/mobile2.png?raw=true" width="350"></kdb>
+</p>
 
 <br/>
+
 # 📌환경 설정 및 실행 방법
 
 ###  1. 깃 클론 , 모듈 설치 
@@ -158,7 +167,7 @@ npm start
 
 ### 리덕스를 이용한 모달창 및 Alert 창 구현
 
-<img src="./demo/ModalExp.png?raw=true"/>
+<img src="./demo/ModalExp.jpg?raw=true"/>
 
 
 
