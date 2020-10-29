@@ -8,9 +8,8 @@
 
 # 📌 데모
 
-- 회원가입 / 로그인  <br/>
+- 회원가입 <br/>
 <img src="./demo/signup.gif?raw=true"/>
-<img src="./demo/login.gif?raw=true"/>
 
 - 포스트 <br/>
 <img src="./demo/post.gif?raw=true">
@@ -30,15 +29,13 @@
 <img src="./demo/hashtag.gif?raw=true"/>
 
 device 별 레이아웃
-- pc full
-<img src="./demo/pcFull.png?raw=true"/>
 
 - tablet & pc small
 <img src="./demo/tablet.png?raw=true"/>
 
 - mobile
-<img src="./demo/mobile.png?raw=true"/>
-<img src="./demo/mobile2.png?raw=true"/>
+<img src="./demo/mobile.png?raw=true" width=200px/>
+<img src="./demo/mobile2.png?raw=true" width=200px/>
 
 <br/>
 # 📌환경 설정 및 실행 방법
