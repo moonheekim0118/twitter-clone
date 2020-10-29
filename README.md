@@ -21,7 +21,7 @@
 
 ### 내 프로필 수정 <br/>
 
-<img src="./demo/editProfile.gif?raw=true"/>
+<img src="./demo/Editprofile.gif?raw=true"/>
 
 ### 유저 프로필 페이지 <br/>
 
