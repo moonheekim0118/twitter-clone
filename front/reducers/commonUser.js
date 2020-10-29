@@ -84,6 +84,11 @@ const reducer=(state= initialState, action)=>{
                 draft.loadFollowersListDone=false;
                 draft.loadFollowersListError=null;
                 break;
+
+            case type.UPDATE_USER_INFO:
+                draft.userInfo.nickname=action.data.nickname;
+                draft.userInfo.profilepic=action.data.image;
+                break;
         }
     });
 };

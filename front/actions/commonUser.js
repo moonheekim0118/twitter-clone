@@ -15,6 +15,14 @@ export const LOAD_FOLLOWERS_REQUEST="LOAD_FOLLOWERS";
 export const LOAD_FOLLOWERS_SUCCESS="LOAD_FOLLOWERS_SUCCESS";
 export const LOAD_FOLLOWERS_FAIL="LOAD_FOLLOWERS_FAIL";
 
+export const UPDATE_USER_INFO="UPDATE_USER_INFO";
+
+export const updateUserInfoAction=(data)=>{
+    return{
+        type: UPDATE_USER_INFO,
+        data,
+    }
+}
 
 export const loadUserInfoAction=(data)=>{
     return {
