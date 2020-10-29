@@ -4,6 +4,7 @@ import useInput from '../../../hooks/useInput';
 import { useSelector , useDispatch } from 'react-redux';
 import { hideInfoEditModalAction } from '../../../actions/ui';
 import { updateMyInfoAction,uploadProfilePicAction } from '../../../actions/user';
+import { updateUserInfoAction } from '../../../actions/commonUser';
 import { Wrapper,Title,ContentWrapper,ProfilePicWrapper, Overaly, Header } from './style';
 import { InputWrapper,  TextLength, Label , TextInput } from '../style';
 import { RectButton } from '../../globalStyle';
@@ -23,6 +24,7 @@ const EditProfileForm=()=>{
 
     const onSubmitUpdate = useCallback(()=>{ // submit 
         dispatch(updateMyInfoAction({nickname:nickname, image:profilePicPath}));
+        dispatch(updateUserInfoAction({nickname:nickname, image:profilePicPath}));
         dispatch(hideInfoEditModalAction()); // 모달 창 닫기 
     },[nickname,profilePicPath]);
 
