@@ -1,12 +1,13 @@
-# 트위터 클론 풀스텍 프로젝트
+# 트위터 클론 프로젝트
 
 - 트위터를 클론하며 `리액트-서버사이드렌더링`을 학습하기 위한 프로젝트입니다.
 - 개발에만 집중하고자 클론 프로젝트를 선택했습니다.
 - http://twitcloneproject.xyz (closed server)
 
-
+<br/>
 
 # 📌 데모
+<br/>
 
 ### 회원가입 <br/>
 
@@ -21,7 +22,7 @@
 
 ### 내 프로필 수정 <br/>
 
-<img src="./demo/Editprofile.gif?raw=true"/>
+<img src="./demo//profileEdit.gif?raw=true"/>
 
 ### 유저 프로필 페이지 <br/>
 
@@ -35,11 +36,11 @@
 
 
 ### device 별 레이아웃 ( 실제 트위터 기준 )
-#### 태블릿 & pc small <br/>
+### - 태블릿 & pc small <br/>
 
 <img src="./demo/tablet.png?raw=true"/>
 
-#### 모바일 <br/>
+### - 모바일 <br/>
 <p align="center">
   <kdb><img src="./demo/mobile.png?raw=true" width="350"></kdb>
   <kdb><img src="./demo/mobile2.png?raw=true" width="350"></kdb>
@@ -59,7 +60,6 @@ cd twitter-clone/back
 npm install
 ```
 
-### 
 
 ### 2. DB 설정
 
@@ -133,7 +133,7 @@ npm start
 - [x] 포스트 / 팔로잉 리스트 로딩시 인피니트 스크롤링 구현
 - [x] 해시태그 최근 검색어 구현 
 
-
+<br/>
 
 ### 동적 라우팅
 
@@ -146,7 +146,7 @@ npm start
 - 특정 해시태그 목록
   - /hashtag/[tag]
 
-
+<br/>
 
 ### 리덕스 상태 구조
 
@@ -155,7 +155,7 @@ npm start
 - **user** : 로그인 / 로그아웃 / 현재 로그인한 유저 정보 (me) / 프로필사진 소스 (변경시 사용)
 - **ui** : 포스트 작성 모달창 show / 포스트 수정 모달창 show / 유저 프로필 모달창 show / Alert show 
 
-
+<br/>
 
 ### 포스트 및 팔로잉 팔로워 리스트 로딩시 인피니트 스크롤링 구현 
 
@@ -163,13 +163,13 @@ npm start
 
 - 포스트를 로딩하는 모든 페이지와 유저 팔로잉 / 팔로워 목록에서 구현
 
-
+<br/>
 
 ### 리덕스를 이용한 모달창 및 Alert 창 구현
 
 <img src="./demo/ModalExp.jpg?raw=true"/>
 
-
+<br/>
 
 ### 커스텀 아바타 컴포넌트 구현
 
@@ -183,3 +183,4 @@ npm start
 
 - globalStyle에 AvatarWrapper의 props를 이용해 avatar 사이즈 조절 가능 
 
+<br/>
