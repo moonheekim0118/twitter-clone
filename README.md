@@ -68,7 +68,7 @@ cd twitter-clone/back
 vim .env
 > 
 COOKIE_SECRET=쿠키 시크릿 입력 
-DB_PASSWORD=디비 패스워드 입 
+DB_PASSWORD=디비 패스워드 입력
 ```
 
 
