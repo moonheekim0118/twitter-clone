@@ -3,6 +3,7 @@
 - 트위터를 클론하며 `리액트-서버사이드렌더링`을 학습하기 위한 프로젝트입니다.
 - 개발에만 집중하고자 클론 프로젝트를 선택했습니다.
 - http://twitcloneproject.xyz (closed server)
+- [배포과정 블로그에 정리](https://mooneedev.netlify.app/Infra/AWS-EC2%20%EB%B0%B0%ED%8F%AC%20%EA%B3%BC%EC%A0%95%20%EC%A0%95%EB%A6%AC/)
 
 <br/>
 
