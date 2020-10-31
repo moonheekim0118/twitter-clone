@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCommentAction } from '../../../actions/post';
 import useInput from '../../../hooks/useInput';
-import { RectButton } from '../../globalStyle';
+import Button from '../../../atom/Button';
 import { LoadingIcon } from '../../Icons';
 import { FormWrapper, TextArea } from '../../Post/PostForm/style';
 import { Wrapper, ButtonWrapper } from './style';
@@ -44,10 +44,14 @@ const CommentForm=({postId})=>{
                 placeholder={"따뜻한 댓글을 남겨주세요"}
                 />
             </FormWrapper>
-            <ButtonWrapper onClick={onSubmitComment}>
-                    {addCommentloading ? <LoadingIcon/> : 
-                    <RectButton disabled={commentText.length===0 || commentText.length>50} 
-                    type="primary" htmlType="submit">Comment</RectButton>}
+            <ButtonWrapper>
+                <Button 
+                onClick={onSubmitComment} 
+                disabled={commentText.length===0 || commentText.length>50}
+                style={{radius:'5px', back:'full'}}
+                >
+                    {addCommentloading ? <LoadingIcon/> : 'Comment'}
+                </Button>
             </ButtonWrapper>
         </Wrapper>
     )

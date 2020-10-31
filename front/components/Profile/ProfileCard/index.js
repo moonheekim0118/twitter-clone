@@ -4,9 +4,9 @@ import useToggle from '../../../hooks/useToggle';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import Avatar from '../../Avatar';
+import Button from '../../../atom/Button';
 import FollowButton from '../../Follow/FollowButton';
 import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
-import { Button } from '../../globalStyle';
 import ImagesZoom from '../../Image/ImagesZoom';
 import Modal from '../../../atom/Modal';
 import EditProfileForm from '../../User/EditProfileForm';
@@ -51,7 +51,8 @@ const UserProfile=({user})=>{
                     <div>{user.email}</div>
                 </UserInfoWrapper>
                 {me && user.id!==me && <FollowButton userId={user.id}/>}
-                {me && user.id===me&& <Button onClick={openModal}>프로필 수정</Button>}
+                {me && user.id===me&& 
+                <Button style={{back:'trans'}} type="button" onClick={openModal}>프로필 수정</Button>}
             </UpperWrapper>
             <DownWrapper>
                 <FollowWrapper onClick={onClickFollowings}>{user.Followings} <Description>Followings</Description></FollowWrapper>

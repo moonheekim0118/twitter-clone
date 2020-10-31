@@ -5,9 +5,9 @@ import useInput from '../../../hooks/useInput';
 import { useSelector , useDispatch } from 'react-redux';
 import { updateMyInfoAction,uploadProfilePicAction } from '../../../actions/user';
 import { updateUserInfoAction } from '../../../actions/commonUser';
+import Button from '../../../atom/Button';
 import { Wrapper,Title,ContentWrapper,ProfilePicWrapper, Overaly, Header } from './style';
 import { InputWrapper,  TextLength, Label , TextInput } from '../style';
-import { RectButton } from '../../globalStyle';
 import { CloseLeftIcon , EditIcon } from '../../Icons';
 
 const EditProfileForm=({onClose})=>{
@@ -45,7 +45,13 @@ const EditProfileForm=({onClose})=>{
             <Header>
                 <CloseLeftIcon onClick={onClose}/>
                 <Title>Edit Profile</Title>
-                <RectButton onClick={onSubmitUpdate} disabled={nickname.length > 5}>저장</RectButton>
+                <Button 
+                onClick={onSubmitUpdate} 
+                disabled={nickname.length > 5}
+                style={{back:'full'}}
+                >
+                    저장
+                </Button>
             </Header>
             <ContentWrapper>
                 <ProfilePicWrapper>

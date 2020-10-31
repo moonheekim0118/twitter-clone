@@ -94,11 +94,7 @@ Avatar.propTypes = {
     user:PropTypes.shape({
         id:PropTypes.number,
         nickname:PropTypes.string,
-        email:PropTypes.string,
-        Followings:PropTypes.number,
-        Followers:PropTypes.number,
-        Posts:PropTypes.number,
-        Likes:PropTypes.number,
+        profilepic:PropTypes.string,
     }).isRequired,
     size:PropTypes.number.isRequired,
     isLink:PropTypes.bool.isRequired,

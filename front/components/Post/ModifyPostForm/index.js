@@ -3,7 +3,8 @@ import { useDispatch , useSelector } from 'react-redux';
 import { modifyPostAction} from '../../../actions/post';
 import useInput from '../../../hooks/useInput';
 import PropTypes from 'prop-types';
-import { FormWrapper,FormMeta,TextArea,TweetButton,Buttons,TextLength } from '../PostForm/style';
+import Button from '../../../atom/Button';
+import { FormWrapper,FormMeta,TextArea,Buttons,TextLength } from '../PostForm/style';
 import { SideWrapper } from '../PostCard/style';
 import { LoadingIcon } from '../../Icons';
 import { ButtonWrapper } from '../style';
@@ -37,7 +38,13 @@ const ModifyPostPorm =({postId, postContent, onClose})=>{
                 <Buttons>
                     {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
                     <ButtonWrapper>
-                         {modifyPostloading ? <LoadingIcon/> : <TweetButton type="primary" htmlType="submit" disabled={text.length===0 || text===postContent}>수정</TweetButton>}
+                        <Button 
+                        onClick={onSubmit}
+                        disabled={text.length===0 || text.length>=140 || text === postContent }
+                        style={{back:'full', radius:'24px', weight:'bold'}}
+                        >
+                            {modifyPostloading ? <LoadingIcon/> : '수정' }
+                        </Button>
                     </ButtonWrapper>
                 </Buttons>
             </FormMeta>
