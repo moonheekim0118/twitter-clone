@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { EditOutlined } from '@ant-design/icons';
 import { Detail } from  './style';
 import Modal from '../../atom/Modal';
-import PostFormModal from '../Modals/PostFormModal';
+import PostFormModal from '../ModalContents/PostFormModal';
 
 const Button = styled.button`
     cursor:pointer;

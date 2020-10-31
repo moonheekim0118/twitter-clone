@@ -6,7 +6,7 @@ import { followRequestAction , unfollowRequestAction} from '../../../actions/use
 import { removePostAction } from '../../../actions/post';
 import { Wrapper, ItemWrapper , Item, Container } from './style';
 import Modal from '../../../atom/Modal';
-import ModifyPostModal from '../../Modals/ModifyPostModal';
+import ModifyPostModal from '../../ModalContents/ModifyPostModal';
 
 const Tooltip=({post, children})=>{
 
