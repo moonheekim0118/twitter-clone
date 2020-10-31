@@ -10,7 +10,7 @@ import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout'
 import ProfileCard from '../../../components/Profile/ProfileCard';
-import PostHeader from '../../../components/Header/PostHeader';
+import Header from '../../../components/Header';
 import PostsList from '../../../components/Post/PostsList';
 
 
@@ -54,7 +54,7 @@ const Detail =()=>{
             <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지`}/>
             <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
             <ProfileCard user={userInfo}/>
-            <PostHeader userId={id} pageName={"Likes"}/>
+            <Header userId={id} theme="Tweet" where={"Likes"}/>
             {mainPosts.length > 0 && <PostsList posts={mainPosts} loading={loadPostloading} target="like"/>}
         </AppLayout>
     )

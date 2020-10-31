@@ -8,7 +8,7 @@ import { loadUserInfoAction,loadFollowersAction } from '../../../actions/commonU
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout';
-import FollowHeader from '../../../components/Header/FollowHeader';
+import Header from '../../../components/Header';
 import FollowCard from '../../../components/Follow/FollowCard';
 import { MiddleWrapper } from '../../../components/globalStyle';
 import { LoadingIcon } from '../../../components/Icons';
@@ -50,7 +50,7 @@ const Followers=()=>{
           <meta name="description" content={userInfo.nickname}/>
           <meta property="og:title" content={`${userInfo.nickname}님의 짹짹 페이지 팔로잉 목록 `}/>
           <meta property="og:url" content={`https://jackjacks.com/user/${id}`}/>
-          <FollowHeader userId={id} pageName={"Followers"}/>
+          <Header userId={id} theme="Follow" where={"Followers"}/>
           {FollowerList.length === 0 ? <h1>팔로워가 없습니다.</h1>:FollowerList.map((user)=><FollowCard  key={user.id} user={user}/>)}
           {loadFollowerListLoading? <MiddleWrapper><LoadingIcon/></MiddleWrapper> : ''}
         </AppLayout>

@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Card } from 'antd';
@@ -23,25 +24,16 @@ const CardWrapper = styled(Card)`
 const UserProfileDetail =()=>{
     const me = useSelector((state)=>state.user.me);
 
-    const onClickProfilePage=useCallback(()=>{
-        window.open(`/user/${me.id}`,'_self');
-    },[]);
-
-    const onClickFollowingPage=useCallback(()=>{
-        window.open(`/user/${me.id}/followings`,'_self');
-    },[]);
-
-    const onClickFollowerPage=useCallback(()=>{
-        window.open(`/user/${me.id}/followers`,'_self');
-    })
-
     return(
         <>
         <CardWrapper
             actions={[
-            <div onClick={onClickProfilePage} key="twit">트윗 <br/>{me.Posts.length}</div>,
-            <div onClick={onClickFollowingPage} key="followings">팔로잉 <br/>{me.Followings.length}</div>,
-            <div onClick={onClickFollowerPage} key="followers">팔로워<br/>{me.Followers.length}</div>,
+            <Link href="/user[id]" as={`/user/${me.id}`}><a>
+                <div key="twit">트윗 <br/>{me.Posts.length}</div></a></Link>,
+            <Link href="/user[id]/followings" as={`/user/${me.id}/followings`}><a>
+                <div key="followings">팔로잉 <br/>{me.Followings.length}</div></a></Link>,
+            <Link href="/user[id]/followers" as={`/user/${me.id}/followers`}><a>
+                <div key="followings">팔로워 <br/>{me.Followers.length}</div></a></Link>,
             ]}
            >
             <Card.Meta
