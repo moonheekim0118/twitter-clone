@@ -17,7 +17,7 @@ const FollowList=({user})=>{
         <Wrapper onClick={onClickUser}>
             <SideWrapper>
             <Avatar 
-                user={me}
+                user={user}
                 isLink={true} 
                 isMyPic={false}
                 size={65}

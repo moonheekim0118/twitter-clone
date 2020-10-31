@@ -2,7 +2,7 @@ import React , {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { followRequestAction , unfollowRequestAction} from '../../../actions/user';
-import { Button } from '../../globalStyle';
+import Button from '../../../atom/Button';
 import { LoadingIcon } from '../../Icons';
 
 const FollowButton=({userId})=>{
@@ -25,7 +25,13 @@ const FollowButton=({userId})=>{
         <>
         {
         (followLoading || unfollowLoading) ? <LoadingIcon/> :
-        <Button onClick={onClickFollow}> {isFollowing ? "언팔로우" : "팔로우"} </Button> 
+        <Button 
+        onClick={onClickFollow}
+        style={{radius:'24px', back:'trans'}}
+        type="button"
+        > 
+            {isFollowing ? "언팔로우" : "팔로우"}
+        </Button> 
         }
         </>
     );

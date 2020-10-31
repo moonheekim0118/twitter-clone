@@ -2,8 +2,9 @@ import React, { useCallback, useEffect,useState, useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { loginRequestAction } from '../../../actions/user';
 import Link from 'next/link';
-import useInput from '../../../hooks/useInput';;
-import {  Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text  } from '../style';
+import useInput from '../../../hooks/useInput';
+import Button from '../../../atom/Button';
+import {  Form, Label, InputWrapper,TextInput,PasswordInput,ButtonWrapper,Text  } from '../style';
 import { ErrorMessage } from '../../globalStyle';
 import { LoadingIcon } from '../../Icons';
 
@@ -36,7 +37,7 @@ const LoginForm =()=>{
 
     
     return(
-        <Form onSubmit={onSubmit}>
+        <Form>
               {hasLoginError &&<ErrorMessage>{loginError}</ErrorMessage> }
             <InputWrapper>
                 <TextInput 
@@ -57,7 +58,12 @@ const LoginForm =()=>{
                  <Label htmlFor="user-password">비밀번호</Label>
             </InputWrapper>
             <ButtonWrapper>
-                {isLoggingIn ? <LoadingIcon/> : <SubmitButton>로그인</SubmitButton> }
+                <Button 
+                onClick={onSubmit}
+                style={{back:'full',radius:'5px',size:'0.8rem',width:'100%'}}
+                >
+                    {isLoggingIn? <LoadingIcon/> : '로그인'}
+                </Button>
                 <Link href="/signUp"><Text>회원가입</Text></Link>
             </ButtonWrapper>
         </Form>

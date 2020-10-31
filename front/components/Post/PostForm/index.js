@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
 import Avatar from '../../Avatar';
-import { FormWrapper,FormMeta,Buttons,TextArea,TweetButton,TextLength } from './style';
+import Button from '../../../atom/Button';
+import { FormWrapper,FormMeta,Buttons,TextArea,TextLength } from './style';
 import { SideWrapper } from '../PostCard/style';
 import { ImageIcon , LoadingIcon } from '../../Icons';
 
@@ -61,7 +62,7 @@ const PostForm =({isModal,onClose})=>{
 
     return(
         <>
-        <FormWrapper encType="multipart/form-data" onSubmit={onSubmit} noborder={isModal}>
+        <FormWrapper encType="multipart/form-data" noborder={isModal}>
             <SideWrapper>
                 <Avatar 
                     user={me}
@@ -84,9 +85,13 @@ const PostForm =({isModal,onClose})=>{
                     <ImageIcon onClick={onClickImageUpload} 
                     disabled={imagePaths.length===4? 'true' : 'false'}/>
                     {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
-                    {addPostloading ? <LoadingIcon/> : 
-                    <TweetButton type="primary" htmlType="submit"  disabled={text.length===0 || text.length>=140}>Tweet</TweetButton>
-                    }
+                    <Button 
+                    onClick={onSubmit}
+                    disabled={text.length===0 || text.length>=140}
+                    style={{back:'full', radius:'24px', weight:'bold'}}
+                    >
+                        {addPostloading ? <LoadingIcon/> : 'Tweet' }
+                    </Button>
                 </Buttons>
                 <ImagePath/>
             </FormMeta>

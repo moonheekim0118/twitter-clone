@@ -48,26 +48,6 @@ export const Buttons = styled.div`
 
 `;
 
-export const TweetButton=styled.button`
-    border:none;
-    background-color:${({theme})=>theme.colors.blue_1};
-    color:${({theme})=>theme.colors.white};
-    font-size:${({theme})=>theme.fontSizes.base};
-    font-weight:bold;
-    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
-    cursor:pointer;
-    border-radius:25px;
-    transition: 0.2s background-color ease-in-out;
-    
-    &:hover{
-        background-color:${({theme})=>theme.colors.blue_2};
-    }
-
-    &:disabled{
-        background-color:${({theme})=>theme.colors.disabled};
-        cursor:default;
-    }
-`;
 
 export const TextLength = styled.span`
     position:absolute;

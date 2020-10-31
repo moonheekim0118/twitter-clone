@@ -5,6 +5,7 @@ import { Checkbox } from 'antd';
 import useInput from '../../../hooks/useInput';
 import useValidation from '../../../hooks/useValidation';
 import {useDispatch , useSelector} from 'react-redux';
+import Button from '../../../atom/Button';
 import {signUpRequestAction,signUpResetAction} from '../../../actions/user';
 import { showAlertAction } from '../../../actions/ui';
 import { Form, Label, InputWrapper,TextInput,PasswordInput,SubmitButton,ButtonWrapper,Text,TextLength } from '../style';
@@ -63,8 +64,7 @@ const SignUp=()=>{
     }, [password])
 
     return(
-        <Form onSubmit={onSubmit}>
-    
+        <Form>
             <InputWrapper>
                 <TextInput 
                 name ="user-email" 
@@ -113,7 +113,12 @@ const SignUp=()=>{
             </InputWrapper>
     
             <ButtonWrapper>
-                {signUploading ? <LoadingIcon/> : <SubmitButton>회원가입</SubmitButton>}
+                <Button 
+                onClick={onSubmit}
+                style={{back:'full',radius:'5px',size:'0.8rem',width:'100%'}}
+                >
+                    {signUploading? <LoadingIcon/> : '회원가입'}
+                </Button>
                 <Link href="/login"><Text>로그인</Text></Link>
             </ButtonWrapper>
         </Form>
