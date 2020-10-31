@@ -1,7 +1,8 @@
 import React, { useCallback,useRef,useEffect } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import { addPostAction , uploadImagesAction } from '../../../actions/post';
-import { hidePostModalAction, showAlertAction } from '../../../actions/ui';
+import { showAlertAction } from '../../../actions/ui';
+import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
 import Avatar from '../../Avatar';
@@ -10,10 +11,9 @@ import { SideWrapper } from '../PostCard/style';
 import { AvatarWrapper } from '../../globalStyle';
 import { ImageIcon , LoadingIcon } from '../../Icons';
 
-const PostForm =()=>{
+const PostForm =({isModal,onClose})=>{
     const { addPostloading,addPostDone,imagePaths }= useSelector((state)=>state.post);
     const me = useSelector((state)=>state.user.me);
-    const showPostModal = useSelector((state)=>state.ui.showPostModal);
     const imageInput = useRef();
     const dispatch = useDispatch();
     const [text, onChangeText, setText] = useInput('');
@@ -39,9 +39,8 @@ const PostForm =()=>{
             formData={'content':text}
         }
         dispatch(addPostAction(formData));
-
-        if(showPostModal){ // 모달창 이라면, 
-            dispatch(hidePostModalAction());
+        if(onClose){
+            onClose();
         }
     },[text,imagePaths])
 
@@ -63,7 +62,7 @@ const PostForm =()=>{
 
     return(
         <>
-        <FormWrapper encType="multipart/form-data" onSubmit={onSubmit} noborder={showPostModal}>
+        <FormWrapper encType="multipart/form-data" onSubmit={onSubmit} noborder={isModal}>
             <SideWrapper>
                 <AvatarWrapper size={65}>
                     <Avatar imageSrc={me.profilepic || ""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
@@ -92,6 +91,16 @@ const PostForm =()=>{
         </FormWrapper>
         </>
     )
+}
+
+PostForm.defaultProps={
+    isModal:false,
+    onClose:()=>{}
+};
+
+PostForm.propTypes={
+    onClose: PropTypes.func.isRequired,
+    isModal : PropTypes.bool.isRequired,
 }
 
 export default PostForm;

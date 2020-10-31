@@ -1,11 +1,9 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { hideProfileModalAction } from '../../actions/ui';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Card } from 'antd';
 import  Avatar from '../Avatar';
 import LogoutButton from '../User/LogoutButton';
-import { TransparentOveraly } from './style';
 import { AvatarWrapper } from '../globalStyle';
 
 const CardWrapper = styled(Card)`
@@ -22,14 +20,8 @@ const CardWrapper = styled(Card)`
 `;
 
 
-
 const UserProfileDetail =()=>{
     const me = useSelector((state)=>state.user.me);
-    const dispatch = useDispatch();
-
-    const onClose=useCallback(()=>{
-        dispatch(hideProfileModalAction());
-    },[]);
 
     const onClickProfilePage=useCallback(()=>{
         window.open(`/user/${me.id}`,'_self');
@@ -45,7 +37,6 @@ const UserProfileDetail =()=>{
 
     return(
         <>
-        <TransparentOveraly onClick={onClose}/>
         <CardWrapper
             actions={[
             <div onClick={onClickProfilePage} key="twit">트윗 <br/>{me.Posts.length}</div>,

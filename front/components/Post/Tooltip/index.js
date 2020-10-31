@@ -1,15 +1,17 @@
 import React , { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import useToggle from '../../../hooks/useToggle';
 import { useSelector, useDispatch } from 'react-redux';
 import { followRequestAction , unfollowRequestAction} from '../../../actions/user';
-import { showModifyModalAction } from '../../../actions/ui';
 import { removePostAction } from '../../../actions/post';
 import { Wrapper, ItemWrapper , Item, Container } from './style';
-
+import Modal from '../../../atom/Modal';
+import ModifyPostModal from '../../Modals/ModifyPostModal';
 
 const Tooltip=({post, children})=>{
 
     const dispatch = useDispatch();
+    const [showModal, openModal, closeModal] = useToggle();
     const me  = useSelector(state=>state.user.me);
     const isFollowing = me&&me.Followings.find((v)=>v.id===post.User.id);
         
@@ -34,13 +36,14 @@ const Tooltip=({post, children})=>{
         if(!me){
             return;
         }
-        dispatch(showModifyModalAction({ postId:post.id, postContent:post.content}));
+        openModal();
     },[post.content]);
 
 
     if(me.id === post.User.id){ // 내 포스트일경우 수정 / 삭제 가능 
         return(
             <Container>
+                {showModal && <Modal onClose={closeModal} color="black" ><ModifyPostModal onClose={closeModal} postId={post.id} postContent={post.content}/></Modal>}
                 <Wrapper className="tooltip">
                     <ItemWrapper onClick={onClickModify}>
                         <Item>포스트 수정하기</Item>

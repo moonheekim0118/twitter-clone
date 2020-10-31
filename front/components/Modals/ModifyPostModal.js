@@ -1,26 +1,25 @@
-import React , {useCallback} from 'react';
-import { useDispatch } from 'react-redux';
-import { hideModifyModalAction } from '../../actions/ui';
+import React from 'react';
 import ModifyPostForm from '../Post/ModifyPostForm';
-import { BlackOveraly,ModalFormWrapper,ModalBoxHeader } from './style';
+import PropTypes from 'prop-types';
+import { ModalFormWrapper,ModalBoxHeader } from './style';
 import { CloseIcon } from '../Icons';
 
-const ModifyPostModal=()=>{
-    const dispatch = useDispatch();
-    
-    const onClose=useCallback(()=>{
-        dispatch(hideModifyModalAction());    
-    },[]);
+const ModifyPostModal=({onClose , postId, postContent})=>{
 
     return(
         <>
-        <BlackOveraly onClick={onClose}/>
         <ModalFormWrapper>
             <ModalBoxHeader><CloseIcon onClick={onClose} /></ModalBoxHeader>
-                <ModifyPostForm/>
+                <ModifyPostForm postId={postId} postContent={postContent} onClose={onClose}/>
         </ModalFormWrapper>
         </>
     );
+}
+
+ModifyPostModal.propTypes={
+    onClose: PropTypes.func.isRequired,
+    postId:PropTypes.number.isRequired,
+    postContent:PropTypes.string.isRequired
 }
 
 export default ModifyPostModal;

@@ -1,23 +1,22 @@
 import React , { useCallback , useState } from 'react';
 import PropTypes from 'prop-types';
+import useToggle from '../../../hooks/useToggle';
 import Router from 'next/router';
-import { useSelector,useDispatch } from 'react-redux';
-import { showInfoEditModalAction  } from '../../../actions/ui';
+import { useSelector } from 'react-redux';
 import Avatar from '../../Avatar';
 import FollowButton from '../../Follow/FollowButton';
 import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
 import { Button, AvatarWrapper } from '../../globalStyle';
-import EditProfileModal from '../../Modals/EditProfileModal'
 import ImagesZoom from '../../Image/ImagesZoom';
+import Modal from '../../../atom/Modal';
+import EditProfileForm from '../../User/EditProfileForm';
 
 const UserProfile=({user})=>{
     const me = useSelector((state)=>state.user.me?.id);
-    const showInfoEditModal = useSelector((state)=>state.ui.showInfoEditModal);
     const [showAvatarZoom, setAvatarZoom]=useState(false);
-    const dispatch= useDispatch();
+    const [showModal, openModal, closeModal] = useToggle();
 
     const onClickFollowings=useCallback(()=>{
-
         Router.push(`/user/${user.id}/followings`);
     },[user]);
 
@@ -25,9 +24,6 @@ const UserProfile=({user})=>{
         Router.push(`/user/${user.id}/followers`);
     },[user]);
 
-    const onShowEditModal=useCallback(()=>{
-        dispatch(showInfoEditModalAction());
-    },[]);
 
     const onZoomClose=useCallback(()=>{
         setAvatarZoom(false);
@@ -40,7 +36,7 @@ const UserProfile=({user})=>{
     return(
         <>
         {user.profilepic&& showAvatarZoom && <ImagesZoom images={[{src:user.profilepic}]} onClose={onZoomClose} initial={0}/>}
-        {me && showInfoEditModal && <EditProfileModal/> }
+        {me===user.id && showModal && <Modal onClose={closeModal} color="black"><EditProfileForm onClose={closeModal}/></Modal>}
         <Wrapper>
             <UpperWrapper>
                 <UserInfoWrapper>
@@ -51,7 +47,7 @@ const UserProfile=({user})=>{
                     <div>{user.email}</div>
                 </UserInfoWrapper>
                 {me && user.id!==me && <FollowButton userId={user.id}/>}
-                {me && user.id===me&& <Button onClick={onShowEditModal}>프로필 수정</Button>}
+                {me && user.id===me&& <Button onClick={openModal}>프로필 수정</Button>}
             </UpperWrapper>
             <DownWrapper>
                 <FollowWrapper onClick={onClickFollowings}>{user.Followings} <Description>Followings</Description></FollowWrapper>

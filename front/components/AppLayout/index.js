@@ -6,9 +6,6 @@ import { hideAlertAction } from '../../actions/ui';
 import Router from 'next/router'
 import Menu from './Menu';
 import Alert from '../Alert';
-import UserProfileModal from '../Modals/UserProfileModal';
-import PostFormModal from '../Modals/PostFormModal';
-import ModifyModal from '../Modals/ModifyPostModal';
 import Search from '../Search';
 import { Header,Main,Side,Footer, Description,DescriptionWithoutLink } from './style';
 import { PushBackIcon } from '../Icons';
@@ -18,7 +15,7 @@ import theme from '../theme';
 
 const AppLayout = ({pageName, searchKeyword,children})=>{
     const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
-    const {showProfileModal ,showPostModal, showModifyModal, showAlert } =useSelector(state=>state.ui);
+    const { showAlert } =useSelector(state=>state.ui);
     const dispatch = useDispatch();
 
 
@@ -35,9 +32,7 @@ const AppLayout = ({pageName, searchKeyword,children})=>{
 
     return(
         <ThemeProvider theme={theme}>
-            {isLoggedIn && showProfileModal&& <UserProfileModal/>}
-            {isLoggedIn && showPostModal && <PostFormModal/> } 
-            {isLoggedIn && showModifyModal && <ModifyModal/>}
+            <div id="root"/>
             <Alert/>
             <Header>
              {pageName==="Home"? <Link href="/"><Description>{pageName}</Description></Link> : 
