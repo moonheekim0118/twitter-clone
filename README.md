@@ -1,7 +1,6 @@
 # 트위터 클론 프로젝트
 
 - 트위터를 클론하며 `리액트-서버사이드렌더링`을 학습하기 위한 프로젝트입니다.
-- 개발에만 집중하고자 클론 프로젝트를 선택했습니다.
 - http://twitcloneproject.xyz (closed server)
 - [배포과정 블로그에 정리](https://mooneedev.netlify.app/Infra/AWS-EC2%20%EB%B0%B0%ED%8F%AC%20%EA%B3%BC%EC%A0%95%20%EC%A0%95%EB%A6%AC/)
 
@@ -154,7 +153,7 @@ npm start
 - **post** : 포스트 작성 / 삭제 / 수정 / 좋아요 / 리트윗 / 댓글 작성 및 삭제 
 - **commonUser** : 유저 프로필 페이지 방문시 해당 유저 정보 / 해당 유저 팔로우 ,팔로잉 리스트
 - **user** : 로그인 / 로그아웃 / 현재 로그인한 유저 정보 (me) / 프로필사진 소스 (변경시 사용)
-- **ui** : 포스트 작성 모달창 show / 포스트 수정 모달창 show / 유저 프로필 모달창 show / Alert show 
+- **ui** : Alert show
 
 <br/>
 
@@ -166,22 +165,115 @@ npm start
 
 <br/>
 
-### 리덕스를 이용한 모달창 및 Alert 창 구현
-
-<img src="./demo/ModalExp.jpg?raw=true"/>
-
-<br/>
 
 ### 커스텀 아바타 컴포넌트 구현
 
 - 기존의 antd 아바타 컴포넌트를 대체하여 커스텀 아바타 컴포넌트 구현
 - Props
-  - imageSrc : 유저 정보에 담겨진 profilepic 소스 
-  -  userId : 유저 페이지로 넘어가기 위한 userId
-  - userNickname : profilepic 소스가 null일 경우를 위한 닉네임 
+  - user : 유저 정보 
+  - size : 아바타 사이즈 
   - isLink : true -> 아바타 컴포넌트 클릭시 해당 유저 페이지 /user/[userId] 로 라우팅 
   - isMyPic : true -> 아바타 이미지 수정 가능
 
-- globalStyle에 AvatarWrapper의 props를 이용해 avatar 사이즈 조절 가능 
-
 <br/>
+
+# 📌리팩토링 과정 (..ing)
+
+## 모달창 구현 과정
+### 첫번째 시도
+- nested 컴포넌트 내부에서 모달창을 띄워주어야 하므로, 리덕스를 이용하여 SHOW_MODAL , HIDE_MODAL 액션을 디스패치
+- showModal 상태가 되면 레이아웃 내 body 에서 해당 모달창을 불러오도록 구현함
+### 문제점
+- 모달창이 띄워지고 사라지는 연산에서 불필요하게 모든 레이아웃이 리플로우 됨
+- 모달창이 필요없는 페이지에서도 모달창을 위한 상태를 관리하게 됨
+
+</br>
+
+### 현재 채택한 구현방법
+- Portal 을 사용하여 해당 모달 오픈 요청 이벤트가 발생하면 해당 모달창 컴포넌트를 body에 붙여주도록 구현
+- 이에 따라 모달창이 필요한 곳에서 모달 오픈 / 클로즈를 정할 수 있음
+- 기존에 만든 여러개의 모달 컴포넌트를 하나의 컴포넌트 아래에서 관리하도록 수정
+  - 모달 컨텐츠는 모달 컴포넌트의 children으로 넣어줌
+- Overaly 의 background-color를 props로 지정 가능하도록 구현
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+export const Overaly = styled.div`
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    position:fixed;
+    z-index:5000;
+    background-color:${(props)=>props.color==='black'?'rgba(0,0,0,0.5)':'none'}; 
+`;
+
+
+const Modal = ({onClose, color, children}) => {
+    const root = document.getElementById('root');
+
+    return(
+        ReactDOM.createPortal((
+            <>
+                <Overaly color={color} onClick={onClose}/>
+                {children}
+            </>)
+        ,root)
+    )
+};
+
+
+Modal.propTypes={
+    onClose: PropTypes.func.isRequired,
+    children : PropTypes.node.isRequired,
+    color: PropTypes.string.isRequired,
+}
+
+
+export default Modal;
+```
+
+<br />
+
+## 버튼 컴포넌트 구현 과정
+### 첫번째 시도
+- 스타일링만 달리한 버튼 컴포넌트 2개를 globalStyle.js 파일에서 export 해줌
+
+### 문제점
+- 버튼의 스타일링을 더 자유롭게 하고싶었고, onClick 이벤트나 disabled 프로퍼티도 모든 버튼의 공통이므로 하나의 props로 받으면 좋겠다고 판단.
+
+### 현재 채택한 구현 방법
+- 버튼 컴포넌트를 따로 구현
+- props
+  - type 
+  - onClick
+  - disabled
+  - style:{ size, radius,width,back(색상) } 
+ 
+ 
+ <br />
+ 
+ ##  네비게이터 구현 과정
+ ### 첫번째 시도
+ - 네비게이션 바 내부의 네비게이터 별로 아이콘과 라우팅 주소가 다르므로 컴포넌트를 모두 분리함
+ ### 문제점
+ - 각각 컴포넌트들이 같은 역할을 하는 것을 발견, 따라서 같은 컴포넌트로 묶어주면 좋겠다고 판단
+ 
+<br/>
+
+### 현재 채택한 구현 방법
+- props로 where(=네비게이터 이름) , as (=네비게이터 실주소), href (=네비게이터 라우팅 방식) 를 받아옴
+- where에 따른 icon 분리
+```javascript
+const ICONS={
+    'Home':HomeIcon,
+    'Login':LoginIcon,
+    'Profile':ProfileIcon,
+    'Signup':SignupIcon,
+};
+```
+ 
