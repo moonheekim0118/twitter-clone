@@ -12,7 +12,6 @@ import { Wrapper, SideWrapper, Card, CardMeta, CardButtons,
     NicknameWrapper,Count,CommentButtonWrapper,
     LikeButtonWrapper,Retweet,RetweetCard,
     ContentWrapper,PostInfoWrapper,Date,CommentWrapper } from './style';
-import { AvatarWrapper } from '../../globalStyle';
 import Tooltip from '../Tooltip';
 import { HeartIcon , RetweetIcon , MoreIcon, CommentIcon, SmallRetweetIcon } from '../../Icons';
 
@@ -79,10 +78,13 @@ const PostCard=({post,commentFormOpen})=>{
         <RetweetCard onClick={onClickPost}>
             <Retweet onClick={onClickUser}><SmallRetweetIcon/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
         <SideWrapper>
-            <AvatarWrapper onClick={onClickButtons} size={65}>
-                <Avatar imageSrc={post.Retweet.User.profilepic || ""} userId={post.Retweet.User.id}
-                userNickname={post.Retweet.User.nickname} isLink={true} isMyPic={false}/>     
-            </AvatarWrapper>
+            <Avatar 
+                user={post.Retweet.User}
+                size={65}
+                isLink={true}
+                isMyPic={false}
+                onClick={onClickButtons}
+            />    
         </SideWrapper>
             <CardMeta>
                 <PostInfoWrapper>
@@ -113,10 +115,13 @@ const PostCard=({post,commentFormOpen})=>{
        :
        <Card onClick={onClickPost}>
             <SideWrapper>
-                <AvatarWrapper onClick={onClickButtons} size={65}>
-                    <Avatar imageSrc={post.User.profilepic || ""} userId={post.User.id}
-                    userNickname={post.User.nickname} isLink={true} isMyPic={false}/>     
-                </AvatarWrapper>
+            <Avatar 
+                user={post.User}
+                size={65}
+                isLink={true}
+                isMyPic={false}
+                onClick={onClickButtons}
+            />    
             </SideWrapper>
             <CardMeta>
                 <PostInfoWrapper>

@@ -52,7 +52,7 @@ const EditProfileForm=({onClose})=>{
                     <Overaly/>
                     <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
                     <EditIcon  onClick={onClickImageUpload}/>
-                    <Avatar imageSrc={me.profilepic||""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
+                    <Avatar user={me} size={80} isLink={false} isMyPic={true}/>
                 </ProfilePicWrapper>
                 <InputWrapper>
                     <TextInput

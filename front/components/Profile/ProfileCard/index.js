@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Avatar from '../../Avatar';
 import FollowButton from '../../Follow/FollowButton';
 import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
-import { Button, AvatarWrapper } from '../../globalStyle';
+import { Button } from '../../globalStyle';
 import ImagesZoom from '../../Image/ImagesZoom';
 import Modal from '../../../atom/Modal';
 import EditProfileForm from '../../User/EditProfileForm';
@@ -40,9 +40,13 @@ const UserProfile=({user})=>{
         <Wrapper>
             <UpperWrapper>
                 <UserInfoWrapper>
-                    <AvatarWrapper size={90} onClick={onZoom}>
-                        <Avatar imageSrc={user.profilepic || ""} userId={user.id} userNickname={user.nickname} isLink={false} isMyPic={false}/>
-                    </AvatarWrapper>
+                    <Avatar 
+                    user={user}
+                    size={90}
+                    isLink={false}
+                    isMyPic={false}
+                    onClick={onZoom}
+                    />    
                     <NicknameWrapper>{user.nickname}</NicknameWrapper>
                     <div>{user.email}</div>
                 </UserInfoWrapper>
