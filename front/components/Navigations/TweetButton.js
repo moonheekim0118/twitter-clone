@@ -1,9 +1,10 @@
-import React , { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { showPostModalAction } from '../../actions/ui';
+import React from 'react';
+import useToggle from '../../hooks/useToggle';
 import styled from 'styled-components';
 import { EditOutlined } from '@ant-design/icons';
 import { Detail } from  './style';
+import Modal from '../../atom/Modal';
+import PostFormModal from '../Modals/PostFormModal';
 
 const Button = styled.button`
     cursor:pointer;
@@ -39,19 +40,18 @@ const Button = styled.button`
 
 
 const TweetButton=()=>{
-
-    const dispatch = useDispatch();
-    const onClickShowPostForm=useCallback(()=>{
-        dispatch(showPostModalAction());
-    },[]);
+    const [showModal, openModal, closeModal] = useToggle();
 
     return(
-        <Button onClick={onClickShowPostForm}>
-            <EditOutlined />
-            <Detail>
-                Tweet
-            </Detail>
-        </Button>
+        <>
+            {showModal && <Modal onClose={closeModal} color="black"><PostFormModal onClose={closeModal}/></Modal>}
+            <Button onClick={openModal}>
+                <EditOutlined />
+                <Detail>
+                    Tweet
+                </Detail>
+            </Button>
+        </>
     )
 };
 

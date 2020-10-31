@@ -1,12 +1,14 @@
-import React , { useCallback } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
-import { showProfileModalAction } from '../../actions/ui';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Avatar from '../Avatar';
 import styled from 'styled-components';
+import useToggle from '../../hooks/useToggle';
 import { DownOutlined } from '@ant-design/icons';
 import { Detail } from './style';
 import { Description } from '../AppLayout/style';
 import { AvatarWrapper } from '../globalStyle';
+import Modal from '../../atom/Modal';
+import UserProfileDetail from './UserProfileDetail';
 
 const Card = styled.div`
     cursor:pointer;
@@ -52,23 +54,24 @@ const Email= styled.span`
 
 const UserProfile =()=>{
     const me = useSelector((state)=>state.user.me);
-    const dispatch=useDispatch();
-    const onClickProfile=useCallback(()=>{
-        dispatch(showProfileModalAction());
-    },[]);
+    const [showModal, openModal, closeModal] = useToggle();
+   
     return(
-        <Card onClick={onClickProfile}>
-            <AvatarWrapper size={45}>
-                <Avatar imageSrc={me.profilepic || ""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={false} />
-            </AvatarWrapper>
-            <Detail>
-                <UserInfo>
-                    <Description>{me.nickname}</Description>
-                    <Email>{me.email}</Email>
-                </UserInfo>
-                <DownOutlined />
-            </Detail>
-        </Card>
+        <>
+            {showModal && <Modal color="none" onClose={closeModal}><UserProfileDetail/></Modal>}
+            <Card onClick={openModal}>
+                <AvatarWrapper size={45}>
+                    <Avatar imageSrc={me.profilepic || ""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={false} />
+                </AvatarWrapper>
+                <Detail>
+                    <UserInfo>
+                        <Description>{me.nickname}</Description>
+                        <Email>{me.email}</Email>
+                    </UserInfo>
+                    <DownOutlined />
+                </Detail>
+            </Card>
+        </>
     );
 };
 

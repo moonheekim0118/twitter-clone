@@ -1,28 +1,29 @@
 import React , {useCallback} from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { hidePostModalAction } from '../../actions/ui';
 import { resetImageAction } from '../../actions/post';
 import PostForm from '../Post/PostForm';
-import { BlackOveraly,ModalFormWrapper,ModalBoxHeader } from './style';
+import { ModalFormWrapper,ModalBoxHeader } from './style';
 import { CloseIcon } from '../Icons';
 
-const PostformModal=()=>{
+const PostformModal=({onClose})=>{
     const dispatch = useDispatch();
     
-    const onClose=useCallback(()=>{
+    const onCloseRequest=useCallback(()=>{
         dispatch(resetImageAction()); // 업로드된 이미지 리셋
-        dispatch(hidePostModalAction());    
+        onClose();
     },[]);
 
     return(
-        <>
-        <BlackOveraly onClick={onClose}/>
         <ModalFormWrapper>
-            <ModalBoxHeader><CloseIcon onClick={onClose} /></ModalBoxHeader>
-            <PostForm/>
+            <ModalBoxHeader><CloseIcon onClick={onCloseRequest} /></ModalBoxHeader>
+            <PostForm isModal={true} onClose={onClose}/>
         </ModalFormWrapper>
-        </>
     );
+}
+
+PostformModal.propTypes={
+    onClose: PropTypes.func.isRequired,
 }
 
 

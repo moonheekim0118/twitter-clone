@@ -1,8 +1,8 @@
 import React , { useRef, useCallback } from 'react';
 import Avatar from '../../Avatar';
+import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import { useSelector , useDispatch } from 'react-redux';
-import { hideInfoEditModalAction } from '../../../actions/ui';
 import { updateMyInfoAction,uploadProfilePicAction } from '../../../actions/user';
 import { updateUserInfoAction } from '../../../actions/commonUser';
 import { Wrapper,Title,ContentWrapper,ProfilePicWrapper, Overaly, Header } from './style';
@@ -10,28 +10,23 @@ import { InputWrapper,  TextLength, Label , TextInput } from '../style';
 import { RectButton } from '../../globalStyle';
 import { CloseLeftIcon , EditIcon } from '../../Icons';
 
-const EditProfileForm=()=>{
+const EditProfileForm=({onClose})=>{
     const dispatch = useDispatch();
     const imageInput = useRef();
     const { me , profilePicPath } = useSelector(state=>state.user);
     const [nickname, onChangeNickname]=useInput(me.nickname);
 
-    // 프로필 이미지 수정 폼 , 닉네임 수정 폼
-
-    const onClose=useCallback(()=>{
-        dispatch(hideInfoEditModalAction()); // 모달 창 닫기 
-    },[]);
+    // 프로필 이미지 수정 폼 , 닉네임 수정 
 
     const onSubmitUpdate = useCallback(()=>{ // submit 
         dispatch(updateMyInfoAction({nickname:nickname, image:profilePicPath}));
         dispatch(updateUserInfoAction({nickname:nickname, image:profilePicPath}));
-        dispatch(hideInfoEditModalAction()); // 모달 창 닫기 
+        onClose();
     },[nickname,profilePicPath]);
 
     // 이미지 업로드 
     const onChangeImages=useCallback((e)=>{
         if(e.target.files.length>1){ // 이미지 개수가 1개 이상일 경우 
-             return dispatch(showAlertAction("하나의 이미지만 선택해주세요."));
         }
         const imageFormData = new FormData();
         [].forEach.call(e.target.files, (f)=>{
@@ -74,5 +69,10 @@ const EditProfileForm=()=>{
      )
      
 };
+
+EditProfileForm.propTypes={
+    onClose: PropTypes.func.isRequired,
+}
+
 
 export default EditProfileForm;

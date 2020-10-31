@@ -1,24 +1,23 @@
 import React, { useCallback } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import { modifyPostAction} from '../../../actions/post';
-import { hideModifyModalAction } from '../../../actions/ui';
 import useInput from '../../../hooks/useInput';
+import PropTypes from 'prop-types';
 import { FormWrapper,FormMeta,TextArea,TweetButton,Buttons,TextLength } from '../PostForm/style';
 import { SideWrapper } from '../PostCard/style';
 import { LoadingIcon } from '../../Icons';
 import { ButtonWrapper } from '../style';
 
-const ModifyPostPorm =()=>{
+const ModifyPostPorm =({postId, postContent, onClose})=>{
 
-    const {modifyFormerContent,modifyPostId}= useSelector(state=>state.ui);
     const modifyPostloading = useSelector(state=>state.post.modifyPostloading);
     const dispatch = useDispatch();
-    const [text, onChangeText]=useInput(modifyFormerContent);
+    const [text, onChangeText]=useInput(postContent);
 
     const onSubmit=useCallback((e)=>{
         e.preventDefault();
-        dispatch(modifyPostAction( { postId:modifyPostId, content:text}));
-        dispatch(hideModifyModalAction());
+        dispatch(modifyPostAction( { postId:postId, content:text}));
+        onClose();
     },[text])
 
     return(
@@ -38,7 +37,7 @@ const ModifyPostPorm =()=>{
                 <Buttons>
                     {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
                     <ButtonWrapper>
-                         {modifyPostloading ? <LoadingIcon/> : <TweetButton type="primary" htmlType="submit" disabled={text.length===0 || text===modifyFormerContent}>수정</TweetButton>}
+                         {modifyPostloading ? <LoadingIcon/> : <TweetButton type="primary" htmlType="submit" disabled={text.length===0 || text===postContent}>수정</TweetButton>}
                     </ButtonWrapper>
                 </Buttons>
             </FormMeta>
@@ -46,5 +45,10 @@ const ModifyPostPorm =()=>{
     )
 }
 
+ModifyPostPorm.propTypes={
+    postId: PropTypes.number.isRequired,
+    postContent : PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+}
 
 export default ModifyPostPorm;
