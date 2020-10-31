@@ -18,7 +18,6 @@ const Navigator=({where, href, as})=>{
     const pageName= Router.pathname;
     const SpecificIcon = ICONS[where];
 
-    console.log(pageName);
     return(
         <MenuItemWrapper visit={pageName===href &&'true'}>
             <Link href={as}><a><SpecificIcon/></a></Link>
