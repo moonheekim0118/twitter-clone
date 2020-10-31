@@ -6,7 +6,6 @@ import useToggle from '../../hooks/useToggle';
 import { DownOutlined } from '@ant-design/icons';
 import { Detail } from './style';
 import { Description } from '../AppLayout/style';
-import { AvatarWrapper } from '../globalStyle';
 import Modal from '../../atom/Modal';
 import UserProfileDetail from './UserProfileDetail';
 
@@ -60,9 +59,7 @@ const UserProfile =()=>{
         <>
             {showModal && <Modal color="none" onClose={closeModal}><UserProfileDetail/></Modal>}
             <Card onClick={openModal}>
-                <AvatarWrapper size={45}>
-                    <Avatar imageSrc={me.profilepic || ""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={false} />
-                </AvatarWrapper>
+            <Avatar user={me} size={45} isLink={false} isMyPic={false} />
                 <Detail>
                     <UserInfo>
                         <Description>{me.nickname}</Description>

@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import FollowButton from '../FollowButton';
 import Avatar from '../../Avatar';
 import { Wrapper, SideWrapper, FollowButtonWrapper} from './style';
-import { AvatarWrapper } from '../../globalStyle';
 
 const FollowList=({user})=>{
     const me = useSelector(state=>state.user.me?.id);
@@ -17,9 +16,12 @@ const FollowList=({user})=>{
     return(
         <Wrapper onClick={onClickUser}>
             <SideWrapper>
-                <AvatarWrapper size={65}>
-                     <Avatar imageSrc={user.profilepic} userId={user.id} userNickname={user.nickname} isLink={true} isMyPic={false}/>
-                </AvatarWrapper>
+            <Avatar 
+                user={me}
+                isLink={true} 
+                isMyPic={false}
+                size={65}
+            />  
             </SideWrapper>
             <span>{user.nickname}</span>
             <FollowButtonWrapper>

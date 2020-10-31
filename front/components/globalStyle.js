@@ -78,11 +78,4 @@ export const RectButton = styled.button`
     }
 `;
 
-
-export const AvatarWrapper = styled.div`
-    width:${(props)=>`${props.size}px`};
-    height:${(props)=>`${props.size}px`};
-    cursor:pointer;
-`;
-
 export default GlobalStyles;

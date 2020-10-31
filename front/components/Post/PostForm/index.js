@@ -8,7 +8,6 @@ import ImagePath from '../../Image/ImagePath';
 import Avatar from '../../Avatar';
 import { FormWrapper,FormMeta,Buttons,TextArea,TweetButton,TextLength } from './style';
 import { SideWrapper } from '../PostCard/style';
-import { AvatarWrapper } from '../../globalStyle';
 import { ImageIcon , LoadingIcon } from '../../Icons';
 
 const PostForm =({isModal,onClose})=>{
@@ -64,9 +63,12 @@ const PostForm =({isModal,onClose})=>{
         <>
         <FormWrapper encType="multipart/form-data" onSubmit={onSubmit} noborder={isModal}>
             <SideWrapper>
-                <AvatarWrapper size={65}>
-                    <Avatar imageSrc={me.profilepic || ""} userId={me.id} userNickname={me.nickname} isLink={false} isMyPic={true}/>
-                </AvatarWrapper>
+                <Avatar 
+                    user={me}
+                    size={65}
+                    isLink={false}
+                    isMyPic={true}
+                />    
             </SideWrapper>
             <FormMeta>
                 <TextArea

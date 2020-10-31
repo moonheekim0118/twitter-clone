@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Card } from 'antd';
 import  Avatar from '../Avatar';
 import LogoutButton from '../User/LogoutButton';
-import { AvatarWrapper } from '../globalStyle';
 
 const CardWrapper = styled(Card)`
     position:fixed;
@@ -38,9 +37,7 @@ const UserProfileDetail =()=>{
            >
             <Card.Meta
             avatar={
-                <AvatarWrapper size={45}>
-                    <Avatar imageSrc={me.profilepic} userId={me.id} userNickname={me.nickname} isLink={true} isMyPic={false}/>
-                </AvatarWrapper>
+                <Avatar user={me} size={45} isLink={true} isMyPic={false}/>
             }
             title={me.nickname}/>
            <LogoutButton/>
