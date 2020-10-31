@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LogoutButton from '../User/LogoutButton';
-import Home from '../Navigations/Home';
-import Profile from '../Navigations/Profile';
 import UserProfile from '../Navigations/UserProfile';
-import SignUp from '../Navigations/SignUp';
-import LogIn from '../Navigations/Login';
 import TweetButton from '../Navigations/TweetButton';
+import Navigator from '../Navigations/Navigator';
+import { useSelector } from 'react-redux';
 
 const Navigation=styled.nav`
     display:flex;
@@ -80,14 +78,15 @@ const LogOutWrapper=styled.div`
 `;
 
 const Menu =({isLoggedIn})=>{
+    const me = useSelector((state)=>state.user.me?.id);
     return(
         <Navigation>
             <MenuWrapper>
-                <div><Home/></div>
-                {isLoggedIn && <div><Profile/></div>}
-                {!isLoggedIn && <div><SignUp/></div>}
+                <div><Navigator where="Home" href="/" as="/"/></div>
+                {isLoggedIn && <div><Navigator where="Profile" href='/user/[id]' as={`/user/${me}`}/></div>}
+                {!isLoggedIn && <div><Navigator where="Signup" href="/signUp" as="/signUp"/></div>}
                 {isLoggedIn && <TweetButton/>}
-                {isLoggedIn ? <UserProfile/> : <div><LogIn/></div> }
+                {isLoggedIn ? <UserProfile/> : <div><Navigator where="Login" href="/login" as="/login"/></div> }
                 {isLoggedIn&&
                 <LogOutWrapper>
                     <LogoutButton/>

@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { LeftOutlined, LoadingOutlined,CloseCircleOutlined,CloseOutlined,PlusOutlined,
-    RetweetOutlined, HeartOutlined , EllipsisOutlined , MessageOutlined, AreaChartOutlined,SearchOutlined,
-    RightCircleOutlined, LeftCircleOutlined, MinusOutlined, 
-    HomeOutlined,KeyOutlined,UserOutlined,TeamOutlined,
+import { 
+    LeftOutlined, LoadingOutlined, CloseCircleOutlined,
+    CloseOutlined, PlusOutlined, RetweetOutlined,
+    HeartOutlined , EllipsisOutlined , MessageOutlined,
+    AreaChartOutlined, SearchOutlined, RightCircleOutlined,
+    LeftCircleOutlined, MinusOutlined, HomeOutlined,
+    KeyOutlined, UserOutlined, TeamOutlined,
  } from '@ant-design/icons';
 
 // 뒤로가기 아이콘 , 왼쪽 상단에 붙어있음 
