@@ -197,6 +197,7 @@ npm start
 - 기존에 만든 여러개의 모달 컴포넌트를 하나의 컴포넌트 아래에서 관리하도록 수정
   - 모달 컨텐츠는 모달 컴포넌트의 children으로 넣어줌
 - Overaly 의 background-color를 props로 지정 가능하도록 구현
+- 모달을 띄우는 컴포넌트에서 [커스텀 훅스](https://github.com/moonheekim0118/twitter-clone/blob/master/front/hooks/useToggle.js) 를 사용하여 모달 open과 close를 편리하게 함
 
 ```javascript
 const Modal = ({onClose, color, children}) => {
