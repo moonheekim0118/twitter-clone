@@ -1,29 +1,20 @@
 import React , { useCallback , useState } from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import useToggle from '../../../hooks/useToggle';
-import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import Avatar from '../../Avatar';
 import Button from '../../../atom/Button';
 import FollowButton from '../../Follow/FollowButton';
-import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
 import ImagesZoom from '../../Image/ImagesZoom';
 import Modal from '../../../atom/Modal';
-import EditProfileForm from '../../User/EditProfileForm';
+import EditProfileForm from '../EditProfileForm';
+import { Wrapper,UpperWrapper,UserInfoWrapper,DownWrapper,NicknameWrapper,FollowWrapper,Description } from './style';
 
 const UserProfile=({user})=>{
     const me = useSelector((state)=>state.user.me?.id);
     const [showAvatarZoom, setAvatarZoom]=useState(false);
     const [showModal, openModal, closeModal] = useToggle();
-
-    const onClickFollowings=useCallback(()=>{
-        Router.push(`/user/${user.id}/followings`);
-    },[user]);
-
-    const onClickFollowers=useCallback(()=>{
-        Router.push(`/user/${user.id}/followers`);
-    },[user]);
-
 
     const onZoomClose=useCallback(()=>{
         setAvatarZoom(false);
@@ -55,8 +46,12 @@ const UserProfile=({user})=>{
                 <Button style={{back:'trans'}} type="button" onClick={openModal}>프로필 수정</Button>}
             </UpperWrapper>
             <DownWrapper>
-                <FollowWrapper onClick={onClickFollowings}>{user.Followings} <Description>Followings</Description></FollowWrapper>
-                <FollowWrapper onClick={onClickFollowers}>{user.Followers} <Description>Followers</Description></FollowWrapper>
+                <Link href='/user/[id]/followings' as={`/user/${user.id}/followings`}>
+                    <a><FollowWrapper>{user.Followings} <Description>Followings</Description></FollowWrapper></a>
+                </Link>
+                <Link href='/user/[id]/followers' as={`/user/${user.id}/followers`}>
+                    <a><FollowWrapper>{user.Followers} <Description>Followers</Description></FollowWrapper></a>
+                </Link>
             </DownWrapper>
         </Wrapper>
         </>

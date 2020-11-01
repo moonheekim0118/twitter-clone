@@ -18,6 +18,7 @@ const Followers=()=>{
     const router = useRouter();
     const { id  } = router.query;
     const { userInfo , FollowerList, hasMoreFollowers , loadFollowerListLoading } = useSelector((state)=>state.commonUser);
+  
     useEffect(()=>{
         function onScroll(){
             if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){

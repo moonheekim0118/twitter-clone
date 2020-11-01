@@ -9,7 +9,7 @@ import { loadUserPostsAction,changeTargetAction } from '../../../actions/post';
 import axios from 'axios';
 import wrapper from '../../../store/configureStore';
 import AppLayout from '../../../components/AppLayout'
-import ProfileCard from '../../../components/Profile/ProfileCard';
+import ProfileCard from '../../../components/User/ProfileCard';
 import Header from '../../../components/Header';
 import PostsList from '../../../components/Post/PostsList';
 

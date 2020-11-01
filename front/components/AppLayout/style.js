@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
 export const Header=styled.header`
-    text-align:center;
-    padding:${({theme})=>`${theme.paddings.xl} ${theme.paddings.base}`};
-    height:50px;
-    background-color:${({theme})=>theme.colors.white};
-    top: 0;
     position: -webkit-sticky;
     position:sticky;
-    z-index:10;
+    top: 0;    
+    text-align:center;
+    height:50px;
+    padding:${({theme})=>`${theme.paddings.xl} ${theme.paddings.base}`};
     border-bottom:1px solid ${({theme})=>theme.colors.gray_3};
+    background-color:${({theme})=>theme.colors.white};
+    z-index:10;
+   
     @media ${({theme})=>theme.device.tablet}{
         padding-top:${({theme})=>theme.paddings.base};
         border:none;
@@ -36,17 +37,19 @@ export const Main=styled.section`
 `;
 
 export const Side=styled.section`
-     z-index:20;
      position:fixed;
-     background:${({theme})=>theme.colors.white};
-     height:100%;
-     max-height:1000px;
      top:0px;
      bottom:0px;
      right:0px;
      width:20%;
+     height:100%;
+     max-height:1000px;
+
      margin-left:25px;
      border-left: 2px solid ${({theme})=>theme.colors.gray_3};
+     background:${({theme})=>theme.colors.white};
+
+     z-index:20;
 
      @media ${({theme})=>theme.device.tablet}{
         display:none;
@@ -55,8 +58,8 @@ export const Side=styled.section`
 `;
 
 export const Footer =styled.footer`
-    padding:${({theme})=>theme.paddings.base};
     text-align:center;
+    padding:${({theme})=>theme.paddings.base};
 `;
 
 
@@ -67,11 +70,12 @@ export const Description=styled.a`
 `;
 
 export const DescriptionWithoutLink=styled.div`
-    font-size:${({theme})=>theme.fontSizes.xxl};
-    color:${({theme})=>theme.colors.black};
-    font-weight:bold;
     position:relative;
     margin:0 auto;
     width:50%;
     text-align:center;
+    
+    font-weight:bold;    
+    font-size:${({theme})=>theme.fontSizes.xxl};
+    color:${({theme})=>theme.colors.black};
 `;

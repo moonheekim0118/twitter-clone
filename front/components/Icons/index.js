@@ -10,9 +10,9 @@ import {
 
 // 뒤로가기 아이콘 , 왼쪽 상단에 붙어있음 
 export const PushBackIcon=styled(LeftOutlined)`
-    font-size:${({theme})=>theme.fontSizes.xxl};
     position:absolute;
     left:0px;
+    font-size:${({theme})=>theme.fontSizes.xxl};
 
     &:hover{
         color:${({theme})=>theme.colors.blue_1};
@@ -29,14 +29,13 @@ export const LoadingIcon = styled(LoadingOutlined)`
 
 
 // 창닫기 아이콘, 왼쪽 상단 
-export const CloseCircleIcon =styled(CloseCircleOutlined)`
+export const CloseCircleLeftIcon =styled(CloseCircleOutlined)`
     position:fixed;
-    font-size:${({theme})=>theme.fontSizes.buttonSize};
-    color:${({theme})=>theme.colors.white};
     left:0;
     top:0;
     padding:${({theme})=>theme.paddings.base};
-    line-height:14px;
+    font-size:${({theme})=>theme.fontSizes.buttonSize};
+    color:${({theme})=>theme.colors.white};
     cursor:pointer;
     z-index:7000;
 `
@@ -45,11 +44,13 @@ export const CloseCircleIcon =styled(CloseCircleOutlined)`
 export const CloseCircleRightIcon=styled(CloseCircleOutlined)`
     position:absolute;
     top:5px;
-    right:5px;
-    color:${({theme})=>theme.colors.black};    
-    z-index:100;
-    font-size:${({theme})=>theme.fontSizes.xl};
+    right:5px; 
+
+    font-size:${({theme})=>theme.fontSizes.lg};
+    color:${({theme})=>theme.colors.black};   
+
     cursor:pointer;
+    z-index:0;
 
     &:hover{
         color:red;
@@ -59,15 +60,17 @@ export const CloseCircleRightIcon=styled(CloseCircleOutlined)`
 
 
 // 일반창닫기 버튼 오른쪽 상단 
-export const CloseIcon=styled(CloseOutlined)`
-    cursor:pointer;
+export const CloseRightIcon=styled(CloseOutlined)`
     position:absolute;
     right:10px;
     top:5px;
-    border-radius:50%;
+
     padding:${({theme})=>theme.paddings.lg};
+    border-radius:50%;
     font-size:${({theme})=>theme.fontSizes.xl};
+    
     transition: 0.2s background-color ease-in-out;
+    cursor:pointer;
 
     &:hover{
         background-color:${({theme})=>theme.colors.hover};
@@ -76,12 +79,13 @@ export const CloseIcon=styled(CloseOutlined)`
 
 
 export const CloseLeftIcon=styled(CloseOutlined)`
-    cursor:pointer;
-    border-radius:50%;
     padding:${({theme})=>theme.paddings.lg};
+    border-radius:50%;
+
     font-size:${({theme})=>theme.fontSizes.xl};
     transition: 0.2s background-color ease-in-out;
-
+    cursor:pointer;
+    
     &:hover{
         background-color:${({theme})=>theme.colors.hover};
     }
@@ -94,6 +98,7 @@ export const RedCloseIcon = styled(CloseOutlined)`
 `;
 
 export const SearchIcon=styled(SearchOutlined)`
+    font-size:${({theme})=>theme.fontSizes.lg};
 `;
 
 export const EditIcon= styled(PlusOutlined)`
@@ -101,14 +106,15 @@ export const EditIcon= styled(PlusOutlined)`
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    cursor:pointer;
-
     padding:${({theme})=>theme.paddings.base};
-    color:${({theme})=>theme.colors.white};
+
     font-size:${({theme})=>theme.fontSizes.xxxl};
-    z-index:1001;
+    color:${({theme})=>theme.colors.white};
+
     border-radius:50%;
     transition: 0.2s background-color ease-in-out;
+    cursor:pointer;
+    z-index:1001;
 
     &:hover{
         background-color:rgba(255,255,255,0.3);
@@ -117,9 +123,9 @@ export const EditIcon= styled(PlusOutlined)`
 
 
 export const HeartIcon = styled(HeartOutlined)`
-    color:inherit;  
     padding:${({theme})=>theme.paddings.base};
-    border-radius:50%;
+    border-radius:50%;    
+    color:inherit;  
     transition: 0.2s background-color ease-in-out;
 
     &:hover{
@@ -132,9 +138,9 @@ export const SmallRetweetIcon = styled(RetweetOutlined)`
 `;
 
 export const RetweetIcon = styled(RetweetOutlined)`
-    color:${(props)=>props.retweeted==="true"? 'lime' : 'gray'};  
     padding:${({theme})=>theme.paddings.base};
     border-radius:50%;
+    color:${(props)=>props.retweeted==="true"? 'lime' : 'gray'};  
     transition: 0.2s background-color ease-in-out;
 
     &:hover{
@@ -155,9 +161,9 @@ export const MoreIcon = styled(EllipsisOutlined)`
 `;
 
 export const CommentIcon = styled(MessageOutlined)`
-    color:inherit;  
     padding:${({theme})=>theme.paddings.base};
     border-radius:50%;
+    color:inherit;  
     transition: 0.2s background-color ease-in-out;
 
     &:hover{
@@ -166,11 +172,12 @@ export const CommentIcon = styled(MessageOutlined)`
 `;
 
 export const ImageIcon=styled(AreaChartOutlined)`
-    border-radius:50%;
-    cursor:${(props)=>props.disabled==='true'? 'default' :'pointer'};
+   
     padding:${({theme})=>theme.paddings.lg};
+    border-radius:50%;
     transition: 0.2s background-color ease-in-out;
     opacity:${(props)=>props.disabled==='true'? '0' :'1'};
+    cursor:${(props)=>props.disabled==='true'? 'default' :'pointer'};
 
     &:hover{
         background-color:${({theme})=>theme.colors.hover};
@@ -201,7 +208,6 @@ export const RightIcon = styled(RightCircleOutlined)`
     top: 50%;
     right: 0;
     transform: translate(-20%, -50%);
-    font-size:2rem;
     font-size:${({theme})=>theme.fontSizes.buttonSize};
     color:${({theme})=>theme.colors.white};
     cursor:pointer;

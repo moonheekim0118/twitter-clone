@@ -3,27 +3,31 @@ import TextareaAutosize from 'react-textarea-autosize';
 // Avatr Wrapper는 공유
 
 export const FormWrapper = styled.form`
+    display:flex;   
+    flex-direction: row;
+
+    position:relative;
+    width:100%
+    height: auto;
+    min-height:${(props)=>props.small ? "50px": "130px"};
+
     margin-top:${({theme})=>theme.margins.xxl};
     margin-bottom:${({theme})=>theme.margins.xxxl};
     padding:${({theme})=>theme.paddings.xxxl};
     padding-bottom:${(props)=>props.small ? "1rem": "0"};
-    position:relative;
-    width:100%;
-    min-height:${(props)=>props.small ? "50px": "130px"};
-    height: auto;
-    display:flex;   
-    flex-direction: row;
+
     border:${(props)=>props.noborder ? "1px solid transparent": "1px solid #f4f4f4"}
 `;
 
 export const FormMeta= styled.div`
-    position:relative;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: 90%;
     display:flex;
     flex-direction:column;
     justify-content:space-evenly;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 90%;
+    position:relative;
+
     padding:0 ${({theme})=>theme.paddings.xxxl};
     margin-left:${({theme})=>theme.margins.xxxl};
 `
@@ -36,16 +40,17 @@ export const TextArea = styled(TextareaAutosize)`
 `;
 
 export const Buttons = styled.div`
-    border-top:1px solid ${({theme})=>theme.colors.gray_3}; 
-    font-size:${({theme})=>theme.fontSizes.lg};
-    margin-top:${({theme})=>theme.margins.xsmall};
-    padding:${({theme})=>theme.paddings.base} 0;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
     position:relative;
-    color:${({theme})=>theme.colors.blue_2};
 
+    margin-top:${({theme})=>theme.margins.xsmall};
+    padding:${({theme})=>theme.paddings.base} 0;
+    border-top:1px solid ${({theme})=>theme.colors.gray_3}; 
+    
+    font-size:${({theme})=>theme.fontSizes.lg};
+    color:${({theme})=>theme.colors.blue_2};
 `;
 
 

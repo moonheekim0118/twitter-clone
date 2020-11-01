@@ -6,7 +6,6 @@ export const ButtonWrapper= styled.div`
 `;
 
 export const HashTag=styled.a`
-
     &:hover{
         text-decoration:underline;
     }

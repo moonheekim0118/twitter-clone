@@ -15,29 +15,33 @@ const Navigation=styled.nav`
     width:20%;
     height:100%;
     max-height:100%;
-    background:${({theme})=>theme.colors.white};
     position:fixed;
     top:0;
     left:0;
     bottom:0;
     right:0;
-    z-index:20;
+  
     margin-right:${({theme})=>theme.margins.base};
     border-right: 2px solid ${({theme})=>theme.colors.gray_3};
-    
+
+    background:${({theme})=>theme.colors.white};
+    z-index:20;
+
     @media ${({theme})=>theme.device.tablet}{
-        width:100% !important;
         flex-direction:row;
+        justify-content:center;
+        align-items:center;
+        width:100% !important;
+        position: -webkit-sticky;
+        position:sticky;
+        top: 0;
+
         margin-bottom:10px;
         padding-top:${({theme})=>theme.paddings.base};
         border-bottom:2px solid ${({theme})=>theme.colors.gray_3};
-        justify-content:center;
-        align-items:center;
-        position: -webkit-sticky;
-        position:sticky;
-        z-index:20;
-        top: 0;
         background:${({theme})=>theme.colors.white};
+
+        z-index:20;
     }
 
     @media  ${({theme})=>theme.device.pcS}{
@@ -57,10 +61,10 @@ const MenuWrapper=styled.div`
     }
 
     @media ${({theme})=>theme.device.tablet}{
-        width:70%;
         flex-direction:row;
         justify-content:space-evenly;
         align-items:center;
+        width:70%;
         padding:0;
         margin: 0;
     }

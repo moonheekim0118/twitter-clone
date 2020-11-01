@@ -8,13 +8,13 @@ export const CommentBar = styled.div`
     position:relative;
 
     &::after{
-        content:"";
-        background-color:${({theme})=>theme.colors.blue_1};
         position:absolute;
         width: 10px;
         height: 33px;
         bottom:-17px;
         left:20px;
+        content:"";
+        background-color:${({theme})=>theme.colors.blue_1};
     }
     
 `;

@@ -6,20 +6,6 @@ import { Card } from 'antd';
 import  Avatar from '../Avatar';
 import LogoutButton from '../User/LogoutButton';
 
-const CardWrapper = styled(Card)`
-    position:fixed;
-    bottom:120px;
-    left:20px;
-    width:250px;
-    box-shadow: -1px 1px 7px -2px rgba(0,0,0,0.64);
-    z-index:6000;
-
-    @media ${({theme})=>theme.device.tablet}{
-        display:none;
-    }
-`;
-
-
 const UserProfileDetail =()=>{
     const me = useSelector((state)=>state.user.me);
 
@@ -45,5 +31,18 @@ const UserProfileDetail =()=>{
      </>
     );
 };
+
+const CardWrapper = styled(Card)`
+    position:fixed;
+    bottom:120px;
+    left:20px;
+    width:250px;
+    box-shadow: -1px 1px 7px -2px rgba(0,0,0,0.64);
+    z-index:6000;
+
+    @media ${({theme})=>theme.device.tablet}{
+        display:none;
+    }
+`;
 
 export default UserProfileDetail;

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { resetImageAction } from '../../actions/post';
 import PostForm from '../Post/PostForm';
 import { ModalFormWrapper,ModalBoxHeader } from './style';
-import { CloseIcon } from '../Icons';
+import { CloseRightIcon } from '../Icons';
 
 const PostformModal=({onClose})=>{
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const PostformModal=({onClose})=>{
 
     return(
         <ModalFormWrapper>
-            <ModalBoxHeader><CloseIcon onClick={onCloseRequest} /></ModalBoxHeader>
+            <ModalBoxHeader><CloseRightIcon onClick={onCloseRequest} /></ModalBoxHeader>
             <PostForm isModal={true} onClose={onClose}/>
         </ModalFormWrapper>
     );

@@ -9,8 +9,6 @@ const GlobalStyles = createGlobalStyle`
         margin:0;
         padding:0;
         font-family : 'Source Sans Pro' , sans-serif;
-        margin:0;
-        padding:0;
     }
 
     *:focus{
@@ -20,8 +18,8 @@ const GlobalStyles = createGlobalStyle`
     body{
         overflow-x:hidden;
         overflow-y:scroll;
-        background-color:#FFFFFF;
         color:#000000;
+        background-color:#FFFFFF;
     }
 
 `;

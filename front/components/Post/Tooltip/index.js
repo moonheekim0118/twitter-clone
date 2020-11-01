@@ -4,7 +4,7 @@ import useToggle from '../../../hooks/useToggle';
 import { useSelector, useDispatch } from 'react-redux';
 import { followRequestAction , unfollowRequestAction} from '../../../actions/user';
 import { removePostAction } from '../../../actions/post';
-import { Wrapper, ItemWrapper , Item, Container } from './style';
+import styled  from 'styled-components';
 import Modal from '../../../atom/Modal';
 import ModifyPostModal from '../../ModalContents/ModifyPostModal';
 
@@ -85,5 +85,47 @@ Tooltip.propTypes = {
     }).isRequired,
 }
 
+const Container = styled.div`
+    position:relative;
+    width: fit-content;
+    height: fit-content;
+
+    &:hover > .tooltip,
+    &:active > .tooltip {
+        display:flex;
+    }
+`;
+
+const Wrapper = styled.div`
+    display:none;
+    flex-direction:column;
+    position: absolute;
+    right:-10px;
+    bottom:12px;
+    width:200px;
+
+    font-size:${({theme})=>theme.fontSizes.base};
+    border-radius:5px;
+    
+    background-color:${({theme})=>theme.colors.white};
+    -webkit-box-shadow: 1px 2px 6px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 2px 6px -1px rgba(0,0,0,0.75);
+    box-shadow: 1px 2px 6px -1px rgba(0,0,0,0.75);
+    z-index:2000;    
+`;
+
+const ItemWrapper=styled.div`
+    cursor:pointer;
+    transition: 0.2s background-color ease-in-out;
+    
+    &:hover{
+        background-color:${({theme})=>theme.colors.hover_gray};
+    }
+`;
+
+const Item =styled.div`
+    padding:${({theme})=>theme.paddings.xl};
+
+`
 
 export default Tooltip;
