@@ -48,7 +48,7 @@ const EditProfileForm=({onClose})=>{
                 <Button 
                 onClick={onSubmitUpdate} 
                 disabled={nickname.length > 5}
-                style={{back:'full'}}
+                style={{back:'full', radius:'10px'}}
                 >
                     저장
                 </Button>

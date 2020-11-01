@@ -29,14 +29,13 @@ export const LoadingIcon = styled(LoadingOutlined)`
 
 
 // 창닫기 아이콘, 왼쪽 상단 
-export const CloseCircleIcon =styled(CloseCircleOutlined)`
+export const CloseCircleLeftIcon =styled(CloseCircleOutlined)`
     position:fixed;
     font-size:${({theme})=>theme.fontSizes.buttonSize};
     color:${({theme})=>theme.colors.white};
     left:0;
     top:0;
     padding:${({theme})=>theme.paddings.base};
-    line-height:14px;
     cursor:pointer;
     z-index:7000;
 `
@@ -44,11 +43,11 @@ export const CloseCircleIcon =styled(CloseCircleOutlined)`
 // 창닫기 아이콘, 오른쪽 상단 
 export const CloseCircleRightIcon=styled(CloseCircleOutlined)`
     position:absolute;
+    font-size:${({theme})=>theme.fontSizes.lg};
+    color:${({theme})=>theme.colors.black};   
     top:5px;
-    right:5px;
-    color:${({theme})=>theme.colors.black};    
-    z-index:100;
-    font-size:${({theme})=>theme.fontSizes.xl};
+    right:5px; 
+    z-index:0;
     cursor:pointer;
 
     &:hover{
@@ -59,7 +58,7 @@ export const CloseCircleRightIcon=styled(CloseCircleOutlined)`
 
 
 // 일반창닫기 버튼 오른쪽 상단 
-export const CloseIcon=styled(CloseOutlined)`
+export const CloseRightIcon=styled(CloseOutlined)`
     cursor:pointer;
     position:absolute;
     right:10px;
@@ -94,6 +93,7 @@ export const RedCloseIcon = styled(CloseOutlined)`
 `;
 
 export const SearchIcon=styled(SearchOutlined)`
+    font-size:${({theme})=>theme.fontSizes.lg};
 `;
 
 export const EditIcon= styled(PlusOutlined)`

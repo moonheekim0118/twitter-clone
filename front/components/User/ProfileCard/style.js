@@ -47,9 +47,19 @@ export const NicknameWrapper= styled.div`
 
 export const FollowWrapper =styled.div`
     margin-right:${({theme})=>theme.margins.xxxl};
+    color:${({theme})=>theme.colors.black};
+    
+    &:hover{
+        color:${({theme})=>theme.colors.blue_2};
+    }
+    
 `;
 
 export const Description=styled.span`
     color:${({theme})=>theme.colors.gray_2};
     font-weight:bold;
+
+    &:hover{
+        color:${({theme})=>theme.colors.blue_2};
+    }
 `;

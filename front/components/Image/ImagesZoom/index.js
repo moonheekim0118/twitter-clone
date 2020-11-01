@@ -2,7 +2,7 @@ import React ,{useState,useCallback} from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper,IndicatorWrapper, ImageWrapper } from './style';
 import { Overaly } from '../../../atom/Modal';
-import { CloseCircleIcon ,  IndicatorIcon , LeftIcon, RightIcon } from '../../Icons';
+import { CloseCircleLeftIcon ,  IndicatorIcon , LeftIcon, RightIcon } from '../../Icons';
 
 
 const ImagesZoom=({images,onClose,initial})=>{
@@ -37,7 +37,7 @@ const ImagesZoom=({images,onClose,initial})=>{
         <>
             <Overaly color="black" onClick={onClose}/>
             <Wrapper>
-                <CloseCircleIcon onClick={onClose}></CloseCircleIcon>
+                <CloseCircleLeftIcon onClick={onClose}></CloseCircleLeftIcon>
                 <div>
                 <LeftIcon onClick={onClickLeft}/>
                 <RightIcon onClick={onClickRight}/>
