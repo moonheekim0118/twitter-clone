@@ -3,6 +3,7 @@
 - 트위터를 클론하며 `리액트-서버사이드렌더링`을 학습하기 위한 프로젝트입니다.
 - http://twitcloneproject.xyz (closed server)
 - [배포과정 블로그에 정리](https://mooneedev.netlify.app/Infra/AWS-EC2%20%EB%B0%B0%ED%8F%AC%20%EA%B3%BC%EC%A0%95%20%EC%A0%95%EB%A6%AC/)
+- 리액트로 한 첫 프로젝트이다 보니 컴포넌트 설계에 부족한 점이 많아 계속해서 리팩토링 중입니다.
 
 <br/>
 
@@ -180,6 +181,7 @@ npm start
 # 📌리팩토링 과정 (..ing)
 
 ## 모달창 구현 과정
+[현재 소스코드](https://github.com/moonheekim0118/twitter-clone/blob/master/front/atom/Modal/index.js)
 ### 첫번째 시도
 - nested 컴포넌트 내부에서 모달창을 띄워주어야 하므로, 리덕스를 이용하여 SHOW_MODAL , HIDE_MODAL 액션을 디스패치
 - showModal 상태가 되면 레이아웃 내 body 에서 해당 모달창을 불러오도록 구현함
@@ -195,24 +197,9 @@ npm start
 - 기존에 만든 여러개의 모달 컴포넌트를 하나의 컴포넌트 아래에서 관리하도록 수정
   - 모달 컨텐츠는 모달 컴포넌트의 children으로 넣어줌
 - Overaly 의 background-color를 props로 지정 가능하도록 구현
+- 모달을 띄우는 컴포넌트에서 [커스텀 훅스](https://github.com/moonheekim0118/twitter-clone/blob/master/front/hooks/useToggle.js) 를 사용하여 모달 open과 close를 편리하게 함
 
 ```javascript
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-export const Overaly = styled.div`
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    position:fixed;
-    z-index:5000;
-    background-color:${(props)=>props.color==='black'?'rgba(0,0,0,0.5)':'none'}; 
-`;
-
-
 const Modal = ({onClose, color, children}) => {
     const root = document.getElementById('root');
 
@@ -225,21 +212,12 @@ const Modal = ({onClose, color, children}) => {
         ,root)
     )
 };
-
-
-Modal.propTypes={
-    onClose: PropTypes.func.isRequired,
-    children : PropTypes.node.isRequired,
-    color: PropTypes.string.isRequired,
-}
-
-
-export default Modal;
 ```
 
 <br />
 
 ## 버튼 컴포넌트 구현 과정
+[현재 소스코드](https://github.com/moonheekim0118/twitter-clone/blob/master/front/atom/Button/index.js)
 ### 첫번째 시도
 - 스타일링만 달리한 버튼 컴포넌트 2개를 globalStyle.js 파일에서 export 해줌
 
@@ -258,6 +236,7 @@ export default Modal;
  <br />
  
  ##  네비게이터 구현 과정
+ [현재 소스코드](https://github.com/moonheekim0118/twitter-clone/blob/master/front/components/Navigations/Navigator.js)
  ### 첫번째 시도
  - 네비게이션 바 내부의 네비게이터 별로 아이콘과 라우팅 주소가 다르므로 컴포넌트를 모두 분리함
  ### 문제점
