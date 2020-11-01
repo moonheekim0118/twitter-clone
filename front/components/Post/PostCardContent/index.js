@@ -1,7 +1,7 @@
 import React , { useCallback }from 'react';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
-import { HashTag } from './style';
+import { HashTag } from '../style';
 // 해시태그 
 
 const PostCardContent=({postData})=>{

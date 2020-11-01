@@ -16,19 +16,26 @@ import Tooltip from '../Tooltip';
 import { HeartIcon , RetweetIcon , MoreIcon, CommentIcon, SmallRetweetIcon } from '../../Icons';
 
 const PostCard=({post,commentFormOpen})=>{
+    let CardComponent = Card;
+    let loadedPost = post;
+    let author = post.User;
+    let retweetUser ;
+
+    if(post.Retweet) {
+        CardComponent=RetweetCard;
+        loadedPost=post.Retweet;
+        author = post.Retweet.User;
+        retweetUser=post.User;
+    }
+
     const dispatch = useDispatch();
     const [commentFormOpend, setCommentFormOpend]=useState(commentFormOpen);
     const me = useSelector(state => state.user.me?.id);
-    const [liked, setLiked] = useState(post.Likers.find((x)=>x.id===me));
-
+    const [liked, setLiked] = useState(loadedPost.Likers.find((x)=>x.id===me));
+    
     const onClickPost=useCallback(()=>{ // 해당 post Single page로 라우팅 
-        if(post.Retweet){
-            Router.push(`/post/${post.Retweet.id}`);
-        }
-        else{
-            Router.push(`/post/${post.id}`);
-        }
-    });
+        Router.push(`/post/${loadedPost.id}`);
+    },[]);
 
     const onLikeToggle=useCallback(()=>{
         if(!me){
@@ -36,10 +43,10 @@ const PostCard=({post,commentFormOpen})=>{
         }
         if(liked){
             setLiked(false);
-            return dispatch(unLikePostAction(post.id));
+            return dispatch(unLikePostAction(loadedPost.id));
         }
         setLiked(true);
-        dispatch(likePostAction(post.id));
+        dispatch(likePostAction(loadedPost.id));
     },[liked]);
 
     const onToggleComment = useCallback(()=>{
@@ -50,22 +57,25 @@ const PostCard=({post,commentFormOpen})=>{
         if(!me ){ // 로그인 안되어 있다면 
             return;
         }
-        if( post.UserId === me && post.Retweet ){ // 내가 리트윗한 게시글이라면 
+        if( retweetUser && retweetUser.id === me ){ // 내가 리트윗한 게시글이라면 
             return dispatch(unretweetAction(post.id));
         }
-        else if( post.UserId!==me ){
-            dispatch(retweetAction(post.id));
+        else if( author.id!==me ){ // 내 글이 아니라면 
+            dispatch(retweetAction(loadedPost.id));
         }
     },[]);
 
     const onClickUser= useCallback((e)=>{
         e.stopPropagation();
-        Router.push(`/user/${post.User.id}`);
+        Router.push(`/user/${author.id}`);
     },[]);
 
-    const onClickRetweetedUser=useCallback((e)=>{
+    const onClickRetweetUser = useCallback((e)=>{
+        if(!retweetUser){
+            return;
+        }
         e.stopPropagation();
-        Router.push(`/user/${post.Retweet.User.id}`);
+        Router.push(`/user/${retweetUser.id}`);
     },[]);
 
     const onClickButtons = useCallback((e)=>{
@@ -74,84 +84,45 @@ const PostCard=({post,commentFormOpen})=>{
 
     return(
        <Wrapper>
-       {post.RetweetId && post.Retweet ?  
-        <RetweetCard onClick={onClickPost}>
-            <Retweet onClick={onClickUser}><SmallRetweetIcon/>  {post.User.nickname}님이 리트윗 하셨습니다</Retweet>
-        <SideWrapper>
-            <Avatar 
-                user={post.Retweet.User}
-                size={65}
-                isLink={true}
-                isMyPic={false}
-                onClick={onClickButtons}
-            />    
-        </SideWrapper>
+        <CardComponent onClick={onClickPost}>
+            {retweetUser && <Retweet onClick={onClickRetweetUser}><SmallRetweetIcon/>{retweetUser.nickname}님이 리트윗 하셨습니다</Retweet> }
+            <SideWrapper>
+                <Avatar 
+                    user={author}
+                    size={65}
+                    isLink={true}
+                    isMyPic={false}
+                    onClick={onClickButtons}
+                />    
+            </SideWrapper>
             <CardMeta>
                 <PostInfoWrapper>
-                    <NicknameWrapper onClick={onClickRetweetedUser}>{post.Retweet.User.nickname}</NicknameWrapper>
-                    <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
+                    <NicknameWrapper onClick={onClickUser}>{author.nickname}</NicknameWrapper>
+                    <Date>{dayjs(loadedPost.createdAt).format('MMM DD YYYY')}</Date>
                 </PostInfoWrapper>
                 <ContentWrapper onClick={onClickButtons}>
-                    <PostCardContent postData={post.Retweet.content}/>
+                    <PostCardContent postData={loadedPost.content}/>
                 </ContentWrapper>
-                {post.Retweet.Images[0] && <div onClick={onClickButtons}><PostImages images={post.Retweet.Images}/></div>}
+                {loadedPost.Images[0] && <div onClick={onClickButtons}><PostImages images={loadedPost.Images}/></div>}
                 <CardButtons onClick={onClickButtons}>
-                    <RetweetIcon retweeted={post.UserId===me?"true":"false"} onClick={onRetweetToggle} key="retweet"/>
+                    <RetweetIcon retweeted={me && retweetUser && retweetUser.id===me?"true":"false"} onClick={onRetweetToggle} key="retweet"/>
                     <LikeButtonWrapper liked={liked?"true":"false"}>
                         <HeartIcon onClick={onLikeToggle} />
-                        {post.Likers.length>0 && <Count>{post.Likers.length}</Count>}
+                        {loadedPost.Likers.length>0 && <Count>{loadedPost.Likers.length}</Count>}
                     </LikeButtonWrapper>
                     <CommentButtonWrapper opend={commentFormOpend?"true":"false"} >
                         <CommentIcon
                         onClick={onToggleComment} key="comment"/>
-                        {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
+                        {loadedPost.Comments.length > 0 && <Count>{loadedPost.Comments.length}</Count>}
                     </CommentButtonWrapper>
-                    {me &&<Tooltip post={post.Retweet}>
+                    {me &&<Tooltip post={loadedPost}>
                             <MoreIcon/>
                     </Tooltip>}
                  </CardButtons>
             </CardMeta>
-        </RetweetCard>
-       :
-       <Card onClick={onClickPost}>
-            <SideWrapper>
-            <Avatar 
-                user={post.User}
-                size={65}
-                isLink={true}
-                isMyPic={false}
-                onClick={onClickButtons}
-            />    
-            </SideWrapper>
-            <CardMeta>
-                <PostInfoWrapper>
-                    <NicknameWrapper onClick={onClickUser}>{post.User.nickname}</NicknameWrapper>
-                    <Date>{dayjs(post.createdAt).format('MMM DD YYYY')}</Date>
-                </PostInfoWrapper>
-                <ContentWrapper onClick={onClickButtons}>
-                    <PostCardContent postData={post.content}/>
-                </ContentWrapper>
-                {post.Images[0] && <div onClick={onClickButtons} ><PostImages images={post.Images}/></div>}
-                <CardButtons onClick={onClickButtons}>
-                    <RetweetIcon retweeted="false" onClick={onRetweetToggle} key="retweet"/>
-                    <LikeButtonWrapper liked={liked ? "true":"false" } >
-                        <HeartIcon onClick={onLikeToggle} />
-                        {post.Likers.length>0 && <Count>{post.Likers.length}</Count>}
-                    </LikeButtonWrapper>
-                    <CommentButtonWrapper opend={commentFormOpend ? "true" : "false"} >
-                        <CommentIcon
-                        onClick={onToggleComment} key="comment"/>
-                        {post.Comments.length > 0 && <Count>{post.Comments.length}</Count>}
-                    </CommentButtonWrapper>
-                    {me && <Tooltip post={post}>
-                            <MoreIcon/>
-                        </Tooltip>}
-                </CardButtons>
-            </CardMeta>
-        </Card>
-       }
+        </CardComponent>
         {commentFormOpend &&
-        <CommentWrapper><Comment postId={post.id} Comments={post.Comments}/></CommentWrapper> }
+        <CommentWrapper><Comment postId={loadedPost.id} Comments={loadedPost.Comments}/></CommentWrapper> }
        </Wrapper>
     );
 }
