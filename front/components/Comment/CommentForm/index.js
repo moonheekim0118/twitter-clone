@@ -7,7 +7,7 @@ import useInput from '../../../hooks/useInput';
 import Button from '../../../atom/Button';
 import { LoadingIcon } from '../../Icons';
 import { FormWrapper, TextArea } from '../../Post/PostForm/style';
-import { Wrapper, ButtonWrapper } from './style';
+import styled from 'styled-components';
 
 const CommentForm=({postId})=>{
     const {isLoggedIn}= useSelector((state)=>state.user);
@@ -60,6 +60,19 @@ const CommentForm=({postId})=>{
 CommentForm.propTypes={
     postId:PropTypes.number.isRequired
 };
+
+const Wrapper = styled.div`
+    position:relative;    
+    width:100%;
+    padding-bottom:${({theme})=>theme.paddings.xxxl};
+    margin-bottom:${({theme})=>theme.margins.xxl};
+`;
+
+const ButtonWrapper = styled.div`
+    position:absolute;
+    bottom:-10px;
+    right:0;
+`;
 
 
 export default CommentForm;

@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import PostCard from '../PostCard';
 import { LoadingIcon } from '../../Icons';
 
-const Wrapper = styled.div`
-    text-align:center;
-`;
-
 const PostsList=({posts, loading})=>{
 
     return(
@@ -22,5 +18,9 @@ PostsList.propTypes = {
     posts:PropTypes.array.isRequired,
     loading:PropTypes.bool.isRequired,
 }
+
+const Wrapper = styled.div`
+    text-align:center;
+`;
 
 export default PostsList;

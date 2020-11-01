@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 
 export const TransparentButton= styled.button`
     border:1px solid ${({theme})=>theme.colors.blue_1} ;
-    background-color:${({theme})=>theme.colors.white};
-    color:${({theme})=>theme.colors.blue_1};
+    border-radius:24px;
+    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
+    
     font-size:${(props)=>props.size};
     font-weight:bold;
-    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
-    cursor:pointer;
-    border-radius:24px;
+
+    color:${({theme})=>theme.colors.blue_1};
+    background-color:${({theme})=>theme.colors.white};
+
     transition: 0.2s background-color ease-in-out;
+    cursor:pointer;
 
     &:hover{
         background-color:${({theme})=>theme.colors.hover} ;
@@ -19,16 +22,18 @@ export const TransparentButton= styled.button`
 `;
 
 export const FullButton = styled.button`
-    border:none;
-    background-color:${({theme})=>theme.colors.blue_1} ;
-    color:${({theme})=>theme.colors.white};
-    font-size:${(props)=>props.size};
-    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
-    cursor:pointer;
-    font-weight:${(props)=>props.weight};
-    border-radius:${(props)=>props.radius};
-    transition: 0.2s background-color ease-in-out;
     width:${(props)=>props.width};
+    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
+    border:none;
+    border-radius:${(props)=>props.radius};
+    
+    font-size:${(props)=>props.size};
+    font-weight:${(props)=>props.weight};
+    color:${({theme})=>theme.colors.white};
+    background-color:${({theme})=>theme.colors.blue_1} ;
+    
+    transition: 0.2s background-color ease-in-out;
+    cursor:pointer;
 
     &:hover{
         background-color:${({theme})=>theme.colors.blue_2} ;

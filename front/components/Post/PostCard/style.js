@@ -9,41 +9,45 @@ export const SideWrapper=styled.div`
 `;
 
 export const Card = styled.div`
-    position:relative;
-    width:100%;
     display:flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: stretch;    
+    position:relative;
+    width:100%;
+    
     padding:${({theme})=>theme.paddings.xxxl};
     border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
+
     &:hover{
         background-color:${({theme})=>theme.colors.hover_gray};
     }
 `;
 
 export const RetweetCard=styled.div`
-    position:relative;
-    width:100%;
     display:flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: stretch;    
+    position:relative;
+    width:100%;
+    
     padding:${({theme})=>theme.paddings.xxxl};
     padding-top:40px;
     border:1px solid ${({theme})=>theme.colors.gray_3};
     cursor:pointer;
+
     &:hover{
         background-color:${({theme})=>theme.colors.hover};
     }
 `;
 
 export const CardMeta = styled.div`
-    position:relative;
+    display:flex;
+    flex-direction:column;
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: 90%;
-    display:flex;
-    flex-direction:column;
+    position:relative;
     width:100%;
 
     padding:0 ${({theme})=>theme.paddings.xl};
@@ -51,13 +55,14 @@ export const CardMeta = styled.div`
 `;
 
 export const CardButtons= styled.div`
-    margin-top:${({theme})=>theme.margins.xxxl};
-    font-size:${({theme})=>theme.fontSizes.lg};
-    width:100%;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
+    width:100%;
+
+    margin-top:${({theme})=>theme.margins.xxxl};
+    font-size:${({theme})=>theme.fontSizes.lg};
 `;
 
 export const FollowButtonWrapper=styled.div`
@@ -106,8 +111,8 @@ export const Retweet=styled.div`
     position:absolute;
     top:5px;
     left:5px;
-    color:${({theme})=>theme.colors.blue_2};
     font-weight:bold;
+    color:${({theme})=>theme.colors.blue_2};
 
     &:hover{
         text-decoration:underline;
@@ -120,9 +125,10 @@ export const ContentWrapper=styled.div`
 
 export const Date = styled.span`
     margin-left:${({theme})=>theme.margins.xsmall};
-    color:${({theme})=>theme.colors.gray_2};
     font-size:${({theme})=>theme.fontSizes.small};
+    color:${({theme})=>theme.colors.gray_2};
 `;
+
 export const CommentWrapper = styled.div`
     padding : ${({theme})=>theme.paddings.xxl};
 `;

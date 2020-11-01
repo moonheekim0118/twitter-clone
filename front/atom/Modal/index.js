@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export const Overaly = styled.div`
+    position:fixed;    
     top:0;
     left:0;
     bottom:0;
     right:0;
-    position:fixed;
     z-index:5000;
     background-color:${(props)=>props.color==='black'?'rgba(0,0,0,0.5)':'none'}; 
 `;

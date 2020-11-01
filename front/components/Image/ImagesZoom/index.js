@@ -1,9 +1,8 @@
 import React ,{useState,useCallback} from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper,IndicatorWrapper, ImageWrapper } from './style';
 import { Overaly } from '../../../atom/Modal';
 import { CloseCircleLeftIcon ,  IndicatorIcon , LeftIcon, RightIcon } from '../../Icons';
-
+import styled  from 'styled-components';
 
 const ImagesZoom=({images,onClose,initial})=>{
     const [currentSlide, setCurrentSlide]=useState(initial);
@@ -61,5 +60,38 @@ ImagesZoom.propTypes = {
     onClose:PropTypes.func.isRequired,
     initial:PropTypes.number.isRequired
 }
+
+const Wrapper = styled.div`
+    z-index:7000;
+`;
+
+const IndicatorWrapper= styled.div`
+    display:flex;
+    justify-content:space-between;    
+    position: fixed;
+    bottom: 0%;
+    left: 50%;
+
+    transform: translate(-50%, -30%);
+    font-size:${({theme})=>theme.fontSizes.buttonSize};
+    color:${({theme})=>theme.colors.white};
+
+    cursor:pointer;
+    z-index:7000;
+`;
+
+const ImageWrapper = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:7000;
+    
+    & img {
+        margin:${({theme})=>theme.margins.base}; auto;
+        max-height:70vmax;
+        max-width:70vmin;
+    }
+`;
 
 export default ImagesZoom;

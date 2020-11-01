@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import FollowButton from '../FollowButton';
 import Avatar from '../../Avatar';
-import { Wrapper, SideWrapper, FollowButtonWrapper} from './style';
+import styled from 'styled-components';
 
 const FollowList=({user})=>{
     const me = useSelector(state=>state.user.me?.id);
@@ -43,5 +43,33 @@ FollowList.propTypes = {
         Likes:PropTypes.number,
     }).isRequired,
 }
+
+const Wrapper=styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    position:relative;
+    width:100%;
+    height:100px;
+    padding:${({theme})=>theme.paddings.xl};
+
+    font-size:${({theme})=>theme.fontSizes.xl};
+    font-weight:bold;
+    color:black;
+    cursor:pointer;
+
+    &:hover{
+        background-color:rgba(214, 214, 194,0.3);
+    }
+`;
+
+const SideWrapper=styled.div`
+    margin-right:${({theme})=>theme.margins.base};
+`;
+
+const FollowButtonWrapper=styled.div`
+    position:absolute;
+    right:5px;
+`;
 
 export default FollowList;

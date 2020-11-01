@@ -9,8 +9,29 @@ import { Description } from '../AppLayout/style';
 import Modal from '../../atom/Modal';
 import UserProfileDetail from './UserProfileDetail';
 
+const UserProfile =()=>{
+    const me = useSelector((state)=>state.user.me);
+    const [showModal, openModal, closeModal] = useToggle();
+   
+    return(
+        <>
+            {showModal && <Modal color="none" onClose={closeModal}><UserProfileDetail/></Modal>}
+            <Card onClick={openModal}>
+            <Avatar user={me} size={45} isLink={false} isMyPic={false} />
+                <Detail>
+                    <UserInfo>
+                        <Description>{me.nickname}</Description>
+                        <Email>{me.email}</Email>
+                    </UserInfo>
+                    <DownOutlined />
+                </Detail>
+            </Card>
+        </>
+    );
+};
+
 const Card = styled.div`
-    cursor:pointer;
+    display:flex;
     position:absolute;
     bottom:0;
     right:0;
@@ -19,10 +40,10 @@ const Card = styled.div`
     margin-bottom:${({theme})=>theme.margins.base};
     padding:${({theme})=>theme.paddings.small};
     border-radius:20px;
-    display:flex;
-
-    transition: 0.2s background-color ease-in-out;
     
+    transition: 0.2s background-color ease-in-out;
+    cursor:pointer;
+
     @media ${({theme})=>theme.device.pcS}{
         width:60px;
         border-radius:50%;
@@ -44,32 +65,11 @@ const UserInfo=styled.div`
 `;
 
 const Email= styled.span`
-    color:${({theme})=>theme.colors.gray_2};
-    width:120px;
+    width:120px;    
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color:${({theme})=>theme.colors.gray_2};
 `;
-
-const UserProfile =()=>{
-    const me = useSelector((state)=>state.user.me);
-    const [showModal, openModal, closeModal] = useToggle();
-   
-    return(
-        <>
-            {showModal && <Modal color="none" onClose={closeModal}><UserProfileDetail/></Modal>}
-            <Card onClick={openModal}>
-            <Avatar user={me} size={45} isLink={false} isMyPic={false} />
-                <Detail>
-                    <UserInfo>
-                        <Description>{me.nickname}</Description>
-                        <Email>{me.email}</Email>
-                    </UserInfo>
-                    <DownOutlined />
-                </Detail>
-            </Card>
-        </>
-    );
-};
 
 export default UserProfile;

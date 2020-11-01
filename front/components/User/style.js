@@ -5,15 +5,17 @@ export const Title=styled.span`
 `;
 
 export const Form= styled.form`
+    position:relative;
     width:50%;
-    border-radius:30px;
-    background:${({theme})=>theme.colors.gradient};
-    border: none;
+    
     padding:3rem 2.2rem 2.2rem 2.2rem;
     margin: 50px auto;
-    
-    position:relative;
 
+    border: none;
+    border-radius:30px;
+    
+    background:${({theme})=>theme.colors.gradient};
+    
     @media ${({theme})=>theme.device.tabletL} {
         width:90%;
     }
@@ -22,38 +24,44 @@ export const Form= styled.form`
 
 export const Label = styled.label`
     position:absolute;
-    font-size:${({theme})=>theme.fontSizes.base};
     left:0;
     top:0;
     transform:translateY(-50%);
-    background-color:${({theme})=>theme.colors.white};
-    border-radius:5px;
-    color:${({theme})=>theme.colors.gray_2};
+
     padding: 0 0.3rem;
     margin: 0 0.5rem;
-    pointer-events:none;
-    
-    transition: 0.2s color ease-in-out;
 
+    border-radius:5px;
+
+    font-size:${({theme})=>theme.fontSizes.base};
+
+    color:${({theme})=>theme.colors.gray_2};
+    background-color:${({theme})=>theme.colors.white};
+    
+    pointer-events:none; 
+    transition: 0.2s color ease-in-out;
 `;
 
 
 export const InputWrapper=styled.div`
+    position:relative;
     width:100%;
     margin:2rem auto;
     color : ${({theme})=>theme.colors.black}; 
-    position:relative;
 `
 
 export const TextInput = styled.input.attrs({ type: 'text' })`
-    font-size:${({theme})=>theme.fontSizes.small};
-    background-color: ${({theme})=>theme.colors.white};
-    outline:none;
-    border: none;
     width:100%;
-    border-radius:5px;
     padding:${({theme})=>theme.paddings.base} ${({theme})=>theme.colors.small};
+    
+    border-radius:5px;
+    border: none;
+    outline:none;
+
+    font-size:${({theme})=>theme.fontSizes.small};
+
     color:  ${({theme})=>theme.colors.gray_2};
+    background-color: ${({theme})=>theme.colors.white};
 
     &:focus + label{
         color: ${({theme})=>theme.colors.blue_2};
@@ -61,12 +69,14 @@ export const TextInput = styled.input.attrs({ type: 'text' })`
 `;
 
 export const PasswordInput = styled.input.attrs({ type: 'password' })`
-    font-size:${({theme})=>theme.fontSizes.small};
-    outline:none;
-    border: none;
     width:100%;
-    border-radius:5px;
     padding:${({theme})=>theme.paddings.base} ${({theme})=>theme.colors.small};
+    
+    border: none;
+    border-radius:5px;
+    outline:none;
+
+    font-size:${({theme})=>theme.fontSizes.small};
     color:  ${({theme})=>theme.colors.gray_2};
 
     &:focus + label{
@@ -76,16 +86,17 @@ export const PasswordInput = styled.input.attrs({ type: 'password' })`
 
 
 export const SubmitButton = styled.button`
+    width:100%;
+    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};    
     border:none;
-    background-color:${({theme})=>theme.colors.blue_2};
-    color:${({theme})=>theme.colors.white};
+    border-radius:5px;
 
     font-size:${({theme})=>theme.fontSizes.small};
-    padding:${({theme})=>theme.paddings.small} ${({theme})=>theme.paddings.xxl};
-    cursor:pointer;
-    border-radius:5px;
+    color:${({theme})=>theme.colors.white};
+    background-color:${({theme})=>theme.colors.blue_2};
+
+    cursor:pointer;    
     transition: 0.2s background-color ease-in-out;
-    width:100%;
 
     &:hover{
         background-color:${({theme})=>theme.colors.blue_1};
@@ -93,10 +104,10 @@ export const SubmitButton = styled.button`
 `;
 
 export const Text =styled.a`
-    color:${({theme})=>theme.colors.white};
-    font-weight:bold;
-    cursor-pointer;
     margin-top:${({theme})=>theme.margins.xxl};
+    font-weight:bold;
+    color:${({theme})=>theme.colors.white};
+    cursor-pointer;
 `
 
 
