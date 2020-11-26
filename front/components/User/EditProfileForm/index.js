@@ -26,12 +26,8 @@ const EditProfileForm=({onClose})=>{
 
     // 이미지 업로드 
     const onChangeImages=useCallback((e)=>{
-        if(e.target.files.length>1){ // 이미지 개수가 1개 이상일 경우 
-        }
         const imageFormData = new FormData();
-        [].forEach.call(e.target.files, (f)=>{
-            imageFormData.append('image',f);
-        });
+        imageFormData.append('image',e.target.files[0]);
         dispatch(uploadProfilePicAction(imageFormData));
      },[]);
  
