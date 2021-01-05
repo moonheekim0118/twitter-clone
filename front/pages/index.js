@@ -1,4 +1,5 @@
 import React , { useEffect } from 'react';
+import { scrollHandler } from '../util/scrollHandler';
 import { useSelector , useDispatch} from 'react-redux';
 import { END } from 'redux-saga';
 import { loadPostsAction } from '../actions/post';
@@ -16,15 +17,12 @@ const Home =()=>{
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        function onScroll(){
-            if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
-                if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
-                    const lastId= mainPosts[mainPosts.length-1]?.id;
-                    dispatch(loadPostsAction(lastId));
-                }
-            }
-        }
+        const lastId= mainPosts[mainPosts.length-1]?.id;
+
+        const onScroll= scrollHandler(dispatch.bind(null,loadPostsAction(lastId)),
+                                      hasMorePost, loadPostloading);
         window.addEventListener('scroll',onScroll);
+
         return()=>{
             window.removeEventListener('scroll',onScroll);
         }

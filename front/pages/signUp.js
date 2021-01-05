@@ -8,8 +8,7 @@ import AppLayout from '../components/AppLayout';
 import SignUpComponent from '../components/User/SignUp';
 
 const SignUp=()=>{
-
-
+    
     return(
         <AppLayout  pageName={"SignUp"}> 
             <Head>
