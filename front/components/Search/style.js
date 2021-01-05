@@ -76,26 +76,3 @@ export const SearchButton = styled.button.attrs({ type: 'submit' })`
     cursor:pointer;    
     z-index:100;
 `;
-
-
-
-
-export const HistoryTab=styled.div.attrs({ tabindex: "0" })`
-    display:flex;
-    justify-content:space-between;    
-    width:100%;
-    padding: ${({theme})=>theme.paddings.lg};
-    border-bottom:1px solid ${({theme})=>theme.colors.gray_4};
-    border-left:1px solid ${({theme})=>theme.colors.gray_4};
-    border-right:1px solid ${({theme})=>theme.colors.gray_4};
-    cursor:pointer;
-    
-    &:last-child {
-        border-bottom-right-radius:5px;
-        border-bottom-left-radius:5px;
-    }
-
-    &:hover{
-        background-color:${({theme})=>theme.colors.hover};
-    }
-`;
