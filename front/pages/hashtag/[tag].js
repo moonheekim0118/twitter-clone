@@ -1,4 +1,5 @@
 import React , { useEffect } from 'react';
+import { scrollHandler } from '../../util/scrollHandler';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import Head from 'next/head';
@@ -18,14 +19,9 @@ const HashTagPost=()=>{
 
     
     useEffect(()=>{
-      function onScroll(){
-          if(window.pageYOffset + document.documentElement.clientHeight+100>=document.documentElement.scrollHeight){
-              if(hasMorePost && !loadPostloading){ // 이미 요청이 간 상태에서는 다시 요청을 보내지 않도록 
-                  const lastId= hashTagPosts[hashTagPosts.length-1]?.id;
-                  dispatch(loadHashtagAction({hashTag:tag, lastId:lastId}));
-              }
-          }
-      }
+      const lastId= hashTagPosts[hashTagPosts.length-1]?.id;
+      const onScroll = scrollHandler(dispatch.bind(null,loadHashtagAction({hashTag:tag, lastId:lastId})),
+                                     hasMorePost, loadPostloading);
       window.addEventListener('scroll',onScroll);
       return()=>{
           window.removeEventListener('scroll',onScroll);
