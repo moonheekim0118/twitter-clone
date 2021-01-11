@@ -26,7 +26,7 @@ const ImagesZoom=({images,onClose,initial})=>{
         }
     },[currentSlide]);
 
-    const onClickIndicator=useCallback((index)=>{
+    const onClickIndicator=useCallback((index)=>()=>{
         if(index!==currentSlide){
             setCurrentSlide(index);
         }
@@ -45,7 +45,7 @@ const ImagesZoom=({images,onClose,initial})=>{
                 </ImageWrapper>
                 </div>
             <IndicatorWrapper>
-            {images.map((v,i)=>(<IndicatorIcon onClick={onClickIndicator.bind(this,i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? "true": "false" }/>))}
+            {images.map((v,i)=>(<IndicatorIcon onClick={onClickIndicator(i)} id={i} key={v.src} position ={(i*10)+45} color={ i===currentSlide ? "true": "false" }/>))}
             </IndicatorWrapper>
             </Wrapper>
         </>

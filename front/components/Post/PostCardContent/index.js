@@ -6,7 +6,7 @@ import { HashTag } from '../style';
 
 const PostCardContent=({postData})=>{
 
-    const onClickHashTag=useCallback((hashtag)=>{
+    const onClickHashTag=useCallback((hashtag)=>()=>{
         Router.push(`/hashtag/${hashtag}`);
     },[])
 
@@ -14,7 +14,7 @@ const PostCardContent=({postData})=>{
         <>
         {postData.split(/(#[^\s#]+)/g).map((v,i)=>{
             if(v.match((/(#[^\s#]+)/))){
-            return <HashTag key={i} onClick={onClickHashTag.bind(this,v.slice(1))}>{v}</HashTag>
+            return <HashTag key={i} onClick={onClickHashTag(v.slice(1))}>{v}</HashTag>
             }
             return v;
         })}
