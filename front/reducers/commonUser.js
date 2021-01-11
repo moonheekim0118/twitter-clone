@@ -4,90 +4,87 @@ import produce from '../util/produce';
 // 유저정보에는 , id, nickname, Following 수 , Follower 수
 // 작성 Post 수, Like Post 수가 들어있다.
 
+export const initialState = {
+    loadUserInfoLoading: false, // 유저 로딩
+    loadUserInfoDone: false,
+    loadUserInfoError: null,
 
+    loadFollowingListLoading: false, // 팔로잉 목록
+    loadFollowingListDone: false,
+    loadFollowingListError: null,
 
-export const initialState={
-    loadUserInfoLoading:false, // 유저 로딩 
-    loadUserInfoDone:false,
-    loadUserInfoError:null,
+    loadFollowerListLoading: false, // 팔로워 목록
+    loadFollowerListDone: false,
+    loadFollowerListError: null,
 
-    loadFollowingListLoading:false, // 팔로잉 목록
-    loadFollowingListDone:false,
-    loadFollowingListError:null,
+    hasMoreFollowings: true,
+    hasMoreFollowers: true,
 
-    loadFollowerListLoading:false, // 팔로워 목록
-    loadFollowerListDone:false,
-    loadFollowerListError:null,
+    FollowingList: [],
+    FollowerList: [],
 
-    hasMoreFollowings:true,
-    hasMoreFollowers:true, 
-
-
-    FollowingList:[],
-    FollowerList:[],
-
-
-    userInfo:null, // 로딩된 유저 인포 저장
+    userInfo: null, // 로딩된 유저 인포 저장
 };
 
-
-const reducer=(state= initialState, action)=>{
-    return produce(state,draft=>{
-        switch(action.type){
-            // 현재 프로필 페이지 들어간 유저 정보 불러오기 
+const reducer = (state = initialState, action) => {
+    return produce(state, (draft) => {
+        switch (action.type) {
+            // 현재 프로필 페이지 들어간 유저 정보 불러오기
             case type.LOAD_USER_INFO_REQUEST:
-                draft.loadUserInfoLoading=true;
-                draft.loadUserInfoDone=false;
-                draft.loadUserInfoError=null;
+                draft.loadUserInfoLoading = true;
+                draft.loadUserInfoDone = false;
+                draft.loadUserInfoError = null;
                 break;
-            case type.LOAD_USER_INFO_SUCCESS: 
-                draft.userInfo=action.data;
-                draft.loadUserInfoDone=true;
-                draft.loadUserInfoLoading=false;
+            case type.LOAD_USER_INFO_SUCCESS:
+                draft.userInfo = action.data;
+                draft.loadUserInfoDone = true;
+                draft.loadUserInfoLoading = false;
                 break;
             case type.LOAD_USER_INFO_FAIL:
-                draft.loadUserInfoLoading=false;
-                draft.loadUserInfoError=action.error;
+                draft.loadUserInfoLoading = false;
+                draft.loadUserInfoError = action.error;
                 break;
 
-                // 현재 프로필 페이지 들어간 유저 팔로잉 목록 불러오기 
+            // 현재 프로필 페이지 들어간 유저 팔로잉 목록 불러오기
             case type.LOAD_FOLLOWINGS_REQUEST:
-                draft.loadFollowingListLoading=true;
-                draft.loadFollowingListDone=false;
-                draft.loadFollowingListError=null;
+                draft.loadFollowingListLoading = true;
+                draft.loadFollowingListDone = false;
+                draft.loadFollowingListError = null;
                 break;
             case type.LOAD_FOLLOWINGS_SUCCESS:
-                draft.loadFollowingListLoading=false;
-                draft.loadFollowingListDone=true;
-                draft.FollowingList=draft.FollowingList.concat(action.data);
-                draft.hasMoreFollowings=draft.FollowingList.length<draft.userInfo.Followings;
+                draft.loadFollowingListLoading = false;
+                draft.loadFollowingListDone = true;
+                draft.FollowingList = draft.FollowingList.concat(action.data);
+                draft.hasMoreFollowings =
+                    draft.FollowingList.length < draft.userInfo.Followings;
                 break;
             case type.LOAD_FOLLOWINGS_FAIL:
-                draft.loadFollowerListLoading=false;
-                draft.loadFollowingListError=action.error;
+                draft.loadFollowerListLoading = false;
+                draft.loadFollowingListError = action.error;
                 break;
 
-                // 현재 프로필 페이지 들어간 유저 팔로워 목록 불러오기 
+            // 현재 프로필 페이지 들어간 유저 팔로워 목록 불러오기
             case type.LOAD_FOLLOWERS_REQUEST:
-                draft.loadFollowersListLoading=true;
-                draft.loadFollowersListDone=false;
-                draft.loadFollowersListError=null;
+                draft.loadFollowersListLoading = true;
+                draft.loadFollowersListDone = false;
+                draft.loadFollowersListError = null;
                 break;
             case type.LOAD_FOLLOWERS_SUCCESS:
-                draft.loadFollowersListLoading=false;
-                draft.loadFollowersListDone=true;
-                draft.FollowerList=draft.FollowerList.concat(action.data);
-                draft.hasMoreFollowers=draft.FollowerList.length<draft.userInfo.Followers;
+                draft.loadFollowersListLoading = false;
+                draft.loadFollowersListDone = true;
+                draft.FollowerList = draft.FollowerList.concat(action.data);
+                draft.hasMoreFollowers =
+                    draft.FollowerList.length < draft.userInfo.Followers;
                 break;
             case type.LOAD_FOLLOWERS_FAIL:
-                draft.loadFollowersListLoading=true;
-                draft.loadFollowersListDone=false;
-                draft.loadFollowersListError=null;
+                draft.loadFollowersListLoading = true;
+                draft.loadFollowersListDone = false;
+                draft.loadFollowersListError = null;
                 break;
 
             case type.UPDATE_USER_INFO:
-                draft.userInfo.nickname=action.data.nickname;
-                draft.userInfo.profilepic=action.data.image;
+                draft.userInfo.nickname = action.data.nickname;
+                draft.userInfo.profilepic = action.data.image;
                 break;
         }
     });

@@ -2,26 +2,30 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { Detail } from  './style';
+import { Detail } from './style';
 import { Description } from '../AppLayout/style';
 import { HomeIcon, LoginIcon, ProfileIcon, SignupIcon } from '../Icons';
 import styled from 'styled-components';
 
-const ICONS={
-    'Home':HomeIcon,
-    'Login':LoginIcon,
-    'Profile':ProfileIcon,
-    'Signup':SignupIcon,
+const ICONS = {
+    Home: HomeIcon,
+    Login: LoginIcon,
+    Profile: ProfileIcon,
+    Signup: SignupIcon,
 };
 
-const Navigator=({where, href, as})=>{
-    const Router=useRouter();
-    const pageName= Router.pathname;
+const Navigator = ({ where, href, as }) => {
+    const Router = useRouter();
+    const pageName = Router.pathname;
     const SpecificIcon = ICONS[where];
 
-    return(
-        <MenuItemWrapper visit={pageName===href &&'true'}>
-            <Link href={as}><a><SpecificIcon/></a></Link>
+    return (
+        <MenuItemWrapper visit={pageName === href && 'true'}>
+            <Link href={as}>
+                <a>
+                    <SpecificIcon />
+                </a>
+            </Link>
             <Detail>
                 <Link href={as}>
                     <Description>{where}</Description>
@@ -29,34 +33,34 @@ const Navigator=({where, href, as})=>{
             </Detail>
         </MenuItemWrapper>
     );
-
-}
+};
 
 Navigator.propTypes = {
-    where:PropTypes.string.isRequired,
-    href:PropTypes.string.isRequired,
-    as:PropTypes.string.isRequired,
-}
+    where: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+    as: PropTypes.string.isRequired,
+};
 
 const MenuItemWrapper = styled.div`
-    display:flex;
+    display: flex;
 
-    margin-bottom:${({theme})=>theme.margins.base};
-    padding:${({theme})=>theme.paddings.base};
-    border-radius:20px;
+    margin-bottom: ${({ theme }) => theme.margins.base};
+    padding: ${({ theme }) => theme.paddings.base};
+    border-radius: 20px;
 
-    background-color:${(props)=>props.visit?'rgba(153, 204, 255,0.2)':'none'};
+    background-color: ${(props) =>
+        props.visit ? 'rgba(153, 204, 255,0.2)' : 'none'};
     transition: 0.2s background-color ease-in-out;
-    cursor:pointer;
+    cursor: pointer;
 
-    @media ${({theme})=>theme.device.pcS}{
-        border-radius:50%;
-        margin-right:0;
+    @media ${({ theme }) => theme.device.pcS} {
+        border-radius: 50%;
+        margin-right: 0;
     }
 
-    &:hover{
-        background:${({theme})=>theme.colors.hover};
+    &:hover {
+        background: ${({ theme }) => theme.colors.hover};
     }
 `;
 
-export default Navigator; 
+export default Navigator;

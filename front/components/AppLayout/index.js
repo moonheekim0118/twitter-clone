@@ -1,63 +1,83 @@
-import React, { useEffect,useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { hideAlertAction } from '../../actions/ui';
-import Router from 'next/router'
+import Router from 'next/router';
 import Menu from './Menu';
 import Alert from '../Alert';
 import Search from '../Search';
-import { Header,Main,Side,Footer, Description,DescriptionWithoutLink } from './style';
+import {
+    Header,
+    Main,
+    Side,
+    Footer,
+    Description,
+    DescriptionWithoutLink,
+} from './style';
 import { PushBackIcon } from '../Icons';
 import { ThemeProvider } from 'styled-components';
 import theme from '../theme';
 
-
-const AppLayout = ({pageName, searchKeyword,children})=>{
-    const isLoggedIn = useSelector((state)=> state.user.isLoggedIn);
-    const { showAlert } =useSelector(state=>state.ui);
+const AppLayout = ({ pageName, searchKeyword, children }) => {
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const { showAlert } = useSelector((state) => state.ui);
     const dispatch = useDispatch();
 
-
-    useEffect(()=>{
-        if(showAlert){
-            const timer = setTimeout(()=>dispatch(hideAlertAction()),5000);
-            return()=>clearTimeout(timer);
+    useEffect(() => {
+        if (showAlert) {
+            const timer = setTimeout(() => dispatch(hideAlertAction()), 5000);
+            return () => clearTimeout(timer);
         }
-    },[showAlert]);
+    }, [showAlert]);
 
-    const onClickBack=useCallback(()=>{
-      Router.back()
-    },[]);
+    const onClickBack = useCallback(() => {
+        Router.back();
+    }, []);
 
-    return(
+    return (
         <ThemeProvider theme={theme}>
-            <div id="root"/>
-            <Alert/>
+            <div id="root" />
+            <Alert />
             <Header>
-             {pageName==="Home"? <Link href="/"><Description>{pageName}</Description></Link> : 
-             <DescriptionWithoutLink><PushBackIcon onClick={onClickBack} /><span>{pageName}</span></DescriptionWithoutLink>}
+                {pageName === 'Home' ? (
+                    <Link href="/">
+                        <Description>{pageName}</Description>
+                    </Link>
+                ) : (
+                    <DescriptionWithoutLink>
+                        <PushBackIcon onClick={onClickBack} />
+                        <span>{pageName}</span>
+                    </DescriptionWithoutLink>
+                )}
             </Header>
             <div>
-                <Menu isLoggedIn={isLoggedIn}/>
+                <Menu isLoggedIn={isLoggedIn} />
                 <Main>{children}</Main>
                 <Side>
-                   <Search keyword={searchKeyword}/>
+                    <Search keyword={searchKeyword} />
                 </Side>
             </div>
-            <Footer><a href="https://mooneedev.netlify.app/" target="_blank" rel="noreferrer noopener">Mady by moonee</a></Footer>
+            <Footer>
+                <a
+                    href="https://mooneedev.netlify.app/"
+                    target="_blank"
+                    rel="noreferrer noopener">
+                    Mady by moonee
+                </a>
+            </Footer>
         </ThemeProvider>
-    )
-}
-
-AppLayout.defaultProps={
-    searchKeyword:'',
+    );
 };
 
-AppLayout.propTypes={
+AppLayout.defaultProps = {
+    searchKeyword: '',
+};
+
+AppLayout.propTypes = {
     pageName: PropTypes.string.isRequired,
-    children : PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
     searchKeyword: PropTypes.string.isRequired,
-}
+};
 
 export default AppLayout;
