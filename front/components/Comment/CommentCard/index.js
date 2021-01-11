@@ -32,7 +32,7 @@ const CommentCard = ({ postId, comment }) => {
                 <NicknameWrapper>{comment.User.nickname}</NicknameWrapper>
                 <span> {comment.content}</span>
             </SecondWrapper>
-            {me && comment.User.id === me && (
+            {me && comment.User.id === me.id && (
                 <ButtonWrapper>
                     <RedCloseIcon onClick={onClickRemove}>삭제</RedCloseIcon>
                 </ButtonWrapper>
