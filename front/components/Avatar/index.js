@@ -7,32 +7,32 @@ import { useSelector } from 'react-redux';
 const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
     const profilePicPath = useSelector((state) => state.user.profilePicPath);
 
-    if(isLink && isMyPic){
-        return(
+    if (isLink && isMyPic) {
+        return (
             <Link href="/user/[id]" as={`/user/${userId}`}>
                 <a>
-                    {imageSrc ? 
-                        (<Image src={`${profilePicPath}`}/>) : 
-                        (<NicknameWrapper>
-                            {userNickname[0]} 
-                         </NicknameWrapper>)
-                    }
+                    {imageSrc ? (
+                        <Image src={`${profilePicPath}`} />
+                    ) : (
+                        <NicknameWrapper>{userNickname[0]}</NicknameWrapper>
+                    )}
                 </a>
             </Link>
-        )
+        );
     }
 
-    if(isLink && !isMyPic){
-        return(
+    if (isLink && !isMyPic) {
+        return (
             <Wrapper size={size} onClick={onClick}>
                 <Link href="/user/[id]" as={`/user/${user.id}`}>
                     <a>
-                        {user.profilepic ? 
-                            (<Image src={`${user.profilepic}`}/>) : 
-                            (<NicknameWrapper size={size}>
-                                {user.nickname[0]} 
-                            </NicknameWrapper>)
-                        }
+                        {user.profilepic ? (
+                            <Image src={`${user.profilepic}`} />
+                        ) : (
+                            <NicknameWrapper size={size}>
+                                {user.nickname[0]}
+                            </NicknameWrapper>
+                        )}
                     </a>
                 </Link>
             </Wrapper>
@@ -42,26 +42,28 @@ const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
     if (!isLink && isMyPic) {
         return (
             <Wrapper size={size} onClick={onClick}>
-                {profilePicPath ? 
-                    (<Image src={`${profilePicPath}`}/>) : 
-                    ( <NicknameWrapper size={size}>
-                        {user.nickname[0]} 
-                    </NicknameWrapper>)
-                }
+                {profilePicPath ? (
+                    <Image src={`${profilePicPath}`} />
+                ) : (
+                    <NicknameWrapper size={size}>
+                        {user.nickname[0]}
+                    </NicknameWrapper>
+                )}
             </Wrapper>
         );
     }
 
-   return(
-    <Wrapper size={size} onClick={onClick}>
-        {user.profilepic ? 
-            (<Image src={`${user.profilepic}`}/>) : 
-            ( <NicknameWrapper size={size}>
-                {user.nickname[0]} 
-              </NicknameWrapper>)
-        }
-    </Wrapper>
-    )
+    return (
+        <Wrapper size={size} onClick={onClick}>
+            {user.profilepic ? (
+                <Image src={`${user.profilepic}`} />
+            ) : (
+                <NicknameWrapper size={size}>
+                    {user.nickname[0]}
+                </NicknameWrapper>
+            )}
+        </Wrapper>
+    );
 };
 
 Avatar.defaultProps = {

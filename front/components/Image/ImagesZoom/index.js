@@ -44,11 +44,14 @@ const ImagesZoom = ({ images, onClose, initial }) => {
             <Wrapper>
                 <CloseCircleLeftIcon onClick={onClose}></CloseCircleLeftIcon>
                 <div>
-                <LeftIcon onClick={onClickLeft}/>
-                <RightIcon onClick={onClickRight}/>
-                <ImageWrapper>
-                    <img src={`${images[currentSlide].src}`} alt={images[currentSlide].src}/>
-                </ImageWrapper>
+                    <LeftIcon onClick={onClickLeft} />
+                    <RightIcon onClick={onClickRight} />
+                    <ImageWrapper>
+                        <img
+                            src={`${images[currentSlide].src}`}
+                            alt={images[currentSlide].src}
+                        />
+                    </ImageWrapper>
                 </div>
                 <IndicatorWrapper>
                     {images.map((v, i) => (

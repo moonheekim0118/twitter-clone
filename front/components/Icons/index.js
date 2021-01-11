@@ -181,11 +181,10 @@ export const ImageIcon = styled(AreaChartOutlined)`
     border-radius: 50%;
     transition: 0.2s background-color ease-in-out;
     cursor: pointer;
-    
+
     &:hover {
         background-color: ${({ theme }) => theme.colors.hover};
     }
-    
 `;
 
 export const IndicatorIcon = styled(MinusOutlined)`

@@ -20,32 +20,32 @@ const PostForm = ({ isModal, onClose }) => {
     const dispatch = useDispatch();
     const [text, onChangeText, setText] = useInput('');
 
-    useEffect(()=>{
-       if(addPostDone){
-        setText('');
-       }
-    },[addPostDone])
-
-
-    const onSubmit=useCallback((e)=>{
-        e.preventDefault();
-        let formData;
-        if(imagePaths.length > 0 && imagePaths.length<= 4){
-            formData=new FormData();
-            imagePaths.forEach((i)=>{
-                formData.append('image',i);
-            })
-            formData.append('content',text);
-        }
-        else{
-            formData={'content':text}
-        }
-        dispatch(addPostAction(formData));
-        if(onClose){
-            onClose();
-
+    useEffect(() => {
+        if (addPostDone) {
+            setText('');
         }
     }, [addPostDone]);
+
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            let formData;
+            if (imagePaths.length > 0 && imagePaths.length <= 4) {
+                formData = new FormData();
+                imagePaths.forEach((i) => {
+                    formData.append('image', i);
+                });
+                formData.append('content', text);
+            } else {
+                formData = { content: text };
+            }
+            dispatch(addPostAction(formData));
+            if (onClose) {
+                onClose();
+            }
+        },
+        [addPostDone]
+    );
 
     const onSubmit = useCallback(
         (e) => {
@@ -72,10 +72,12 @@ const PostForm = ({ isModal, onClose }) => {
         imageInput.current.click();
     }, [imageInput.current]);
 
-    const onChangeImages=useCallback((e)=>{
-        if(e.target.files.length>4 || imagePaths.length >4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 
-             return dispatch(showAlertAction("이미지는 최대 4장 업로드 가능합니다."));
-
+    const onChangeImages = useCallback((e) => {
+        if (e.target.files.length > 4 || imagePaths.length > 4) {
+            // 이미지 개수가 4개를 초과할 경우 alert 띄워준다.
+            return dispatch(
+                showAlertAction('이미지는 최대 4장 업로드 가능합니다.')
+            );
         }
         const imageFormData = new FormData();
         [].forEach.call(e.target.files, (f) => {
@@ -86,40 +88,53 @@ const PostForm = ({ isModal, onClose }) => {
 
     return (
         <>
-        <FormWrapper encType="multipart/form-data" noborder={isModal}>
-            <SideWrapper>
-                <Avatar 
-                    user={me}
-                    size={65}
-                    isLink={false}
-                    isMyPic={true}
-                />    
-            </SideWrapper>
-            <FormMeta>
-                <TextArea
-                 name="content"
-                 onChange={onChangeText}
-                 value={text}
-                 minRows={1}
-                 type="text"
-                 placeholder="What is happening?"
-                 />
-                <Buttons>
-                    <input type="file" multiple name="image" hidden ref={imageInput} onChange={onChangeImages}/>
-                    <ImageIcon onClick={onClickImageUpload} 
-                    disabled={imagePaths.length===4? 'true' : 'false'}/>
-                    {text.length>0 && <TextLength limit={text.length>=140}>{140-text.length}</TextLength>}
-                    <Button 
-                    onClick={onSubmit}
-                    disabled={text.length===0 || text.length>=140}
-                    style={{back:'full', radius:'24px', weight:'bold'}}
-                    >
-                        {addPostloading ? <LoadingIcon/> : 'Tweet' }
-                    </Button>
-                </Buttons>
-                <ImagePath/>
-            </FormMeta>
-        </FormWrapper>
+            <FormWrapper encType="multipart/form-data" noborder={isModal}>
+                <SideWrapper>
+                    <Avatar user={me} size={65} isLink={false} isMyPic={true} />
+                </SideWrapper>
+                <FormMeta>
+                    <TextArea
+                        name="content"
+                        onChange={onChangeText}
+                        value={text}
+                        minRows={1}
+                        type="text"
+                        placeholder="What is happening?"
+                    />
+                    <Buttons>
+                        <input
+                            type="file"
+                            multiple
+                            name="image"
+                            hidden
+                            ref={imageInput}
+                            onChange={onChangeImages}
+                        />
+                        <ImageIcon
+                            onClick={onClickImageUpload}
+                            disabled={
+                                imagePaths.length === 4 ? 'true' : 'false'
+                            }
+                        />
+                        {text.length > 0 && (
+                            <TextLength limit={text.length >= 140}>
+                                {140 - text.length}
+                            </TextLength>
+                        )}
+                        <Button
+                            onClick={onSubmit}
+                            disabled={text.length === 0 || text.length >= 140}
+                            style={{
+                                back: 'full',
+                                radius: '24px',
+                                weight: 'bold',
+                            }}>
+                            {addPostloading ? <LoadingIcon /> : 'Tweet'}
+                        </Button>
+                    </Buttons>
+                    <ImagePath />
+                </FormMeta>
+            </FormWrapper>
         </>
     );
 };
