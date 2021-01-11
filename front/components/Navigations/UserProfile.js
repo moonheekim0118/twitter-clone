@@ -9,15 +9,19 @@ import { Description } from '../AppLayout/style';
 import Modal from '../../atom/Modal';
 import UserProfileDetail from './UserProfileDetail';
 
-const UserProfile =()=>{
-    const me = useSelector((state)=>state.user.me);
+const UserProfile = () => {
+    const me = useSelector((state) => state.user.me);
     const [showModal, openModal, closeModal] = useToggle();
-   
-    return(
+
+    return (
         <>
-            {showModal && <Modal color="none" onClose={closeModal}><UserProfileDetail/></Modal>}
+            {showModal && (
+                <Modal color="none" onClose={closeModal}>
+                    <UserProfileDetail />
+                </Modal>
+            )}
             <Card onClick={openModal}>
-            <Avatar user={me} size={45} isLink={false} isMyPic={false} />
+                <Avatar user={me} size={45} isLink={false} isMyPic={false} />
                 <Detail>
                     <UserInfo>
                         <Description>{me.nickname}</Description>
@@ -31,45 +35,45 @@ const UserProfile =()=>{
 };
 
 const Card = styled.div`
-    display:flex;
-    position:absolute;
-    bottom:0;
-    right:0;
-    width:80%;
-    margin-right:${({theme})=>theme.margins.base};
-    margin-bottom:${({theme})=>theme.margins.base};
-    padding:${({theme})=>theme.paddings.small};
-    border-radius:20px;
-    
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80%;
+    margin-right: ${({ theme }) => theme.margins.base};
+    margin-bottom: ${({ theme }) => theme.margins.base};
+    padding: ${({ theme }) => theme.paddings.small};
+    border-radius: 20px;
+
     transition: 0.2s background-color ease-in-out;
-    cursor:pointer;
+    cursor: pointer;
 
-    @media ${({theme})=>theme.device.pcS}{
-        width:60px;
-        border-radius:50%;
-        margin-right:${({theme})=>theme.margins.base};
+    @media ${({ theme }) => theme.device.pcS} {
+        width: 60px;
+        border-radius: 50%;
+        margin-right: ${({ theme }) => theme.margins.base};
     }
 
-    @media ${({theme})=>theme.device.tablet}{
-        display:none;
+    @media ${({ theme }) => theme.device.tablet} {
+        display: none;
     }
 
-    &:hover{
-        background:rgba(128, 223, 255,0.2);
+    &:hover {
+        background: rgba(128, 223, 255, 0.2);
     }
 `;
 
-const UserInfo=styled.div`
-    display:flex;
-    flex-direction:column;
+const UserInfo = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
-const Email= styled.span`
-    width:120px;    
+const Email = styled.span`
+    width: 120px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color:${({theme})=>theme.colors.gray_2};
+    color: ${({ theme }) => theme.colors.gray_2};
 `;
 
 export default UserProfile;

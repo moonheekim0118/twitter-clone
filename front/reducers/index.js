@@ -5,20 +5,20 @@ import post from './post';
 import ui from './ui';
 import commonUser from './commonUser';
 
-// (이전상태, 액션 ) => 다음상태 리턴 
-const rootReducer =(state,action)=>{
-    switch(action.type){
+// (이전상태, 액션 ) => 다음상태 리턴
+const rootReducer = (state, action) => {
+    switch (action.type) {
         case HYDRATE:
-            console.log('HYDRATE',action);
+            console.log('HYDRATE', action);
             return action.payload;
-        default:{
-            const combinedReducer=combineReducers({
+        default: {
+            const combinedReducer = combineReducers({
                 user,
                 post,
                 ui,
                 commonUser,
             });
-            return combinedReducer(state,action);
+            return combinedReducer(state, action);
         }
     }
 };

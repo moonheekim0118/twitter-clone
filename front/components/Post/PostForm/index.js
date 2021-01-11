@@ -1,19 +1,21 @@
-import React, { useCallback,useRef,useEffect } from 'react';
-import { useDispatch , useSelector } from 'react-redux';
-import { addPostAction , uploadImagesAction } from '../../../actions/post';
+import React, { useCallback, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPostAction, uploadImagesAction } from '../../../actions/post';
 import { showAlertAction } from '../../../actions/ui';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import ImagePath from '../../Image/ImagePath';
 import Avatar from '../../Avatar';
 import Button from '../../../atom/Button';
-import { FormWrapper,FormMeta,Buttons,TextArea,TextLength } from './style';
+import { FormWrapper, FormMeta, Buttons, TextArea, TextLength } from './style';
 import { SideWrapper } from '../PostCard/style';
-import { ImageIcon , LoadingIcon } from '../../Icons';
+import { ImageIcon, LoadingIcon } from '../../Icons';
 
-const PostForm =({isModal,onClose})=>{
-    const { addPostloading,addPostDone,imagePaths }= useSelector((state)=>state.post);
-    const me = useSelector((state)=>state.user.me);
+const PostForm = ({ isModal, onClose }) => {
+    const { addPostloading, addPostDone, imagePaths } = useSelector(
+        (state) => state.post
+    );
+    const me = useSelector((state) => state.user.me);
     const imageInput = useRef();
     const dispatch = useDispatch();
     const [text, onChangeText, setText] = useInput('');
@@ -41,26 +43,48 @@ const PostForm =({isModal,onClose})=>{
         dispatch(addPostAction(formData));
         if(onClose){
             onClose();
-        }
-    },[text,imagePaths])
 
-    const onClickImageUpload=useCallback(()=>{
+        }
+    }, [addPostDone]);
+
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            let formData;
+            if (imagePaths.length > 0) {
+                formData = new FormData();
+                imagePaths.forEach((i) => {
+                    formData.append('image', i);
+                });
+                formData.append('content', text);
+            } else {
+                formData = { content: text };
+            }
+            dispatch(addPostAction(formData));
+            if (onClose) {
+                onClose();
+            }
+        },
+        [text, imagePaths]
+    );
+
+    const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
-    },[imageInput.current]);
+    }, [imageInput.current]);
 
     const onChangeImages=useCallback((e)=>{
         if(e.target.files.length>4 || imagePaths.length >4){ // 이미지 개수가 4개를 초과할 경우 alert 띄워준다. 
              return dispatch(showAlertAction("이미지는 최대 4장 업로드 가능합니다."));
+
         }
         const imageFormData = new FormData();
-        [].forEach.call(e.target.files, (f)=>{
-            imageFormData.append('image',f);
+        [].forEach.call(e.target.files, (f) => {
+            imageFormData.append('image', f);
         });
         dispatch(uploadImagesAction(imageFormData));
-    },[]);
+    }, []);
 
-
-    return(
+    return (
         <>
         <FormWrapper encType="multipart/form-data" noborder={isModal}>
             <SideWrapper>
@@ -97,17 +121,17 @@ const PostForm =({isModal,onClose})=>{
             </FormMeta>
         </FormWrapper>
         </>
-    )
-}
-
-PostForm.defaultProps={
-    isModal:false,
-    onClose:()=>{}
+    );
 };
 
-PostForm.propTypes={
+PostForm.defaultProps = {
+    isModal: false,
+    onClose: () => {},
+};
+
+PostForm.propTypes = {
     onClose: PropTypes.func.isRequired,
-    isModal : PropTypes.bool.isRequired,
-}
+    isModal: PropTypes.bool.isRequired,
+};
 
 export default PostForm;

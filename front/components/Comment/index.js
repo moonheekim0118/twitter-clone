@@ -4,42 +4,48 @@ import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import styled from 'styled-components';
 
-export const CommentBar = styled.div`   
-    position:relative;
+export const CommentBar = styled.div`
+    position: relative;
 
-    &::after{
-        position:absolute;
+    &::after {
+        position: absolute;
         width: 10px;
         height: 33px;
-        bottom:-17px;
-        left:20px;
-        content:"";
-        background-color:${({theme})=>theme.colors.blue_1};
+        bottom: -17px;
+        left: 20px;
+        content: '';
+        background-color: ${({ theme }) => theme.colors.blue_1};
     }
-    
 `;
-const Comment =({postId , Comments})=>{
-
-    return(
+const Comment = ({ postId, Comments }) => {
+    return (
         <>
-            <CommentBar/>
-            <CommentForm postId={postId}/>
-            {Comments.map(comment=>(<CommentCard key={comment.id}comment={comment} postId={postId}/>))}
+            <CommentBar />
+            <CommentForm postId={postId} />
+            {Comments.map((comment) => (
+                <CommentCard
+                    key={comment.id}
+                    comment={comment}
+                    postId={postId}
+                />
+            ))}
         </>
     );
 };
 
 Comment.propTypes = {
-    postId:PropTypes.number.isRequired,
-    Comments:PropTypes.arrayOf(PropTypes.shape({
-        id:PropTypes.number,
-        User:PropTypes.shape({
-            id:PropTypes.number,
-            nickname:PropTypes.string,
-            profilepic:PropTypes.string,
-        }),
-        content:PropTypes.string,
-    }).isRequired,)
-}
+    postId: PropTypes.number.isRequired,
+    Comments: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number,
+            User: PropTypes.shape({
+                id: PropTypes.number,
+                nickname: PropTypes.string,
+                profilepic: PropTypes.string,
+            }),
+            content: PropTypes.string,
+        }).isRequired
+    ),
+};
 
 export default Comment;

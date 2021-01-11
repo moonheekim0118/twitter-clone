@@ -24,19 +24,16 @@ const GlobalStyles = createGlobalStyle`
 
 `;
 
-
-export const ErrorMessage=styled.div
-`
-    color:red;
-`
-
-export const AlertMessage=styled.div
-`
-    color:green;
+export const ErrorMessage = styled.div`
+    color: red;
 `;
 
-export const MiddleWrapper=styled.div`
-    text-align:center;
+export const AlertMessage = styled.div`
+    color: green;
+`;
+
+export const MiddleWrapper = styled.div`
+    text-align: center;
 `;
 
 export default GlobalStyles;
