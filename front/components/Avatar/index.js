@@ -7,42 +7,18 @@ import { useSelector } from 'react-redux';
 const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
     const profilePicPath = useSelector((state) => state.user.profilePicPath);
 
-    if (isLink && !isMyPic) {
-        return (
-            <Wrapper size={size} onClick={onClick}>
-                <Link href="/user/[id]" as={`/user/${user.id}`}>
-                    <a>
-                        {user.profilepic ? (
-                            <Image
-                                src={`http://localhost:3065/${user.profilepic}`}
-                            />
-                        ) : (
-                            <NicknameWrapper size={size}>
-                                {user.nickname[0]}
-                            </NicknameWrapper>
-                        )}
-                    </a>
-                </Link>
-            </Wrapper>
-        );
-    }
-
-    if (!isLink && isMyPic) {
-        return (
-            <Wrapper size={size} onClick={onClick}>
-                {profilePicPath ? (
-                    <Image src={`http://localhost:3065/${profilePicPath}`} />
-                ) : (
-                    <NicknameWrapper size={size}>
-                        {user.nickname[0]}
-                    </NicknameWrapper>
-                )}
-            </Wrapper>
-        );
-    }
-
-    return (
-        <Wrapper size={size} onClick={onClick}>
+    const AvatarImage = isMyPic ? (
+        <>
+            {profilePicPath ? (
+                <Image src={`http://localhost:3065/${profilePicPath}`} />
+            ) : (
+                <NicknameWrapper size={size}>
+                    {user.nickname[0]}
+                </NicknameWrapper>
+            )}
+        </>
+    ) : (
+        <>
             {user.profilepic ? (
                 <Image src={`http://localhost:3065/${user.profilepic}`} />
             ) : (
@@ -50,7 +26,19 @@ const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
                     {user.nickname[0]}
                 </NicknameWrapper>
             )}
-        </Wrapper>
+        </>
+    );
+
+    return (
+        <Container size={size} onClick={onClick}>
+            {isLink ? (
+                <Link href="/user/[id]" as={`/user/${user.id}`}>
+                    <a>{AvatarImage}</a>
+                </Link>
+            ) : (
+                <>{AvatarImage}</>
+            )}
+        </Container>
     );
 };
 
@@ -72,7 +60,7 @@ Avatar.propTypes = {
     onClick: PropTypes.func.isRequired,
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
     width: ${(props) => `${props.size}px`};
     height: ${(props) => `${props.size}px`};
     cursor: pointer;
