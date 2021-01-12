@@ -12,36 +12,26 @@ const Menu = ({ isLoggedIn }) => {
     return (
         <Navigation>
             <MenuWrapper>
-                <div>
-                    <Navigator where="Home" href="/" as="/" />
-                </div>
-                {isLoggedIn && (
-                    <div>
+                <Navigator where="Home" href="/" as="/" />
+                {isLoggedIn ?  
+                    <>
                         <Navigator
                             where="Profile"
                             href="/user/[id]"
                             as={`/user/${me}`}
                         />
-                    </div>
-                )}
-                {!isLoggedIn && (
-                    <div>
-                        <Navigator where="Signup" href="/signUp" as="/signUp" />
-                    </div>
-                )}
-                {isLoggedIn && <TweetButton />}
-                {isLoggedIn ? (
+                    <TweetButton />
                     <UserProfile />
-                ) : (
-                    <div>
-                        <Navigator where="Login" href="/login" as="/login" />
-                    </div>
-                )}
-                {isLoggedIn && (
                     <LogOutWrapper>
                         <LogoutButton />
                     </LogOutWrapper>
-                )}
+                    </>
+                    : 
+                    <>  
+                    <Navigator where="Signup" href="/signUp" as="/signUp" /> 
+                    <Navigator where="Login" href="/login" as="/login" />
+                    </>
+                    }
             </MenuWrapper>
         </Navigation>
     );
