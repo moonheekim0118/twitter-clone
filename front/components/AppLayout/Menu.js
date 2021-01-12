@@ -13,25 +13,25 @@ const Menu = ({ isLoggedIn }) => {
         <Navigation>
             <MenuWrapper>
                 <Navigator where="Home" href="/" as="/" />
-                {isLoggedIn ?  
+                {isLoggedIn ? (
                     <>
                         <Navigator
                             where="Profile"
                             href="/user/[id]"
                             as={`/user/${me}`}
                         />
-                    <TweetButton />
-                    <UserProfile />
-                    <LogOutWrapper>
-                        <LogoutButton />
-                    </LogOutWrapper>
+                        <TweetButton />
+                        <UserProfile />
+                        <LogOutWrapper>
+                            <LogoutButton />
+                        </LogOutWrapper>
                     </>
-                    : 
-                    <>  
-                    <Navigator where="Signup" href="/signUp" as="/signUp" /> 
-                    <Navigator where="Login" href="/login" as="/login" />
+                ) : (
+                    <>
+                        <Navigator where="Signup" href="/signUp" as="/signUp" />
+                        <Navigator where="Login" href="/login" as="/login" />
                     </>
-                    }
+                )}
             </MenuWrapper>
         </Navigation>
     );
