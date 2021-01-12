@@ -4,19 +4,6 @@ import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import styled from 'styled-components';
 
-export const CommentBar = styled.div`
-    position: relative;
-
-    &::after {
-        position: absolute;
-        width: 10px;
-        height: 33px;
-        bottom: -17px;
-        left: 20px;
-        content: '';
-        background-color: ${({ theme }) => theme.colors.blue_1};
-    }
-`;
 const Comment = ({ postId, Comments }) => {
     return (
         <>
@@ -47,5 +34,19 @@ Comment.propTypes = {
         }).isRequired
     ),
 };
+
+export const CommentBar = styled.div`
+    position: relative;
+
+    &::after {
+        position: absolute;
+        width: 10px;
+        height: 33px;
+        bottom: -17px;
+        left: 20px;
+        content: '';
+        background-color: ${({ theme }) => theme.colors.blue_1};
+    }
+`;
 
 export default Comment;

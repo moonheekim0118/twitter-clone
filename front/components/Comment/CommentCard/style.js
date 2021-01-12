@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -25,14 +25,14 @@ export const ButtonWrapper = styled.div`
 `;
 
 // for avatar
-export const FirstWrapper = styled.div`
+export const AvatarWrapper = styled.div`
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: 5%;
 `;
 
 // for nickanme and contents
-export const SecondWrapper = styled.div`
+export const ContentsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 0;

@@ -4,35 +4,32 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Header = ({ userId, theme, where }) => {
-    const First = {};
-    const Second = {};
+    const First =
+        theme === 'Tweet'
+            ? { name: 'Tweets', path: '' }
+            : { name: 'Followings', path: '/followings' };
+    const Second =
+        theme === 'Tweet'
+            ? { name: 'Likes', path: '/likes' }
+            : { name: 'Followers', path: '/followers' };
     const href = '/user/[id]';
     const as = `/user/${userId}`;
-    if (theme === 'Tweet') {
-        First.name = 'Tweets';
-        First.path = '';
-        Second.name = 'Likes';
-        Second.path = '/likes';
-    } else {
-        First.name = 'Followings';
-        First.path = '/followings';
-        Second.name = 'Followers';
-        Second.path = '/followers';
-    }
 
     return (
-        <Wrapper>
+        <Container>
             <Menu clicked={First.name === where}>
                 <Link href={href + First.path} as={as + First.path}>
-                    <Atag clicked={First.name === where}>{First.name}</Atag>
+                    <Anchor clicked={First.name === where}>{First.name}</Anchor>
                 </Link>
             </Menu>
             <Menu clicked={Second.name === where}>
                 <Link href={href + Second.path} as={as + Second.path}>
-                    <Atag clicked={Second.name === where}>{Second.name}</Atag>
+                    <Anchor clicked={Second.name === where}>
+                        {Second.name}
+                    </Anchor>
                 </Link>
             </Menu>
-        </Wrapper>
+        </Container>
     );
 };
 
@@ -42,7 +39,7 @@ Header.propTypes = {
     where: PropTypes.string.isRequired,
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -68,7 +65,7 @@ const Menu = styled.div`
     }
 `;
 
-const Atag = styled.a`
+const Anchor = styled.a`
     color: ${(props) => (props.clicked ? '#0099cc' : 'black')};
 `;
 
