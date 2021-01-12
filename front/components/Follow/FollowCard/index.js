@@ -14,7 +14,7 @@ const FollowList = ({ user }) => {
     }, []);
 
     return (
-        <Wrapper onClick={onClickUser}>
+        <Container onClick={onClickUser}>
             <SideWrapper>
                 <Avatar user={user} isLink={true} isMyPic={false} size={65} />
             </SideWrapper>
@@ -22,7 +22,7 @@ const FollowList = ({ user }) => {
             <FollowButtonWrapper>
                 {me && user.id !== me && <FollowButton userId={user.id} />}
             </FollowButtonWrapper>
-        </Wrapper>
+        </Container>
     );
 };
 
@@ -38,7 +38,7 @@ FollowList.propTypes = {
     }).isRequired,
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;

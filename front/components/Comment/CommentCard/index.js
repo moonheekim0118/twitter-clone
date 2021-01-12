@@ -4,9 +4,9 @@ import { removeCommentAction } from '../../../actions/post';
 import Avatar from '../../Avatar';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    Wrapper,
-    FirstWrapper,
-    SecondWrapper,
+    Container,
+    AvatarWrapper,
+    ContentsWrapper,
     NicknameWrapper,
     ButtonWrapper,
 } from './style';
@@ -24,20 +24,20 @@ const CommentCard = ({ postId, comment }) => {
     }, []);
 
     return (
-        <Wrapper>
-            <FirstWrapper>
+        <Container>
+            <AvatarWrapper>
                 <Avatar user={me} isLink={true} isMyPic={false} size={30} />
-            </FirstWrapper>
-            <SecondWrapper>
+            </AvatarWrapper>
+            <ContentsWrapper>
                 <NicknameWrapper>{comment.User.nickname}</NicknameWrapper>
                 <span> {comment.content}</span>
-            </SecondWrapper>
+            </ContentsWrapper>
             {me && comment.User.id === me.id && (
                 <ButtonWrapper>
                     <RedCloseIcon onClick={onClickRemove}>삭제</RedCloseIcon>
                 </ButtonWrapper>
             )}
-        </Wrapper>
+        </Container>
     );
 };
 
