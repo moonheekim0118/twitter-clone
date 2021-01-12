@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Avatar from '../Avatar';
+import Avatar from '../../Avatar';
 import styled from 'styled-components';
-import useToggle from '../../hooks/useToggle';
+import useToggle from '../../../hooks/useToggle';
 import { DownOutlined } from '@ant-design/icons';
-import { Detail } from './style';
-import { Description } from '../AppLayout/style';
-import Modal from '../../atom/Modal';
-import UserProfileDetail from './UserProfileDetail';
+import { Detail } from '../style';
+import { Description } from '../../AppLayout/style';
+import Modal from '../../../atom/Modal';
+import UserProfileDetail from '../UserProfileDetail';
 
 const UserProfile = () => {
     const me = useSelector((state) => state.user.me);
@@ -20,7 +20,7 @@ const UserProfile = () => {
                     <UserProfileDetail />
                 </Modal>
             )}
-            <Card onClick={openModal}>
+            <Container onClick={openModal}>
                 <Avatar user={me} size={45} isLink={false} isMyPic={false} />
                 <Detail>
                     <UserInfo>
@@ -29,12 +29,12 @@ const UserProfile = () => {
                     </UserInfo>
                     <DownOutlined />
                 </Detail>
-            </Card>
+            </Container>
         </>
     );
 };
 
-const Card = styled.div`
+const Container = styled.div`
     display: flex;
     position: absolute;
     bottom: 0;

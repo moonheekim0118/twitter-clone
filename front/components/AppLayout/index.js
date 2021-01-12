@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideAlertAction } from '../../actions/ui';
 import Router from 'next/router';
-import Menu from './Menu';
+import Navigation from '../Navigations';
 import Alert from '../Alert';
 import Search from '../Search';
 import {
@@ -52,7 +52,7 @@ const AppLayout = ({ pageName, searchKeyword, children }) => {
                 )}
             </Header>
             <div>
-                <Menu isLoggedIn={isLoggedIn} />
+                <Navigation isLoggedIn={isLoggedIn} />
                 <Main>{children}</Main>
                 <Side>
                     <Search keyword={searchKeyword} />

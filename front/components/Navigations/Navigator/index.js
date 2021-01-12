@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { Detail } from './style';
-import { Description } from '../AppLayout/style';
-import { HomeIcon, LoginIcon, ProfileIcon, SignupIcon } from '../Icons';
+import { Detail } from '../style';
+import { Description } from '../../AppLayout/style';
+import { HomeIcon, LoginIcon, ProfileIcon, SignupIcon } from '../../Icons';
 import styled from 'styled-components';
 
 const ICONS = {
@@ -20,7 +20,7 @@ const Navigator = ({ where, href, as }) => {
     const SpecificIcon = ICONS[where];
 
     return (
-        <MenuItemWrapper visit={pageName === href && 'true'}>
+        <Container visit={pageName === href && 'true'}>
             <Link href={as}>
                 <a>
                     <SpecificIcon />
@@ -31,7 +31,7 @@ const Navigator = ({ where, href, as }) => {
                     <Description>{where}</Description>
                 </Link>
             </Detail>
-        </MenuItemWrapper>
+        </Container>
     );
 };
 
@@ -41,7 +41,7 @@ Navigator.propTypes = {
     as: PropTypes.string.isRequired,
 };
 
-const MenuItemWrapper = styled.div`
+const Container = styled.div`
     display: flex;
 
     margin-bottom: ${({ theme }) => theme.margins.base};

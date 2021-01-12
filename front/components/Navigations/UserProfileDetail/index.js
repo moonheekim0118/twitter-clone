@@ -3,15 +3,15 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Card } from 'antd';
-import Avatar from '../Avatar';
-import LogoutButton from '../User/LogoutButton';
+import Avatar from '../../Avatar';
+import LogoutButton from '../../User/LogoutButton';
 
 const UserProfileDetail = () => {
     const me = useSelector((state) => state.user.me);
 
     return (
         <>
-            <CardWrapper
+            <Container
                 actions={[
                     <Link href="/user[id]" as={`/user/${me.id}`}>
                         <a>
@@ -54,12 +54,12 @@ const UserProfileDetail = () => {
                     title={me.nickname}
                 />
                 <LogoutButton />
-            </CardWrapper>
+            </Container>
         </>
     );
 };
 
-const CardWrapper = styled(Card)`
+const Container = styled(Card)`
     position: fixed;
     bottom: 120px;
     left: 20px;
