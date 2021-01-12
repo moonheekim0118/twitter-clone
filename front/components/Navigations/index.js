@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LogoutButton from '../User/LogoutButton';
-import UserProfile from '../Navigations/UserProfile';
-import TweetButton from '../Navigations/TweetButton';
-import Navigator from '../Navigations/Navigator';
+import UserProfile from './UserProfile';
+import TweetButton from './TweetButton';
+import Navigator from './Navigator';
 import { useSelector } from 'react-redux';
 
-const Menu = ({ isLoggedIn }) => {
+const Navigation = ({ isLoggedIn }) => {
     const me = useSelector((state) => state.user.me?.id);
     return (
-        <Navigation>
-            <MenuWrapper>
+        <Container>
+            <Menu>
                 <Navigator where="Home" href="/" as="/" />
                 {isLoggedIn ? (
                     <>
@@ -32,16 +32,16 @@ const Menu = ({ isLoggedIn }) => {
                         <Navigator where="Login" href="/login" as="/login" />
                     </>
                 )}
-            </MenuWrapper>
-        </Navigation>
+            </Menu>
+        </Container>
     );
 };
 
-Menu.propTypes = {
+Navigation.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
 };
 
-const Navigation = styled.nav`
+const Container = styled.nav`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -83,7 +83,7 @@ const Navigation = styled.nav`
     }
 `;
 
-const MenuWrapper = styled.div`
+const Menu = styled.div`
     display: flex;
     flex-direction: column;
     padding: 25px;
@@ -114,4 +114,4 @@ const LogOutWrapper = styled.div`
     }
 `;
 
-export default Menu;
+export default Navigation;

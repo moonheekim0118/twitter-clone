@@ -1,10 +1,10 @@
 import React from 'react';
-import useToggle from '../../hooks/useToggle';
+import useToggle from '../../../hooks/useToggle';
 import styled from 'styled-components';
 import { EditOutlined } from '@ant-design/icons';
-import { Detail } from './style';
-import Modal from '../../atom/Modal';
-import PostFormModal from '../ModalContents/PostFormModal';
+import { Detail } from '../style';
+import Modal from '../../../atom/Modal';
+import PostFormModal from '../../ModalContents/PostFormModal';
 
 const TweetButton = () => {
     const [showModal, openModal, closeModal] = useToggle();
