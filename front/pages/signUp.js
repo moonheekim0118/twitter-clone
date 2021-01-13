@@ -5,7 +5,7 @@ import Head from "next/head";
 import axios from "axios";
 import wrapper from "../store/configureStore";
 import AppLayout from "../components/AppLayout";
-import SignUpComponent from "../components/User/SignUp";
+import SignUpComponent from "../components/User/SignUpForm";
 
 const SignUp = () => {
   return (
