@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Avatar from '../../Avatar';
 import Button from '../../../atom/Button';
 import FollowButton from '../../Follow/FollowButton';
-import ImagesZoom from '../../Image/ImagesZoom';
+import ImagesZoom from '../../Images/ImagesZoom';
 import Modal from '../../../atom/Modal';
 import EditProfileForm from '../EditProfileForm';
 import {

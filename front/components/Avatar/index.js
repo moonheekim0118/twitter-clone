@@ -12,9 +12,7 @@ const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
             {profilePicPath ? (
                 <Image src={`${profilePicPath}`} />
             ) : (
-                <NicknameWrapper size={size}>
-                    {user.nickname[0]}
-                </NicknameWrapper>
+                <Nickname $size={size}>{user.nickname[0]}</Nickname>
             )}
         </>
     ) : (
@@ -22,9 +20,7 @@ const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
             {user.profilepic ? (
                 <Image src={`${user.profilepic}`} />
             ) : (
-                <NicknameWrapper size={size}>
-                    {user.nickname[0]}
-                </NicknameWrapper>
+                <Nickname size={size}>{user.nickname[0]}</Nickname>
             )}
         </>
     );
@@ -74,7 +70,7 @@ const Image = styled.img`
     object-fit: fill;
 `;
 
-const NicknameWrapper = styled.div`
+const Nickname = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,7 +80,7 @@ const NicknameWrapper = styled.div`
     height: 100%;
     border-radius: 100%;
     oveflow: hidden;
-    font-size: ${(props) => `${props.size - 10}px`};
+    font-size: ${(props) => `${props.$size - 10}px`};
     color: ${({ theme }) => theme.colors.white};
     background-color: ${({ theme }) => theme.colors.gray_1};
 `;
