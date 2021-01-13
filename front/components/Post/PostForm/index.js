@@ -4,7 +4,7 @@ import { addPostAction, uploadImagesAction } from '../../../actions/post';
 import { showAlertAction } from '../../../actions/ui';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
-import ImagePath from '../../Image/ImagePath';
+import ImagePath from '../../Images/ImagePath';
 import Avatar from '../../Avatar';
 import Button from '../../../atom/Button';
 import { FormWrapper, FormMeta, Buttons, TextArea, TextLength } from './style';
