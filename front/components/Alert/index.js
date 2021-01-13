@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 const Alert = () => {
     const { showAlert, alertContent } = useSelector((state) => state.ui);
 
-    return <AlertBox show={showAlert}>{alertContent}</AlertBox>;
+    return <Container show={showAlert}>{alertContent}</Container>;
 };
 
-const AlertBox = styled.div`
+const Container = styled.div`
     position: fixed;
     bottom: 0;
     left: 50%;

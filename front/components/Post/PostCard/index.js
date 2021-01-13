@@ -185,6 +185,7 @@ const PostCard = ({ post, commentFormOpen }) => {
                     <Comment
                         postId={loadedPost.id}
                         Comments={loadedPost.Comments}
+                        me={me}
                     />
                 </CommentWrapper>
             )}

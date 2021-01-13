@@ -4,18 +4,14 @@ import { addPostAction, uploadImagesAction } from '../../../actions/post';
 import { showAlertAction } from '../../../actions/ui';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
-import ImagePath from '../../Images/ImagePath';
-import Avatar from '../../Avatar';
-import Button from '../../../atom/Button';
-import { FormWrapper, FormMeta, Buttons, TextArea, TextLength } from './style';
-import { SideWrapper } from '../PostCard/style';
-import { ImageIcon, LoadingIcon } from '../../Icons';
+import Form from '../../Form';
+import SubmitButton from '../../Form/SubmitButton';
 
 const PostForm = ({ isModal, onClose }) => {
     const { addPostloading, addPostDone, imagePaths } = useSelector(
         (state) => state.post
     );
-    const me = useSelector((state) => state.user.me);
+
     const imageInput = useRef();
     const dispatch = useDispatch();
     const [text, onChangeText, setText] = useInput('');
@@ -66,50 +62,22 @@ const PostForm = ({ isModal, onClose }) => {
     }, []);
 
     return (
-        <>
-            <FormWrapper encType="multipart/form-data" noborder={isModal}>
-                <SideWrapper>
-                    <Avatar user={me} size={65} isLink={false} isMyPic={true} />
-                </SideWrapper>
-                <FormMeta>
-                    <TextArea
-                        name="content"
-                        onChange={onChangeText}
-                        value={text}
-                        minRows={1}
-                        type="text"
-                        placeholder="What is happening?"
-                    />
-                    <Buttons>
-                        <input
-                            type="file"
-                            multiple
-                            name="image"
-                            hidden
-                            ref={imageInput}
-                            onChange={onChangeImages}
-                        />
-                        <ImageIcon onClick={onClickImageUpload} />
-                        {text.length > 0 && (
-                            <TextLength limit={text.length >= 140}>
-                                {140 - text.length}
-                            </TextLength>
-                        )}
-                        <Button
-                            onClick={onSubmit}
-                            disabled={text.length === 0 || text.length >= 140}
-                            style={{
-                                back: 'full',
-                                radius: '24px',
-                                weight: 'bold',
-                            }}>
-                            {addPostloading ? <LoadingIcon /> : 'Tweet'}
-                        </Button>
-                    </Buttons>
-                    <ImagePath />
-                </FormMeta>
-            </FormWrapper>
-        </>
+        <Form
+            type={isModal ? 'modal' : 'post'}
+            onChange={onChangeText}
+            value={text}
+            Button={
+                <SubmitButton
+                    onClick={onSubmit}
+                    disabled={text.length === 0 || text.length >= 140}
+                    loading={addPostloading}
+                    title="Tweet"
+                />
+            }
+            onChangeImage={onChangeImages}
+            imageInput={imageInput}
+            onClickImageUpload={onClickImageUpload}
+        />
     );
 };
 

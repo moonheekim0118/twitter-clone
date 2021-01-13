@@ -4,11 +4,11 @@ import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import styled from 'styled-components';
 
-const Comment = ({ postId, Comments }) => {
+const Comment = ({ postId, Comments, me=null }) => {
     return (
         <>
             <CommentBar />
-            <CommentForm postId={postId} />
+            {me && <CommentForm postId={postId} />}
             {Comments.map((comment) => (
                 <CommentCard
                     key={comment.id}
@@ -19,6 +19,20 @@ const Comment = ({ postId, Comments }) => {
         </>
     );
 };
+
+const CommentBar = styled.div`
+    position: relative;
+
+    &::after {
+        position: absolute;
+        width: 10px;
+        height: 33px;
+        bottom: -17px;
+        left: 20px;
+        content: '';
+        background-color: ${({ theme }) => theme.colors.blue_1};
+    }
+`;
 
 Comment.propTypes = {
     postId: PropTypes.number.isRequired,
@@ -33,20 +47,7 @@ Comment.propTypes = {
             content: PropTypes.string,
         }).isRequired
     ),
+    me:PropTypes.number
 };
-
-export const CommentBar = styled.div`
-    position: relative;
-
-    &::after {
-        position: absolute;
-        width: 10px;
-        height: 33px;
-        bottom: -17px;
-        left: 20px;
-        content: '';
-        background-color: ${({ theme }) => theme.colors.blue_1};
-    }
-`;
 
 export default Comment;
