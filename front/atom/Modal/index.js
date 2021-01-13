@@ -15,12 +15,6 @@ const Modal = ({ onClose, color, children }) => {
   );
 };
 
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-  color: PropTypes.string.isRequired,
-};
-
 export const Overaly = styled.div`
   position: fixed;
   top: 0;
@@ -31,5 +25,12 @@ export const Overaly = styled.div`
   background-color: ${(props) =>
     props.color === "black" ? "rgba(0,0,0,0.5)" : "none"};
 `;
+
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  color: PropTypes.string.isRequired,
+};
+
 
 export default Modal;

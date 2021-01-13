@@ -31,12 +31,6 @@ const Header = ({ userId, theme, where }) => {
   );
 };
 
-Header.propTypes = {
-  userId: PropTypes.string.isRequired,
-  theme: PropTypes.string.isRequired,
-  where: PropTypes.string.isRequired,
-};
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -65,5 +59,12 @@ const Menu = styled.div`
 const Anchor = styled.a`
   color: ${(props) => (props.clicked ? "#0099cc" : "black")};
 `;
+
+Header.propTypes = {
+  userId: PropTypes.string.isRequired,
+  theme: PropTypes.string.isRequired,
+  where: PropTypes.string.isRequired,
+};
+
 
 export default Header;

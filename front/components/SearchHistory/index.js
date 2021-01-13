@@ -19,8 +19,6 @@ const SearchHistory = ({ data, onRemove, onClick }) => {
   );
 };
 
-export default SearchHistory;
-
 const HistoryTab = styled.div`
   display: flex;
   justify-content: space-between;
@@ -40,3 +38,5 @@ const HistoryTab = styled.div`
     background-color: ${({ theme }) => theme.colors.hover};
   }
 `;
+
+export default SearchHistory;

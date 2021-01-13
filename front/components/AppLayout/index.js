@@ -1,12 +1,13 @@
 import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
-import { hideAlertAction } from "../../actions/ui";
 import Router from "next/router";
 import Navigation from "../Navigations";
 import Alert from "../Alert";
 import Search from "../Search";
+import theme from "../theme";
+import { useSelector, useDispatch } from "react-redux";
+import { hideAlertAction } from "../../actions/ui";
 import {
   Header,
   Main,
@@ -17,7 +18,6 @@ import {
 } from "./style";
 import { PushBackIcon } from "../Icons";
 import { ThemeProvider } from "styled-components";
-import theme from "../theme";
 
 const AppLayout = ({ pageName, searchKeyword, children }) => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);

@@ -15,13 +15,13 @@ const FollowList = ({ user }) => {
 
   return (
     <Container onClick={onClickUser}>
-      <SideWrapper>
+      <Side>
         <Avatar user={user} isLink={true} isMyPic={false} size={65} />
-      </SideWrapper>
+      </Side>
       <span>{user.nickname}</span>
-      <FollowButtonWrapper>
+      <ButtonContainer>
         {me && user.id !== me && <FollowButton userId={user.id} />}
-      </FollowButtonWrapper>
+      </ButtonContainer>
     </Container>
   );
 };
@@ -57,11 +57,11 @@ const Container = styled.div`
   }
 `;
 
-const SideWrapper = styled.div`
+const Side = styled.div`
   margin-right: ${({ theme }) => theme.margins.base};
 `;
 
-const FollowButtonWrapper = styled.div`
+const ButtonContainer = styled.div`
   position: absolute;
   right: 5px;
 `;

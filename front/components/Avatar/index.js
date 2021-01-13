@@ -38,23 +38,6 @@ const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
   );
 };
 
-Avatar.defaultProps = {
-  imageSrc: "",
-  size: 24,
-  onClick: () => {},
-};
-
-Avatar.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    nickname: PropTypes.string,
-    profilepic: PropTypes.string,
-  }).isRequired,
-  size: PropTypes.number.isRequired,
-  isLink: PropTypes.bool.isRequired,
-  isMyPic: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
 
 const Container = styled.div`
   width: ${(props) => `${props.size}px`};
@@ -84,5 +67,23 @@ const Nickname = styled.div`
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.gray_1};
 `;
+
+Avatar.defaultProps = {
+  imageSrc: "",
+  size: 24,
+  onClick: () => {},
+};
+
+Avatar.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    nickname: PropTypes.string,
+    profilepic: PropTypes.string,
+  }).isRequired,
+  size: PropTypes.number.isRequired,
+  isLink: PropTypes.bool.isRequired,
+  isMyPic: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Avatar;

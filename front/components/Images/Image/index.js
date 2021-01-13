@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const Image = ({ src, onClick = null, onRemove = null, ratio, height }) => {
   return (
-    <Container $ratio={ratio}>
+    <Container ratio={ratio}>
       <PostImage
         role="presentation"
         alt="image"
@@ -21,7 +21,7 @@ const Image = ({ src, onClick = null, onRemove = null, ratio, height }) => {
 const Container = styled.div`
   flex-grow: 1;
   position: relative;
-  width: ${(props) => `${100 / props.$ratio}%`};
+  width: ${(props) => `${100 / props.ratio}%`};
   margin: 3px;
 `;
 
@@ -29,7 +29,7 @@ const PostImage = styled.img`
   display: inline-block;
   flex-grow: 1;
   width: 100%;
-  height: ${(props) => (props.$height ? "150px" : "300px")};
+  height: ${(props) => (props.height ? "150px" : "300px")};
   border-radius: 10px;
 `;
 
