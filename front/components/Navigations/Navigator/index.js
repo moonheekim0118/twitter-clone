@@ -35,11 +35,6 @@ const Navigator = ({ where, href, as }) => {
   );
 };
 
-Navigator.propTypes = {
-  where: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  as: PropTypes.string.isRequired,
-};
 
 const Container = styled.div`
   display: flex;
@@ -62,5 +57,11 @@ const Container = styled.div`
     background: ${({ theme }) => theme.colors.hover};
   }
 `;
+
+Navigator.propTypes = {
+  where: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  as: PropTypes.string.isRequired,
+};
 
 export default Navigator;

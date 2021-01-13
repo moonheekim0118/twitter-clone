@@ -71,16 +71,6 @@ const ImagesZoom = ({ images, onClose, initial = 0 }) => {
   );
 };
 
-ImagesZoom.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      src: PropTypes.string,
-    })
-  ).isRequired,
-  onClose: PropTypes.func.isRequired,
-  initial: PropTypes.number.isRequired,
-};
-
 const Container = styled.div`
   z-index: 7000;
 `;
@@ -113,5 +103,16 @@ const ImageContainer = styled.div`
         max-width:70vmin;
     }
 `;
+
+ImagesZoom.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string,
+    })
+  ).isRequired,
+  onClose: PropTypes.func.isRequired,
+  initial: PropTypes.number.isRequired,
+};
+
 
 export default ImagesZoom;

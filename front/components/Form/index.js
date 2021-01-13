@@ -20,12 +20,12 @@ const TYPES = {
   },
   modify: {
     noborder: true,
-    encType: "multipart/form-data",
+    encType,
     placeholder: "what is happening?",
   },
   comment: {
     noborder: false,
-    encType: "",
+    encType,
     placeholder: "따뜻한 댓글을 남겨주세요",
   },
 };
@@ -40,7 +40,7 @@ const Form = ({
   onClickImageUpload = null,
 }) => {
   return (
-    <Container $noborder={TYPES[type].noborder} encType={TYPES[type].encType}>
+    <Container noborder={TYPES[type].noborder} encType={TYPES[type].encType}>
       <Side />
       <FormMeta>
         <Textarea
@@ -94,7 +94,7 @@ const Container = styled.form`
     padding-bottom:${(props) => (props.$small ? "1rem" : "0")};
 
     border:${(props) =>
-      props.$noborder ? "1px solid transparent" : "1px solid #f4f4f4"}
+      props.noborder ? "1px solid transparent" : "1px solid #f4f4f4"}
 `;
 
 const FormMeta = styled.div`

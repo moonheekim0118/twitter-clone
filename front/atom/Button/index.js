@@ -2,13 +2,35 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-export const TransparentButton = styled.button`
+const BUTTONSTYLE = {
+  trans: TransparentButton, // 투명
+  full: FullButton, // 색 채워짐
+};
+
+const Button = ({ children, style, onClick, disabled, type }) => {
+  const SpecificButton = BUTTONSTYLE[style.back];
+  return (
+    <SpecificButton
+      onClick={onClick}
+      size={style.size}
+      weight={style.weight}
+      disabled={disabled}
+      radius={style.radius}
+      width={style.width}
+      type={type}>
+      {children}
+    </SpecificButton>
+  );
+};
+
+
+const TransparentButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.blue_1};
   border-radius: 24px;
   padding: ${({ theme }) => theme.paddings.small}
     ${({ theme }) => theme.paddings.xxl};
 
-  font-size: ${(props) => props.size};
+  font-size: ${(props) => props.$size};
   font-weight: bold;
 
   color: ${({ theme }) => theme.colors.blue_1};
@@ -22,7 +44,7 @@ export const TransparentButton = styled.button`
   }
 `;
 
-export const FullButton = styled.button`
+const FullButton = styled.button`
   width: ${(props) => props.width};
   padding: ${({ theme }) => theme.paddings.small}
     ${({ theme }) => theme.paddings.xxl};
@@ -47,27 +69,6 @@ export const FullButton = styled.button`
   }
 `;
 
-const BUTTONSTYLE = {
-  trans: TransparentButton, // 투명
-  full: FullButton, // 색 채워짐
-};
-
-const Button = ({ children, style, onClick, disabled, type }) => {
-  const SpecificButton = BUTTONSTYLE[style.back];
-  return (
-    <SpecificButton
-      onClick={onClick}
-      size={style.size}
-      weight={style.weight}
-      disabled={disabled}
-      radius={style.radius}
-      width={style.width}
-      type={type}>
-      {children}
-    </SpecificButton>
-  );
-};
-
 Button.defaultProps = {
   onClick: () => {},
   disabled: false,
@@ -79,6 +80,7 @@ Button.defaultProps = {
     width: "",
   },
 };
+
 
 Button.propTypes = {
   style: PropTypes.shape({
