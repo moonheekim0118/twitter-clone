@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ImagesZoom from '../ImagesZoom';
-import { Wrapper, ImageWrapperColumn } from '../style';
 import Image from '../Image';
+import { Container, ImageColumn } from '../style';
 import { imageSizing } from '../../../util/imageSizing';
 
 const PostImages = ({ images }) => {
-    const selectedIndex = useRef();
+    const selectedIndex = useRef(0);
     const [showImageZoom, setShowImageZoom] = useState(false);
 
     const onZoom = useCallback(
@@ -46,33 +46,33 @@ const PostImages = ({ images }) => {
 
         if (images.length === 3) {
             return (
-                <Wrapper>
+                <Container>
                     {Images[0]}
-                    <ImageWrapperColumn>
+                    <ImageColumn>
                         {Images[1]}
                         {Images[2]}
-                    </ImageWrapperColumn>
+                    </ImageColumn>
                     {showImageZoom && <>{zoom}</>}
-                </Wrapper>
+                </Container>
             );
         } else {
             return (
-                <Wrapper>
-                    <ImageWrapperColumn>
+                <Container>
+                    <ImageColumn>
                         {Images[0]}
                         {Images[1]}
-                    </ImageWrapperColumn>
-                    <ImageWrapperColumn>
+                    </ImageColumn>
+                    <ImageColumn>
                         {Images[2]}
                         {Images[3]}
-                    </ImageWrapperColumn>
+                    </ImageColumn>
                     {showImageZoom && <>{zoom}</>}
-                </Wrapper>
+                </Container>
             );
         }
     }
     return (
-        <Wrapper>
+        <Container>
             {images.map((v, i) => (
                 <Image
                     key={v.src + i}
@@ -83,7 +83,7 @@ const PostImages = ({ images }) => {
                 />
             ))}
             {showImageZoom && <>{zoom}</>}
-        </Wrapper>
+        </Container>
     );
 };
 

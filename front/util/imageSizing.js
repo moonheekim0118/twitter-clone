@@ -3,24 +3,24 @@
 export const imageSizing = (length) => {
     switch (length) {
         case 1:
-            return [{ ratio: 1, height: 'false' }];
+            return [{ ratio: 1, height: false }];
         case 2:
             return [
-                { ratio: 2, height: 'false' },
-                { ratio: 2, height: 'false' },
+                { ratio: 2, height: false },
+                { ratio: 2, height: false },
             ];
         case 3:
             return [
-                { ratio: 2, height: 'false' },
-                { ratio: 1, height: 'true' },
-                { ratio: 1, height: 'true' },
+                { ratio: 2, height: false },
+                { ratio: 1, height: true },
+                { ratio: 1, height: true },
             ];
         default:
             return [
-                { ratio: 1, height: 'true' },
-                { ratio: 1, height: 'true' },
-                { ratio: 1, height: 'true' },
-                { ratio: 1, height: 'true' },
+                { ratio: 1, height: true },
+                { ratio: 1, height: true },
+                { ratio: 1, height: true },
+                { ratio: 1, height: true },
             ];
     }
 };

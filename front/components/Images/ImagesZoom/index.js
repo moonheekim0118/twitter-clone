@@ -9,9 +9,10 @@ import {
 } from '../../Icons';
 import styled from 'styled-components';
 
-const ImagesZoom = ({ images, onClose, initial }) => {
+const ImagesZoom = ({ images, onClose, initial = 0 }) => {
     const [currentSlide, setCurrentSlide] = useState(initial);
 
+    // 왼쪽으로 이동 버튼
     const onClickLeft = useCallback(() => {
         if (currentSlide === 0) {
             setCurrentSlide(images.length - 1);
@@ -20,8 +21,8 @@ const ImagesZoom = ({ images, onClose, initial }) => {
         }
     }, [currentSlide]);
 
+    // 오른쪽으로 이동 버튼
     const onClickRight = useCallback(() => {
-        console.log(currentSlide);
         if (currentSlide === images.length - 1) {
             setCurrentSlide(0);
         } else {
@@ -29,6 +30,7 @@ const ImagesZoom = ({ images, onClose, initial }) => {
         }
     }, [currentSlide]);
 
+    // Indicator bar로 이동 버튼
     const onClickIndicator = useCallback(
         (index) => () => {
             if (index !== currentSlide) {
@@ -41,19 +43,19 @@ const ImagesZoom = ({ images, onClose, initial }) => {
     return (
         <>
             <Overaly color="black" onClick={onClose} />
-            <Wrapper>
+            <Container>
                 <CloseCircleLeftIcon onClick={onClose}></CloseCircleLeftIcon>
                 <div>
                     <LeftIcon onClick={onClickLeft} />
                     <RightIcon onClick={onClickRight} />
-                    <ImageWrapper>
+                    <ImageContainer>
                         <img
                             src={`${images[currentSlide].src}`}
                             alt={images[currentSlide].src}
                         />
-                    </ImageWrapper>
+                    </ImageContainer>
                 </div>
-                <IndicatorWrapper>
+                <Indicators>
                     {images.map((v, i) => (
                         <IndicatorIcon
                             onClick={onClickIndicator(i)}
@@ -63,8 +65,8 @@ const ImagesZoom = ({ images, onClose, initial }) => {
                             color={i === currentSlide ? 'true' : 'false'}
                         />
                     ))}
-                </IndicatorWrapper>
-            </Wrapper>
+                </Indicators>
+            </Container>
         </>
     );
 };
@@ -79,11 +81,11 @@ ImagesZoom.propTypes = {
     initial: PropTypes.number.isRequired,
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
     z-index: 7000;
 `;
 
-const IndicatorWrapper = styled.div`
+const Indicators = styled.div`
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -98,7 +100,7 @@ const IndicatorWrapper = styled.div`
     z-index: 7000;
 `;
 
-const ImageWrapper = styled.div`
+const ImageContainer = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;

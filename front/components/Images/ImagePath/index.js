@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeImageAction } from '../../../actions/post';
-import { Wrapper, ImageWrapperColumn } from '../style';
+import { Container, ImageColumn } from '../style';
 import { imageSizing } from '../../../util/imageSizing';
 import Image from '../Image';
 
@@ -34,31 +34,31 @@ const ImagePath = () => {
 
         if (imagePaths.length === 3) {
             return (
-                <Wrapper>
+                <Container>
                     {Images[0]}
-                    <ImageWrapperColumn>
+                    <ImageColumn>
                         {Images[1]}
                         {Images[2]}
-                    </ImageWrapperColumn>
-                </Wrapper>
+                    </ImageColumn>
+                </Container>
             );
         } else {
             return (
-                <Wrapper>
-                    <ImageWrapperColumn>
+                <Container>
+                    <ImageColumn>
                         {Images[0]}
                         {Images[1]}
-                    </ImageWrapperColumn>
-                    <ImageWrapperColumn>
+                    </ImageColumn>
+                    <ImageColumn>
                         {Images[2]}
                         {Images[3]}
-                    </ImageWrapperColumn>
-                </Wrapper>
+                    </ImageColumn>
+                </Container>
             );
         }
     }
     return (
-        <Wrapper>
+        <Container>
             {imagePaths.map((v, i) => (
                 <Image
                     key={v + i}
@@ -68,7 +68,7 @@ const ImagePath = () => {
                     height={size[i].height}
                 />
             ))}
-        </Wrapper>
+        </Container>
     );
 };
 
