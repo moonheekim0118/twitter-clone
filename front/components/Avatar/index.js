@@ -38,7 +38,6 @@ const Avatar = ({ user, size, isLink, isMyPic, onClick }) => {
   );
 };
 
-
 const Container = styled.div`
   width: ${(props) => `${props.size}px`};
   height: ${(props) => `${props.size}px`};

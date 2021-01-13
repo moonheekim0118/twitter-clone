@@ -114,5 +114,4 @@ ImagesZoom.propTypes = {
   initial: PropTypes.number.isRequired,
 };
 
-
 export default ImagesZoom;

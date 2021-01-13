@@ -32,5 +32,4 @@ Modal.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-
 export default Modal;
