@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import styled from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 const GlobalStyles = createGlobalStyle`  
     *,
@@ -25,15 +25,15 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export const ErrorMessage = styled.div`
-    color: red;
+  color: red;
 `;
 
 export const AlertMessage = styled.div`
-    color: green;
+  color: green;
 `;
 
 export const MiddleWrapper = styled.div`
-    text-align: center;
+  text-align: center;
 `;
 
 export default GlobalStyles;
