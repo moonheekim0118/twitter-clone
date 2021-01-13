@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Router from 'next/router';
 import useInput from '../../../hooks/useInput';
 import styled from 'styled-components';
 import Form from '../../Form';
@@ -10,7 +9,7 @@ import { addCommentAction } from '../../../actions/post';
 
 const CommentForm = ({ postId }) => {
     const dispatch = useDispatch();
-    const { isLoggedIn, me } = useSelector((state) => state.user);
+    const { me } = useSelector((state) => state.user);
     const { addCommentDone, addCommentloading } = useSelector(
         (state) => state.post
     );
@@ -25,11 +24,7 @@ const CommentForm = ({ postId }) => {
     const onSubmitComment = useCallback(
         (e) => {
             e.preventDefault();
-            if (!isLoggedIn) {
-                // 로그인 되지 않은 상태라면 로그인 페이지로 리다이렉트
-                Router.push('/login');
-            } else if (commentText.length > 0) {
-                // commenet 추가
+            if (commentText.length > 0) {
                 dispatch(
                     addCommentAction({
                         text: commentText,
