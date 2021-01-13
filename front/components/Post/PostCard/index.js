@@ -9,7 +9,7 @@ import {
     retweetAction,
     unretweetAction,
 } from '../../../actions/post';
-import PostImages from '../../Image/PostImages';
+import PostImages from '../../Images/PostImages';
 import PostCardContent from '../PostCardContent';
 import Comment from '../../Comment';
 import Avatar from '../../Avatar';
