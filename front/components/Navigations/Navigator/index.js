@@ -35,7 +35,6 @@ const Navigator = ({ where, href, as }) => {
   );
 };
 
-
 const Container = styled.div`
   display: flex;
 

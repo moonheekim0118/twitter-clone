@@ -66,5 +66,4 @@ Header.propTypes = {
   where: PropTypes.string.isRequired,
 };
 
-
 export default Header;

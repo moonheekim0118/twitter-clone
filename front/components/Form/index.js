@@ -20,12 +20,12 @@ const TYPES = {
   },
   modify: {
     noborder: true,
-    encType,
+    encType: "",
     placeholder: "what is happening?",
   },
   comment: {
     noborder: false,
-    encType,
+    encType: "",
     placeholder: "따뜻한 댓글을 남겨주세요",
   },
 };

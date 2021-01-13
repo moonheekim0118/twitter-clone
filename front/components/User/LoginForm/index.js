@@ -3,18 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../../../actions/user";
 import Link from "next/link";
 import useInput from "../../../hooks/useInput";
-import Button from "../../../atom/Button";
 import {
   Form,
-  Label,
-  InputWrapper,
-  TextInput,
-  PasswordInput,
   ButtonWrapper,
   Text,
 } from "../style";
+import SignInput from "../SignInput";
+import SignSubmitButton from "../SignSubmitButton";
 import { ErrorMessage } from "../../globalStyle";
-import { LoadingIcon } from "../../Icons";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -47,35 +43,26 @@ const LoginForm = () => {
   return (
     <Form>
       {hasLoginError && <ErrorMessage>{loginError}</ErrorMessage>}
-      <InputWrapper>
-        <TextInput
-          name="user-email"
-          value={email}
-          onChange={onChangeEmail}
-          placeholder=" "
-        />
-        <Label htmlFor="user-email">이메일</Label>
-      </InputWrapper>
-      <InputWrapper>
-        <PasswordInput
-          name="user-password"
-          value={password}
-          onChange={onChangePassword}
-          placeholder=" "
-        />
-        <Label htmlFor="user-password">비밀번호</Label>
-      </InputWrapper>
+      <SignInput
+        name="email"
+        value={email}
+        onChange={onChangeEmail}
+        type="text"
+        label="이메일"
+      />
+      <SignInput
+        name="password"
+        value={password}
+        onChange={onChangePassword}
+        type="password"
+        label="비밀번호"
+      />
       <ButtonWrapper>
-        <Button
+        <SignSubmitButton
           onClick={onSubmit}
-          style={{
-            back: "full",
-            radius: "5px",
-            size: "0.8rem",
-            width: "100%",
-          }}>
-          {isLoggingIn ? <LoadingIcon /> : "로그인"}
-        </Button>
+          title="로그인"
+          loading={isLoggingIn}
+        />
         <Link href="/signUp">
           <Text>회원가입</Text>
         </Link>

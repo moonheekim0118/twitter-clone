@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestAction } from "../../../actions/user";
-import Button from "../../../atom/Button";
 import { LoadingIcon } from "../../Icons";
+import Button from "../../../atom/Button";
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
