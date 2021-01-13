@@ -1,16 +1,12 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../../../actions/user";
+import { ErrorMessage } from "../../globalStyle";
+import { Form,ButtonContainer,Text } from "../style";
 import Link from "next/link";
 import useInput from "../../../hooks/useInput";
-import {
-  Form,
-  ButtonWrapper,
-  Text,
-} from "../style";
 import SignInput from "../SignInput";
 import SignSubmitButton from "../SignSubmitButton";
-import { ErrorMessage } from "../../globalStyle";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -57,16 +53,17 @@ const LoginForm = () => {
         type="password"
         label="비밀번호"
       />
-      <ButtonWrapper>
+      <ButtonContainer>
         <SignSubmitButton
           onClick={onSubmit}
           title="로그인"
           loading={isLoggingIn}
+          disabled={email.length < 2 || password.length < 6 || password.length>14}
         />
         <Link href="/signUp">
           <Text>회원가입</Text>
         </Link>
-      </ButtonWrapper>
+      </ButtonContainer>
     </Form>
   );
 };

@@ -3,12 +3,12 @@ import Router from "next/router";
 import Link from "next/link";
 import useInput from "../../../hooks/useInput";
 import useValidation from "../../../hooks/useValidation";
+import SignInput from "../SignInput";
+import SignSubmitButton from "../SignSubmitButton";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpRequestAction, signUpResetAction } from "../../../actions/user";
 import { showAlertAction } from "../../../actions/ui";
-import { Form, ButtonWrapper, Text } from "../style";
-import SignInput from "../SignInput";
-import SignSubmitButton from "../SignSubmitButton";
+import { Form,Text,ButtonContainer } from "../style";
 
 const SignUp = () => {
   const [email, onChangeEmail] = useInput("");
@@ -107,7 +107,7 @@ const SignUp = () => {
         Error={passwordError}
       />
 
-      <ButtonWrapper>
+      <ButtonContainer>
         <SignSubmitButton
           onClick={onSubmit}
           loading={signUploading}
@@ -118,14 +118,14 @@ const SignUp = () => {
             passwordError ||
             email.length < 2 ||
             nickname.length < 1 ||
-            password.length < 5 ||
-            passwordCheck.length < 5
+            password.length < 6 ||
+            passwordCheck.length < 6
           }
         />
         <Link href="/login">
           <Text>로그인</Text>
         </Link>
-      </ButtonWrapper>
+      </ButtonContainer>
     </Form>
   );
 };

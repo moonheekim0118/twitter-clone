@@ -9,15 +9,7 @@ import FollowButton from "../../Follow/FollowButton";
 import ImagesZoom from "../../Images/ImagesZoom";
 import Modal from "../../../atom/Modal";
 import EditProfileForm from "../EditProfileForm";
-import {
-  Wrapper,
-  UpperWrapper,
-  UserInfoWrapper,
-  DownWrapper,
-  NicknameWrapper,
-  FollowWrapper,
-  Description,
-} from "./style";
+import styled from 'styled-components';
 
 const UserProfile = ({ user }) => {
   const me = useSelector((state) => state.user.me?.id);
@@ -46,9 +38,9 @@ const UserProfile = ({ user }) => {
           <EditProfileForm onClose={closeModal} />
         </Modal>
       )}
-      <Wrapper>
-        <UpperWrapper>
-          <UserInfoWrapper>
+      <Container>
+        <UpperContainer>
+          <UserInfo>
             <Avatar
               user={user}
               size={90}
@@ -56,38 +48,92 @@ const UserProfile = ({ user }) => {
               isMyPic={false}
               onClick={onZoom}
             />
-            <NicknameWrapper>{user.nickname}</NicknameWrapper>
+            <Nickname>{user.nickname}</Nickname>
             <div>{user.email}</div>
-          </UserInfoWrapper>
+          </UserInfo>
           {me && user.id !== me && <FollowButton userId={user.id} />}
           {me && user.id === me && (
             <Button style={{ back: "trans" }} type="button" onClick={openModal}>
               프로필 수정
             </Button>
           )}
-        </UpperWrapper>
-        <DownWrapper>
+        </UpperContainer>
+        <LowerContainer>
           <Link href="/user/[id]/followings" as={`/user/${user.id}/followings`}>
-            <a>
-              <FollowWrapper>
+              <Follow>
                 {user.Followings} <Description>Followings</Description>
-              </FollowWrapper>
-            </a>
+              </Follow>
           </Link>
           <Link href="/user/[id]/followers" as={`/user/${user.id}/followers`}>
-            <a>
-              <FollowWrapper>
+              <Follow>
                 {user.Followers} <Description>Followers</Description>
-              </FollowWrapper>
-            </a>
+              </Follow>
           </Link>
-        </DownWrapper>
-      </Wrapper>
+        </LowerContainer>
+      </Container>
     </>
   );
 };
 
-export default UserProfile;
+
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 250px;
+`;
+
+// 유저정보  / 팔로우버튼
+const UpperContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: ${({ theme }) => theme.paddings.xxl};
+`;
+// 아바타 / 이메일 / 닉네임
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+// 팔로잉 몇명 / 팔로우 몇명
+const LowerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: ${({ theme }) => theme.margins.xxl};
+  margin-top: ${({ theme }) => theme.margins.xxl};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  cursor: pointer;
+`;
+
+const Nickname = styled.div`
+  margin-top: ${({ theme }) => theme.margins.base};
+  font-size: ${({ theme }) => theme.fontSizes.xxl};
+  font-weight: bold;
+`;
+
+const Follow = styled.a`
+  margin-right: ${({ theme }) => theme.margins.xxxl};
+  color: ${({ theme }) => theme.colors.black};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.blue_2};
+  }
+`;
+
+const Description = styled.span`
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.gray_2};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.blue_2};
+  }
+`;
+
 
 UserProfile.propTypes = {
   user: PropTypes.shape({
@@ -100,3 +146,6 @@ UserProfile.propTypes = {
     Likes: PropTypes.number,
   }).isRequired,
 };
+
+
+export default UserProfile;

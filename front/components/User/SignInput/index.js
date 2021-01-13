@@ -15,7 +15,7 @@ const SignInput = ({ name, value, onChange, label, type, Error = false }) => {
       {type === "text" ? (
         <TextInput name={name} value={value} onChange={onChange} />
       ) : (
-        <PasswordInput />
+        <PasswordInput name={name} value={value} onChange={onChange}/>
       )}
       {name === "nickname" && (
         <TextLength limit={value.length > 5}>{value.length}/5</TextLength>
