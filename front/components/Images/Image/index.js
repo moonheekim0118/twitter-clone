@@ -9,7 +9,7 @@ const Image = ({ src, onClick = null, onRemove = null, ratio, height }) => {
       <PostImage
         role="presentation"
         alt="image"
-        $height={height}
+        height={height}
         src={`/${src}`}
         onClick={onClick}
       />
