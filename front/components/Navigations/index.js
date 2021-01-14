@@ -33,10 +33,6 @@ const Navigation = ({ isLoggedIn }) => {
   );
 };
 
-Navigation.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-};
-
 const Container = styled.nav`
   display: flex;
   flex-direction: column;
@@ -109,5 +105,9 @@ const LogOutWrapper = styled.div`
     margin-left: ${({ theme }) => theme.margins.base};
   }
 `;
+
+Navigation.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+};
 
 export default Navigation;

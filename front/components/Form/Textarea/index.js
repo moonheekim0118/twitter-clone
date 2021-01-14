@@ -1,8 +1,9 @@
 import React from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const Textarea = ({ text, onChange, placeholder }) => {
+const Textarea = ({ text = "", onChange, placeholder = "" }) => {
   return (
     <Container
       name="content"
@@ -11,6 +12,12 @@ const Textarea = ({ text, onChange, placeholder }) => {
       placeholder={placeholder}
     />
   );
+};
+
+Textarea.propTypes = {
+  text: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
 };
 
 const Container = styled(TextareaAutosize)`

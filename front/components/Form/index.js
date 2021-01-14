@@ -3,6 +3,7 @@ import Textarea from "./Textarea";
 import Side from "./Side";
 import styled from "styled-components";
 import ImagePath from "../Images/ImagePath";
+import PropTypes from "prop-types";
 import { ImageIcon } from "../Icons";
 import { useSelector } from "react-redux";
 
@@ -137,5 +138,17 @@ const TextLength = styled.span`
       theme,
     }) => theme.colors.blue_2};
 `;
+
+Form.propTypes = {
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  Button: PropTypes.node.isRequired,
+  onChangeImage: PropTypes.func.isRequired,
+  imageInput: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLInputElement),
+  }),
+  onClickImageUpload: PropTypes.func.isRequired,
+};
 
 export default Form;

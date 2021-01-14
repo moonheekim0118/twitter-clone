@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { HeartIcon, CommentIcon } from "../../Icons";
 
 const TYPE = {
@@ -30,5 +31,12 @@ const Count = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.base};
   color: inherit;
 `;
+
+PostButton.propTypes = {
+  type: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  counts: PropTypes.number.isRequired,
+};
 
 export default PostButton;
