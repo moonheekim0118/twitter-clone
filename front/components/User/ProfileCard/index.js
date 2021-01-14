@@ -9,7 +9,7 @@ import FollowButton from "../../Follow/FollowButton";
 import ImagesZoom from "../../Images/ImagesZoom";
 import Modal from "../../../atom/Modal";
 import EditProfileForm from "../EditProfileForm";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const UserProfile = ({ user }) => {
   const me = useSelector((state) => state.user.me?.id);
@@ -60,22 +60,20 @@ const UserProfile = ({ user }) => {
         </UpperContainer>
         <LowerContainer>
           <Link href="/user/[id]/followings" as={`/user/${user.id}/followings`}>
-              <Follow>
-                {user.Followings} <Description>Followings</Description>
-              </Follow>
+            <Follow>
+              {user.Followings} <Description>Followings</Description>
+            </Follow>
           </Link>
           <Link href="/user/[id]/followers" as={`/user/${user.id}/followers`}>
-              <Follow>
-                {user.Followers} <Description>Followers</Description>
-              </Follow>
+            <Follow>
+              {user.Followers} <Description>Followers</Description>
+            </Follow>
           </Link>
         </LowerContainer>
       </Container>
     </>
   );
 };
-
-
 
 const Container = styled.div`
   display: flex;
@@ -134,7 +132,6 @@ const Description = styled.span`
   }
 `;
 
-
 UserProfile.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
@@ -146,6 +143,5 @@ UserProfile.propTypes = {
     Likes: PropTypes.number,
   }).isRequired,
 };
-
 
 export default UserProfile;

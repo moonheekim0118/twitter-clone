@@ -55,8 +55,19 @@ const EditProfileForm = ({ onClose }) => {
         </Button>
       </Header>
       <Contents>
-        <ProfilePicForm user={me} imageInput={imageInput} onChange={onChangeImages} onClick={onClickImageUpload}/>
-        <SignInput name="nickname" value={nickname} onChange={onChangeNickname} label="닉네임" type="text"/>
+        <ProfilePicForm
+          user={me}
+          imageInput={imageInput}
+          onChange={onChangeImages}
+          onClick={onClickImageUpload}
+        />
+        <SignInput
+          name="nickname"
+          value={nickname}
+          onChange={onChangeNickname}
+          label="닉네임"
+          type="text"
+        />
       </Contents>
     </Container>
   );

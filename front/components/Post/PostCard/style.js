@@ -1,8 +1,10 @@
 import styled from "styled-components";
-export const Wrapper = styled.div`
+
+export const Container = styled.div`
   margin-bottom: 30px;
 `;
-export const SideWrapper = styled.div`
+
+export const SideContainer = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 5%;
@@ -71,41 +73,6 @@ export const FollowButtonWrapper = styled.div`
   top: 5px;
 `;
 
-export const NicknameWrapper = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: bold;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-export const PostInfoWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-export const Count = styled.span`
-  margin-left: ${({ theme }) => theme.margins.xsmall};
-  font-size: ${({ theme }) => theme.fontSizes.base};
-  color: inherit;
-`;
-
-export const LikeButtonWrapper = styled.div`
-  color: ${(props) => (props.liked === "true" ? "#eb2f96" : "gray")};
-  &:hover {
-    color: ${({ theme }) => theme.colors.pink};
-  }
-`;
-
-export const CommentButtonWrapper = styled.div`
-  color: ${(props) => (props.opend === "true" ? "#0099cc" : "gray")};
-  &:hover {
-    color: ${({ theme }) => theme.colors.blue_2};
-  }
-`;
-
 export const Retweet = styled.div`
   position: absolute;
   top: 5px;
@@ -118,16 +85,10 @@ export const Retweet = styled.div`
   }
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentContainer = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.lg};
 `;
 
-export const Date = styled.span`
-  margin-left: ${({ theme }) => theme.margins.xsmall};
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  color: ${({ theme }) => theme.colors.gray_2};
-`;
-
-export const CommentWrapper = styled.div`
+export const CommentContainer = styled.div`
   padding: ${({ theme }) => theme.paddings.xxl};
 `;

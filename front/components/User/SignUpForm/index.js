@@ -8,7 +8,7 @@ import SignSubmitButton from "../SignSubmitButton";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpRequestAction, signUpResetAction } from "../../../actions/user";
 import { showAlertAction } from "../../../actions/ui";
-import { Form,Text,ButtonContainer } from "../style";
+import { Form, Text, ButtonContainer } from "../style";
 
 const SignUp = () => {
   const [email, onChangeEmail] = useInput("");

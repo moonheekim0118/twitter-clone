@@ -1,7 +1,13 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
-import dayjs from "dayjs";
+import PostImages from "../../Images/PostImages";
+import PostCardContent from "../PostCardContent";
+import PostInfo from "../PostInfo";
+import PostButton from "../PostButton";
+import Comment from "../../Comment";
+import Avatar from "../../Avatar";
+import Tooltip from "../Tooltip";
 import { useSelector, useDispatch } from "react-redux";
 import {
   likePostAction,
@@ -9,37 +15,22 @@ import {
   retweetAction,
   unretweetAction,
 } from "../../../actions/post";
-import PostImages from "../../Images/PostImages";
-import PostCardContent from "../PostCardContent";
-import Comment from "../../Comment";
-import Avatar from "../../Avatar";
 import {
-  Wrapper,
-  SideWrapper,
+  Container,
+  SideContainer,
   Card,
   CardMeta,
   CardButtons,
-  NicknameWrapper,
-  Count,
-  CommentButtonWrapper,
-  LikeButtonWrapper,
   Retweet,
   RetweetCard,
-  ContentWrapper,
-  PostInfoWrapper,
-  Date,
-  CommentWrapper,
+  ContentContainer,
+  CommentContainer,
 } from "./style";
-import Tooltip from "../Tooltip";
-import {
-  HeartIcon,
-  RetweetIcon,
-  MoreIcon,
-  CommentIcon,
-  SmallRetweetIcon,
-} from "../../Icons";
+import { RetweetIcon, MoreIcon, SmallRetweetIcon } from "../../Icons";
 
 const PostCard = ({ post, commentFormOpen }) => {
+  const dispatch = useDispatch();
+
   let CardComponent = Card;
   let loadedPost = post;
   let author = post.User;
@@ -52,7 +43,6 @@ const PostCard = ({ post, commentFormOpen }) => {
     retweetUser = post.User;
   }
 
-  const dispatch = useDispatch();
   const [commentFormOpend, setCommentFormOpend] = useState(commentFormOpen);
   const me = useSelector((state) => state.user.me?.id);
   const [liked, setLiked] = useState(
@@ -64,7 +54,7 @@ const PostCard = ({ post, commentFormOpen }) => {
     Router.push(`/post/${loadedPost.id}`);
   }, []);
 
-  const onLikeToggle = useCallback(() => {
+  const onToggleLike = useCallback(() => {
     if (!me) {
       return;
     }
@@ -80,7 +70,7 @@ const PostCard = ({ post, commentFormOpen }) => {
     setCommentFormOpend((prev) => !prev);
   }, []);
 
-  const onRetweetToggle = useCallback(() => {
+  const onToggleRetweet = useCallback(() => {
     if (!me) {
       // 로그인 안되어 있다면
       return;
@@ -94,76 +84,67 @@ const PostCard = ({ post, commentFormOpen }) => {
     }
   }, []);
 
-  const onClickUser = useCallback((e) => {
+  const onClickUser = useCallback((e, userId) => {
     e.stopPropagation();
-    Router.push(`/user/${author.id}`);
+    Router.push(`/user/${userId}`);
   }, []);
 
-  const onClickRetweetUser = useCallback((e) => {
-    if (!retweetUser) {
-      return;
-    }
+  const onStopBubbling = useCallback((e) => {
     e.stopPropagation();
-    Router.push(`/user/${retweetUser.id}`);
   }, []);
-
-  const onClickButtons = useCallback((e) => {
-    e.stopPropagation();
-  });
 
   return (
-    <Wrapper>
+    <Container>
       <CardComponent onClick={onClickPost}>
         {retweetUser && (
-          <Retweet onClick={onClickRetweetUser}>
+          <Retweet onClick={(e) => onClickUser(e, retweetUser.id)}>
             <SmallRetweetIcon />
             {retweetUser.nickname}님이 리트윗 하셨습니다
           </Retweet>
         )}
-        <SideWrapper>
+        <SideContainer>
           <Avatar
             user={author}
             size={65}
             isLink={true}
             isMyPic={false}
-            onClick={onClickButtons}
+            onClick={onStopBubbling}
           />
-        </SideWrapper>
+        </SideContainer>
         <CardMeta>
-          <PostInfoWrapper>
-            <NicknameWrapper onClick={onClickUser}>
-              {author.nickname}
-            </NicknameWrapper>
-            <Date>{dayjs(loadedPost.createdAt).format("MMM DD YYYY")}</Date>
-          </PostInfoWrapper>
-          <ContentWrapper onClick={onClickButtons}>
+          <PostInfo
+            nickname={author.nickname}
+            onClick={(e) => onClickUser(e, author.id)}
+            date={loadedPost.createdAt}
+          />
+          <ContentContainer onClick={onStopBubbling}>
             <PostCardContent postData={loadedPost.content} />
-          </ContentWrapper>
+          </ContentContainer>
           {loadedPost.Images[0] && (
-            <div onClick={onClickButtons}>
+            <div onClick={onStopBubbling}>
               <PostImages images={loadedPost.Images} />
             </div>
           )}
-          <CardButtons onClick={onClickButtons}>
+          <CardButtons onClick={onStopBubbling}>
             <RetweetIcon
               retweeted={
                 me && retweetUser && retweetUser.id === me ? "true" : "false"
               }
-              onClick={onRetweetToggle}
+              onClick={onToggleRetweet}
               key="retweet"
             />
-            <LikeButtonWrapper liked={liked ? "true" : "false"}>
-              <HeartIcon onClick={onLikeToggle} />
-              {loadedPost.Likers.length > 0 && (
-                <Count>{loadedPost.Likers.length}</Count>
-              )}
-            </LikeButtonWrapper>
-            <CommentButtonWrapper opend={commentFormOpend ? "true" : "false"}>
-              <CommentIcon onClick={onToggleComment} key="comment" />
-              {loadedPost.Comments.length > 0 && (
-                <Count>{loadedPost.Comments.length}</Count>
-              )}
-            </CommentButtonWrapper>
+            <PostButton
+              type="like"
+              checked={liked}
+              onClick={onToggleLike}
+              counts={loadedPost.Likers.length}
+            />
+            <PostButton
+              type="comment"
+              checked={commentFormOpend}
+              onClick={onToggleComment}
+              counts={loadedPost.Comments.length}
+            />
             {me && (
               <Tooltip post={loadedPost}>
                 <MoreIcon />
@@ -173,15 +154,15 @@ const PostCard = ({ post, commentFormOpen }) => {
         </CardMeta>
       </CardComponent>
       {commentFormOpend && (
-        <CommentWrapper>
+        <CommentContainer>
           <Comment
             postId={loadedPost.id}
             Comments={loadedPost.Comments}
             me={me}
           />
-        </CommentWrapper>
+        </CommentContainer>
       )}
-    </Wrapper>
+    </Container>
   );
 };
 

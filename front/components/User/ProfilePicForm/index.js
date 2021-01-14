@@ -1,25 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import Avatar from '../../Avatar';
-import { EditIcon } from '../../Icons';
+import React from "react";
+import styled from "styled-components";
+import Avatar from "../../Avatar";
+import { EditIcon } from "../../Icons";
 
-const ProfilePicForm =({user,imageInput,onChange,onClick})=>{
-
-    return(
-        <Container>
-            <Overaly/>
-            <input
-            type="file"
-            multiple
-            name="image"
-            hidden
-            ref={imageInput}
-            onChange={onChange}
-          />
-          <EditIcon onClick={onClick} />
-          <Avatar user={user} size={80} isLink={false} isMyPic={true} />
-        </Container>
-    );
+const ProfilePicForm = ({ user, imageInput, onChange, onClick }) => {
+  return (
+    <Container>
+      <Overaly />
+      <input
+        type="file"
+        multiple
+        name="image"
+        hidden
+        ref={imageInput}
+        onChange={onChange}
+      />
+      <EditIcon onClick={onClick} />
+      <Avatar user={user} size={80} isLink={false} isMyPic={true} />
+    </Container>
+  );
 };
 
 const Container = styled.div`

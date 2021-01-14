@@ -23,7 +23,6 @@ export const ButtonContainer = styled.div`
   align-items: center;
 `;
 
-
 export const Text = styled.a`
     margin-top:${({ theme }) => theme.margins.xxl};
     font-weight:bold;
