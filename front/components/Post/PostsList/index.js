@@ -11,9 +11,9 @@ const PostsList = ({ posts, loading }) => {
         <PostCard key={post.id} post={post} />
       ))}
       {loading ? (
-        <Wrapper>
+        <Container>
           <LoadingIcon />
-        </Wrapper>
+        </Container>
       ) : (
         ""
       )}
@@ -26,7 +26,7 @@ PostsList.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
   text-align: center;
 `;
 

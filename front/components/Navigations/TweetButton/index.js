@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useCallback } from "react";
 import useToggle from "../../../hooks/useToggle";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { Detail } from "../style";
 import Modal from "../../../atom/Modal";
-import PostFormModal from "../../ModalContents/PostFormModal";
+import ModalContents from "../../ModalContents";
+import PostForm from "../../Post/PostForm";
+import { useDispatch } from "react-redux";
+import { resetImageAction } from "../../../actions/post";
 
 const TweetButton = () => {
+  const dispatch = useDispatch();
   const [showModal, openModal, closeModal] = useToggle();
+
+  const onResetImage = useCallback(() => {
+    dispatch(resetImageAction()); // 업로드된 이미지 리셋
+    closeModal();
+  }, []);
 
   return (
     <>
       {showModal && (
         <Modal onClose={closeModal} color="black">
-          <PostFormModal onClose={closeModal} />
+          <ModalContents
+            onClose={onResetImage}
+            child={<PostForm isModal={true} onClose={closeModal} />}
+          />
         </Modal>
       )}
       <Button onClick={openModal}>

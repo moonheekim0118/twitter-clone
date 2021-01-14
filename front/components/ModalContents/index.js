@@ -1,6 +1,19 @@
+import React from "react";
 import styled from "styled-components";
+import { CloseRightIcon } from "../Icons";
 
-export const ModalFormWrapper = styled.div`
+const ModalContents = ({ onClose = null, child }) => {
+  return (
+    <Container>
+      <Header>
+        <CloseRightIcon onClick={onClose} />
+      </Header>
+      {child}
+    </Container>
+  );
+};
+
+const Container = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -20,7 +33,9 @@ export const ModalFormWrapper = styled.div`
   }
 `;
 
-export const ModalBoxHeader = styled.div`
+const Header = styled.div`
   width: 100%;
   margin-bottom: ${({ theme }) => theme.margins.xl};
 `;
+
+export default ModalContents;

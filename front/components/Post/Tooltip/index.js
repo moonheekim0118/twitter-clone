@@ -9,7 +9,8 @@ import {
 import { removePostAction } from "../../../actions/post";
 import styled from "styled-components";
 import Modal from "../../../atom/Modal";
-import ModifyPostModal from "../../ModalContents/ModifyPostModal";
+import ModalContetns from "../../ModalContents";
+import ModifyPostForm from "../ModifyPostForm";
 
 const Tooltip = ({ post, children }) => {
   const dispatch = useDispatch();
@@ -47,21 +48,25 @@ const Tooltip = ({ post, children }) => {
       <Container>
         {showModal && (
           <Modal onClose={closeModal} color="black">
-            <ModifyPostModal
-              onClose={closeModal}
-              postId={post.id}
-              postContent={post.content}
+            <ModalContetns
+              child={
+                <ModifyPostForm
+                  postId={post.id}
+                  onClose={closeModal}
+                  postContent={post.content}
+                />
+              }
             />
           </Modal>
         )}
-        <Wrapper className="tooltip">
-          <ItemWrapper onClick={onClickModify}>
+        <Contents className="tooltip">
+          <ItemContainer onClick={onClickModify}>
             <Item>포스트 수정하기</Item>
-          </ItemWrapper>
-          <ItemWrapper onClick={onClickRemove}>
+          </ItemContainer>
+          <ItemContainer onClick={onClickRemove}>
             <Item>포스트 삭제하기</Item>
-          </ItemWrapper>
-        </Wrapper>
+          </ItemContainer>
+        </Contents>
         {children}
       </Container>
     );
@@ -70,15 +75,15 @@ const Tooltip = ({ post, children }) => {
   return (
     // 남의 포스트일경우 팔로우 / 언팔로우 만 가능
     <Container>
-      <Wrapper className="tooltip">
-        <ItemWrapper onClick={onClickFollow}>
+      <Contents className="tooltip">
+        <ItemContainer onClick={onClickFollow}>
           <Item>
             {isFollowing
               ? `${post.User.nickname}님 언팔로우`
               : `${post.User.nickname}님 팔로우`}
           </Item>
-        </ItemWrapper>
-      </Wrapper>
+        </ItemContainer>
+      </Contents>
       {children}
     </Container>
   );
@@ -110,7 +115,7 @@ const Container = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const Contents = styled.div`
   display: none;
   flex-direction: column;
   position: absolute;
@@ -128,7 +133,7 @@ const Wrapper = styled.div`
   z-index: 2000;
 `;
 
-const ItemWrapper = styled.div`
+const ItemContainer = styled.div`
   cursor: pointer;
   transition: 0.2s background-color ease-in-out;
 
