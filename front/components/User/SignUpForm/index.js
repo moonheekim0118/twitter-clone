@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Router from "next/router";
 import Link from "next/link";
 import useInput from "../../../hooks/useInput";
@@ -28,7 +28,6 @@ const SignUp = () => {
   const { signUploading, signUpDone, signUpError } = useSelector(
     (state) => state.user
   );
-  const firstUpdate = useRef(true);
 
   useEffect(() => {
     if (signUpDone) {
@@ -38,10 +37,6 @@ const SignUp = () => {
   }, [signUpDone]);
 
   useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
     if (signUpError) {
       dispatch(showAlertAction(signUpError));
     }
