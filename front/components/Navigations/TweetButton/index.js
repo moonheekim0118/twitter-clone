@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import useToggle from "../../../hooks/useToggle";
+import useModal from "../../../hooks/useModal";
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { Detail } from "../style";
@@ -11,7 +11,7 @@ import { resetImageAction } from "../../../actions/post";
 
 const TweetButton = () => {
   const dispatch = useDispatch();
-  const [showModal, openModal, closeModal] = useToggle();
+  const [showModal, openModal, closeModal] = useModal();
 
   const onResetImage = useCallback(() => {
     dispatch(resetImageAction()); // 업로드된 이미지 리셋

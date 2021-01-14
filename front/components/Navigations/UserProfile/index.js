@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Avatar from "../../Avatar";
 import styled from "styled-components";
-import useToggle from "../../../hooks/useToggle";
+import useModal from "../../../hooks/useModal";
 import { DownOutlined } from "@ant-design/icons";
 import { Detail } from "../style";
 import { Description } from "../../AppLayout/style";
@@ -11,7 +11,7 @@ import UserProfileDetail from "../UserProfileDetail";
 
 const UserProfile = () => {
   const me = useSelector((state) => state.user.me);
-  const [showModal, openModal, closeModal] = useToggle();
+  const [showModal, openModal, closeModal] = useModal();
 
   return (
     <>

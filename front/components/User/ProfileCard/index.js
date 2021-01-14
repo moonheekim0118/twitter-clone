@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
-import useToggle from "../../../hooks/useToggle";
+import useModal from "../../../hooks/useModal";
 import { useSelector } from "react-redux";
 import Avatar from "../../Avatar";
 import Button from "../../../atom/Button";
@@ -14,7 +14,7 @@ import styled from "styled-components";
 const UserProfile = ({ user }) => {
   const me = useSelector((state) => state.user.me?.id);
   const [showAvatarZoom, setAvatarZoom] = useState(false);
-  const [showModal, openModal, closeModal] = useToggle();
+  const [showModal, openModal, closeModal] = useModal();
 
   const onZoomClose = useCallback(() => {
     setAvatarZoom(false);
