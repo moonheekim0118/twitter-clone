@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
+import useModal from "../../../hooks/useModal";
+import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { Detail } from "../style";
 import { useDispatch } from "react-redux";
-import { resetImageAction } from "../../../actions/post";
-import useToggle from "../../../hooks/useToggle";
+import { resetImageAction } from "../../../actions/post";;
 import styled from "styled-components";
 import Modal from "../../../atom/Modal";
 import ModalContents from "../../ModalContents";
@@ -11,7 +12,7 @@ import PostForm from "../../Post/PostForm";
 
 const TweetButton = () => {
   const dispatch = useDispatch();
-  const [showModal, openModal, closeModal] = useToggle();
+  const [showModal, openModal, closeModal] = useModal();
 
   const onResetImage = useCallback(() => {
     dispatch(resetImageAction()); // 업로드된 이미지 리셋

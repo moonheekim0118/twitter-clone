@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import useToggle from "../../../hooks/useToggle";
+import useModal from "../../../hooks/useModal";
 import { useSelector, useDispatch } from "react-redux";
 import {
   followRequestAction,
@@ -14,7 +14,7 @@ import ModifyPostForm from "../ModifyPostForm";
 
 const Tooltip = ({ post, children }) => {
   const dispatch = useDispatch();
-  const [showModal, openModal, closeModal] = useToggle();
+  const [showModal, openModal, closeModal] = useModal();
   const me = useSelector((state) => state.user.me);
   const isFollowing = me && me.Followings.find((v) => v.id === post.User.id);
 
