@@ -6,8 +6,8 @@ import PostCardContent from "../PostCardContent";
 import PostInfo from "../PostInfo";
 import PostButton from "../PostButton";
 import Comment from "../../Comment";
-import Avatar from "../../Avatar";
 import Tooltip from "../Tooltip";
+import Side from "../../Form/Side";
 import { useSelector, useDispatch } from "react-redux";
 import {
   likePostAction,
@@ -17,7 +17,6 @@ import {
 } from "../../../actions/post";
 import {
   Container,
-  SideContainer,
   Card,
   CardMeta,
   CardButtons,
@@ -56,9 +55,9 @@ const PostCard = ({ post, commentFormOpen }) => {
 
   const onToggleLike = useCallback(() => {
     if (!me) {
+      // 로그인 안되어있을 경우
       return;
-    }
-    if (liked) {
+    } else if (liked) {
       setLiked(false);
       return dispatch(unLikePostAction(loadedPost.id));
     }
@@ -71,17 +70,14 @@ const PostCard = ({ post, commentFormOpen }) => {
   }, []);
 
   const onToggleRetweet = useCallback(() => {
-    if (!me) {
-      // 로그인 안되어 있다면
+    if (!me || author.id === me) {
+      // 로그인 안되었거나, 내가 작성한 글일 경우
       return;
-    }
-    if (retweetUser && retweetUser.id === me) {
+    } else if (retweetUser && retweetUser.id === me) {
       // 내가 리트윗한 게시글이라면
       return dispatch(unretweetAction(post.id));
-    } else if (author.id !== me) {
-      // 내 글이 아니라면
-      dispatch(retweetAction(loadedPost.id));
     }
+    dispatch(retweetAction(loadedPost.id));
   }, []);
 
   const onClickUser = useCallback((e, userId) => {
@@ -102,15 +98,7 @@ const PostCard = ({ post, commentFormOpen }) => {
             {retweetUser.nickname}님이 리트윗 하셨습니다
           </Retweet>
         )}
-        <SideContainer>
-          <Avatar
-            user={author}
-            size={65}
-            isLink={true}
-            isMyPic={false}
-            onClick={onStopBubbling}
-          />
-        </SideContainer>
+        <Side isLink={true} user={author} isMyPic={false} />
         <CardMeta>
           <PostInfo
             nickname={author.nickname}

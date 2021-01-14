@@ -4,12 +4,6 @@ export const Container = styled.div`
   margin-bottom: 30px;
 `;
 
-export const SideContainer = styled.div`
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 5%;
-`;
-
 export const Card = styled.div`
   display: flex;
   flex-direction: row;
@@ -65,12 +59,6 @@ export const CardButtons = styled.div`
 
   margin-top: ${({ theme }) => theme.margins.xxxl};
   font-size: ${({ theme }) => theme.fontSizes.lg};
-`;
-
-export const FollowButtonWrapper = styled.div`
-  position: absolute;
-  right: 15px;
-  top: 5px;
 `;
 
 export const Retweet = styled.div`

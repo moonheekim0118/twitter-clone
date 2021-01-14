@@ -4,6 +4,7 @@ import Side from "./Side";
 import styled from "styled-components";
 import ImagePath from "../Images/ImagePath";
 import { ImageIcon } from "../Icons";
+import { useSelector } from "react-redux";
 
 // type : post / modal / modify / comment
 
@@ -39,9 +40,11 @@ const Form = ({
   imageInput = null,
   onClickImageUpload = null,
 }) => {
+  const me = useSelector((state) => state.user.me);
+
   return (
     <Container noborder={TYPES[type].noborder} encType={TYPES[type].encType}>
-      <Side />
+      <Side isLink={false} user={me} isMyPic={true} />
       <FormMeta>
         <Textarea
           text={value}

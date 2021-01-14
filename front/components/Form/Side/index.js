@@ -1,14 +1,11 @@
 import React from "react";
 import Avatar from "../../Avatar";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
-const Side = () => {
-  const me = useSelector((state) => state.user.me);
-
+const Side = ({ isLink, user, isMyPic }) => {
   return (
     <Container>
-      <Avatar user={me} size={65} isLink={false} isMyPic={true} />
+      <Avatar user={user} size={65} isLink={isLink} isMyPic={isMyPic} />
     </Container>
   );
 };
