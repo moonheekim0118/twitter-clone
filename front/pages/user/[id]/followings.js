@@ -30,12 +30,18 @@ const Followings = () => {
 
   useEffect(() => {
     const lastId = FollowingList[FollowingList.length - 1]?.id;
+
+    const predicate = () => {
+      return hasMoreFollowings && !loadFollowingListLoading;
+    };
+
     const onScroll = scrollHandler(
       dispatch.bind(null, loadFollowingsAction({ userId: id, lastId: lastId })),
-      hasMoreFollowings,
-      loadFollowingListLoading
+      predicate
     );
+
     window.addEventListener("scroll", onScroll);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
     };

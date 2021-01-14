@@ -28,18 +28,21 @@ const Detail = () => {
 
   useEffect(() => {
     const lastId = mainPosts[mainPosts.length - 1]?.id;
+
+    const predicate = () => {
+      return hasMorePost && !loadPostloading;
+    };
+
     const onScroll = scrollHandler(
-      null,
       dispatch.bind(
         null,
-        loadUserLikedPostsAction(
-          { userId: id, lastId: lastId },
-          hasMorePost,
-          loadPostloading
-        )
-      )
+        loadUserLikedPostsAction({ userId: id, lastId: lastId })
+      ),
+      predicate
     );
+
     window.addEventListener("scroll", onScroll);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
     };

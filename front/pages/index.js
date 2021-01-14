@@ -20,11 +20,15 @@ const Home = () => {
   useEffect(() => {
     const lastId = mainPosts[mainPosts.length - 1]?.id;
 
+    const predicate = () => {
+      return hasMorePost & !loadPostloading;
+    };
+
     const onScroll = scrollHandler(
       dispatch.bind(null, loadPostsAction(lastId)),
-      hasMorePost,
-      loadPostloading
+      predicate
     );
+
     window.addEventListener("scroll", onScroll);
 
     return () => {

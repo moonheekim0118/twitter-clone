@@ -1,10 +1,10 @@
-export const scrollHandler = (dispatch, condition1, condition2) => {
+export const scrollHandler = (dispatch, predicate) => {
   return function (e) {
     if (
       window.pageYOffset + document.documentElement.clientHeight + 10 >=
       document.documentElement.scrollHeight
     ) {
-      if (condition1 && !condition2) {
+      if (predicate()) {
         dispatch();
       }
     }

@@ -21,11 +21,16 @@ const HashTagPost = () => {
 
   useEffect(() => {
     const lastId = hashTagPosts[hashTagPosts.length - 1]?.id;
+
+    const predicate = () => {
+      return hasMorePost && !loadPostloading;
+    };
+
     const onScroll = scrollHandler(
       dispatch.bind(null, loadHashtagAction({ hashTag: tag, lastId: lastId })),
-      hasMorePost,
-      loadPostloading
+      predicate
     );
+
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);

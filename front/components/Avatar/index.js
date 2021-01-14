@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-const Avatar = ({ user, size=24, isLink, isMyPic, onClick=null }) => {
+const Avatar = ({ user, size = 24, isLink, isMyPic, onClick = null }) => {
   const profilePicPath = useSelector((state) => state.user.profilePicPath);
 
   const AvatarImage = isMyPic ? (
