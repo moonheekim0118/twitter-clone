@@ -35,7 +35,7 @@ const Date = styled.span`
 
 PostInfo.propTypes = {
   nickname: PropTypes.string.isRequired,
-  date: propTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

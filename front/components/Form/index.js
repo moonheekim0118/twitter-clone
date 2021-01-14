@@ -145,9 +145,6 @@ Form.propTypes = {
   value: PropTypes.string.isRequired,
   Button: PropTypes.node.isRequired,
   onChangeImage: PropTypes.func.isRequired,
-  imageInput: PropTypes.shape({
-    current: PropTypes.instanceOf(HTMLInputElement),
-  }),
   onClickImageUpload: PropTypes.func.isRequired,
 };
 
