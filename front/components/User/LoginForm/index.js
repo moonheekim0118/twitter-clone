@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../../../actions/user";
 import { ErrorMessage } from "../../globalStyle";
-import { Form,ButtonContainer,Text } from "../style";
+import { Form, ButtonContainer, Text } from "../style";
 import Link from "next/link";
 import useInput from "../../../hooks/useInput";
 import SignInput from "../SignInput";
@@ -53,7 +53,9 @@ const LoginForm = () => {
           onClick={onSubmit}
           title="로그인"
           loading={isLoggingIn}
-          disabled={email.length < 2 || password.length < 6 || password.length>14}
+          disabled={
+            email.length < 2 || password.length < 6 || password.length > 14
+          }
         />
         <Link href="/signUp">
           <Text>회원가입</Text>
