@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Router from "next/router";
-import { useSelector } from "react-redux";
 import FollowButton from "../FollowButton";
 import Avatar from "../../Avatar";
 import styled from "styled-components";

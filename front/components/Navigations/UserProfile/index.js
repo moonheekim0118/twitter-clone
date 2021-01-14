@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Avatar from "../../Avatar";
-import styled from "styled-components";
-import useToggle from "../../../hooks/useToggle";
 import { DownOutlined } from "@ant-design/icons";
 import { Detail } from "../style";
 import { Description } from "../../AppLayout/style";
 import Modal from "../../../atom/Modal";
 import UserProfileDetail from "../UserProfileDetail";
+import Avatar from "../../Avatar";
+import styled from "styled-components";
+import useToggle from "../../../hooks/useToggle";
 
 const UserProfile = () => {
   const me = useSelector((state) => state.user.me);

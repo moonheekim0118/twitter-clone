@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 import { Card } from "antd";
+import styled from "styled-components";
 import Avatar from "../../Avatar";
 import LogoutButton from "../../User/LogoutButton";
 

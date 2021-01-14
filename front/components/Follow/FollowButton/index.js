@@ -5,8 +5,8 @@ import {
   followRequestAction,
   unfollowRequestAction,
 } from "../../../actions/user";
-import Button from "../../../atom/Button";
 import { LoadingIcon } from "../../Icons";
+import Button from "../../../atom/Button";
 
 const FollowButton = ({ userId }) => {
   const dispatch = useDispatch();

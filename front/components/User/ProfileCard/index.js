@@ -11,7 +11,7 @@ import Modal from "../../../atom/Modal";
 import EditProfileForm from "../EditProfileForm";
 import styled from "styled-components";
 
-const UserProfile = ({ user }) => {
+const ProfileCard = ({ user }) => {
   const me = useSelector((state) => state.user.me?.id);
   const [showAvatarZoom, setAvatarZoom] = useState(false);
   const [showModal, openModal, closeModal] = useToggle();
@@ -132,7 +132,7 @@ const Description = styled.span`
   }
 `;
 
-UserProfile.propTypes = {
+ProfileCard.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
     nickname: PropTypes.string,
@@ -144,4 +144,4 @@ UserProfile.propTypes = {
   }).isRequired,
 };
 
-export default UserProfile;
+export default ProfileCard;

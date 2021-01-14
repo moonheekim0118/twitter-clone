@@ -63,7 +63,7 @@ const Search = ({ keyword }) => {
   );
 };
 
-export const Container = styled.form`
+const Container = styled.form`
   top: 0;
   left: 0;
   height: 50px;

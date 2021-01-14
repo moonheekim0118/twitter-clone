@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
-import useToggle from "../../../hooks/useToggle";
-import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { Detail } from "../style";
+import { useDispatch } from "react-redux";
+import { resetImageAction } from "../../../actions/post";
+import useToggle from "../../../hooks/useToggle";
+import styled from "styled-components";
 import Modal from "../../../atom/Modal";
 import ModalContents from "../../ModalContents";
 import PostForm from "../../Post/PostForm";
-import { useDispatch } from "react-redux";
-import { resetImageAction } from "../../../actions/post";
 
 const TweetButton = () => {
   const dispatch = useDispatch();
