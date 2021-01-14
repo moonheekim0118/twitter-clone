@@ -26,18 +26,6 @@ const FollowList = ({ user }) => {
   );
 };
 
-FollowList.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    nickname: PropTypes.string,
-    email: PropTypes.string,
-    Followings: PropTypes.number,
-    Followers: PropTypes.number,
-    Posts: PropTypes.number,
-    Likes: PropTypes.number,
-  }).isRequired,
-};
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -65,5 +53,17 @@ const ButtonContainer = styled.div`
   position: absolute;
   right: 5px;
 `;
+
+FollowList.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    nickname: PropTypes.string,
+    email: PropTypes.string,
+    Followings: PropTypes.number,
+    Followers: PropTypes.number,
+    Posts: PropTypes.number,
+    Likes: PropTypes.number,
+  }).isRequired,
+};
 
 export default FollowList;

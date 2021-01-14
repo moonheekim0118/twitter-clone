@@ -1,6 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const PostInfo = ({ nickname, date, onClick }) => {
   return (
@@ -31,5 +32,11 @@ const Date = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.gray_2};
 `;
+
+PostInfo.propTypes = {
+  nickname: PropTypes.string.isRequired,
+  date: propTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default PostInfo;

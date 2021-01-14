@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { ErrorMessage } from "../../globalStyle";
 
 const ErrorType = {
@@ -96,5 +97,14 @@ const TextLength = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.base};
   color: ${(props) => (props.limit ? "red" : "gray")};
 `;
+
+SignInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  Error: PropTypes.bool.isRequired,
+};
 
 export default SignInput;

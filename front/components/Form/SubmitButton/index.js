@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Button from "../../../atom/Button";
 import { LoadingIcon } from "../../Icons";
 
@@ -15,6 +16,13 @@ const SubmitButton = ({ onClick, disabled, loading, title }) => {
       {loading ? <LoadingIcon /> : title}
     </Button>
   );
+};
+
+SubmitButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default SubmitButton;

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Avatar from "../../Avatar";
+import PropTypes from "prop-types";
 import { EditIcon } from "../../Icons";
 
 const ProfilePicForm = ({ user, imageInput, onChange, onClick }) => {
@@ -47,5 +48,18 @@ const Overaly = styled.div`
   z-index: 1000;
   cursor: pointer;
 `;
+
+ProfilePicForm.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    nickname: PropTypes.string,
+    profilepic: PropTypes.string,
+  }).isRequired,
+  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  imageInput: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLInputElement),
+  }),
+};
 
 export default ProfilePicForm;

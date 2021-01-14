@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { CloseRightIcon } from "../Icons";
 
 const ModalContents = ({ onClose = null, child }) => {
@@ -37,5 +38,10 @@ const Header = styled.div`
   width: 100%;
   margin-bottom: ${({ theme }) => theme.margins.xl};
 `;
+
+ModalContents.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  isMyPic: PropTypes.node.isRequired,
+};
 
 export default ModalContents;
